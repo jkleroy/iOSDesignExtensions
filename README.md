@@ -115,7 +115,6 @@ A set of 100+ UI extensions for Xojo iOS framework.
 * Tabbar color
 * Pop to root view
 * Pushto and hide Tabbar
-* 
 
 ### iOSToolbutton
 * Tint color
@@ -129,7 +128,3 @@ A set of 100+ UI extensions for Xojo iOS framework.
 * Original Image to prevent it from rendering in the tint color
 * Masked version of an image
 
-
-Pop to Root View
-Pushto and hide Tabar
-Activity Indicator Style
