@@ -1,0 +1,46 @@
+#tag MultiImage
+Image ic8_lock
+	#tag ImageRepresentation
+		SaveInfo = APHRcwECAQAAAAGCAAAAAAGCAAIAAAxNYWNpbnRvc2ggSEQAAAAAAAAAAAAAAAAAAAAAAAAAQkQAAf////8MaWM4X2xvY2sucG5nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/////wAAAAAAAAAAAAAAAP////8AAAogY3UAAAAAAAAAAAAAAAAABkltYWdlcwACAEcvOlVzZXJzOmpsZXJveTpEb2N1bWVudHM6R2l0SHViOmlPU0Rlc2lnbkV4dGVuc2lvbnM6SW1hZ2VzOmljOF9sb2NrLnBuZwAADgAaAAwAaQBjADgAXwBsAG8AYwBrAC4AcABuAGcADwAaAAwATQBhAGMAaQBuAHQAbwBzAGgAIABIAEQAEgBFVXNlcnMvamxlcm95L0RvY3VtZW50cy9HaXRIdWIvaU9TRGVzaWduRXh0ZW5zaW9ucy9JbWFnZXMvaWM4X2xvY2sucG5nAAATAAEvAAAVAAIADf//AAAAAAAAAAA=
+		FullPath = /Users/jleroy/Documents/GitHub/iOSDesignExtensions/Images/ic8_lock.png
+		PartialPath = Images\ic8_lock.png
+		#tag ImageSpecification
+			Comment = 
+			Device = 31
+			HSize = 25.00
+			Orientation = Any
+			Platform = 15
+			PPI = 72
+			VSize = 25.00
+		#tag EndImageSpecification
+	#tag EndImageRepresentation
+	#tag ImageRepresentation
+		SaveInfo = APHRcwECAQAAAAGMAAAAAAGMAAIAAAxNYWNpbnRvc2ggSEQAAAAAAAAAAAAAAAAAAAAAAAAAQkQAAf////8PaWM4X2xvY2tAMngucG5nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/////wAAAAAAAAAAAAAAAP////8AAAogY3UAAAAAAAAAAAAAAAAABkltYWdlcwACAEovOlVzZXJzOmpsZXJveTpEb2N1bWVudHM6R2l0SHViOmlPU0Rlc2lnbkV4dGVuc2lvbnM6SW1hZ2VzOmljOF9sb2NrQDJ4LnBuZwAOACAADwBpAGMAOABfAGwAbwBjAGsAQAAyAHgALgBwAG4AZwAPABoADABNAGEAYwBpAG4AdABvAHMAaAAgAEgARAASAEhVc2Vycy9qbGVyb3kvRG9jdW1lbnRzL0dpdEh1Yi9pT1NEZXNpZ25FeHRlbnNpb25zL0ltYWdlcy9pYzhfbG9ja0AyeC5wbmcAEwABLwAAFQACAA3//wAAAAAAAAAA
+		FullPath = /Users/jleroy/Documents/GitHub/iOSDesignExtensions/Images/ic8_lock@2x.png
+		PartialPath = Images\ic8_lock@2x.png
+		#tag ImageSpecification
+			Comment = 
+			Device = 31
+			HSize = 25.00
+			Orientation = Any
+			Platform = 15
+			PPI = 144
+			VSize = 25.00
+		#tag EndImageSpecification
+	#tag EndImageRepresentation
+	#tag ImageRepresentation
+		SaveInfo = APHRcwECAQAAAAGMAAAAAAGMAAIAAAxNYWNpbnRvc2ggSEQAAAAAAAAAAAAAAAAAAAAAAAAAQkQAAf////8PaWM4X2xvY2tAM3gucG5nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/////wAAAAAAAAAAAAAAAP////8AAAogY3UAAAAAAAAAAAAAAAAABkltYWdlcwACAEovOlVzZXJzOmpsZXJveTpEb2N1bWVudHM6R2l0SHViOmlPU0Rlc2lnbkV4dGVuc2lvbnM6SW1hZ2VzOmljOF9sb2NrQDN4LnBuZwAOACAADwBpAGMAOABfAGwAbwBjAGsAQAAzAHgALgBwAG4AZwAPABoADABNAGEAYwBpAG4AdABvAHMAaAAgAEgARAASAEhVc2Vycy9qbGVyb3kvRG9jdW1lbnRzL0dpdEh1Yi9pT1NEZXNpZ25FeHRlbnNpb25zL0ltYWdlcy9pYzhfbG9ja0AzeC5wbmcAEwABLwAAFQACAA3//wAAAAAAAAAA
+		FullPath = /Users/jleroy/Documents/GitHub/iOSDesignExtensions/Images/ic8_lock@3x.png
+		PartialPath = Images\ic8_lock@3x.png
+		#tag ImageSpecification
+			Comment = 
+			Device = 31
+			HSize = 25.00
+			Orientation = Any
+			Platform = 15
+			PPI = 216
+			VSize = 25.00
+		#tag EndImageSpecification
+	#tag EndImageRepresentation
+End Image
+#tag EndMultiImage

@@ -1,0 +1,40 @@
+#tag MultiImage
+Image img_green_pattern
+	#tag ImageRepresentation
+		SaveInfo = APHRcwECAQAAAAGkAAAAAAGkAAIAAAxNYWNpbnRvc2ggSEQAAAAAAAAAAAAAAAAAAAAAAAAAQkQAAf////8VaW1nX2dyZWVuX3BhdHRlcm4ucG5nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/////wAAAAAAAAAAAAAAAP////8AAAogY3UAAAAAAAAAAAAAAAAABkltYWdlcwACAFAvOlVzZXJzOmpsZXJveTpEb2N1bWVudHM6R2l0SHViOmlPU0Rlc2lnbkV4dGVuc2lvbnM6SW1hZ2VzOmltZ19ncmVlbl9wYXR0ZXJuLnBuZwAOACwAFQBpAG0AZwBfAGcAcgBlAGUAbgBfAHAAYQB0AHQAZQByAG4ALgBwAG4AZwAPABoADABNAGEAYwBpAG4AdABvAHMAaAAgAEgARAASAE5Vc2Vycy9qbGVyb3kvRG9jdW1lbnRzL0dpdEh1Yi9pT1NEZXNpZ25FeHRlbnNpb25zL0ltYWdlcy9pbWdfZ3JlZW5fcGF0dGVybi5wbmcAEwABLwAAFQACAA3//wAAAAAAAAAA
+		FullPath = /Users/jleroy/Documents/GitHub/iOSDesignExtensions/Images/img_green_pattern.png
+		PartialPath = Images\img_green_pattern.png
+		#tag ImageSpecification
+			Comment = 
+			Device = 31
+			HSize = 250.00
+			Orientation = Any
+			Platform = 15
+			PPI = 72
+			VSize = 250.00
+		#tag EndImageSpecification
+	#tag EndImageRepresentation
+	#tag ImageRepresentation
+		#tag ImageSpecification
+			Comment = 
+			Device = 31
+			HSize = 250.00
+			Orientation = Any
+			Platform = 15
+			PPI = 144
+			VSize = 250.00
+		#tag EndImageSpecification
+	#tag EndImageRepresentation
+	#tag ImageRepresentation
+		#tag ImageSpecification
+			Comment = 
+			Device = 31
+			HSize = 250.00
+			Orientation = Any
+			Platform = 15
+			PPI = 216
+			VSize = 250.00
+		#tag EndImageSpecification
+	#tag EndImageRepresentation
+End Image
+#tag EndMultiImage
