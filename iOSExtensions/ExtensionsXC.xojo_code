@@ -72,7 +72,22 @@ Protected Module ExtensionsXC
 	#tag EndMethod
 
 
+	#tag Note, Name = History
+		### History
+		
+		* Version 1.1 - Released 2018-05-10
+		** New modal transition options
+		
+		
+		* Version 1.0 - Released 2018-04-26
+		
+	#tag EndNote
+
+
 	#tag Constant, Name = kUseUIKit, Type = Boolean, Dynamic = False, Default = \"False", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = kVersion, Type = Double, Dynamic = False, Default = \"1.1", Scope = Public
 	#tag EndConstant
 
 

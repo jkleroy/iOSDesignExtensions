@@ -138,6 +138,111 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub PushToShowModalCurlXC(extends parent As iOSView, v As iOSView, style As ViewExtensionsXC.UIModalPresentationStyle=ViewExtensionsXC.UIModalPresentationStyle.fullscreen, Animate As Boolean=True, callback As iOSBlock=Nil)
+		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
+		  Declare Function alloc Lib "Foundation.framework" selector "alloc" (clsRef As ptr) As ptr
+		  Declare Function initWithRootViewController_ Lib "Foundation" selector "initWithRootViewController:" (obj_id As ptr, rootViewController As ptr) As ptr
+		  Declare Sub presentViewController Lib "UIKit.framework" _
+		  Selector "presentViewController:animated:completion:" _
+		  (parentView As Ptr, viewControllerToPresent As Ptr, animated As Boolean, completion As Ptr)
+		  Declare Sub modalPresentationStyle_ Lib UIKitLib Selector "setModalPresentationStyle:" (obj_id As Ptr, modalPresentationStyle As UIModalPresentationStyle)
+		  Declare Sub modalTransitionStyle_ Lib UIKitLib Selector "setModalTransitionStyle:" (obj_id As Ptr, modalTransitionStyle As UIModalTransitionStyle)
+		  
+		  
+		  
+		  Dim navController As ptr = initWithRootViewController_( alloc(NSClassFromString("UINavigationController")), v.ViewControllerHandle ) 
+		  
+		  
+		  modalPresentationStyle_(navController, style)
+		  modalTransitionStyle_(navController, UIModalTransitionStyle.partialCurl)
+		  
+		  
+		  
+		  If callback <> Nil Then
+		    Break
+		    //This code might fail
+		  end if
+		  
+		  If callback Is Nil Then
+		    presentViewController(parent.Handle, navController, Animate, Nil)
+		  Else
+		    presentViewController(parent.Handle, navController, Animate, callback.handle)
+		  End If
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub PushToShowModalDissolveXC(extends parent As iOSView, v As iOSView, style As ViewExtensionsXC.UIModalPresentationStyle=ViewExtensionsXC.UIModalPresentationStyle.fullscreen, Animate As Boolean=True, callback As iOSBlock=Nil)
+		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
+		  Declare Function alloc Lib "Foundation.framework" selector "alloc" (clsRef As ptr) As ptr
+		  Declare Function initWithRootViewController_ Lib "Foundation" selector "initWithRootViewController:" (obj_id As ptr, rootViewController As ptr) As ptr
+		  Declare Sub presentViewController Lib "UIKit.framework" _
+		  Selector "presentViewController:animated:completion:" _
+		  (parentView As Ptr, viewControllerToPresent As Ptr, animated As Boolean, completion As Ptr)
+		  Declare Sub modalPresentationStyle_ Lib UIKitLib Selector "setModalPresentationStyle:" (obj_id As Ptr, modalPresentationStyle As UIModalPresentationStyle)
+		  Declare Sub modalTransitionStyle_ Lib UIKitLib Selector "setModalTransitionStyle:" (obj_id As Ptr, modalTransitionStyle As UIModalTransitionStyle)
+		  
+		  
+		  
+		  Dim navController As ptr = initWithRootViewController_( alloc(NSClassFromString("UINavigationController")), v.ViewControllerHandle ) 
+		  
+		  
+		  modalPresentationStyle_(navController, style)
+		  modalTransitionStyle_(navController, UIModalTransitionStyle.crossDissolve)
+		  
+		  
+		  
+		  If callback <> Nil Then
+		    Break
+		    //This code might fail
+		  end if
+		  
+		  If callback Is Nil Then
+		    presentViewController(parent.Handle, navController, Animate, Nil)
+		  Else
+		    presentViewController(parent.Handle, navController, Animate, callback.handle)
+		  End If
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub PushToShowModalFlipXC(extends parent As iOSView, v As iOSView, style As ViewExtensionsXC.UIModalPresentationStyle=ViewExtensionsXC.UIModalPresentationStyle.fullscreen, Animate As Boolean=True, callback As iOSBlock=Nil)
+		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
+		  Declare Function alloc Lib "Foundation.framework" selector "alloc" (clsRef As ptr) As ptr
+		  Declare Function initWithRootViewController_ Lib "Foundation" selector "initWithRootViewController:" (obj_id As ptr, rootViewController As ptr) As ptr
+		  Declare Sub presentViewController Lib "UIKit.framework" _
+		  Selector "presentViewController:animated:completion:" _
+		  (parentView As Ptr, viewControllerToPresent As Ptr, animated As Boolean, completion As Ptr)
+		  Declare Sub modalPresentationStyle_ Lib UIKitLib Selector "setModalPresentationStyle:" (obj_id As Ptr, modalPresentationStyle As UIModalPresentationStyle)
+		  Declare Sub modalTransitionStyle_ Lib UIKitLib Selector "setModalTransitionStyle:" (obj_id As Ptr, modalTransitionStyle As UIModalTransitionStyle)
+		  
+		  
+		  
+		  Dim navController As ptr = initWithRootViewController_( alloc(NSClassFromString("UINavigationController")), v.ViewControllerHandle ) 
+		  
+		  
+		  modalPresentationStyle_(navController, style)
+		  modalTransitionStyle_(navController, UIModalTransitionStyle.flipHorizontal)
+		  
+		  
+		  
+		  If callback <> Nil Then
+		    Break
+		    //This code might fail
+		  end if
+		  
+		  If callback Is Nil Then
+		    presentViewController(parent.Handle, navController, Animate, Nil)
+		  Else
+		    presentViewController(parent.Handle, navController, Animate, callback.handle)
+		  End If
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub PushToShowModalXC(extends parent As iOSView, v As iOSView, style As ViewExtensionsXC.UIModalPresentationStyle=ViewExtensionsXC.UIModalPresentationStyle.fullscreen, Animate As Boolean=True, callback As iOSBlock=Nil)
 		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
 		  Declare Function alloc Lib "Foundation.framework" selector "alloc" (clsRef As ptr) As ptr
@@ -624,6 +729,13 @@ Protected Module ViewExtensionsXC
 		  overCurrentContext
 		  popover
 		none = -1
+	#tag EndEnum
+
+	#tag Enum, Name = UIModalTransitionStyle, Type = Integer, Flags = &h1
+		coverVertical = 0
+		  flipHorizontal
+		  crossDissolve
+		partialCurl
 	#tag EndEnum
 
 	#tag Enum, Name = UIRectCorners, Type = Integer, Flags = &h1

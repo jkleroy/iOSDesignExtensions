@@ -1,0 +1,46 @@
+#tag MultiImage
+Image ic8_paper
+	#tag ImageRepresentation
+		SaveInfo = APHRcwECAQAAAAGEAAAAAAGEAAIAAAxNYWNpbnRvc2ggSEQAAAAAAAAAAAAAAAAAAAAAAAAAQkQAAf////8NaWM4X3BhcGVyLnBuZwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/////wAAAAAAAAAAAAAAAP////8AAAogY3UAAAAAAAAAAAAAAAAABkltYWdlcwACAEgvOlVzZXJzOmpsZXJveTpEb2N1bWVudHM6R2l0SHViOmlPU0Rlc2lnbkV4dGVuc2lvbnM6SW1hZ2VzOmljOF9wYXBlci5wbmcADgAcAA0AaQBjADgAXwBwAGEAcABlAHIALgBwAG4AZwAPABoADABNAGEAYwBpAG4AdABvAHMAaAAgAEgARAASAEZVc2Vycy9qbGVyb3kvRG9jdW1lbnRzL0dpdEh1Yi9pT1NEZXNpZ25FeHRlbnNpb25zL0ltYWdlcy9pYzhfcGFwZXIucG5nABMAAS8AABUAAgAN//8AAAAAAAAAAA==
+		FullPath = /Users/jleroy/Documents/GitHub/iOSDesignExtensions/Images/ic8_paper.png
+		PartialPath = Images\ic8_paper.png
+		#tag ImageSpecification
+			Comment = 
+			Device = 31
+			HSize = 25.00
+			Orientation = Any
+			Platform = 15
+			PPI = 72
+			VSize = 25.00
+		#tag EndImageSpecification
+	#tag EndImageRepresentation
+	#tag ImageRepresentation
+		SaveInfo = APHRcwECAQAAAAGSAAAAAAGSAAIAAAxNYWNpbnRvc2ggSEQAAAAAAAAAAAAAAAAAAAAAAAAAQkQAAf////8QaWM4X3BhcGVyQDJ4LnBuZwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/////wAAAAAAAAAAAAAAAP////8AAAogY3UAAAAAAAAAAAAAAAAABkltYWdlcwACAEsvOlVzZXJzOmpsZXJveTpEb2N1bWVudHM6R2l0SHViOmlPU0Rlc2lnbkV4dGVuc2lvbnM6SW1hZ2VzOmljOF9wYXBlckAyeC5wbmcAAA4AIgAQAGkAYwA4AF8AcABhAHAAZQByAEAAMgB4AC4AcABuAGcADwAaAAwATQBhAGMAaQBuAHQAbwBzAGgAIABIAEQAEgBJVXNlcnMvamxlcm95L0RvY3VtZW50cy9HaXRIdWIvaU9TRGVzaWduRXh0ZW5zaW9ucy9JbWFnZXMvaWM4X3BhcGVyQDJ4LnBuZwAAEwABLwAAFQACAA3//wAAAAAAAAAA
+		FullPath = /Users/jleroy/Documents/GitHub/iOSDesignExtensions/Images/ic8_paper@2x.png
+		PartialPath = Images\ic8_paper@2x.png
+		#tag ImageSpecification
+			Comment = 
+			Device = 31
+			HSize = 25.00
+			Orientation = Any
+			Platform = 15
+			PPI = 144
+			VSize = 25.00
+		#tag EndImageSpecification
+	#tag EndImageRepresentation
+	#tag ImageRepresentation
+		SaveInfo = APHRcwECAQAAAAGSAAAAAAGSAAIAAAxNYWNpbnRvc2ggSEQAAAAAAAAAAAAAAAAAAAAAAAAAQkQAAf////8QaWM4X3BhcGVyQDN4LnBuZwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/////wAAAAAAAAAAAAAAAP////8AAAogY3UAAAAAAAAAAAAAAAAABkltYWdlcwACAEsvOlVzZXJzOmpsZXJveTpEb2N1bWVudHM6R2l0SHViOmlPU0Rlc2lnbkV4dGVuc2lvbnM6SW1hZ2VzOmljOF9wYXBlckAzeC5wbmcAAA4AIgAQAGkAYwA4AF8AcABhAHAAZQByAEAAMwB4AC4AcABuAGcADwAaAAwATQBhAGMAaQBuAHQAbwBzAGgAIABIAEQAEgBJVXNlcnMvamxlcm95L0RvY3VtZW50cy9HaXRIdWIvaU9TRGVzaWduRXh0ZW5zaW9ucy9JbWFnZXMvaWM4X3BhcGVyQDN4LnBuZwAAEwABLwAAFQACAA3//wAAAAAAAAAA
+		FullPath = /Users/jleroy/Documents/GitHub/iOSDesignExtensions/Images/ic8_paper@3x.png
+		PartialPath = Images\ic8_paper@3x.png
+		#tag ImageSpecification
+			Comment = 
+			Device = 31
+			HSize = 25.00
+			Orientation = Any
+			Platform = 15
+			PPI = 216
+			VSize = 25.00
+		#tag EndImageSpecification
+	#tag EndImageRepresentation
+End Image
+#tag EndMultiImage

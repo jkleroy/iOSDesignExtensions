@@ -1,0 +1,46 @@
+#tag MultiImage
+Image ic8_direction
+	#tag ImageRepresentation
+		SaveInfo = APHRcwECAQAAAAGUAAAAAAGUAAIAAAxNYWNpbnRvc2ggSEQAAAAAAAAAAAAAAAAAAAAAAAAAQkQAAf////8RaWM4X2RpcmVjdGlvbi5wbmcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/////wAAAAAAAAAAAAAAAP////8AAAogY3UAAAAAAAAAAAAAAAAABkltYWdlcwACAEwvOlVzZXJzOmpsZXJveTpEb2N1bWVudHM6R2l0SHViOmlPU0Rlc2lnbkV4dGVuc2lvbnM6SW1hZ2VzOmljOF9kaXJlY3Rpb24ucG5nAA4AJAARAGkAYwA4AF8AZABpAHIAZQBjAHQAaQBvAG4ALgBwAG4AZwAPABoADABNAGEAYwBpAG4AdABvAHMAaAAgAEgARAASAEpVc2Vycy9qbGVyb3kvRG9jdW1lbnRzL0dpdEh1Yi9pT1NEZXNpZ25FeHRlbnNpb25zL0ltYWdlcy9pYzhfZGlyZWN0aW9uLnBuZwATAAEvAAAVAAIADf//AAAAAAAAAAA=
+		FullPath = /Users/jleroy/Documents/GitHub/iOSDesignExtensions/Images/ic8_direction.png
+		PartialPath = Images\ic8_direction.png
+		#tag ImageSpecification
+			Comment = 
+			Device = 31
+			HSize = 25.00
+			Orientation = Any
+			Platform = 15
+			PPI = 72
+			VSize = 25.00
+		#tag EndImageSpecification
+	#tag EndImageRepresentation
+	#tag ImageRepresentation
+		SaveInfo = APHRcwECAQAAAAGiAAAAAAGiAAIAAAxNYWNpbnRvc2ggSEQAAAAAAAAAAAAAAAAAAAAAAAAAQkQAAf////8UaWM4X2RpcmVjdGlvbkAyeC5wbmcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/////wAAAAAAAAAAAAAAAP////8AAAogY3UAAAAAAAAAAAAAAAAABkltYWdlcwACAE8vOlVzZXJzOmpsZXJveTpEb2N1bWVudHM6R2l0SHViOmlPU0Rlc2lnbkV4dGVuc2lvbnM6SW1hZ2VzOmljOF9kaXJlY3Rpb25AMngucG5nAAAOACoAFABpAGMAOABfAGQAaQByAGUAYwB0AGkAbwBuAEAAMgB4AC4AcABuAGcADwAaAAwATQBhAGMAaQBuAHQAbwBzAGgAIABIAEQAEgBNVXNlcnMvamxlcm95L0RvY3VtZW50cy9HaXRIdWIvaU9TRGVzaWduRXh0ZW5zaW9ucy9JbWFnZXMvaWM4X2RpcmVjdGlvbkAyeC5wbmcAABMAAS8AABUAAgAN//8AAAAAAAAAAA==
+		FullPath = /Users/jleroy/Documents/GitHub/iOSDesignExtensions/Images/ic8_direction@2x.png
+		PartialPath = Images\ic8_direction@2x.png
+		#tag ImageSpecification
+			Comment = 
+			Device = 31
+			HSize = 25.00
+			Orientation = Any
+			Platform = 15
+			PPI = 144
+			VSize = 25.00
+		#tag EndImageSpecification
+	#tag EndImageRepresentation
+	#tag ImageRepresentation
+		SaveInfo = APHRcwECAQAAAAGiAAAAAAGiAAIAAAxNYWNpbnRvc2ggSEQAAAAAAAAAAAAAAAAAAAAAAAAAQkQAAf////8UaWM4X2RpcmVjdGlvbkAzeC5wbmcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/////wAAAAAAAAAAAAAAAP////8AAAogY3UAAAAAAAAAAAAAAAAABkltYWdlcwACAE8vOlVzZXJzOmpsZXJveTpEb2N1bWVudHM6R2l0SHViOmlPU0Rlc2lnbkV4dGVuc2lvbnM6SW1hZ2VzOmljOF9kaXJlY3Rpb25AM3gucG5nAAAOACoAFABpAGMAOABfAGQAaQByAGUAYwB0AGkAbwBuAEAAMwB4AC4AcABuAGcADwAaAAwATQBhAGMAaQBuAHQAbwBzAGgAIABIAEQAEgBNVXNlcnMvamxlcm95L0RvY3VtZW50cy9HaXRIdWIvaU9TRGVzaWduRXh0ZW5zaW9ucy9JbWFnZXMvaWM4X2RpcmVjdGlvbkAzeC5wbmcAABMAAS8AABUAAgAN//8AAAAAAAAAAA==
+		FullPath = /Users/jleroy/Documents/GitHub/iOSDesignExtensions/Images/ic8_direction@3x.png
+		PartialPath = Images\ic8_direction@3x.png
+		#tag ImageSpecification
+			Comment = 
+			Device = 31
+			HSize = 25.00
+			Orientation = Any
+			Platform = 15
+			PPI = 216
+			VSize = 25.00
+		#tag EndImageSpecification
+	#tag EndImageRepresentation
+End Image
+#tag EndMultiImage

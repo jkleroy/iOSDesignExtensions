@@ -1,0 +1,46 @@
+#tag MultiImage
+Image ic8_flip_vertical
+	#tag ImageRepresentation
+		SaveInfo = APHRcwECAQAAAAGkAAAAAAGkAAIAAAxNYWNpbnRvc2ggSEQAAAAAAAAAAAAAAAAAAAAAAAAAQkQAAf////8VaWM4X2ZsaXBfdmVydGljYWwucG5nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/////wAAAAAAAAAAAAAAAP////8AAAogY3UAAAAAAAAAAAAAAAAABkltYWdlcwACAFAvOlVzZXJzOmpsZXJveTpEb2N1bWVudHM6R2l0SHViOmlPU0Rlc2lnbkV4dGVuc2lvbnM6SW1hZ2VzOmljOF9mbGlwX3ZlcnRpY2FsLnBuZwAOACwAFQBpAGMAOABfAGYAbABpAHAAXwB2AGUAcgB0AGkAYwBhAGwALgBwAG4AZwAPABoADABNAGEAYwBpAG4AdABvAHMAaAAgAEgARAASAE5Vc2Vycy9qbGVyb3kvRG9jdW1lbnRzL0dpdEh1Yi9pT1NEZXNpZ25FeHRlbnNpb25zL0ltYWdlcy9pYzhfZmxpcF92ZXJ0aWNhbC5wbmcAEwABLwAAFQACAA3//wAAAAAAAAAA
+		FullPath = /Users/jleroy/Documents/GitHub/iOSDesignExtensions/Images/ic8_flip_vertical.png
+		PartialPath = Images\ic8_flip_vertical.png
+		#tag ImageSpecification
+			Comment = 
+			Device = 31
+			HSize = 25.00
+			Orientation = Any
+			Platform = 15
+			PPI = 72
+			VSize = 25.00
+		#tag EndImageSpecification
+	#tag EndImageRepresentation
+	#tag ImageRepresentation
+		SaveInfo = APHRcwECAQAAAAGyAAAAAAGyAAIAAAxNYWNpbnRvc2ggSEQAAAAAAAAAAAAAAAAAAAAAAAAAQkQAAf////8YaWM4X2ZsaXBfdmVydGljYWxAMngucG5nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/////wAAAAAAAAAAAAAAAP////8AAAogY3UAAAAAAAAAAAAAAAAABkltYWdlcwACAFMvOlVzZXJzOmpsZXJveTpEb2N1bWVudHM6R2l0SHViOmlPU0Rlc2lnbkV4dGVuc2lvbnM6SW1hZ2VzOmljOF9mbGlwX3ZlcnRpY2FsQDJ4LnBuZwAADgAyABgAaQBjADgAXwBmAGwAaQBwAF8AdgBlAHIAdABpAGMAYQBsAEAAMgB4AC4AcABuAGcADwAaAAwATQBhAGMAaQBuAHQAbwBzAGgAIABIAEQAEgBRVXNlcnMvamxlcm95L0RvY3VtZW50cy9HaXRIdWIvaU9TRGVzaWduRXh0ZW5zaW9ucy9JbWFnZXMvaWM4X2ZsaXBfdmVydGljYWxAMngucG5nAAATAAEvAAAVAAIADf//AAAAAAAAAAA=
+		FullPath = /Users/jleroy/Documents/GitHub/iOSDesignExtensions/Images/ic8_flip_vertical@2x.png
+		PartialPath = Images\ic8_flip_vertical@2x.png
+		#tag ImageSpecification
+			Comment = 
+			Device = 31
+			HSize = 25.00
+			Orientation = Any
+			Platform = 15
+			PPI = 144
+			VSize = 25.00
+		#tag EndImageSpecification
+	#tag EndImageRepresentation
+	#tag ImageRepresentation
+		SaveInfo = APHRcwECAQAAAAGyAAAAAAGyAAIAAAxNYWNpbnRvc2ggSEQAAAAAAAAAAAAAAAAAAAAAAAAAQkQAAf////8YaWM4X2ZsaXBfdmVydGljYWxAM3gucG5nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/////wAAAAAAAAAAAAAAAP////8AAAogY3UAAAAAAAAAAAAAAAAABkltYWdlcwACAFMvOlVzZXJzOmpsZXJveTpEb2N1bWVudHM6R2l0SHViOmlPU0Rlc2lnbkV4dGVuc2lvbnM6SW1hZ2VzOmljOF9mbGlwX3ZlcnRpY2FsQDN4LnBuZwAADgAyABgAaQBjADgAXwBmAGwAaQBwAF8AdgBlAHIAdABpAGMAYQBsAEAAMwB4AC4AcABuAGcADwAaAAwATQBhAGMAaQBuAHQAbwBzAGgAIABIAEQAEgBRVXNlcnMvamxlcm95L0RvY3VtZW50cy9HaXRIdWIvaU9TRGVzaWduRXh0ZW5zaW9ucy9JbWFnZXMvaWM4X2ZsaXBfdmVydGljYWxAM3gucG5nAAATAAEvAAAVAAIADf//AAAAAAAAAAA=
+		FullPath = /Users/jleroy/Documents/GitHub/iOSDesignExtensions/Images/ic8_flip_vertical@3x.png
+		PartialPath = Images\ic8_flip_vertical@3x.png
+		#tag ImageSpecification
+			Comment = 
+			Device = 31
+			HSize = 25.00
+			Orientation = Any
+			Platform = 15
+			PPI = 216
+			VSize = 25.00
+		#tag EndImageSpecification
+	#tag EndImageRepresentation
+End Image
+#tag EndMultiImage
