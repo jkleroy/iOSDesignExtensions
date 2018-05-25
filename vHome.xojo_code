@@ -242,7 +242,7 @@ End
 		  AddRow(section, "Modal View", "", accessory, "modal") 
 		  AddRow(section, "Modal View Flip", "", accessory, "modalflip", ic8_flip_vertical)
 		  AddRow(section, "Modal View Dissolve", "", accessory, "modaldissolve", ic8_direction)
-		  AddRow(section, "Modal View Curl", "", accessory, "modalcurl", ic8_paper)
+		  'AddRow(section, "Modal View Curl", "", accessory, "modalcurl", ic8_paper)
 		  
 		  section = AddSection("UI Examples")
 		  AddRow(section, "Netflix", "", accessory, "netflix", ExtensionsXC.ColoredIcon(ic8_netflix, &ce50914))
@@ -307,10 +307,10 @@ End
 		      Self.PushToShowModalFlipXC(v, ViewExtensionsXC.UIModalPresentationStyle.formSheet)
 		      
 		      
-		    Case "modalcurl"
-		      
-		      Dim v As New vModal
-		      Self.PushToShowModalCurlXC(v, ViewExtensionsXC.UIModalPresentationStyle.formSheet)
+		      'Case "modalcurl"
+		      '
+		      'Dim v As New vModal
+		      'Self.PushToShowModalCurlXC(v, ViewExtensionsXC.UIModalPresentationStyle.formSheet)
 		      
 		      
 		      

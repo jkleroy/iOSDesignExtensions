@@ -1,5 +1,5 @@
 #tag Module
-Protected Module ScrollViewExtensionsXCXC
+Protected Module ScrollViewExtensionsXC
 	#tag Method, Flags = &h0, Description = 466C617368657320746865207363726F6C6C20696E64696361746F727320746F20696E6469636174652074686174207468697320766965772063616E206265207363726F6C6C65642E202855736520776974682061203230306D732074696D657229
 		Sub FlashScrollIndicatorsXC(extends scroll As iOSScrollableArea)
 		  Declare Sub flashScrollIndicators_ Lib "UIKit.framework" selector "flashScrollIndicators" (obj_id As ptr)
@@ -45,9 +45,9 @@ Protected Module ScrollViewExtensionsXCXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetIndicatorStyleXC(extends scroll as iOSScrollableArea, value as ScrollViewExtensionsXCXC.UIScrollViewIndicatorStyle)
+		Sub SetIndicatorStyleXC(extends scroll as iOSScrollableArea, value as ScrollViewExtensionsXC.UIScrollViewIndicatorStyle)
 		  
-		  Declare Sub setIndicatorStyle_ Lib "UIKit.framework" selector "setIndicatorStyle:" (obj_id As ptr, value As ScrollViewExtensionsXCXC.UIScrollViewIndicatorStyle)
+		  Declare Sub setIndicatorStyle_ Lib "UIKit.framework" selector "setIndicatorStyle:" (obj_id As ptr, value As ScrollViewExtensionsXC.UIScrollViewIndicatorStyle)
 		  setIndicatorStyle_(scroll.Handle, value)
 		End Sub
 	#tag EndMethod
@@ -64,7 +64,7 @@ Protected Module ScrollViewExtensionsXCXC
 	#tag Method, Flags = &h0
 		Sub SetScrollEnabledXC(extends scroll as iOSScrollableArea, value As Boolean)
 		  
-		  Declare Sub scrollEnabled Lib UIKitLib selector "setScrollEnabled:" (obj_id As ptr, value As Boolean)
+		  Declare Sub scrollEnabled Lib "UIKit.framework" selector "setScrollEnabled:" (obj_id As ptr, value As Boolean)
 		  
 		  scrollenabled(scroll.Handle, value)
 		End Sub

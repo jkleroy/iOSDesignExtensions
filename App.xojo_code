@@ -5,6 +5,18 @@ Inherits IOSApplication
 	#tag Note, Name = README
 		### History
 		
+		* Version 1.2 - Released 2018-05-??
+		** Added an app icongith
+		** Fixed GetBoundsXC function
+		** Renamed ScrollViewExtensionsXCXC to ScrollViewExtensionsXC
+		** Removed Modal Curl transition
+		** AdjustFontSizeToFitWidthXC now has an optional lines property to set the amount of lines to display
+		** SetTabPageXC to set the current page in a TabBar view
+		** GetTabPageXC to get the current page index in a TabBar view
+		** SetNavBarTitleColorXC to set the color of the text in the navbar
+		** GetiOSVersionXC returns the current iOS version number
+		** Table.GetScrollPositionXC returns the current section/row position
+		
 		* Version 1.1 - Released 2018-05-10
 		** New modal transition options
 		

@@ -97,6 +97,41 @@ Protected Module ViewExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h1, Description = 47657473207468652063757272656E74207061676520696E64657820696E20612054616242617220766965772E200A52657475726E73202D31206966207468652063757272656E74207669657720636F6E74726F6C6C65722069736E27742061205461624261722E
+		Protected Function GetTabPageXC() As Integer
+		  
+		  'This method has been posted in the forum by Antonio Rinaldi.
+		  'It allows setting the active tab like if the user had tapped himself on the tab icon, without need for PushTo.
+		  'Index is zero based, left to right
+		  
+		  
+		  
+		  'Sub goTabPage(idx as integer,doReset as Boolean=False)
+		  
+		  Declare Function NSClassFromString Lib "Foundation"(cls As CFStringRef) As Ptr
+		  Declare Function sharedApplication_ Lib "UIKit" selector "sharedApplication"(cls_ptr As Ptr) As Ptr
+		  Dim shAppPtr As Ptr=sharedApplication_(NSClassFromString("UIApplication"))
+		  
+		  Declare Function keyWindow_ Lib "UIkit" selector "keyWindow"(app_ptr As Ptr) As Ptr
+		  Dim keyWinPtr As Ptr=keyWindow_(shAppPtr)
+		  
+		  Declare Function rootWiewController_ Lib "UIKit" selector "rootViewController"(winPtr As Ptr) As Ptr
+		  Dim rootWiewControllerPtr As Ptr=rootWiewController_(keyWinPtr)
+		  
+		  Declare Function isMemberOfClass_ Lib "foundation" selector "isMemberOfClass:"(oPtr As Ptr,cPtr As Ptr) As Boolean
+		  Dim a As ptr
+		  a=NSClassFromString("UITabBarController")
+		  If isMemberOfClass_(rootWiewControllerPtr,NSClassFromString("UITabBarController")) Then
+		    Declare Function getSelectedIndex Lib "UIKIT" selector "selectedIndex"(tbPtr As Ptr) as UInteger
+		    return getSelectedIndex(rootWiewControllerPtr)
+		    
+		    
+		  End If
+		  
+		  Return -1
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
 		Sub HideNavBarShadowXC(extends v as iOSView)
 		  
@@ -118,7 +153,7 @@ Protected Module ViewExtensionsXC
 		  declare function sharedApplication lib "UIKit" selector "sharedApplication" (obj_ref as ptr) as ptr
 		  declare function rootViewController lib "UIKit" selector "rootViewController" (obj_ref as ptr) as ptr
 		  declare function navigationBar lib "UIKit" selector "navigationBar" (obj_ref as ptr) as ptr
-		  declare function view lib UIKitLib selector "view" (obj_ref as ptr) as ptr
+		  declare function view lib "UIKit.framework" selector "view" (obj_ref as ptr) as ptr
 		  
 		  declare function navigationController lib "UIKit" selector "navigationController" (viewController as ptr) as ptr
 		  dim navigationControllerRef as ptr = navigationController(v.ViewControllerHandle)
@@ -137,38 +172,43 @@ Protected Module ViewExtensionsXC
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
-		Sub PushToShowModalCurlXC(extends parent As iOSView, v As iOSView, style As ViewExtensionsXC.UIModalPresentationStyle=ViewExtensionsXC.UIModalPresentationStyle.fullscreen, Animate As Boolean=True, callback As iOSBlock=Nil)
-		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
-		  Declare Function alloc Lib "Foundation.framework" selector "alloc" (clsRef As ptr) As ptr
-		  Declare Function initWithRootViewController_ Lib "Foundation" selector "initWithRootViewController:" (obj_id As ptr, rootViewController As ptr) As ptr
-		  Declare Sub presentViewController Lib "UIKit.framework" _
-		  Selector "presentViewController:animated:completion:" _
-		  (parentView As Ptr, viewControllerToPresent As Ptr, animated As Boolean, completion As Ptr)
-		  Declare Sub modalPresentationStyle_ Lib UIKitLib Selector "setModalPresentationStyle:" (obj_id As Ptr, modalPresentationStyle As UIModalPresentationStyle)
-		  Declare Sub modalTransitionStyle_ Lib UIKitLib Selector "setModalTransitionStyle:" (obj_id As Ptr, modalTransitionStyle As UIModalTransitionStyle)
+	#tag Method, Flags = &h21
+		Private Sub PushToShowModalCurlXC(extends parent As iOSView, v As iOSView, style As ViewExtensionsXC.UIModalPresentationStyle=ViewExtensionsXC.UIModalPresentationStyle.fullscreen, Animate As Boolean=True, callback As iOSBlock=Nil)
+		  //Removed
 		  
-		  
-		  
-		  Dim navController As ptr = initWithRootViewController_( alloc(NSClassFromString("UINavigationController")), v.ViewControllerHandle ) 
-		  
-		  
-		  modalPresentationStyle_(navController, style)
-		  modalTransitionStyle_(navController, UIModalTransitionStyle.partialCurl)
-		  
-		  
-		  
-		  If callback <> Nil Then
-		    Break
-		    //This code might fail
-		  end if
-		  
-		  If callback Is Nil Then
-		    presentViewController(parent.Handle, navController, Animate, Nil)
-		  Else
-		    presentViewController(parent.Handle, navController, Animate, callback.handle)
-		  End If
-		  
+		  #If False
+		    Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
+		    Declare Function alloc Lib "Foundation.framework" selector "alloc" (clsRef As ptr) As ptr
+		    Declare Function initWithRootViewController_ Lib "Foundation" selector "initWithRootViewController:" (obj_id As ptr, rootViewController As ptr) As ptr
+		    Declare Sub presentViewController Lib "UIKit.framework" _
+		    Selector "presentViewController:animated:completion:" _
+		    (parentView As Ptr, viewControllerToPresent As Ptr, animated As Boolean, completion As Ptr)
+		    Declare Sub modalPresentationStyle_ Lib "UIKit.framework" Selector "setModalPresentationStyle:" (obj_id As Ptr, modalPresentationStyle As UIModalPresentationStyle)
+		    Declare Sub modalTransitionStyle_ Lib "UIKit.framework" Selector "setModalTransitionStyle:" (obj_id As Ptr, modalTransitionStyle As UIModalTransitionStyle)
+		    
+		    
+		    
+		    Dim navController As ptr = initWithRootViewController_( alloc(NSClassFromString("UINavigationController")), v.ViewControllerHandle ) 
+		    
+		    
+		    modalPresentationStyle_(navController, style)
+		    modalTransitionStyle_(navController, UIModalTransitionStyle.partialCurl)
+		    
+		    
+		    
+		    If callback <> Nil Then
+		      Break
+		      //This code might fail
+		    end if
+		    
+		    If callback Is Nil Then
+		      presentViewController(parent.Handle, navController, Animate, Nil)
+		    Else
+		      presentViewController(parent.Handle, navController, Animate, callback.handle)
+		    End If
+		    
+		    
+		  #EndIf
 		End Sub
 	#tag EndMethod
 
@@ -180,8 +220,8 @@ Protected Module ViewExtensionsXC
 		  Declare Sub presentViewController Lib "UIKit.framework" _
 		  Selector "presentViewController:animated:completion:" _
 		  (parentView As Ptr, viewControllerToPresent As Ptr, animated As Boolean, completion As Ptr)
-		  Declare Sub modalPresentationStyle_ Lib UIKitLib Selector "setModalPresentationStyle:" (obj_id As Ptr, modalPresentationStyle As UIModalPresentationStyle)
-		  Declare Sub modalTransitionStyle_ Lib UIKitLib Selector "setModalTransitionStyle:" (obj_id As Ptr, modalTransitionStyle As UIModalTransitionStyle)
+		  Declare Sub modalPresentationStyle_ Lib "UIKit.framework" Selector "setModalPresentationStyle:" (obj_id As Ptr, modalPresentationStyle As UIModalPresentationStyle)
+		  Declare Sub modalTransitionStyle_ Lib "UIKit.framework" Selector "setModalTransitionStyle:" (obj_id As Ptr, modalTransitionStyle As UIModalTransitionStyle)
 		  
 		  
 		  
@@ -215,8 +255,8 @@ Protected Module ViewExtensionsXC
 		  Declare Sub presentViewController Lib "UIKit.framework" _
 		  Selector "presentViewController:animated:completion:" _
 		  (parentView As Ptr, viewControllerToPresent As Ptr, animated As Boolean, completion As Ptr)
-		  Declare Sub modalPresentationStyle_ Lib UIKitLib Selector "setModalPresentationStyle:" (obj_id As Ptr, modalPresentationStyle As UIModalPresentationStyle)
-		  Declare Sub modalTransitionStyle_ Lib UIKitLib Selector "setModalTransitionStyle:" (obj_id As Ptr, modalTransitionStyle As UIModalTransitionStyle)
+		  Declare Sub modalPresentationStyle_ Lib "UIKit.framework" Selector "setModalPresentationStyle:" (obj_id As Ptr, modalPresentationStyle As UIModalPresentationStyle)
+		  Declare Sub modalTransitionStyle_ Lib "UIKit.framework" Selector "setModalTransitionStyle:" (obj_id As Ptr, modalTransitionStyle As UIModalTransitionStyle)
 		  
 		  
 		  
@@ -250,7 +290,7 @@ Protected Module ViewExtensionsXC
 		  Declare Sub presentViewController Lib "UIKit.framework" _
 		  Selector "presentViewController:animated:completion:" _
 		  (parentView As Ptr, viewControllerToPresent As Ptr, animated As Boolean, completion As Ptr)
-		  Declare Sub modalPresentationStyle_ Lib UIKitLib selector "setModalPresentationStyle:" (obj_id As ptr, modalPresentationStyle As UIModalPresentationStyle)
+		  Declare Sub modalPresentationStyle_ Lib "UIKit.framework" selector "setModalPresentationStyle:" (obj_id As ptr, modalPresentationStyle As UIModalPresentationStyle)
 		  
 		  
 		  
@@ -433,8 +473,8 @@ Protected Module ViewExtensionsXC
 		  If sSystemVersion = 0.0 Then
 		    
 		    Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
-		    Declare Function currentDevice_ Lib UIKitLib selector "currentDevice" (clsRef As ptr) As ptr
-		    Declare Function systemversion_ Lib UIKitLib selector "systemVersion" (obj_id As ptr) As CFStringRef
+		    Declare Function currentDevice_ Lib "UIKit.framework" selector "currentDevice" (clsRef As ptr) As ptr
+		    Declare Function systemversion_ Lib "UIKit.framework" selector "systemVersion" (obj_id As ptr) As CFStringRef
 		    Dim device As Ptr = currentDevice_(NSClassFromString("UIDevice"))
 		    Dim systemVersion As Text = systemversion_(device)
 		    
@@ -448,18 +488,18 @@ Protected Module ViewExtensionsXC
 		  //Use new API
 		  If sSystemVersion >= 11.0 Then
 		    
-		    Declare Function navigationBar Lib UIKitLib selector "navigationBar" (obj_ref As ptr) As ptr
+		    Declare Function navigationBar Lib "UIKit.framework" selector "navigationBar" (obj_ref As ptr) As ptr
 		    
-		    Declare Function navigationController Lib UIKitLib selector "navigationController" (viewController As ptr) As ptr
+		    Declare Function navigationController Lib "UIKit.framework" selector "navigationController" (viewController As ptr) As ptr
 		    Dim navigationControllerRef As ptr = navigationController(v.ViewControllerHandle)
 		    
 		    Dim navBar As ptr = navigationBar(navigationControllerRef)
 		    
-		    Declare Function navigationItem Lib UIKitLib selector "navigationItem" (obj_ref As ptr) As ptr
+		    Declare Function navigationItem Lib "UIKit.framework" selector "navigationItem" (obj_ref As ptr) As ptr
 		    Dim navItem As ptr = navigationItem(v.Handle)
 		    
 		    
-		    Declare Sub largeTitleDisplayMode Lib UIKitLib selector "setLargeTitleDisplayMode:" (obj_id As ptr, value As LargeTitleDisplayMode)
+		    Declare Sub largeTitleDisplayMode Lib "UIKit.framework" selector "setLargeTitleDisplayMode:" (obj_id As ptr, value As LargeTitleDisplayMode)
 		    largeTitleDisplayMode(navItem, mode)
 		    
 		  Else
@@ -557,6 +597,44 @@ Protected Module ViewExtensionsXC
 		  declare sub setBarStyle lib "UIKit.framework" selector "setBarStyle:" (id as ptr, theStyle as integer)
 		  setBarStyle navBar, If(Dark, 1, 0) //UIStatusBarStyleLightContent
 		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 536574732074686520636F6C6F72206F6620746865207465787420696E20746865204E61766261722E
+		Sub SetNavBarTitleColorXC(extends v as iOSView, value As Color)
+		  
+		  Declare Function navigationBar Lib "UIKit.framework" selector "navigationBar" (obj_ref As ptr) As ptr
+		  Declare Function navigationController Lib "UIKit.framework" selector "navigationController" (viewController As ptr) As ptr
+		  Dim navigationControllerRef As ptr = navigationController(v.ViewControllerHandle)
+		  Dim navBar As ptr = navigationBar(navigationControllerRef)
+		  
+		  Declare Function NSClassFromString Lib "Foundation" (name As CFStringRef) As Ptr
+		  Declare Function dictionaryWithObject Lib "Foundation.framework" selector "dictionaryWithObject:forKey:" _
+		  (class_id As Ptr, anObject As CFStringRef, key As Ptr) As Ptr
+		  
+		  
+		  
+		  Dim constStr As Text = ExtensionsXC.StringConstantXC("UIKit", "NSForegroundColorAttributeName")
+		  
+		  Dim constRef As CFStringRef = constStr
+		  
+		  Dim nsDic As Ptr
+		  nsDic = DictionaryWithObject(NSClassFromString("NSDictionary"), constRef, New UIColor(value))
+		  
+		  
+		  
+		  Declare Sub setTitleTextAttributes Lib "UIKit.framework" selector "setTitleTextAttributes:" _
+		  (obj_id As ptr, att As ptr)
+		  
+		  setTitleTextAttributes(navBar, nsDic)
+		  
+		  If ExtensionsXC.GetiOSVersionXC >= 11.0 Then
+		    
+		    Declare Sub setLargeTitleTextAttributes Lib "UIKit.framework" selector "setLargeTitleTextAttributes:" _
+		    (obj_id As ptr, att As ptr)
+		    
+		    setLargeTitleTextAttributes(navBar, nsDic)
+		  End If
 		End Sub
 	#tag EndMethod
 
@@ -699,6 +777,44 @@ Protected Module ViewExtensionsXC
 		    setTranslucent tabbar
 		  end
 		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h1, Description = 536574732074686520616374697665207061676520696E20612054616242617220766965772E
+		Protected Sub SetTabPageXC(idx as integer, doReset as Boolean = False)
+		  'This method has been posted in the forum by Antonio Rinaldi.
+		  'It allows setting the active tab like if the user had tapped himself on the tab icon, without need for PushTo.
+		  'Index is zero based, left to right
+		  
+		  
+		  
+		  'Sub goTabPage(idx as integer,doReset as Boolean=False)
+		  if idx<0 then Return
+		  Declare Function NSClassFromString lib "Foundation"(cls as CFStringRef) as Ptr
+		  Declare function sharedApplication_ lib "UIKit" selector "sharedApplication"(cls_ptr as Ptr) as Ptr
+		  dim shAppPtr as Ptr=sharedApplication_(NSClassFromString("UIApplication"))
+		  
+		  Declare function keyWindow_ lib "UIkit" selector "keyWindow"(app_ptr as Ptr) as Ptr
+		  dim keyWinPtr as Ptr=keyWindow_(shAppPtr)
+		  
+		  Declare Function rootWiewController_ lib "UIKit" selector "rootViewController"(winPtr as Ptr) as Ptr
+		  dim rootWiewControllerPtr as Ptr=rootWiewController_(keyWinPtr)
+		  
+		  Declare Function isMemberOfClass_ lib "foundation" selector "isMemberOfClass:"(oPtr as Ptr,cPtr as Ptr) as Boolean
+		  dim a as ptr
+		  a=NSClassFromString("UITabBarController")
+		  if isMemberOfClass_(rootWiewControllerPtr,NSClassFromString("UITabBarController")) then
+		    Declare sub setSelectedIndex lib "UIKIT" selector "setSelectedIndex:"(tbPtr as Ptr,page as UInteger)
+		    setSelectedIndex(rootWiewControllerPtr,idx)
+		    
+		    if doReset then
+		      Declare Function selectedViewController_ lib "UIKIT" selector "selectedViewController"(oPtr as ptr) as Ptr
+		      dim navPtr as Ptr=selectedViewController_(rootWiewControllerPtr)
+		      Declare Sub popToRoot lib "UIKIT" selector "popToRootViewControllerAnimated:"(oPtr as Ptr,animated as Boolean)
+		      popToRoot(navPtr,true)
+		    end if
+		  end if
+		  'End Sub
 		End Sub
 	#tag EndMethod
 

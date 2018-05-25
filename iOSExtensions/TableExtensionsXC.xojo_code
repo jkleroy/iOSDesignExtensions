@@ -1,12 +1,17 @@
 #tag Module
 Protected Module TableExtensionsXC
 	#tag Method, Flags = &h0, Description = 41646A757374732074686520666F6E742073697A65206163636F7264696E6720746F20617661696C61626C65207769647468
-		Sub AdjustsFontSizeToFitWidthDetailXC(extends cell As iOSTableCellData)
+		Sub AdjustsFontSizeToFitWidthDetailXC(extends cell As iOSTableCellData, lines As Integer = -1)
 		  
 		  Dim label As Ptr
 		  
 		  declare function getTextLabel lib "UIKit.framework" selector "detailTextLabel" (obj_ref as ptr) as ptr
 		  label = getTextLabel(cell.Handle)
+		  
+		  If lines > 0 Then
+		    Declare Sub setNumberOfLines Lib "UIKit.framework" selector "setNumberOfLines:" (id As ptr, value As Integer)
+		    setNumberOfLines label, lines
+		  End If
 		  
 		  Declare sub setAdjustsFontSizeToFitWidth lib "UIKit.framework" selector "setAdjustsFontSizeToFitWidth:" (id as ptr, value as Boolean)
 		  setAdjustsFontSizeToFitWidth label, True
@@ -14,12 +19,17 @@ Protected Module TableExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 41646A757374732074686520666F6E742073697A65206163636F7264696E6720746F20617661696C61626C65207769647468
-		Sub AdjustsFontSizeToFitWidthXC(extends cell As iOSTableCellData)
+		Sub AdjustsFontSizeToFitWidthXC(extends cell As iOSTableCellData, lines As Integer = -1)
 		  
 		  Dim label As Ptr
 		  
 		  declare function getTextLabel lib "UIKit.framework" selector "textLabel" (obj_ref as ptr) as ptr
 		  label = getTextLabel(cell.Handle)
+		  
+		  If lines > 0 Then
+		    Declare Sub setNumberOfLines Lib "UIKit.framework" selector "setNumberOfLines:" (id As ptr, value As Integer)
+		    setNumberOfLines label, lines
+		  End If
 		  
 		  Declare sub setAdjustsFontSizeToFitWidth lib "UIKit.framework" selector "setAdjustsFontSizeToFitWidth:" (id as ptr, value as Boolean)
 		  setAdjustsFontSizeToFitWidth label, True
@@ -49,6 +59,40 @@ Protected Module TableExtensionsXC
 		  declare function tableHeaderView lib "UIKit.framework" selector "tableHeaderView" (obj_id as ptr) as ptr
 		  
 		  return tableHeaderView(table.Handle)
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 52657475726E73207468652063757272656E742076697369626C652073656374696F6E2F726F772E2052657475726E73202D312C2D31206966207461626C6520697320656D707479
+		Function GetScrollPositionXC(extends table As iOSTable) As Integer()
+		  
+		  Declare Function indexPathsForVisibleRows Lib "UIKit.framework" selector "indexPathsForVisibleRows" (obj_id As ptr) As ptr
+		  
+		  Dim indexArray As ptr = indexPathsForVisibleRows(table.Handle)
+		  
+		  
+		  
+		  If indexArray <> Nil Then
+		    
+		    Declare Function objectAtIndex Lib "Foundation.framework" selector "objectAtIndex:" (theArray As Ptr, idx As Integer) As Ptr
+		    Declare Function getRow Lib "Foundation.framework" selector "row" (obj_id As ptr) As Integer
+		    Declare Function getSection Lib "Foundation.framework" selector "section" (obj_id As ptr) As Integer
+		    
+		    
+		    Dim indexPath As Ptr = objectAtIndex(indexArray, 0)
+		    
+		    
+		    Dim section, row As Integer
+		    
+		    section = getSection(indexPath)
+		    row = getRow(indexPath)
+		    
+		    Return Array(section, row)
+		  End If
+		  
+		  Return Array(-1, -1)
+		  
+		  
+		  
 		End Function
 	#tag EndMethod
 
@@ -127,7 +171,7 @@ Protected Module TableExtensionsXC
 		Sub SetFontsXC(extends cell As iOSTableCellData, textFontName as Text, textFontSize as Double, detailFontName as Text = "", detailFontSize As Double = 0.0)
 		  
 		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
-		  Declare Function initFont Lib UIKitLib selector "fontWithName:size:" (obj_id As ptr, name As CFStringRef, size As CGFloat) As ptr
+		  Declare Function initFont Lib "UIKit.framework" selector "fontWithName:size:" (obj_id As ptr, name As CFStringRef, size As CGFloat) As ptr
 		  
 		  Dim fontPtr As ptr
 		  fontPtr = initFont(NSClassFromString("UIFont"), textFontName, textFontSize)
@@ -241,9 +285,9 @@ Protected Module TableExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 4368616E676520746865207363726F6C6C20696E64696361746F7220636F6C6F7220746F205768697465206F7220426C61636B
-		Sub SetIndicatorStyleXC(extends table as iOSTable, value as ScrollViewExtensionsXCXC.UIScrollViewIndicatorStyle)
+		Sub SetIndicatorStyleXC(extends table as iOSTable, value as ScrollViewExtensionsXC.UIScrollViewIndicatorStyle)
 		  
-		  Declare Sub setIndicatorStyle_ Lib "UIKit.framework" selector "setIndicatorStyle:" (obj_id As ptr, value As ScrollViewExtensionsXCXC.UIScrollViewIndicatorStyle)
+		  Declare Sub setIndicatorStyle_ Lib "UIKit.framework" selector "setIndicatorStyle:" (obj_id As ptr, value As ScrollViewExtensionsXC.UIScrollViewIndicatorStyle)
 		  setIndicatorStyle_(table.Handle, value)
 		End Sub
 	#tag EndMethod
@@ -251,7 +295,7 @@ Protected Module TableExtensionsXC
 	#tag Method, Flags = &h0
 		Sub SetScrollEnabledXC(extends table as iOSTable, value As Boolean)
 		  
-		  Declare Sub scrollEnabled Lib UIKitLib selector "setScrollEnabled:" (obj_id As ptr, value As Boolean)
+		  Declare Sub scrollEnabled Lib "UIKit.framework" selector "setScrollEnabled:" (obj_id As ptr, value As Boolean)
 		  
 		  scrollenabled(table.Handle, value)
 		End Sub
@@ -447,6 +491,14 @@ Protected Module TableExtensionsXC
 		  
 		  
 		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub TextColorXC(extends cell As iOSTableCellData, assigns value As Color)
+		  
+		  
+		  cell.SetTextColorXC(value)
 		End Sub
 	#tag EndMethod
 

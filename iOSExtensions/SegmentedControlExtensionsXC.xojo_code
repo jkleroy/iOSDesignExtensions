@@ -4,7 +4,7 @@ Protected Module SegmentedControlExtensionsXC
 		Sub AdjustFontSizeToFitWidthXC(extends seg As iOSSegmentedControl)
 		  //Requires UIKit
 		  
-		  #If kUseUIKit
+		  #If ExtensionsXC.kUseUIKit
 		    
 		    
 		    

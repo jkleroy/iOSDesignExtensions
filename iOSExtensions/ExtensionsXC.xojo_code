@@ -40,6 +40,31 @@ Protected Module ExtensionsXC
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h1
+		Protected Function GetiOSVersionXC() As Double
+		  
+		  Static sSystemVersion As Double
+		  
+		  //Get sSystemVersion only once
+		  If sSystemVersion = 0.0 Then
+		    
+		    Declare Function currentDevice_ Lib "UIKit.framework" selector "currentDevice" (clsRef As ptr) As ptr
+		    Declare Function systemversion_ Lib "UIKit.framework" selector "systemVersion" (obj_id As ptr) As CFStringRef
+		    Declare Function NSClassFromString Lib "Foundation" (name As CFStringRef) As Ptr
+		    Dim device As Ptr = currentDevice_(NSClassFromString("UIDevice"))
+		    Dim systemVersion As Text = systemversion_(device)
+		    
+		    Try
+		      sSystemVersion = Double.FromText(systemVersion)
+		    Catch
+		    End Try
+		    
+		  End If
+		  
+		  Return sSystemVersion
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h1, Description = 52657475726E7320616E20696D61676520746861742077696C6C20616C776179732072656E646572207573696E6720697473207472756520636F6C6F7273
 		Protected Function ImageOriginalXC(image As iOSImage) As iOSImage
 		  
@@ -59,6 +84,56 @@ Protected Module ExtensionsXC
 		  Declare Function imageWithRenderingMode lib "UIKit.framework" selector "imageWithRenderingMode:" (id as ptr, RenderingMode as Integer) as ptr
 		  
 		  Return iOSImage.FromHandle(imageWithRenderingMode(image.Handle, 2))
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
+		Protected Function LoadConstantXC(frameworkName as Text, constName as Text) As Ptr
+		  Declare Function dlsym Lib "/usr/lib/libSystem.dylib" ( handle As Ptr, name As CString ) As ptr
+		  dim libPtr as Ptr = LoadFrameworkXC(frameworkName)
+		  
+		  dim constPtr as Ptr = dlsym(libPtr, constName.ToCString(xojo.core.TextEncoding.UTF8))
+		  Return constPtr
+		  
+		  Return nil
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
+		Protected Function LoadFrameworkXC(frameworkName as Text) As Ptr
+		  static frameworkHandlesDict as xojo.Core.Dictionary = new xojo.Core.Dictionary
+		  
+		  if frameworkHandlesDict.HasKey(frameworkName) then Return frameworkHandlesDict.Value(frameworkName)
+		  
+		  Declare Function dlopen Lib "/usr/lib/libSystem.dylib" ( path As CString, mode As Int32 ) As Ptr
+		  Declare Function dlerror Lib "/usr/lib/libSystem.dylib" () As CString
+		  
+		  Const RTLD_LAZY = 1
+		  Const RTLD_GLOBAL = 8
+		  
+		  dim path as Text =  "/System/Library/Frameworks/" + frameworkName + ".framework/" + frameworkName
+		  Dim result As ptr = dlopen(path.ToCString(xojo.core.TextEncoding.UTF8), RTLD_LAZY Or RTLD_GLOBAL )
+		  
+		  If result = Nil Then
+		    Dim reason As Text = Text.FromCString(dlerror(), Xojo.Core.TextEncoding.UTF8)
+		    Dim exc As New Xojo.Core.InvalidArgumentException
+		    exc.Reason = reason
+		    Raise exc
+		    Return nil
+		  end if
+		  
+		  frameworkHandlesDict.Value(frameworkName) = result
+		  Return result
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
+		Protected Function StringConstantXC(frameworkName as Text, constName as Text) As Text
+		  Dim constPtr As Ptr = LoadConstantXC(frameworkName, constName)
+		  if constPtr <> nil then
+		    Return constPtr.CFStringRef(0)
+		  end if
+		  Return ""
 		End Function
 	#tag EndMethod
 
@@ -84,10 +159,10 @@ Protected Module ExtensionsXC
 	#tag EndNote
 
 
-	#tag Constant, Name = kUseUIKit, Type = Boolean, Dynamic = False, Default = \"False", Scope = Public
+	#tag Constant, Name = kUseUIKit, Type = Boolean, Dynamic = False, Default = \"False", Scope = Protected
 	#tag EndConstant
 
-	#tag Constant, Name = kVersion, Type = Double, Dynamic = False, Default = \"1.1", Scope = Public
+	#tag Constant, Name = kVersion, Type = Double, Dynamic = False, Default = \"1.2", Scope = Protected
 	#tag EndConstant
 
 

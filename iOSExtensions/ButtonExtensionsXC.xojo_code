@@ -1,12 +1,17 @@
 #tag Module
 Protected Module ButtonExtensionsXC
 	#tag Method, Flags = &h0, Description = 41646A757374732074686520666F6E742073697A65206163636F7264696E6720746F20617661696C61626C65207769647468
-		Sub AdjustsFontSizeToFitWidthXC(extends bt As iOSButton)
+		Sub AdjustsFontSizeToFitWidthXC(extends bt As iOSButton, lines As Integer = -1)
 		  
 		  Dim label As ptr
 		  
 		  Declare Function getTextLabel Lib "UIKit.framework" selector "titleLabel" (obj_ref As ptr) As ptr
 		  label = getTextLabel(bt.Handle)
+		  
+		  If lines > 0 Then
+		    Declare Sub setNumberOfLines Lib "UIKit.framework" selector "setNumberOfLines:" (id As ptr, value As Integer)
+		    setNumberOfLines label, lines
+		  End If
 		  
 		  Declare Sub setAdjustsFontSizeToFitWidth Lib "UIKit.framework" selector "setAdjustsFontSizeToFitWidth:" (id As ptr, value As Boolean)
 		  setAdjustsFontSizeToFitWidth label, True

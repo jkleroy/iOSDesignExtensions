@@ -1,8 +1,14 @@
 #tag Module
 Protected Module ControlExtensionsXC
 	#tag Method, Flags = &h0, Description = 41646A757374732074686520666F6E742073697A65206163636F7264696E6720746F20617661696C61626C65207769647468
-		Sub AdjustsFontSizeToFitWidthXC(extends label As iOSLabel)
+		Sub AdjustsFontSizeToFitWidthXC(extends label As iOSLabel, lines As Integer = -1)
 		  
+		  label.LineBreakMode = iOSLineBreakMode.BreakByTruncatingTail
+		  
+		  If lines > 0 Then
+		    Declare Sub setNumberOfLines Lib "UIKit.framework" selector "setNumberOfLines:" (id As ptr, value As Integer)
+		    setNumberOfLines label.handle, lines
+		  End If
 		  
 		  
 		  Declare sub setAdjustsFontSizeToFitWidth lib "UIKit.framework" selector "setAdjustsFontSizeToFitWidth:" (id as ptr, value as Boolean)
@@ -26,14 +32,14 @@ Protected Module ControlExtensionsXC
 		Function GetBoundsXC(extends c as iOSControl) As xojo.Core.Rect
 		  
 		  
-		  Declare Function view_ Lib "UIKit.framework" selector "view" (controlHandle As ptr) As Ptr
+		  'Declare Function view_ Lib "UIKit.framework" selector "view" (controlHandle As ptr) As Ptr
 		  Declare Function bounds Lib "UIKit.framework" selector "bounds" (obj_id As Ptr) As ExtensionsXC.xcCGRect
 		  
-		  Dim view As Ptr = view_(c.handle)
+		  'Dim view As Ptr = view_(c.handle)
 		  
 		  
 		  
-		  Dim re As ExtensionsXC.xcCGRect = bounds(view)
+		  Dim re As ExtensionsXC.xcCGRect = bounds(c.handle)
 		  
 		  
 		  Return New xojo.Core.Rect(re.origin.x, re.origin.y, re.rsize.width, re.rsize.height)

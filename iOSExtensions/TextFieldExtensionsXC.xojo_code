@@ -29,6 +29,15 @@ Protected Module TextFieldExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub SetAutocorrectionTypeXC(extends txt As iOSTextArea, value As TextFieldExtensionsXC.UITextAutocorrectionType)
+		  
+		  Declare Sub setAutocorrectionType_ Lib "UIKit.framework" selector "setAutocorrectionType:" (obj_id As ptr, value As UITextAutocorrectionType)
+		  
+		  setAutocorrectionType_(txt.Handle, value)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub SetAutocorrectionTypeXC(extends txt As iOSTextField, value As TextFieldExtensionsXC.UITextAutocorrectionType)
 		  
 		  Declare Sub setAutocorrectionType_ Lib "UIKit.framework" selector "setAutocorrectionType:" (obj_id As ptr, value As UITextAutocorrectionType)
@@ -137,20 +146,20 @@ Protected Module TextFieldExtensionsXC
 	#tag Method, Flags = &h0, Description = 536574732074686520706C616365686F6C64657220616E6420706C616365686F6C64657220636F6C6F722E2052657175697265732055494B6974
 		Sub SetPlaceholderColorXC(extends field as iOSTextField, placeholder As Text, aColor As Color)
 		  
-		  #If kUseUIKit
+		  #If ExtensionsXC.kUseUIKit
 		    'NSAttributedString *str = [[NSAttributedString alloc] initWithString:@"Some Text" attributes:@{ NSForegroundColorAttributeName : [UIColor redColor] }];
 		    
 		    
 		    
-		    declare function alloc lib "Foundation.framework" selector "alloc" (clsRef as ptr) as ptr
-		    declare function NSClassFromString lib "Foundation.framework" (clsName as CFStringRef) as ptr
-		    "Foundation.framework"WithStringattributes Lib "Foundation.framework"  selector "initWithString:attributes:" (id As ptr, astring As CFStringRef, attDict As ptr) As ptr
-		    declare sub attributedPlaceholder_ lib "Foundation.framework" selector "setAttributedPlaceholder:" (id as ptr, attribString as ptr) 
+		    Declare Function alloc Lib "Foundation.framework" selector "alloc" (clsRef As ptr) As ptr
+		    Declare Function NSClassFromString Lib "Foundation.framework" (clsName As CFStringRef) As ptr
+		    Declare Function initWithStringattributes Lib "Foundation.framework"  selector "initWithString:attributes:" (id As ptr, astring As CFStringRef, attDict As ptr) As ptr
+		    Declare Sub attributedPlaceholder_ Lib "Foundation.framework" selector "setAttributedPlaceholder:" (id As ptr, attribString As ptr) 
 		    
-		    Dim uic As new UIColor(aColor)
+		    Dim uic As New UIColor(aColor)
 		    
 		    
-		    Dim keyStr As new NSString(Foundation.StringConstant("UIKit.framework", "NSForegroundColorAttributeName"))
+		    Dim keyStr As New NSString(Foundation.StringConstant("UIKit.framework", "NSForegroundColorAttributeName"))
 		    'Dim keyStr2 As new NSString(Foundation.StringConstant("UIKit.framework", "NSBackgroundColorAttributeName"))
 		    
 		    
@@ -165,7 +174,7 @@ Protected Module TextFieldExtensionsXC
 		    
 		    Declare Function initWithObjects Lib FoundationLib selector "initWithObjects:forKeys:" (obj_id As Ptr, objects As Ptr, keys As Ptr) As Ptr
 		    
-		    Dim keysArray As New NSArray(keys)
+		    Dim keysArray As New Foundation.NSArray(keys)
 		    Dim objectsArray As New NSArray(objects)
 		    
 		    Super.Constructor(initWithObjects(Allocate(NSClassFromString("NSMutableDictionary")), objectsArray, keysArray))
