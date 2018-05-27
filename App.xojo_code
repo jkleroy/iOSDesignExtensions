@@ -5,6 +5,9 @@ Inherits IOSApplication
 	#tag Note, Name = README
 		### History
 		
+		* Version 1.3 - Released 2018-05-27
+		** Added scrolling functions to iOSTextArea
+		
 		* Version 1.2 - Released 2018-05-??
 		** Added an app icongith
 		** Fixed GetBoundsXC function

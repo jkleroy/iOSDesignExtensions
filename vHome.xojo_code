@@ -223,9 +223,10 @@ End
 		  AddRow(section, "Table Examples", "", accessory, GetTypeInfo(vTable), ExtensionsXC.ColoredIcon(ic8_list, &c66CCFE00))
 		  
 		  
-		  section = AddSection("TextField Extensions")
+		  section = AddSection("TextFields Extensions")
 		  AddRow(section, "TextField Examples", "", accessory, GetTypeInfo(vTextFields), ExtensionsXC.ColoredIcon(ic8_sms, &cCC66FE00))
 		  AddRow(section, "TextField Keyboards", "", accessory, GetTypeInfo(vTextFieldKeyboards), ExtensionsXC.ColoredIcon(ic8_sms, &c80004000))
+		  AddRow(section, "TextArea Extension", "", accessory, GetTypeInfo(vTextArea), ExtensionsXC.ColoredIcon(ic8_textarea, &c3D97FE00))
 		  
 		  
 		  

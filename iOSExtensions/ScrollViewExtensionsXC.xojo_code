@@ -70,7 +70,7 @@ Protected Module ScrollViewExtensionsXC
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
+	#tag Method, Flags = &h0, Description = 446566696E657320696620746865205363726F6C6C76696577207363726F6C6C7320746F2074686520746F70207768656E20646F75626C652074617070696E67207468652074696D6520696E64696361746F722E
 		Sub SetScrollsToTopXC(extends scroll as iOSScrollableArea, value As Boolean)
 		  
 		  Declare Sub scrollsToTop_ Lib "UIKit.framework" selector "setScrollsToTop:" (obj_id As ptr, value As Boolean)

@@ -20,38 +20,88 @@ Protected Module TextFieldExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetAutocapitalizationTypeXC(extends txt As iOSTextField, value As TextFieldExtensionsXC.UITextAutocapitalizationType)
+		Function GetSelectedRangeXC(Extends area As iOSTextArea) As TextFieldExtensionsXC.NSRangeXC
+		  
+		  
+		  Declare Function selectedRange_ Lib "UIKit.framework" selector "selectedRange" (obj_id As ptr) As NSRangeXC
+		  
+		  Return selectedRange_(area.Handle)
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 526574756E73207468652063757272656E74207363726F6C6C20706F736974696F6E
+		Function ScrollPositionXC(extends area As iOSTextArea) As Xojo.Core.Point
+		  
+		  Dim offset As xojo.core.point
+		  
+		  
+		  Declare Function ContentOffset_ Lib "UIKit.framework" selector "contentOffset" (obj_id As ptr) As ExtensionsXC.xcCGPoint
+		  Dim pt As ExtensionsXC.xcCGPoint = ContentOffset_(area.Handle)
+		  offset = New Xojo.Core.Point(pt.x, pt.y)
+		  
+		  
+		  
+		  Return offset
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 5363726F6C6C7320746F207468652070726F76696465642072616E676520706F736974696F6E2E
+		Sub ScrollToRangeXC(Extends area As iOSTextArea, range As TextFieldExtensionsXC.NSRangeXC)
+		  
+		  
+		  
+		  Declare Sub scrollRangeToVisible_ Lib "UIKit.framework" selector "scrollRangeToVisible:" (obj_id As ptr, rng As NSRangeXC)
+		  
+		  scrollRangeToVisible_(area.Handle, range)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 5363726F6C6C7320746F2074686520646566696E656420636F6F7264696E61746573
+		Sub ScrollToXC(extends area as iOSTextArea, point As Xojo.Core.Point, animated As Boolean = True)
+		  
+		  Declare Sub setContentOffsetAnimated Lib "UIKit.framework" selector "setContentOffset:animated:" (id As ptr, value As ExtensionsXC.xcCGPoint, animated As Boolean)
+		  
+		  Dim pt As ExtensionsXC.xcCGPoint
+		  pt.x = point.X
+		  pt.y = point.Y
+		  
+		  setContentOffsetAnimated(area.Handle, pt, animated)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub SetAutocapitalizationTypeXC(extends field As iOSTextField, value As TextFieldExtensionsXC.UITextAutocapitalizationType)
 		  
 		  Declare Sub setAutocapitalizationType_ Lib "UIKit.framework" selector "setAutocapitalizationType:" (obj_id As ptr, value As UITextAutoCapitalizationType)
 		  
-		  setAutocapitalizationType_(txt.Handle, value)
+		  setAutocapitalizationType_(field.Handle, value)
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetAutocorrectionTypeXC(extends txt As iOSTextArea, value As TextFieldExtensionsXC.UITextAutocorrectionType)
+		Sub SetAutocorrectionTypeXC(extends area As iOSTextArea, value As TextFieldExtensionsXC.UITextAutocorrectionType)
 		  
 		  Declare Sub setAutocorrectionType_ Lib "UIKit.framework" selector "setAutocorrectionType:" (obj_id As ptr, value As UITextAutocorrectionType)
 		  
-		  setAutocorrectionType_(txt.Handle, value)
+		  setAutocorrectionType_(area.Handle, value)
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetAutocorrectionTypeXC(extends txt As iOSTextField, value As TextFieldExtensionsXC.UITextAutocorrectionType)
+		Sub SetAutocorrectionTypeXC(extends field As iOSTextField, value As TextFieldExtensionsXC.UITextAutocorrectionType)
 		  
 		  Declare Sub setAutocorrectionType_ Lib "UIKit.framework" selector "setAutocorrectionType:" (obj_id As ptr, value As UITextAutocorrectionType)
 		  
-		  setAutocorrectionType_(txt.Handle, value)
+		  setAutocorrectionType_(field.Handle, value)
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetBorderColorXC(extends txt As iOSTextField, C As Color)
+		Sub SetBorderColorXC(extends field As iOSTextField, C As Color)
 		  
 		  
 		  Declare Function layer_ Lib "UIKit.framework" selector "layer" (id As ptr) As Ptr
-		  Dim layer As ptr = layer_(txt.Handle)
+		  Dim layer As ptr = layer_(field.Handle)
 		  
 		  Dim uic As New UIColor(C)
 		  
@@ -70,11 +120,11 @@ Protected Module TextFieldExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetBorderWidthXC(extends txt As iOSTextField, value As Double)
+		Sub SetBorderWidthXC(extends field As iOSTextField, value As Double)
 		  
 		  
 		  Declare Function layer_ Lib "UIKit.framework" selector "layer" (id As ptr) As Ptr
-		  Dim layer As ptr = layer_(txt.Handle)
+		  Dim layer As ptr = layer_(field.Handle)
 		  
 		  
 		  Declare Sub setBorderWidth Lib "UIKit.framework" selector "setBorderWidth:" (obj_id As ptr, w As CGFloat)
@@ -83,12 +133,12 @@ Protected Module TextFieldExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetCornerRadiusXC(extends txt As iOSTextField, radius As Double)
+		Sub SetCornerRadiusXC(extends field As iOSTextField, radius As Double)
 		  
 		  
 		  
 		  Declare Function layer_ Lib "UIKit.framework" selector "layer" (id As ptr) As Ptr
-		  Dim layer As ptr = layer_(txt.Handle)
+		  Dim layer As ptr = layer_(field.Handle)
 		  
 		  
 		  
@@ -200,10 +250,33 @@ Protected Module TextFieldExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetReturnKeyTypeXC(extends txt as iOSTextField, value as TextFieldExtensionsXC.UIReturnKeyType)
+		Sub SetReturnKeyTypeXC(extends field as iOSTextField, value as TextFieldExtensionsXC.UIReturnKeyType)
 		  
 		  Declare Sub setReturnKeyType_ Lib "UIKit.framework" selector "setReturnKeyType:" (obj_id As ptr, value As UIReturnKeyType)
-		  setReturnKeyType_(txt.Handle, value)
+		  setReturnKeyType_(field.Handle, value)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 446566696E657320696620746865205465787441726561207363726F6C6C7320746F2074686520746F70207768656E20646F75626C652074617070696E67207468652074696D6520696E64696361746F722E
+		Sub SetScrollsToTopXC(extends area as iOSTextArea, value As Boolean)
+		  
+		  Declare Sub scrollsToTop_ Lib "UIKit.framework" selector "setScrollsToTop:" (obj_id As ptr, value As Boolean)
+		  
+		  scrollsToTop_(area.Handle, value)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub SetSelectedRangeXC(Extends area As iOSTextArea, range As TextFieldExtensionsXC.NSRangeXC)
+		  
+		  
+		  Declare Sub selectedRange Lib "UIKit.framework" selector "setSelectedRange:" (obj_id As ptr, rng As NSRangeXC)
+		  Declare Sub select_ Lib "UIKit.framework" selector "select:" (obj_id As ptr, obj As ptr)
+		  
+		  
+		  select_(area.Handle, area.Handle)
+		  
+		  selectedRange(area.Handle, range)
 		End Sub
 	#tag EndMethod
 
@@ -238,6 +311,19 @@ Protected Module TextFieldExtensionsXC
 		  
 		End Sub
 	#tag EndMethod
+
+
+	#tag Note, Name = About
+		
+		For better organization of code, this module has iOSTextField and iOSTextArea extensions.
+		
+	#tag EndNote
+
+
+	#tag Structure, Name = NSRangeXC, Flags = &h1
+		loc As Uinteger
+		len As UInteger
+	#tag EndStructure
 
 
 	#tag Enum, Name = UIKeyboardAppearance, Type = Integer, Flags = &h1
