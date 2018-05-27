@@ -101,6 +101,13 @@ A set of 100+ UI extensions for Xojo iOS framework.
 * Return key
 * Text indentation
 
+### iOSTextArea
+* Auto-correction
+* Scroll position (get and set)
+* Scrolls to top
+* Scroll to specific range in text
+* Selected range (get and set)
+
 ### iOSView
 * Add big progress in center
 * Close modal view
