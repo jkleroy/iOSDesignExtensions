@@ -143,7 +143,7 @@ End
 		Sub Action()
 		  
 		  Dim pt As Xojo.Core.Point
-		  pt = TextArea1.ScrollPositionXC
+		  pt = TextArea1.GetScrollPositionXC
 		  lblScrollPos.Text = pt.X.ToText(xojo.core.locale.raw, "0") + " x " + pt.Y.ToText(xojo.core.locale.raw, "0")
 		  
 		  

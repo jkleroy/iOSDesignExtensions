@@ -19,18 +19,8 @@ Protected Module TextFieldExtensionsXC
 		End Function
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
-		Function GetSelectedRangeXC(Extends area As iOSTextArea) As TextFieldExtensionsXC.NSRangeXC
-		  
-		  
-		  Declare Function selectedRange_ Lib "UIKit.framework" selector "selectedRange" (obj_id As ptr) As NSRangeXC
-		  
-		  Return selectedRange_(area.Handle)
-		End Function
-	#tag EndMethod
-
 	#tag Method, Flags = &h0, Description = 526574756E73207468652063757272656E74207363726F6C6C20706F736974696F6E
-		Function ScrollPositionXC(extends area As iOSTextArea) As Xojo.Core.Point
+		Function GetScrollPositionXC(extends area As iOSTextArea) As Xojo.Core.Point
 		  
 		  Dim offset As xojo.core.point
 		  
@@ -42,6 +32,16 @@ Protected Module TextFieldExtensionsXC
 		  
 		  
 		  Return offset
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function GetSelectedRangeXC(Extends area As iOSTextArea) As TextFieldExtensionsXC.NSRangeXC
+		  
+		  
+		  Declare Function selectedRange_ Lib "UIKit.framework" selector "selectedRange" (obj_id As ptr) As NSRangeXC
+		  
+		  Return selectedRange_(area.Handle)
 		End Function
 	#tag EndMethod
 

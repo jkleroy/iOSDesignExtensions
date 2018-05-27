@@ -9,7 +9,7 @@ Inherits IOSApplication
 		** Added scrolling functions to iOSTextArea
 		
 		* Version 1.2 - Released 2018-05-??
-		** Added an app icongith
+		** Added an app icon
 		** Fixed GetBoundsXC function
 		** Renamed ScrollViewExtensionsXCXC to ScrollViewExtensionsXC
 		** Removed Modal Curl transition
