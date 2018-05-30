@@ -5,6 +5,9 @@ Inherits IOSApplication
 	#tag Note, Name = README
 		### History
 		
+		* Version 1.3.1 - Released 2018-05-30
+		** Added App.SetWindowColorXC
+		
 		* Version 1.3 - Released 2018-05-27
 		** Added scrolling functions to iOSTextArea
 		

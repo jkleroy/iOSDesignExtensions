@@ -828,6 +828,40 @@ Protected Module ViewExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 43616C6C20746869732066756E6374696F6E20696620796F7520757365206120636F6D62696E6174696F6E206F66204C617267655469746C657320616E64204C617267655469746C65446973706C61794D6F64652E6E65766572
+		Sub SetWindowColorXC(extends app As iOSApplication, value as color)
+		  #Pragma unused app
+		  
+		  Dim uic As UIKit.UIColor
+		  
+		  If value.Alpha = 255 Then
+		    uic = UIKit.UIColor.ClearColor
+		  Else
+		    uic = New UIKit.UIColor(value)
+		  End If
+		  
+		  Declare Function NSClassFromString Lib "UIKit.framework" (clsName As CFStringRef) As ptr
+		  Declare Function sharedApplication Lib "UIKit.framework" selector "sharedApplication" (clsRef As ptr) As ptr
+		  Declare Function keyWindow Lib "UIKit.framework" selector "keyWindow" (obj_id As ptr) As ptr
+		  
+		  Dim myWindowPtr As ptr = keyWindow(sharedApplication(NSClassFromString("UIApplication")))
+		  
+		  
+		  If myWindowPtr = Nil Then
+		    Break
+		    //this needs to be called from the Activate event, not the Open event
+		    Return
+		  End If
+		  
+		  
+		  
+		  Declare Sub setBackgroundColor Lib UIKitLib selector "setBackgroundColor:" (obj_id As ptr, col As ptr)
+		  setBackgroundColor(myWindowPtr, uic)
+		  
+		  
+		End Sub
+	#tag EndMethod
+
 
 	#tag Enum, Name = LargeTitleDisplayMode, Type = Integer, Flags = &h1
 		automatic = 0
