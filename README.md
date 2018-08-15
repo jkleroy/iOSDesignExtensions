@@ -23,6 +23,11 @@ A set of 100+ UI extensions for Xojo iOS framework.
 * Text alignment
 * Title edge insets
 
+### iOSHTMLViewer
+* Load Page
+* Execute Javascript
+* User Agent
+
 ### iOSLabel
 * Adjust font size to fit width
 
