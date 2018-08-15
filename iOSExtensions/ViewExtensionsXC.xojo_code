@@ -464,7 +464,7 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetLargeTitleDisplayMode(Extends v As iOSView, mode As ViewExtensionsXC.LargeTitleDisplayMode)
+		Sub SetLargeTitleDisplayModeXC(Extends v As iOSView, mode As ViewExtensionsXC.LargeTitleDisplayMode)
 		  
 		  
 		  Static sSystemVersion As Double
@@ -823,6 +823,51 @@ Protected Module ViewExtensionsXC
 		  
 		  Declare Sub setTintColor Lib "UIKit.framework" selector "setTintColor:" (id As ptr, UIColor As Ptr)
 		  setTintColor tb.handle, New UIColor(value)
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 4368616E67657320746865206261636B67726F756E6420636F6C6F72206F66206120546162426172
+		Sub SetToolBarBackgroundColorXC(extends v as iOSView, barColor as color, translucent as boolean = false)
+		  
+		  
+		  Declare Function toolbar_ Lib "UIKit.framework" selector "toolbar" (o As Ptr) As Ptr
+		  
+		  Declare Function navigationController Lib "UIKit" selector "navigationController" (viewController As ptr) As ptr
+		  Dim navigationControllerRef As ptr = navigationController(v.ViewControllerHandle)
+		  
+		  
+		  Dim toolbar As Ptr = toolbar_(navigationControllerRef)
+		  
+		  
+		  Declare Sub setBarTintColor Lib "UIKit.framework" selector "setBarTintColor:" (id As ptr, UIColor As Ptr)
+		  setBarTintColor toolbar, New UIColor(barColor)
+		  
+		  if translucent then
+		    declare sub setTranslucent lib "UIKit.framework" selector "setTranslucent:" (id as ptr)
+		    setTranslucent toolbar
+		  end
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 4368616E67657320746865206261636B67726F756E6420636F6C6F72206F66206120546162426172
+		Sub SetToolBarColorXC(extends v as iOSView, barColor as color)
+		  
+		  
+		  Declare Function toolbar_ Lib "UIKit.framework" selector "toolbar" (o As Ptr) As Ptr
+		  
+		  Declare Function navigationController Lib "UIKit" selector "navigationController" (viewController As ptr) As ptr
+		  Dim navigationControllerRef As ptr = navigationController(v.ViewControllerHandle)
+		  
+		  
+		  Dim toolbar As Ptr = toolbar_(navigationControllerRef)
+		  
+		  
+		  Declare Sub tintColor_ Lib UIKitLib selector "setTintColor:" (obj_id As ptr, tintColor As ptr)
+		  
+		  tintColor_ toolbar, New UIColor(barColor)
 		  
 		  
 		End Sub

@@ -211,6 +211,10 @@ End
 		  
 		  AddRow(section, "Buttons", "", accessory, GetTypeInfo(vButtons), ExtensionsXC.ColoredIcon(ic8_button, &c0F7FFE00))
 		  
+		  
+		  section = AddSection("HTMLViewer Extensions")
+		  AddRow(section, "HTMLViewer Examples", "", accessory, GetTypeInfo(vHTMLViewer), ExtensionsXC.ColoredIcon(ic8_html, &cE34E25))
+		  
 		  section = AddSection("TabBar Extensions")
 		  AddRow(section, "TabBar Examples", "", accessory, "tabbar")
 		  

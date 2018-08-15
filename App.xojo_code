@@ -5,6 +5,17 @@ Inherits IOSApplication
 	#tag Note, Name = README
 		### History
 		
+		* Version 1.4.0 - Released 2018-08-15
+		** Added HTMLViewer Extensions (compatible with UIWebView (<Xojo 2018r2) and WKWebview (>=Xojo 2018r2)
+		1. ExecuteJavascript
+		2. LoadPage
+		3. UserAgent 
+		
+		* Version 1.3.1 - Released 2018-05-30
+		** Added iOSView.SetToolBarBackgroundColorXC 
+		and
+		** Added iOSView.SetToolBarColorXC
+		
 		* Version 1.3.1 - Released 2018-05-30
 		** Added App.SetWindowColorXC
 		

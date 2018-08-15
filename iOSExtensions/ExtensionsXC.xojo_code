@@ -150,11 +150,54 @@ Protected Module ExtensionsXC
 	#tag Note, Name = History
 		### History
 		
+		* Version 1.4.0 - Not released
+		** Added HTMLViewer Extensions
+		1. ExecuteJavascript
+		2. LoadPage
+		3. UserAgent 
+		
+		** Added TableExtensionsXC.SetSeparatorColorXC
+		
+		* Version 1.3.1 - Released 2018-05-30
+		** Added iOSView.SetToolBarBackgroundColorXC 
+		and
+		** Added iOSView.SetToolBarColorXC
+		
+		* Version 1.3.1 - Released 2018-05-30
+		** Added App.SetWindowColorXC
+		
+		* Version 1.3 - Released 2018-05-27
+		** Added scrolling functions to iOSTextArea
+		
+		* Version 1.2 - Released 2018-05-??
+		** Added an app icon
+		** Fixed GetBoundsXC function
+		** Renamed ScrollViewExtensionsXCXC to ScrollViewExtensionsXC
+		** Removed Modal Curl transition
+		** AdjustFontSizeToFitWidthXC now has an optional lines property to set the amount of lines to display
+		** SetTabPageXC to set the current page in a TabBar view
+		** GetTabPageXC to get the current page index in a TabBar view
+		** SetNavBarTitleColorXC to set the color of the text in the navbar
+		** GetiOSVersionXC returns the current iOS version number
+		** Table.GetScrollPositionXC returns the current section/row position
+		
 		* Version 1.1 - Released 2018-05-10
 		** New modal transition options
 		
 		
 		* Version 1.0 - Released 2018-04-26
+		
+		Copy-paste the iOSExtensions folder into your project.
+		
+		Most controls will then have additional methods, all ending with "XC"
+		
+		Contact: https://www.jeremieleroy.com/contact.php
+		
+		Feel free to ask for feature requests!
+		
+		Made with ❤️ in France
+		
+		Jeremie LEROY
 		
 	#tag EndNote
 
@@ -162,7 +205,7 @@ Protected Module ExtensionsXC
 	#tag Constant, Name = kUseUIKit, Type = Boolean, Dynamic = False, Default = \"False", Scope = Protected
 	#tag EndConstant
 
-	#tag Constant, Name = kVersion, Type = Double, Dynamic = False, Default = \"1.2", Scope = Protected
+	#tag Constant, Name = kVersion, Type = Text, Dynamic = False, Default = \"1.4.0", Scope = Protected
 	#tag EndConstant
 
 

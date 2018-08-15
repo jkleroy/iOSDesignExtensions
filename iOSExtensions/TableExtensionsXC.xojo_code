@@ -408,6 +408,22 @@ Protected Module TableExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 52656D6F76657320616C6C20726F772073656C656374696F6E73
+		Sub SetSeparatorColorXC(extends table As iOSTable, value As Color)
+		  
+		  Dim uic As UIKit.UIColor
+		  
+		  If value.Alpha = 255 Then
+		    uic = UIKit.UIColor.ClearColor
+		  Else
+		    uic = New UIColor(value)
+		  End If
+		  
+		  Declare Sub setSeparatorColor Lib "UIKit.framework" selector "setSeparatorColor:" (id As ptr, UIColor As Ptr)
+		  setSeparatorColor table.Handle, uic
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 52656D6F76657320616C6C20726F772073656C656374696F6E73
 		Sub SetSeparatorStyleXC(extends table As iOSTable, value As TableExtensionsXC.separatorStyle)
 		  Declare Sub setSeparatorStyle Lib "UIKit.framework" selector "setSeparatorStyle:"(o As ptr, mode As separatorStyle)
 		  
