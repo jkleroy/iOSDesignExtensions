@@ -146,7 +146,7 @@ Protected Module SegmentedControlExtensionsXC
 		    
 		    setTitleTextAttributes(seg.Handle, nsDic, state)
 		    
-		  #elseif
+		  #else
 		  	
 
 		    Declare Function NSClassFromString Lib "Foundation.framework" (className As CFStringRef) As Ptr
