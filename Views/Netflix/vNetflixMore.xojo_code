@@ -2,6 +2,7 @@
 Begin iosView vNetflixMore
    BackButtonTitle =   ""
    Compatibility   =   ""
+   LargeTitleMode  =   "2"
    Left            =   0
    NavigationBarVisible=   True
    TabIcon         =   ""
@@ -11,6 +12,7 @@ Begin iosView vNetflixMore
    Begin iOSTable Table1
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AllowRefresh    =   False
       AutoLayout      =   Table1, 1, <Parent>, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Table1, 2, <Parent>, 2, False, +1.00, 4, 1, -0, , True
       AutoLayout      =   Table1, 3, TopLayoutGuide, 3, False, +1.00, 4, 1, 87, , True
@@ -173,6 +175,19 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="LargeTitleMode"
+		Visible=true
+		Group="Behavior"
+		InitialValue="2"
+		Type="LargeTitleDisplayModes"
+		EditorType="Enum"
+		#tag EnumValues
+			"0 - Automatic"
+			"1 - Always"
+			"2 - Never"
+		#tag EndEnumValues
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="BackButtonTitle"
 		Group="Behavior"

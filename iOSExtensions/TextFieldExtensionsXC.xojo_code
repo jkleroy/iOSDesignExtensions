@@ -197,43 +197,31 @@ Protected Module TextFieldExtensionsXC
 		Sub SetPlaceholderColorXC(extends field as iOSTextField, placeholder As Text, aColor As Color)
 		  
 		  #If ExtensionsXC.kUseUIKit
+		    
 		    'NSAttributedString *str = [[NSAttributedString alloc] initWithString:@"Some Text" attributes:@{ NSForegroundColorAttributeName : [UIColor redColor] }];
 		    
 		    
 		    
-		    Declare Function alloc Lib "Foundation.framework" selector "alloc" (clsRef As ptr) As ptr
-		    Declare Function NSClassFromString Lib "Foundation.framework" (clsName As CFStringRef) As ptr
-		    Declare Function initWithStringattributes Lib "Foundation.framework"  selector "initWithString:attributes:" (id As ptr, astring As CFStringRef, attDict As ptr) As ptr
-		    Declare Sub attributedPlaceholder_ Lib "Foundation.framework" selector "setAttributedPlaceholder:" (id As ptr, attribString As ptr) 
+		    Declare Function alloc Lib FoundationLib selector "alloc" (clsRef As ptr) As ptr
+		    Declare Function NSClassFromString Lib FoundationLib (clsName As CFStringRef) As ptr
+		    Declare Function initWithStringattributes Lib FoundationLib  selector "initWithString:attributes:" (id As ptr, astring As CFStringRef, attDict As ptr) As ptr
+		    Declare Sub attributedPlaceholder_ Lib FoundationLib selector "setAttributedPlaceholder:" (id As ptr, attribString As ptr) 
 		    
 		    Dim uic As New UIColor(aColor)
 		    
 		    
-		    Dim keyStr As New NSString(Foundation.StringConstant("UIKit.framework", "NSForegroundColorAttributeName"))
-		    'Dim keyStr2 As new NSString(Foundation.StringConstant("UIKit.framework", "NSBackgroundColorAttributeName"))
+		    Dim keyStr As New NSString(Foundation.StringConstant("UIKit", "NSForegroundColorAttributeName"))
+		    'Dim keyStr2 As new NSString(Foundation.StringConstant("UIKit", "NSBackgroundColorAttributeName"))
 		    
 		    
-		    Dim keys() As ptr
-		    Dim vals() As ptr
+		    Dim keys() As Foundation.NSObject
+		    Dim vals() As Foundation.NSObject
 		    
 		    keys.Append keyStr
 		    vals.Append uic
 		    
 		    'keys.Append keyStr2
 		    'vals.Append UIColor.Red
-		    
-		    Declare Function initWithObjects Lib FoundationLib selector "initWithObjects:forKeys:" (obj_id As Ptr, objects As Ptr, keys As Ptr) As Ptr
-		    
-		    Dim keysArray As New Foundation.NSArray(keys)
-		    Dim objectsArray As New NSArray(objects)
-		    
-		    Super.Constructor(initWithObjects(Allocate(NSClassFromString("NSMutableDictionary")), objectsArray, keysArray))
-		    
-		    #Pragma unused keys
-		    #Pragma unused objects
-		    
-		    
-		    needsExtraRelease = True
 		    
 		    
 		    Dim attrib As New Foundation.NSMutableDictionary(keys, vals)
@@ -246,6 +234,9 @@ Protected Module TextFieldExtensionsXC
 		    
 		    
 		  #EndIf
+		  
+		  
+		  
 		End Sub
 	#tag EndMethod
 
@@ -277,6 +268,15 @@ Protected Module TextFieldExtensionsXC
 		  select_(area.Handle, area.Handle)
 		  
 		  selectedRange(area.Handle, range)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub SetTabOrder(extends field As iOSTextField, value As Integer)
+		  
+		  declare sub setTag lib "UIKit.framework" selector "setTag:" (obj_id as ptr, value as Integer)
+		  
+		  SetTag(field.Handle, value)
 		End Sub
 	#tag EndMethod
 

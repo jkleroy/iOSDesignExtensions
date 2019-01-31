@@ -294,7 +294,6 @@ Protected Module ViewExtensionsXC
 		  
 		  
 		  
-		  
 		  Dim navController As ptr = initWithRootViewController_( alloc(NSClassFromString("UINavigationController")), v.ViewControllerHandle ) 
 		  
 		  
@@ -460,6 +459,28 @@ Protected Module ViewExtensionsXC
 		  declare sub hidesBarsOnSwipe lib "UIKit.framework" selector "setHidesBarsOnSwipe:" (navcontroller as ptr, value as Boolean)
 		  
 		  hidesBarsOnSwipe(navigationControllerRef, hide)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub SetHidesBackButtonXC(Extends v As iOSView, value As Boolean)
+		  
+		  
+		  
+		  Declare Function navigationBar Lib "UIKit.framework" selector "navigationBar" (obj_ref As ptr) As ptr
+		  
+		  Declare Function navigationController Lib "UIKit.framework" selector "navigationController" (viewController As ptr) As ptr
+		  Dim navigationControllerRef As ptr = navigationController(v.ViewControllerHandle)
+		  
+		  Dim navBar As ptr = navigationBar(navigationControllerRef)
+		  
+		  Declare Function navigationItem Lib "UIKit.framework" selector "navigationItem" (obj_ref As ptr) As ptr
+		  Dim navItem As ptr = navigationItem(v.Handle)
+		  
+		  
+		  Declare Sub hidesBackButton Lib "UIKit.framework" selector "setHidesBackButton:" (obj_id As ptr, value As Boolean)
+		  hidesBackButton(navItem, value)
+		  
 		End Sub
 	#tag EndMethod
 
@@ -633,7 +654,7 @@ Protected Module ViewExtensionsXC
 		    Declare Sub setLargeTitleTextAttributes Lib "UIKit.framework" selector "setLargeTitleTextAttributes:" _
 		    (obj_id As ptr, att As ptr)
 		    
-		    setLargeTitleTextAttributes(navBar, nsDic)
+		    'setLargeTitleTextAttributes(navBar, nsDic)
 		  End If
 		End Sub
 	#tag EndMethod

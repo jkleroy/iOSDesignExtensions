@@ -6,6 +6,7 @@ Begin iOSCustomTableCell cellGeneric
    Height          =   44.0
    Left            =   0.0
    Top             =   0.0
+   UseDynamicHeight=   False
    Visible         =   True
    Width           =   320.0
 End
@@ -15,6 +16,13 @@ End
 #tag EndWindowCode
 
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="UseDynamicHeight"
+		Visible=true
+		Group="Behavior"
+		InitialValue="False"
+		Type="Boolean"
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="AccessibilityHint"
 		Group="Behavior"

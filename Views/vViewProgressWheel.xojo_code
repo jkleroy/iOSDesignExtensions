@@ -2,6 +2,7 @@
 Begin iosView vViewProgressWheel
    BackButtonTitle =   ""
    Compatibility   =   ""
+   LargeTitleMode  =   "2"
    Left            =   0
    NavigationBarVisible=   True
    TabIcon         =   ""
@@ -33,7 +34,7 @@ Begin iosView vViewProgressWheel
       AccessibilityLabel=   ""
       AutoLayout      =   Button2, 2, <Parent>, 2, False, +1.00, 4, 1, -*kStdGapCtlToViewH, , True
       AutoLayout      =   Button2, 7, , 0, False, +1.00, 4, 1, 100, , True
-      AutoLayout      =   Button2, 11, Button1, 11, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   Button2, 10, Button1, 10, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Button2, 8, , 0, False, +1.00, 4, 1, 30, , True
       Caption         =   "Hide"
       Enabled         =   True
@@ -105,6 +106,19 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="LargeTitleMode"
+		Visible=true
+		Group="Behavior"
+		InitialValue="2"
+		Type="LargeTitleDisplayModes"
+		EditorType="Enum"
+		#tag EnumValues
+			"0 - Automatic"
+			"1 - Always"
+			"2 - Never"
+		#tag EndEnumValues
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="BackButtonTitle"
 		Group="Behavior"

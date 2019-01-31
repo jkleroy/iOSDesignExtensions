@@ -2,6 +2,7 @@
 Begin iosView vHome Implements iOSTableDataSource
    BackButtonTitle =   ""
    Compatibility   =   ""
+   LargeTitleMode  =   "2"
    Left            =   0
    NavigationBarVisible=   True
    TabIcon         =   ""
@@ -11,6 +12,7 @@ Begin iosView vHome Implements iOSTableDataSource
    Begin iOSTable Table
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AllowRefresh    =   False
       AutoLayout      =   Table, 1, <Parent>, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Table, 2, <Parent>, 2, False, +1.00, 4, 1, -0, , True
       AutoLayout      =   Table, 3, TopLayoutGuide, 3, False, +1.00, 4, 1, 0, , True
@@ -38,9 +40,11 @@ End
 		  
 		  Self.SetLargeTitlesXC(False, ViewExtensionsXC.LargeTitleDisplayMode.automatic)
 		  
-		  If Self.ParentSplitView <> Nil Then
+		  If Self.ParentSplitView <> Nil and app.currentSplitMode <> ViewExtensionsXC.UISplitViewControllerDisplayMode.PrimaryHidden and _
+		    app.currentSplitMode <> ViewExtensionsXC.UISplitViewControllerDisplayMode.PrimaryOverlay then
 		    
 		    Self.ParentSplitView.setDisplayMode(ViewExtensionsXC.UISplitViewControllerDisplayMode.AllVisible)
+		    app.currentSplitMode = ViewExtensionsXC.UISplitViewControllerDisplayMode.AllVisible
 		    
 		  End If
 		End Sub
@@ -266,6 +270,12 @@ End
 		  
 		  Dim tag As Auto = Me.RowData(section, row).Tag
 		  
+		  If Self.ParentSplitView <> Nil Then
+		    
+		    Self.ParentSplitView.setDisplayMode(ViewExtensionsXC.UISplitViewControllerDisplayMode.AllVisible)
+		    
+		  End If
+		  
 		  If FindType(tag) = "Text" Then
 		    
 		    Dim txtValue As Text = tag
@@ -390,6 +400,19 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="LargeTitleMode"
+		Visible=true
+		Group="Behavior"
+		InitialValue="2"
+		Type="LargeTitleDisplayModes"
+		EditorType="Enum"
+		#tag EnumValues
+			"0 - Automatic"
+			"1 - Always"
+			"2 - Never"
+		#tag EndEnumValues
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="BackButtonTitle"
 		Group="Behavior"

@@ -138,7 +138,27 @@ Protected Module TableExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub setBouncesXC(extends table As iostable, value As Boolean)
+		Sub SetBackgroundViewColorXC(extends cell as iOSTableCellData, value as Color)
+		  
+		  Dim uic As UIKit.UIColor
+		  
+		  If value.Alpha = 255 Then
+		    uic = UIKit.UIColor.ClearColor
+		  Else
+		    uic = New UIColor(value)
+		  End If
+		  
+		  Declare function backgroundView lib "UIkit.framework" selector "backgroundView" (obj as ptr) as ptr
+		  
+		  dim back As ptr = BackgroundView(cell.Handle)
+		  
+		  Declare Sub setBackgroundColor_ Lib "UIKit.framework" selector "setBackgroundColor:" (obj_id As ptr, col As ptr)
+		  setBackgroundColor_(back, uic)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub SetBouncesXC(extends table As iostable, value As Boolean)
 		  
 		  declare sub bounces_ lib "UIKit.framework" selector "setBounces:" (obj_id as ptr, value as Boolean)
 		  bounces_(table.handle, value)

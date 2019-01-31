@@ -22,7 +22,7 @@ Protected Module ControlExtensionsXC
 		  #If ExtensionsXC.kUseUIKit
 		    
 		    Dim v As New UIView(ctrl.Handle)
-		    v.Animatealpha newalpha, duration, completion
+		    v.AnimateAlpha newalpha, duration, completion
 		    
 		  #EndIf
 		End Sub
@@ -167,6 +167,24 @@ Protected Module ControlExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 5365747320726F756E6420636F726E65727320746F206120436F6E7461696E6572436F6E74726F6C
+		Sub SetCornerRadiusXC(extends lbl As iOSLabel, radius As Double)
+		  
+		  Declare Function layer_ Lib "UIKit.framework" selector "layer" (id As ptr) As Ptr
+		  Dim layer As ptr = layer_(lbl.Handle)
+		  
+		  
+		  
+		  Declare Sub setCornerRadius Lib "QuartzCore.framework" selector "setCornerRadius:" (id As ptr, value As CGFloat)
+		  
+		  setCornerRadius layer, radius
+		  
+		  Declare Sub clipsToBounds Lib "UIKit.framework" selector "setClipsToBounds:" (id As ptr, value As Boolean)
+		  clipsToBounds(lbl.Handle, True)
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, CompatibilityFlags = (TargetConsole and (Target32Bit or Target64Bit)) or  (TargetWeb and (Target32Bit or Target64Bit)) or  (TargetDesktop and (Target32Bit or Target64Bit))
 		Sub SetCornersRadiusXC(extends view As UIKit.UIView, corners As Integer, radius As Double)
 		  #If Not DebugBuild
@@ -257,7 +275,7 @@ Protected Module ControlExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub StretchToParentXC(extends c As iOSControl, parentView As iOSContainerControl)
+		Sub StretchToParentXC(extends c As iOSControl, parentView As iOSControl)
 		  
 		  
 		  

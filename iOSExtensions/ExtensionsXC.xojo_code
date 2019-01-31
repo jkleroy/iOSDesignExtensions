@@ -20,7 +20,7 @@ Protected Module ExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
-		Protected Function ColoredIcon(icon As iOSImage, value as Color) As iOSImage
+		Protected Function ColoredIcon(icon as iOSImage, value as Color) As iOSImage
 		  
 		  
 		  
@@ -127,6 +127,37 @@ Protected Module ExtensionsXC
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Sub OpeniOSSettingsXC(extends app As iOSApplication)
+		  
+		  Declare Function NSClassFromString Lib "Foundation.framework" (clsName As CFStringRef) As ptr
+		  Declare Function URLWithString Lib "Foundation" Selector "URLWithString:" ( id As Ptr, URLString As CFStringRef ) As Ptr
+		  
+		  Dim openSettingsURL As ptr = LoadConstantXC("UIKit", "UIApplicationOpenSettingsURLString")
+		  Declare Function stringWithString Lib "Foundation.framework" selector "stringWithString:" (clsRef As ptr, Str As ptr) As CFStringRef
+		  
+		  
+		  Dim nsURL As ptr = URLWithString(NSClassFromString("NSURL"), openSettingsURL.CFStringRef(0))
+		  
+		  Declare Function sharedApplication Lib "UIKit" Selector "sharedApplication" (obj As Ptr) As Ptr
+		  Dim sharedApp As Ptr = sharedApplication(NSClassFromString("UIApplication"))
+		  
+		  
+		  If getiOSVersionXC >= 10.0 Then
+		    
+		    Declare Sub openURL Lib "UIKit" Selector "openURL:options:completionHandler:" (id As Ptr, nsurl As Ptr, options As ptr, completion As ptr)
+		    openURL(sharedApp, nsURL, nil, nil)
+		    
+		  Else
+		    
+		    Declare Function openURL Lib "UIKit" Selector "openURL:" (id As Ptr, nsurl As Ptr) As Boolean
+		    call openURL(sharedApp, nsURL)
+		    
+		    
+		  End If
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h1
 		Protected Function StringConstantXC(frameworkName as Text, constName as Text) As Text
 		  Dim constPtr As Ptr = LoadConstantXC(frameworkName, constName)
@@ -150,8 +181,16 @@ Protected Module ExtensionsXC
 	#tag Note, Name = History
 		### History
 		
-		* Version 1.4.0 - Not released
-		** Added HTMLViewer Extensions
+		* Version 1.5.0 - Released 2019-01-31
+		** Added Layer Extensions 
+		1. Border Color
+		2. Border Width
+		3. Corner Radius
+		4. Shadow
+		
+		
+		* Version 1.4.0 - Released 2018-08-15
+		** Added HTMLViewer Extensions 
 		1. ExecuteJavascript
 		2. LoadPage
 		3. UserAgent 
@@ -208,6 +247,15 @@ Protected Module ExtensionsXC
 	#tag Constant, Name = kVersion, Type = Text, Dynamic = False, Default = \"1.4.0", Scope = Protected
 	#tag EndConstant
 
+
+	#tag Structure, Name = xcCGAffineTransform, Flags = &h0
+		a as CGFloat
+		  b as CGFloat
+		  c as CGFloat
+		  d as CGFloat
+		  tx as CGFloat
+		ty as CGFloat
+	#tag EndStructure
 
 	#tag Structure, Name = xcCGPoint, Flags = &h1
 		x As CGFloat

@@ -132,7 +132,7 @@ Protected Module SegmentedControlExtensionsXC
 		Sub SetTextColorXC(extends seg As iOSSegmentedControl, c As color, state As SegmentedControlExtensionsXC.UIControlState)
 		  #If ExtensionsXC.kUseUIKit
 		    
-		    Dim constStr As Text = Foundation.StringConstant("UIKit.framework", "NSForegroundColorAttributeName")
+		    Dim constStr As Text = Foundation.StringConstant("UIKit", "NSForegroundColorAttributeName")
 		    
 		    Dim constPtr As new NSString(constStr)
 		    
@@ -141,32 +141,12 @@ Protected Module SegmentedControlExtensionsXC
 		    nsDic = Foundation.NSDictionary.CreateFromObject(constPtr, New UIColor(c))
 		    
 		    
-		    Declare Sub setTitleTextAttributes Lib "UIKit.framework" selector "setTitleTextAttributes:forState:" _
+		    Declare Sub setTitleTextAttributes Lib "UIKit" selector "setTitleTextAttributes:forState:" _
 		    (obj_id As ptr, att As ptr, state As UIControlState)
 		    
 		    setTitleTextAttributes(seg.Handle, nsDic, state)
 		    
-		  #else
-		  	
-
-		    Declare Function NSClassFromString Lib "Foundation.framework" (className As CFStringRef) As Ptr
-		    declare function stringWithString lib "Foundation.framework" selector "stringWithString:" (class_id as Ptr, aString as CFStringRef) as Ptr
-		    dim stringRef as Ptr = stringWithString(NSClassFromString("NSString"), "NSColor")
-
-		    //Creating dictionary ref
-		    declare function dictionaryWithObject lib "Foundation.framework" selector "dictionaryWithObject:forKey:" _
-		      (class_id as Ptr, anObject as Ptr, key as Ptr) as Ptr
-
-
-		    dim dictPtr as Ptr = dictionaryWithObject(NSClassFromString("NSDictionary"), New UIColor(c), stringRef) 
-
-
-		    //Setting text attributes
-		    Declare Sub setTitleTextAttributes Lib "UIKit.framework" selector "setTitleTextAttributes:forState:" _
-		      (obj_id As ptr, att As ptr, state As UIControlState)
-
-		    setTitleTextAttributes(seg.Handle, dictPtr, state)
-
+		    
 		    
 		  #EndIf
 		End Sub

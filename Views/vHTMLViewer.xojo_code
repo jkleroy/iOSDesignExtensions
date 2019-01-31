@@ -87,7 +87,7 @@ Begin iosView vHTMLViewer
    Begin iOSButton btCalcPi
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
-      AutoLayout      =   btCalcPi, 11, btLoad, 11, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   btCalcPi, 10, btLoad, 10, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   btCalcPi, 8, , 0, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   btCalcPi, 1, btJavascript, 2, False, +1.00, 4, 1, *kStdControlGapH, , True
       AutoLayout      =   btCalcPi, 7, , 0, False, +1.00, 4, 1, 20, , True

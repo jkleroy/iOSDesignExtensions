@@ -175,6 +175,41 @@ Protected Module HTMLViewerExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub SetAllowsMagnificationXC(extends viewer As iOSHTMLViewer, value As Boolean)
+		  
+		  declare sub setMagnification lib "UIKit.framework" selector "setAllowsMagnification:" (id as ptr, value as Boolean)
+		  
+		  
+		  setMagnification(viewer.Handle, value)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub SetTransparentXC(extends viewer As iOSHTMLViewer, value As Boolean)
+		  //New
+		  
+		  'self.webView!.isOpaque = false
+		  'self.webView!.backgroundColor = UIColor.clear
+		  'self.webView!.scrollView.backgroundColor = UIColor.clear
+		  
+		  
+		  declare sub setOpaque lib "UIKit.framework" selector "setOpaque:" (id as ptr, value as Boolean)
+		  
+		  if value then
+		    setOpaque(viewer.Handle, not value)
+		    
+		    viewer.SetBackgroundColorXC(&c000000FF)
+		    
+		  Else
+		    
+		    setOpaque(viewer.Handle, not value)
+		    viewer.SetBackgroundColorXC(&cFFFFFF)
+		    
+		  end if
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function UserAgentXC(extends viewer As iOSHTMLViewer, callback As ExecuteJavascriptDelegateXC) As Text
 		  
 		  

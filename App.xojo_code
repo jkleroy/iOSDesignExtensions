@@ -5,6 +5,14 @@ Inherits IOSApplication
 	#tag Note, Name = README
 		### History
 		
+		* Version 1.5.0 - Released 2019-01-31
+		** Added Layer Extensions 
+		1. Border Color
+		2. Border Width
+		3. Corner Radius
+		4. Shadow
+		**Fixed crash on iPad
+		
 		* Version 1.4.0 - Released 2018-08-15
 		** Added HTMLViewer Extensions (compatible with UIWebView (<Xojo 2018r2) and WKWebview (>=Xojo 2018r2)
 		1. ExecuteJavascript
@@ -52,6 +60,11 @@ Inherits IOSApplication
 		
 		Jeremie LEROY
 	#tag EndNote
+
+
+	#tag Property, Flags = &h0
+		currentSplitMode As ViewExtensionsXC.UISplitViewControllerDisplayMode
+	#tag EndProperty
 
 
 	#tag ViewBehavior
