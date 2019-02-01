@@ -53,6 +53,7 @@ End
 	#tag Event
 		Sub Open()
 		  me.BackButtonTitle = " "
+		  
 		End Sub
 	#tag EndEvent
 
