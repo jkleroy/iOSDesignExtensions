@@ -172,6 +172,26 @@ Protected Module ViewExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 52657475726E732054727565206966207468652063757272656E7420646973706C61792069732052696768742D546F2D4C65667420284172616269632C204865627265772E2E2E29
+		Function isRightToLeftXC(extends view As iOSView) As Boolean
+		  
+		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
+		  Declare Function view_ Lib "UIKit.framework" Selector "view" (UIViewController As Ptr) As Ptr
+		  
+		  Declare function userInterfaceLayoutDirection_ lib "UIKit" selector "userInterfaceLayoutDirectionForSemanticContentAttribute:" _
+		  (obj_ref as ptr, attribute as ptr) as UIUserInterfaceLayoutDirection
+		  
+		  Declare function semanticContentAttribute_ lib "UIKit" selector "semanticContentAttribute" (obj_ref as ptr) as ptr
+		  
+		  if userInterfaceLayoutDirection_(NSClassFromString("UIView"), semanticContentAttribute_(view_(view.Handle))) = UIUserInterfaceLayoutDirection.rightToLeft then
+		    
+		    Return True
+		  end if
+		  
+		  
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h21
 		Private Sub PushToShowModalCurlXC(extends parent As iOSView, v As iOSView, style As ViewExtensionsXC.UIModalPresentationStyle=ViewExtensionsXC.UIModalPresentationStyle.fullscreen, Animate As Boolean=True, callback As iOSBlock=Nil)
 		  //Removed

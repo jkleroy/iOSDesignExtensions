@@ -150,7 +150,7 @@ Protected Module HTMLViewerExtensionsXC
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
+	#tag Method, Flags = &h0, Description = 4C6F61647320612066696C6520616E6420736F6C7665732053616E64626F78696E6720697373756573
 		Sub LoadFileXC(extends viewer As iOSHTMLViewer, htmlFile As Xojo.IO.FolderItem)
 		  
 		  

@@ -185,6 +185,9 @@ Protected Module ExtensionsXC
 		** New HTMLViewer Function
 		1. LoadFileXC
 		
+		** New iOSView Function
+		1. isRightToLeftXC
+		
 		* Version 1.5.0 - Released 2019-01-31
 		** Added Layer Extensions 
 		1. Border Color
@@ -248,7 +251,7 @@ Protected Module ExtensionsXC
 	#tag Constant, Name = kUseUIKit, Type = Boolean, Dynamic = False, Default = \"False", Scope = Protected
 	#tag EndConstant
 
-	#tag Constant, Name = kVersion, Type = Text, Dynamic = False, Default = \"1.4.0", Scope = Protected
+	#tag Constant, Name = kVersion, Type = Text, Dynamic = False, Default = \"1.5.1", Scope = Protected
 	#tag EndConstant
 
 
