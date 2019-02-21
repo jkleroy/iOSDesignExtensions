@@ -181,6 +181,10 @@ Protected Module ExtensionsXC
 	#tag Note, Name = History
 		### History
 		
+		* Version 1.5.1 - Released 2019-02-21
+		** New HTMLViewer Function
+		1. LoadFileXC
+		
 		* Version 1.5.0 - Released 2019-01-31
 		** Added Layer Extensions 
 		1. Border Color
