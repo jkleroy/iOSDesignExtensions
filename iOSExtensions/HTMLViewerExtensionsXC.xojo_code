@@ -151,6 +151,25 @@ Protected Module HTMLViewerExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub LoadFileXC(extends viewer As iOSHTMLViewer, htmlFile As Xojo.IO.FolderItem)
+		  
+		  
+		  
+		  
+		  Declare Function NSClassFromString Lib "Foundation.framework" (clsName As CFStringRef) As ptr
+		  Declare Function URLWithString Lib "Foundation.framework" Selector "URLWithString:" ( id As Ptr, URLString As CFStringRef ) As Ptr
+		  
+		  Declare sub loadFileURL lib "UIKit.framework" selector "loadFileURL:allowingReadAccessToURL:" (obj as ptr, url as ptr, readAccessURL as ptr)
+		  
+		  Dim fileURL As Ptr = URLWithString(NSClassFromString("NSURL"), htmlFile.URLPath)
+		  Dim parentURL As Ptr = URLWithString(NSClassFromString("NSURL"), htmlFile.parent.URLPath)
+		  
+		  
+		  loadFileURL(htmlPresentation.Handle, fileURL, parentURL)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub LoadPageXC(extends viewer As iOSHTMLViewer, html As Text, baseURL As Text = "")
 		  //Code from Jason King
 		  // https://forum.xojo.com/19271-ios-what-we-want-roadmap/p2#p169870

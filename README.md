@@ -25,6 +25,7 @@ A set of 100+ UI extensions for Xojo iOS framework.
 
 ### iOSHTMLViewer
 * Load Page
+* Load File
 * Execute Javascript
 * User Agent
 
