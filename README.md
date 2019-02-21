@@ -127,6 +127,7 @@ A set of 100+ UI extensions for Xojo iOS framework.
 * Large Titles
 * Navbar color
 * Navbar title image
+* Right To Left Display (Boolean)
 * Tabbar badge
 * Tabbar Button color
 * Tabbar color
