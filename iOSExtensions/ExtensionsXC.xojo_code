@@ -179,14 +179,11 @@ Protected Module ExtensionsXC
 
 
 	#tag Note, Name = History
-		### History
+		## History
 		
-		* Version 1.5.1 - Released 2019-02-21
-		** New HTMLViewer Function
-		1. LoadFileXC
-		
-		** New iOSView Function
-		1. isRightToLeftXC
+		### Version 1.5.1 - Released 2019-02-21
+		* New HTMLViewer Function LoadFileXC
+		* New iOSView Function isRightToLeftXC
 		
 		* Version 1.5.0 - Released 2019-01-31
 		** Added Layer Extensions 
