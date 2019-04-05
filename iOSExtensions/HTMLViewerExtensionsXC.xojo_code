@@ -194,15 +194,6 @@ Protected Module HTMLViewerExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetAllowsMagnificationXC(extends viewer As iOSHTMLViewer, value As Boolean)
-		  
-		  declare sub setMagnification lib "UIKit.framework" selector "setAllowsMagnification:" (id as ptr, value as Boolean)
-		  
-		  setMagnification(viewer.Handle, value)
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
 		Sub SetTransparentXC(extends viewer As iOSHTMLViewer, value As Boolean)
 		  //New
 		  
