@@ -24,6 +24,12 @@ Protected Module ControlExtensionsXC
 		    Dim v As New UIView(ctrl.Handle)
 		    v.AnimateAlpha newalpha, duration, completion
 		    
+		  #else
+		    #Pragma Unused ctrl
+		    #Pragma Unused newalpha
+		    #Pragma Unused duration
+		    #Pragma Unused completion
+		    
 		  #EndIf
 		End Sub
 	#tag EndMethod
@@ -139,9 +145,27 @@ Protected Module ControlExtensionsXC
 	#tag Method, Flags = &h0
 		Sub SetAlphaValueXC(extends ctrl As iOSControl, value As Double)
 		  
-		  Declare Sub setAlphaValue Lib "UIKit.framework" selector "setAlpha:" (id As ptr, value As CGFloat)
 		  
-		  setAlphaValue ctrl.handle, value
+		  
+		  
+		  #if ExtensionsXC.kUseUIKit
+		    //Following code works with any version of iOS
+		    Dim v As new UIKit.UIView(ctrl.handle)
+		    v.alpha = value
+		    
+		  #else
+		    #Pragma Unused ctrl
+		    #Pragma Unused value
+		    
+		    
+		    break
+		    //Following code does not work with iOS 12.2 anymore
+		    'Declare Sub setAlphaValue Lib "UIKit.framework" selector "setAlpha:" (id As ptr, value As CGFloat)
+		    '
+		    'setAlphaValue ctrl.handle, value
+		    
+		    
+		  #endif
 		End Sub
 	#tag EndMethod
 

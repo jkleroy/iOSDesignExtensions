@@ -129,6 +129,8 @@ Protected Module ExtensionsXC
 
 	#tag Method, Flags = &h0
 		Sub OpeniOSSettingsXC(extends app As iOSApplication)
+		  #Pragma Unused app
+		  
 		  
 		  Declare Function NSClassFromString Lib "Foundation.framework" (clsName As CFStringRef) As ptr
 		  Declare Function URLWithString Lib "Foundation" Selector "URLWithString:" ( id As Ptr, URLString As CFStringRef ) As Ptr
@@ -180,6 +182,10 @@ Protected Module ExtensionsXC
 
 	#tag Note, Name = History
 		## History
+		
+		### Version 1.6.0 - Released 2019-04-06
+		* New iOSView hidekeyboard
+		* Fix iOSControl.SetAlphaValueXC for iOS 12.2 (Requires iOSKit)
 		
 		### Version 1.5.1 - Released 2019-02-21
 		* New HTMLViewer Function LoadFileXC
@@ -248,7 +254,7 @@ Protected Module ExtensionsXC
 	#tag Constant, Name = kUseUIKit, Type = Boolean, Dynamic = False, Default = \"False", Scope = Protected
 	#tag EndConstant
 
-	#tag Constant, Name = kVersion, Type = Text, Dynamic = False, Default = \"1.5.1", Scope = Protected
+	#tag Constant, Name = kVersion, Type = Text, Dynamic = False, Default = \"1.6.0", Scope = Protected
 	#tag EndConstant
 
 

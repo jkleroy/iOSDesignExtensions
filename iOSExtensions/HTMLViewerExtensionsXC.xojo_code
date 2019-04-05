@@ -165,7 +165,7 @@ Protected Module HTMLViewerExtensionsXC
 		  Dim parentURL As Ptr = URLWithString(NSClassFromString("NSURL"), htmlFile.parent.URLPath)
 		  
 		  
-		  loadFileURL(htmlPresentation.Handle, fileURL, parentURL)
+		  loadFileURL(viewer.Handle, fileURL, parentURL)
 		End Sub
 	#tag EndMethod
 
@@ -197,7 +197,6 @@ Protected Module HTMLViewerExtensionsXC
 		Sub SetAllowsMagnificationXC(extends viewer As iOSHTMLViewer, value As Boolean)
 		  
 		  declare sub setMagnification lib "UIKit.framework" selector "setAllowsMagnification:" (id as ptr, value as Boolean)
-		  
 		  
 		  setMagnification(viewer.Handle, value)
 		End Sub

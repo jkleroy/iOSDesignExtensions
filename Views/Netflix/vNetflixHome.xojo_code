@@ -77,6 +77,7 @@ End
 
 	#tag Event
 		Sub ToolbarPressed(button As iOSToolButton)
+		  #Pragma Unused button
 		  
 		  If Self.ParentSplitView.Available Then
 		    Dim scr As New iPadScreen

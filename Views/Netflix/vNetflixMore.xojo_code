@@ -152,6 +152,8 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub Action(section As Integer, row As Integer)
+		  #Pragma Unused section
+		  #Pragma Unused row
 		  
 		  me.UnselectTableRowXC
 		End Sub

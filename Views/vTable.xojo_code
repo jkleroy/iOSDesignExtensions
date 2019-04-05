@@ -89,6 +89,8 @@ End
 		Function RowCount(table as iOSTable, section As Integer) As Integer
 		  // Part of the iOSTableDataSource interface.
 		  
+		  #Pragma Unused table
+		  
 		  If section = -1 Or section > sections.Ubound Then
 		    Return 0
 		  End If
@@ -168,7 +170,11 @@ End
 		Sub RowEditingCompleted(table As iOSTable, section As Integer, row As Integer, action As iOSTable.RowEditingStyles)
 		  // Part of the iOSTableDataSourceEditing interface.
 		  
+		  #Pragma Unused table
+		  #Pragma Unused section
 		  
+		  #Pragma Unused row
+		  #Pragma Unused action
 		End Sub
 	#tag EndMethod
 

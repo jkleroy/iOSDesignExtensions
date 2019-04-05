@@ -108,12 +108,40 @@ End
 #tag EndIOSView
 
 #tag WindowCode
+	#tag Event
+		Sub Open()
+		  
+		  Dim tb As iOSToolButton = iOSToolButton.NewPlain("Magnify")
+		  tb.Tag = "magnify"
+		  
+		  self.RightNavigationToolbar.Add tb
+		End Sub
+	#tag EndEvent
+
+	#tag Event
+		Sub ToolbarPressed(button As iOSToolButton)
+		  
+		  Select case button.Tag
+		    
+		  Case "magnify"
+		    
+		    Static magnify as Boolean = True
+		    
+		    magnify = not magnify
+		    
+		    HTMLViewer1.SetAllowsMagnificationXC(magnify)
+		  End Select
+		End Sub
+	#tag EndEvent
+
+
 	#tag Method, Flags = &h21
 		Private Sub PiResult(value As Auto, error As RuntimeException)
 		  
 		  If error <> Nil Then
 		    
-		    Dim reason As Text = error.Reason
+		    Dim reason As Text
+		    reason = error.Reason
 		    
 		    Break
 		    Return

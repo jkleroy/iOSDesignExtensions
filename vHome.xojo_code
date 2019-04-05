@@ -125,6 +125,7 @@ End
 
 	#tag Method, Flags = &h21
 		Private Function RowCount(table as iOSTable, section As Integer) As Integer
+		  #Pragma Unused table
 		  
 		  // Part of the iOSTableDataSource interface.
 		  
@@ -174,6 +175,7 @@ End
 	#tag Method, Flags = &h21
 		Private Function SectionCount(table as iOSTable) As Integer
 		  // Part of the iOSTableDataSource interface.
+		  #Pragma Unused table
 		  
 		  Return sections.Ubound()+1
 		End Function
@@ -193,7 +195,8 @@ End
 
 	#tag Method, Flags = &h0
 		Sub ShowView(parentView As iOSView, childView As iOSView)
-		  
+		  #Pragma Unused parentView
+		  #Pragma Unused childView
 		End Sub
 	#tag EndMethod
 

@@ -36,6 +36,8 @@ Protected Module SegmentedControlExtensionsXC
 		      Next
 		    Next
 		    
+		  #else
+		    #Pragma Unused seg
 		    
 		  #EndIf
 		  
@@ -146,7 +148,11 @@ Protected Module SegmentedControlExtensionsXC
 		    
 		    setTitleTextAttributes(seg.Handle, nsDic, state)
 		    
+		  #else
 		    
+		    #Pragma Unused seg
+		    #Pragma Unused c
+		    #Pragma Unused state
 		    
 		  #EndIf
 		End Sub

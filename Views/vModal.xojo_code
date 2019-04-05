@@ -68,6 +68,7 @@ End
 
 	#tag Event
 		Sub ToolbarPressed(button As iOSToolButton)
+		  #Pragma Unused button
 		  
 		  self.DismissViewControllerXC
 		End Sub

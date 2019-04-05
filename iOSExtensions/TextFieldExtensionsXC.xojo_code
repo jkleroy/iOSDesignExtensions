@@ -232,6 +232,10 @@ Protected Module TextFieldExtensionsXC
 		    
 		    attributedPlaceholder_(field.Handle, attribString)
 		    
+		  #else
+		    #Pragma Unused field
+		    #Pragma Unused placeholder
+		    #Pragma Unused aColor
 		    
 		  #EndIf
 		  

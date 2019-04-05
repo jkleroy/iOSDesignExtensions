@@ -133,6 +133,19 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub HideKeyboardXC(extends v As iOSView)
+		  
+		  ' UIKit Declare to get a reference to a View from its ViewController
+		  Declare Function decl_GetView Lib "UIKit" selector "view" (aUIViewController As Ptr) As Ptr
+		  ' Here is the corresponding Xojo call (View.Self returns a ViewController)
+		  Dim myViewPtr As Ptr = decl_GetView(v.Handle)
+		  
+		  Declare Sub endEditing Lib "UIKit" selector "endEditing:" (obj_id As ptr, value As Boolean)
+		  endEditing(myViewPtr, True)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub HideNavBarShadowXC(extends v as iOSView)
 		  
 		  
@@ -159,7 +172,7 @@ Protected Module ViewExtensionsXC
 		  dim navigationControllerRef as ptr = navigationController(v.ViewControllerHandle)
 		  
 		  dim navBar as ptr = navigationBar(navigationControllerRef)
-		  Dim view As ptr = view(navigationControllerRef)
+		  'Dim view As ptr = view(navigationControllerRef)
 		  
 		  
 		  Declare Sub setBackgroundImage Lib "UIKit.Framework" selector "setBackgroundImage:forBarMetrics:" (id As ptr, image As ptr, metrics As Integer)
@@ -174,6 +187,10 @@ Protected Module ViewExtensionsXC
 
 	#tag Method, Flags = &h0, Description = 52657475726E732054727565206966207468652063757272656E7420646973706C61792069732052696768742D546F2D4C65667420284172616269632C204865627265772E2E2E29
 		Function isRightToLeftXC(extends view As iOSView) As Boolean
+		  
+		  
+		  Const UIUserInterfaceLayoutDirectionLeftToRight = 0
+		  Const UIUserInterfaceLayoutDirectionRightToLeft = 1
 		  
 		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
 		  Declare Function view_ Lib "UIKit.framework" Selector "view" (UIViewController As Ptr) As Ptr
@@ -190,46 +207,6 @@ Protected Module ViewExtensionsXC
 		  
 		  
 		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
-		Private Sub PushToShowModalCurlXC(extends parent As iOSView, v As iOSView, style As ViewExtensionsXC.UIModalPresentationStyle=ViewExtensionsXC.UIModalPresentationStyle.fullscreen, Animate As Boolean=True, callback As iOSBlock=Nil)
-		  //Removed
-		  
-		  #If False
-		    Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
-		    Declare Function alloc Lib "Foundation.framework" selector "alloc" (clsRef As ptr) As ptr
-		    Declare Function initWithRootViewController_ Lib "Foundation" selector "initWithRootViewController:" (obj_id As ptr, rootViewController As ptr) As ptr
-		    Declare Sub presentViewController Lib "UIKit.framework" _
-		    Selector "presentViewController:animated:completion:" _
-		    (parentView As Ptr, viewControllerToPresent As Ptr, animated As Boolean, completion As Ptr)
-		    Declare Sub modalPresentationStyle_ Lib "UIKit.framework" Selector "setModalPresentationStyle:" (obj_id As Ptr, modalPresentationStyle As UIModalPresentationStyle)
-		    Declare Sub modalTransitionStyle_ Lib "UIKit.framework" Selector "setModalTransitionStyle:" (obj_id As Ptr, modalTransitionStyle As UIModalTransitionStyle)
-		    
-		    
-		    
-		    Dim navController As ptr = initWithRootViewController_( alloc(NSClassFromString("UINavigationController")), v.ViewControllerHandle ) 
-		    
-		    
-		    modalPresentationStyle_(navController, style)
-		    modalTransitionStyle_(navController, UIModalTransitionStyle.partialCurl)
-		    
-		    
-		    
-		    If callback <> Nil Then
-		      Break
-		      //This code might fail
-		    end if
-		    
-		    If callback Is Nil Then
-		      presentViewController(parent.Handle, navController, Animate, Nil)
-		    Else
-		      presentViewController(parent.Handle, navController, Animate, callback.handle)
-		    End If
-		    
-		    
-		  #EndIf
-		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
@@ -490,9 +467,9 @@ Protected Module ViewExtensionsXC
 		  Declare Function navigationBar Lib "UIKit.framework" selector "navigationBar" (obj_ref As ptr) As ptr
 		  
 		  Declare Function navigationController Lib "UIKit.framework" selector "navigationController" (viewController As ptr) As ptr
-		  Dim navigationControllerRef As ptr = navigationController(v.ViewControllerHandle)
+		  'Dim navigationControllerRef As ptr = navigationController(v.ViewControllerHandle)
 		  
-		  Dim navBar As ptr = navigationBar(navigationControllerRef)
+		  'Dim navBar As ptr = navigationBar(navigationControllerRef)
 		  
 		  Declare Function navigationItem Lib "UIKit.framework" selector "navigationItem" (obj_ref As ptr) As ptr
 		  Dim navItem As ptr = navigationItem(v.Handle)
@@ -529,12 +506,12 @@ Protected Module ViewExtensionsXC
 		  //Use new API
 		  If sSystemVersion >= 11.0 Then
 		    
-		    Declare Function navigationBar Lib "UIKit.framework" selector "navigationBar" (obj_ref As ptr) As ptr
+		    'Declare Function navigationBar Lib "UIKit.framework" selector "navigationBar" (obj_ref As ptr) As ptr
 		    
-		    Declare Function navigationController Lib "UIKit.framework" selector "navigationController" (viewController As ptr) As ptr
-		    Dim navigationControllerRef As ptr = navigationController(v.ViewControllerHandle)
+		    'Declare Function navigationController Lib "UIKit.framework" selector "navigationController" (viewController As ptr) As ptr
+		    'Dim navigationControllerRef As ptr = navigationController(v.ViewControllerHandle)
 		    
-		    Dim navBar As ptr = navigationBar(navigationControllerRef)
+		    'Dim navBar As ptr = navigationBar(navigationControllerRef)
 		    
 		    Declare Function navigationItem Lib "UIKit.framework" selector "navigationItem" (obj_ref As ptr) As ptr
 		    Dim navItem As ptr = navigationItem(v.Handle)
@@ -733,7 +710,7 @@ Protected Module ViewExtensionsXC
 		  dim navigationControllerRef as ptr = navigationController(v.ViewControllerHandle)
 		  
 		  dim navBar as ptr = navigationBar(navigationControllerRef)
-		  Dim view As ptr = view(navigationControllerRef)
+		  'Dim view As ptr = view(navigationControllerRef)
 		  
 		  
 		  Declare sub setBackgroundImage lib "UIKit.framework" selector "setBackgroundImage:forBarMetrics:" (id as ptr, image as ptr, metrics as Integer)
@@ -987,6 +964,11 @@ Protected Module ViewExtensionsXC
 		  PrimaryHidden
 		  AllVisible
 		PrimaryOverlay
+	#tag EndEnum
+
+	#tag Enum, Name = UIUserInterfaceLayoutDirection, Type = Integer, Flags = &h1
+		leftToRight
+		rightToLeft
 	#tag EndEnum
 
 
