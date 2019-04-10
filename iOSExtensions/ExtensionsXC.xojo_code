@@ -171,6 +171,19 @@ Protected Module ExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
+		Protected Function UIEdgeInsetMake(top As CGFloat, left As CGFloat, bottom As CGFloat, right As CGFloat) As xcUIEdgeInsets
+		  
+		  Dim insets As xcUIEdgeInsets
+		  insets.Top = top
+		  insets.Left = Left
+		  insets.Bottom = bottom
+		  insets.Right = Right
+		  
+		  Return insets
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
 		Protected Function WithMaskXC(extends image As iOSImage) As iOSImage
 		  
 		  //Creates an image that will draw using the current Fillcolor
@@ -258,7 +271,7 @@ Protected Module ExtensionsXC
 	#tag EndConstant
 
 
-	#tag Structure, Name = xcCGAffineTransform, Flags = &h0
+	#tag Structure, Name = xcCGAffineTransform, Flags = &h1
 		a as CGFloat
 		  b as CGFloat
 		  c as CGFloat
