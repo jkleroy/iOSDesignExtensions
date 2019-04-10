@@ -64,8 +64,8 @@ Begin iosView vTextArea
       LineBreakMode   =   "0"
       LockedInPosition=   False
       Scope           =   0
-      Text            =   "Untitled"
-      TextAlignment   =   "0"
+      Text            =   "Unknown"
+      TextAlignment   =   "2"
       TextColor       =   &c00000000
       TextFont        =   ""
       TextSize        =   0
@@ -154,7 +154,7 @@ End
 #tag Events lblScrollPos
 	#tag Event
 		Sub Open()
-		  me.Text = ""
+		  'me.Text = ""
 		End Sub
 	#tag EndEvent
 #tag EndEvents

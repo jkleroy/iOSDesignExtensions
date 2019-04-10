@@ -153,6 +153,19 @@ Begin iosView vTextFieldKeyboards
       Visible         =   True
       Width           =   200.0
    End
+   Begin iOSToolButton btHide
+      Caption         =   "Hide"
+      Enabled         =   True
+      Height          =   22
+      Image           =   "0"
+      Image           =   "0"
+      Left            =   274
+      LockedInPosition=   False
+      Scope           =   0
+      Top             =   32
+      Type            =   "1001"
+      Width           =   38.0
+   End
 End
 #tag EndIOSView
 
@@ -168,6 +181,15 @@ End
 		Sub Open()
 		  
 		  
+		End Sub
+	#tag EndEvent
+
+	#tag Event
+		Sub ToolbarPressed(button As iOSToolButton)
+		  if button.Caption = "Hide" then
+		    
+		    self.HideKeyboardXC
+		  end if
 		End Sub
 	#tag EndEvent
 

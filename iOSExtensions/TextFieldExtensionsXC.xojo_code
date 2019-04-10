@@ -133,24 +133,6 @@ Protected Module TextFieldExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetCornerRadiusXC(extends field As iOSTextField, radius As Double)
-		  
-		  
-		  
-		  Declare Function layer_ Lib "UIKit.framework" selector "layer" (id As ptr) As Ptr
-		  Dim layer As ptr = layer_(field.Handle)
-		  
-		  
-		  
-		  Declare Sub setCornerRadius Lib "QuartzCore.framework" selector "setCornerRadius:" (id As ptr, value As CGFloat)
-		  
-		  setCornerRadius layer, radius
-		  
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
 		Sub SetKeyboardAppearanceXC(extends field As iOSTextField, appearance As TextFieldExtensionsXC.UIKeyboardAppearance)
 		  Declare Sub setKeyboardAppearance Lib "UIKit.framework" selector "setKeyboardAppearance:" (id As ptr, value As UIKeyboardAppearance)
 		  setKeyboardAppearance field.Handle, appearance

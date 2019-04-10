@@ -1,5 +1,5 @@
 Type=iOS
-RBProjectVersion=2018.04
+RBProjectVersion=2019.01
 MinIDEVersion=20140300
 Class=App;App.xojo_code;&h000000001FDD6FFF;&h0000000000000000;false
 iOSScreen=iPhoneScreen;iPhoneScreen.xojo_code;&h00000000172C07FF;&h0000000000000000;false
@@ -74,6 +74,7 @@ Module=ViewExtensionsXC;iOSExtensions/ViewExtensionsXC.xojo_code;&h0000000074CA4
 Module=HTMLViewerExtensionsXC;iOSExtensions/HTMLViewerExtensionsXC.xojo_code;&h000000005471F7FF;&h000000000D697FFF;false
 Module=UIKit;iOSExtensions/UIKit.xojo_code;&h0000000048070FFF;&h000000000D697FFF;false
 Class=UIColor;iOSExtensions/UIKit/UIColor.xojo_code;&h000000000E1A86FB;&h0000000048070FFF;false
+Module=TabBarExtensionsXC;iOSExtensions/TabBarExtensionsXC.xojo_code;&h0000000032E367FF;&h000000000D697FFF;false
 DefaultScreen=iPhoneScreen
 DefaultTabletScreen=iPadScreen
 MajorVersion=1

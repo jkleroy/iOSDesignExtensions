@@ -38,11 +38,11 @@ Protected Module LayerExtensionsXC
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0, Description = 5365747320726F756E6420636F726E65727320746F206120436F6E7461696E6572436F6E74726F6C
-		Sub SetCornerRadiusXC(extends lbl As iOSLabel, radius As Double)
+	#tag Method, Flags = &h0, Description = 5365747320726F756E6420636F726E65727320746F20616E20694F53436F6E74726F6C
+		Sub SetCornerRadiusXC(extends ctrl As iOSControl, radius As Double)
 		  
 		  Declare Function layer_ Lib "UIKit.framework" selector "layer" (id As ptr) As Ptr
-		  Dim layer As ptr = layer_(lbl.Handle)
+		  Dim layer As ptr = layer_(ctrl.Handle)
 		  
 		  
 		  
@@ -50,8 +50,25 @@ Protected Module LayerExtensionsXC
 		  
 		  setCornerRadius layer, radius
 		  
-		  Declare Sub clipsToBounds Lib "UIKit.framework" selector "setClipsToBounds:" (id As ptr, value As Boolean)
-		  clipsToBounds(lbl.Handle, True)
+		  if ctrl isa iOSButton then
+		    
+		    Dim insets As ExtensionsXC.xcUIEdgeInsets
+		    insets.Left = radius
+		    insets.Top = 0
+		    insets.Right = radius
+		    insets.Bottom = 0
+		    
+		    iosButton(ctrl).SetButtonInsetsXC(insets)
+		    
+		  else
+		    
+		    
+		    
+		    Declare Sub clipsToBounds Lib "UIKit.framework" selector "setClipsToBounds:" (id As ptr, value As Boolean)
+		    clipsToBounds(ctrl.Handle, True)
+		    
+		    
+		  end if
 		  
 		End Sub
 	#tag EndMethod

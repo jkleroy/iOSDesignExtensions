@@ -116,36 +116,6 @@ Protected Module ButtonExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetCornerRadiusXC(extends bt As iOSButton, radius As Double)
-		  
-		  
-		  
-		  Declare Function layer_ Lib "UIKit.framework" selector "layer" (id As ptr) As Ptr
-		  Dim layer As ptr = layer_(bt.Handle)
-		  
-		  
-		  
-		  Declare Sub setCornerRadius Lib "QuartzCore.framework" selector "setCornerRadius:" (id As ptr, value As CGFloat)
-		  
-		  setCornerRadius layer, radius
-		  
-		  Dim insets As ExtensionsXC.xcUIEdgeInsets
-		  insets.Left = radius
-		  insets.Top = 0
-		  insets.Right = radius
-		  insets.Bottom = 0
-		  
-		  bt.SetButtonInsetsXC(insets)
-		  
-		  
-		  
-		  
-		  ' yourButton.layer.cornerRadius = 10; // this value vary as per your desire
-		  '    yourButton.clipsToBounds = YES;
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
 		Sub SetImageInsetsXC(extends bt As iOSButton, value As ExtensionsXC.xcUIEdgeInsets)
 		  
 		  

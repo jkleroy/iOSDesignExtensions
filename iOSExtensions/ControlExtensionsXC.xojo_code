@@ -84,28 +84,6 @@ Protected Module ControlExtensionsXC
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
-		Sub PushToHideTabBarXC(extends parentView As iOSView, childView As iOSView)
-		  ' This method was posted by Paul Lefebvre at https://forum.xojo.com/18176-controlling-tab-bar-visibility/last
-		  ' on 12/12/2014
-		  
-		  'To hide the tabbar for a view, call as such :
-		  'Dim v As New View1
-		  'hideTabBar(v, Self)
-		  
-		  // @property(nonatomic) BOOL hidesBottomBarWhenPushed
-		  
-		  Declare Sub setHidesBottomBarWhenPushed Lib "UIKit.framework" _
-		  Selector "setHidesBottomBarWhenPushed:" (id As Ptr, value As Boolean)
-		  
-		  setHidesBottomBarWhenPushed(childview.Handle, True)
-		  
-		  parentView.PushTo(childView)
-		  
-		  // To reinstate the tab bar, close the pushed view.
-		End Sub
-	#tag EndMethod
-
 	#tag Method, Flags = &h0, Description = 44656C6574657320616C6C20636F6E73747261696E74732066726F6D206120636F6E7461696E6572
 		Sub RemoveConstraintsXC(containerHandle as ptr)
 		  // http://stackoverflow.com/questions/13388104/remove-auto-layout-constraints-for-specific-object
@@ -187,24 +165,6 @@ Protected Module ControlExtensionsXC
 		  ' Here is the corresponding Xojo call
 		  decl_SetBackgroundColor(ctrl.handle, uic)
 		  
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0, Description = 5365747320726F756E6420636F726E65727320746F206120436F6E7461696E6572436F6E74726F6C
-		Sub SetCornerRadiusXC(extends lbl As iOSLabel, radius As Double)
-		  
-		  Declare Function layer_ Lib "UIKit.framework" selector "layer" (id As ptr) As Ptr
-		  Dim layer As ptr = layer_(lbl.Handle)
-		  
-		  
-		  
-		  Declare Sub setCornerRadius Lib "QuartzCore.framework" selector "setCornerRadius:" (id As ptr, value As CGFloat)
-		  
-		  setCornerRadius layer, radius
-		  
-		  Declare Sub clipsToBounds Lib "UIKit.framework" selector "setClipsToBounds:" (id As ptr, value As Boolean)
-		  clipsToBounds(lbl.Handle, True)
 		  
 		End Sub
 	#tag EndMethod
