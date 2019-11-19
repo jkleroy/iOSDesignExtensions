@@ -64,7 +64,7 @@ Protected Module ImageExtensionsXC
 
 	#tag Method, Flags = &h1, Description = 52657475726E7320616E20696D6167652066726F6D2074686520694F5331332053462053796D626F6C206C696272617279
 		Protected Function SystemImageXC(name As Text, fallback As iOSImage = nil) As iOSImage
-		  gith
+		  
 		  
 		  if ExtensionsXC.GetiOSVersionXC >= 13.0 then
 		    
