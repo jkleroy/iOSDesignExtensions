@@ -178,6 +178,8 @@ Protected Module TextFieldExtensionsXC
 	#tag Method, Flags = &h0, Description = 536574732074686520706C616365686F6C64657220616E6420706C616365686F6C64657220636F6C6F722E2052657175697265732055494B6974
 		Sub SetPlaceholderColorXC(extends field as iOSTextField, placeholder As Text, aColor As Color)
 		  
+		  if placeholder.trim.Empty then Return
+		  
 		  #If ExtensionsXC.kUseUIKit
 		    
 		    'NSAttributedString *str = [[NSAttributedString alloc] initWithString:@"Some Text" attributes:@{ NSForegroundColorAttributeName : [UIColor redColor] }];
@@ -381,7 +383,9 @@ Protected Module TextFieldExtensionsXC
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
@@ -389,12 +393,15 @@ Protected Module TextFieldExtensionsXC
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -402,6 +409,7 @@ Protected Module TextFieldExtensionsXC
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -409,6 +417,7 @@ Protected Module TextFieldExtensionsXC
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Module

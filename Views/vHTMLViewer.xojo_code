@@ -44,13 +44,53 @@ Begin iosView vHTMLViewer
       Visible         =   True
       Width           =   80.0
    End
+   Begin iOSButton btCalcPi
+      AccessibilityHint=   ""
+      AccessibilityLabel=   ""
+      AutoLayout      =   btCalcPi, 2, <Parent>, 2, False, +1.00, 4, 1, -*kStdGapCtlToViewH, , True
+      AutoLayout      =   btCalcPi, 7, , 0, False, +1.00, 4, 1, 20, , True
+      AutoLayout      =   btCalcPi, 8, , 0, False, +1.00, 4, 1, 30, , True
+      AutoLayout      =   btCalcPi, 10, btLoad, 10, False, +1.00, 4, 1, 0, , True
+      Caption         =   "Pi"
+      Enabled         =   True
+      Height          =   30.0
+      Left            =   280
+      LockedInPosition=   False
+      Scope           =   0
+      TextColor       =   &c007AFF00
+      TextFont        =   ""
+      TextSize        =   0
+      Top             =   430
+      Visible         =   True
+      Width           =   20.0
+   End
+   Begin iOSButton btJavascript
+      AccessibilityHint=   ""
+      AccessibilityLabel=   ""
+      AutoLayout      =   btJavascript, 2, btCalcPi, 1, False, +1.00, 4, 1, -*kStdControlGapH, , True
+      AutoLayout      =   btJavascript, 7, , 0, False, +1.00, 4, 1, 80, , True
+      AutoLayout      =   btJavascript, 8, , 0, False, +1.00, 4, 1, 30, , True
+      AutoLayout      =   btJavascript, 4, btLoad, 4, False, +1.00, 4, 1, 0, , True
+      Caption         =   "Exec Javascript"
+      Enabled         =   True
+      Height          =   30.0
+      Left            =   192
+      LockedInPosition=   False
+      Scope           =   0
+      TextColor       =   &c007AFF00
+      TextFont        =   ""
+      TextSize        =   0
+      Top             =   430
+      Visible         =   True
+      Width           =   80.0
+   End
    Begin iOSButton btUserAgent
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
-      AutoLayout      =   btUserAgent, 4, btLoad, 4, False, +1.00, 4, 1, 0, , True
-      AutoLayout      =   btUserAgent, 8, , 0, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   btUserAgent, 1, btLoad, 2, False, +1.00, 4, 1, *kStdControlGapH, , True
       AutoLayout      =   btUserAgent, 7, , 0, False, +1.00, 4, 1, 80, , True
+      AutoLayout      =   btUserAgent, 8, , 0, False, +1.00, 4, 1, 30, , True
+      AutoLayout      =   btUserAgent, 11, btLoad, 11, False, +1.00, 4, 1, 0, , True
       Caption         =   "UserAgent"
       Enabled         =   True
       Height          =   30.0
@@ -63,46 +103,6 @@ Begin iosView vHTMLViewer
       Top             =   430
       Visible         =   True
       Width           =   80.0
-   End
-   Begin iOSButton btJavascript
-      AccessibilityHint=   ""
-      AccessibilityLabel=   ""
-      AutoLayout      =   btJavascript, 4, btLoad, 4, False, +1.00, 4, 1, 0, , True
-      AutoLayout      =   btJavascript, 8, , 0, False, +1.00, 4, 1, 30, , True
-      AutoLayout      =   btJavascript, 1, btUserAgent, 2, False, +1.00, 4, 1, *kStdControlGapH, , True
-      AutoLayout      =   btJavascript, 7, , 0, False, +1.00, 4, 1, 80, , True
-      Caption         =   "Exec Javascript"
-      Enabled         =   True
-      Height          =   30.0
-      Left            =   196
-      LockedInPosition=   False
-      Scope           =   0
-      TextColor       =   &c007AFF00
-      TextFont        =   ""
-      TextSize        =   0
-      Top             =   430
-      Visible         =   True
-      Width           =   80.0
-   End
-   Begin iOSButton btCalcPi
-      AccessibilityHint=   ""
-      AccessibilityLabel=   ""
-      AutoLayout      =   btCalcPi, 10, btLoad, 10, False, +1.00, 4, 1, 0, , True
-      AutoLayout      =   btCalcPi, 8, , 0, False, +1.00, 4, 1, 30, , True
-      AutoLayout      =   btCalcPi, 1, btJavascript, 2, False, +1.00, 4, 1, *kStdControlGapH, , True
-      AutoLayout      =   btCalcPi, 7, , 0, False, +1.00, 4, 1, 20, , True
-      Caption         =   "Pi"
-      Enabled         =   True
-      Height          =   30.0
-      Left            =   284
-      LockedInPosition=   False
-      Scope           =   0
-      TextColor       =   &c007AFF00
-      TextFont        =   ""
-      TextSize        =   0
-      Top             =   430
-      Visible         =   True
-      Width           =   20.0
    End
 End
 #tag EndIOSView
@@ -135,7 +135,7 @@ End
 
 	#tag Method, Flags = &h21
 		Private Sub UserAgentResult(value As Auto, error As RuntimeException)
-		  
+		  gotresult = True
 		  If error <> Nil Then
 		    
 		    Break
@@ -153,15 +153,19 @@ End
 	#tag EndMethod
 
 
+	#tag Property, Flags = &h21
+		Private gotResult As Boolean
+	#tag EndProperty
+
 	#tag Property, Flags = &h0
 		loaded As Boolean
 	#tag EndProperty
 
 
-	#tag Constant, Name = kHTML, Type = Text, Dynamic = False, Default = \"<!doctype html>\n<html>\n  <head>\n    <title>This is the title of the webpage!</title>\n  <style>\nbody{\nfont-size: 200%;\n-webkit-text-size-adjust: 200%;\n}\n</style>\n  </head>\n  <body>\n    <div id\x3D\"123\">This is an example paragraph. Anything in the <strong>body</strong> tag will appear on the page\x2C just like this <strong>p</strong> tag and its contents.</div>\n  </body>\n</html>", Scope = Public
+	#tag Constant, Name = kHTML, Type = Text, Dynamic = False, Default = \"<!doctype html>\n<html>\n  <head>\n    <title>This is the title of the webpage!</title>\n  <style>\nbody{\nfont-size: 200%;\n-webkit-text-size-adjust: 200%;\n}\n</style>\n  </head>\n  <body>\n    <div id\x3D\"123\">This is an example paragraph. Anything in the <strong>body</strong> tag will appear on the page\x2C just like this <strong>p</strong> tag and its contents.</div>\n<script>\nfunction getBrowserTitle()\n{\n  var newTitle \x3D document.title;\n//  alert(\"newTitle \x3D \" + newTitle);\n  return newTitle;\n}\n</script>\n  </body>\n</html>", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = kJSPie, Type = Text, Dynamic = False, Default = \"var Pi\x3D0;\nvar n\x3D1;\nfor (i\x3D0;i<\x3D1000;i++)\n{\nPi\x3DPi+(4/n)-(4/(n+2))\nn\x3Dn+4\n}\nPi;", Scope = Public
+	#tag Constant, Name = kJSPie, Type = Text, Dynamic = False, Default = \"var Pi\x3D0;\nvar n\x3D1;\nfor (i\x3D0;i<\x3D10000;i++)\n{\nPi\x3DPi+(4/n)-(4/(n+2))\nn\x3Dn+4\n}\nPi;", Scope = Public
 	#tag EndConstant
 
 
@@ -174,28 +178,21 @@ End
 		  HTMLViewer1.loadPageXC(kHTML)
 		  
 		  loaded = True
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events btUserAgent
+#tag Events btCalcPi
 	#tag Event
 		Sub Action()
 		  
-		  #If XojoVersion < 2018.02
-		    Dim agent As Text = HTMLViewer1.UserAgentXC
-		    
-		    Dim msg As New iOSMessageBox
-		    msg.Buttons = Array("OK")
-		    msg.Title = "UserAgent"
-		    msg.Message = agent
-		    msg.Show
-		    
-		    
-		  #Else
-		    
-		    Call HTMLViewer1.UserAgentXC( WeakAddressOf UserAgentResult )
-		    
-		  #EndIf
+		  //Calculating Pi using Javascript
+		  
+		  
+		  Dim js As Text = kJSPie
+		  
+		  Call HTMLViewer1.ExecuteJavascriptXC(js, WeakAddressOf PiResult)
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -230,17 +227,25 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events btCalcPi
+#tag Events btUserAgent
 	#tag Event
 		Sub Action()
 		  
-		  //Calculating Pi using Javascript
-		  
-		  
-		  Dim js As Text = kJSPie
-		  
-		  Call HTMLViewer1.ExecuteJavascriptXC(js, WeakAddressOf PiResult)
-		  
+		  #If XojoVersion < 2018.02
+		    Dim agent As Text = HTMLViewer1.UserAgentXC
+		    
+		    Dim msg As New iOSMessageBox
+		    msg.Buttons = Array("OK")
+		    msg.Title = "UserAgent"
+		    msg.Message = agent
+		    msg.Show
+		    
+		    
+		  #Else
+		    
+		    Call HTMLViewer1.UserAgentXC( WeakAddressOf UserAgentResult )
+		    
+		  #EndIf
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -260,7 +265,9 @@ End
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="BackButtonTitle"
+		Visible=false
 		Group="Behavior"
+		InitialValue=""
 		Type="Text"
 		EditorType="MultiLineEditor"
 	#tag EndViewProperty
@@ -270,6 +277,7 @@ End
 		Group="ID"
 		InitialValue="-2147483648"
 		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Left"
@@ -277,37 +285,53 @@ End
 		Group="Position"
 		InitialValue="0"
 		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Name"
 		Visible=true
 		Group="ID"
+		InitialValue=""
 		Type="String"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="NavigationBarVisible"
+		Visible=false
 		Group="Behavior"
+		InitialValue=""
 		Type="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Super"
 		Visible=true
 		Group="ID"
+		InitialValue=""
 		Type="String"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="TabIcon"
+		Visible=false
 		Group="Behavior"
+		InitialValue=""
 		Type="iOSImage"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="TabTitle"
+		Visible=false
 		Group="Behavior"
+		InitialValue=""
 		Type="Text"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Title"
+		Visible=false
 		Group="Behavior"
+		InitialValue=""
 		Type="Text"
 		EditorType="MultiLineEditor"
 	#tag EndViewProperty
@@ -317,10 +341,14 @@ End
 		Group="Position"
 		InitialValue="0"
 		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="loaded"
+		Visible=false
 		Group="Behavior"
+		InitialValue=""
 		Type="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 #tag EndViewBehavior

@@ -103,7 +103,7 @@ End
 		  
 		  Dim cell As iOSTableCellData
 		  
-		  cell = Me.CreateCell("Notifications", "", ExtensionsXC.ColoredIcon(ic8_notification, NetflixSettings.CellTextColor), iOSTableCellData.AccessoryTypes.Disclosure)
+		  cell = Me.CreateCell("Notifications", "", ImageExtensionsXC.ImageWithColorXC(ic8_notification, NetflixSettings.CellTextColor), iOSTableCellData.AccessoryTypes.Disclosure)
 		  cell.SetBackgroundColorXC(&c000000FF)
 		  cell.SetTextColorXC(NetflixSettings.CellTextColor)
 		  cell.SetSelectedBackgroundColorXC(&c000000FF)
@@ -192,7 +192,9 @@ End
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="BackButtonTitle"
+		Visible=false
 		Group="Behavior"
+		InitialValue=""
 		Type="Text"
 		EditorType="MultiLineEditor"
 	#tag EndViewProperty
@@ -202,6 +204,7 @@ End
 		Group="ID"
 		InitialValue="-2147483648"
 		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Left"
@@ -209,37 +212,53 @@ End
 		Group="Position"
 		InitialValue="0"
 		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Name"
 		Visible=true
 		Group="ID"
+		InitialValue=""
 		Type="String"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="NavigationBarVisible"
+		Visible=false
 		Group="Behavior"
+		InitialValue=""
 		Type="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Super"
 		Visible=true
 		Group="ID"
+		InitialValue=""
 		Type="String"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="TabIcon"
+		Visible=false
 		Group="Behavior"
+		InitialValue=""
 		Type="iOSImage"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="TabTitle"
+		Visible=false
 		Group="Behavior"
+		InitialValue=""
 		Type="Text"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Title"
+		Visible=false
 		Group="Behavior"
+		InitialValue=""
 		Type="Text"
 		EditorType="MultiLineEditor"
 	#tag EndViewProperty
@@ -249,5 +268,6 @@ End
 		Group="Position"
 		InitialValue="0"
 		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 #tag EndViewBehavior

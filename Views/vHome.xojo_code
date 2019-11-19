@@ -217,38 +217,38 @@ End
 		  
 		  section = AddSection("Button Extensions")
 		  
-		  AddRow(section, "Buttons", "", accessory, GetTypeInfo(vButtons), ExtensionsXC.ColoredIcon(ic8_button, &c0F7FFE00))
+		  AddRow(section, "Buttons", "", accessory, GetTypeInfo(vButtons), ImageExtensionsXC.ImageWithColorXC(ic8_button, &c0F7FFE00))
 		  
 		  
 		  section = AddSection("HTMLViewer Extensions")
-		  AddRow(section, "HTMLViewer Examples", "", accessory, GetTypeInfo(vHTMLViewer), ExtensionsXC.ColoredIcon(ic8_html, &cE34E25))
+		  AddRow(section, "HTMLViewer Examples", "", accessory, GetTypeInfo(vHTMLViewer), ImageExtensionsXC.ImageWithColorXC(ic8_html, &cE34E25))
 		  
 		  section = AddSection("TabBar Extensions")
 		  AddRow(section, "TabBar Examples", "", accessory, "tabbar")
 		  
 		  
 		  section = AddSection("Scroll Extensions")
-		  AddRow(section, "Scroll Examples", "", accessory, GetTypeInfo(vScrollView), ExtensionsXC.ColoredIcon(ic8_updown, &cFC800800))
+		  AddRow(section, "Scroll Examples", "", accessory, GetTypeInfo(vScrollView), ImageExtensionsXC.ImageWithColorXC(ic8_updown, &cFC800800))
 		  
 		  
 		  section = AddSection("Table Extensions")
-		  AddRow(section, "Table Examples", "", accessory, GetTypeInfo(vTable), ExtensionsXC.ColoredIcon(ic8_list, &c66CCFE00))
+		  AddRow(section, "Table Examples", "", accessory, GetTypeInfo(vTable), ImageExtensionsXC.ImageWithColorXC(ic8_list, &c66CCFE00))
 		  
 		  
 		  section = AddSection("TextFields Extensions")
-		  AddRow(section, "TextField Examples", "", accessory, GetTypeInfo(vTextFields), ExtensionsXC.ColoredIcon(ic8_sms, &cCC66FE00))
-		  AddRow(section, "TextField Keyboards", "", accessory, GetTypeInfo(vTextFieldKeyboards), ExtensionsXC.ColoredIcon(ic8_sms, &c80004000))
-		  AddRow(section, "TextArea Extension", "", accessory, GetTypeInfo(vTextArea), ExtensionsXC.ColoredIcon(ic8_textarea, &c3D97FE00))
+		  AddRow(section, "TextField Examples", "", accessory, GetTypeInfo(vTextFields), ImageExtensionsXC.ImageWithColorXC(ic8_sms, &cCC66FE00))
+		  AddRow(section, "TextField Keyboards", "", accessory, GetTypeInfo(vTextFieldKeyboards), ImageExtensionsXC.ImageWithColorXC(ic8_sms, &c80004000))
+		  AddRow(section, "TextArea Extension", "", accessory, GetTypeInfo(vTextArea), ImageExtensionsXC.ImageWithColorXC(ic8_textarea, &c3D97FE00))
 		  
 		  
 		  
 		  section = AddSection("View Extensions")
-		  AddRow(section, "Big Progress Wheel", "", accessory, GetTypeInfo(vViewProgressWheel), ExtensionsXC.ColoredIcon(ic8_loading, &c80808000))
+		  AddRow(section, "Big Progress Wheel", "", accessory, GetTypeInfo(vViewProgressWheel), ImageExtensionsXC.ImageWithColorXC(ic8_loading, &c80808000))
 		  AddRow(section, "Hide Navigator on Swipe", "", accessory, GetTypeInfo(vHideNavigator), ic8_hide)
 		  AddRow(section, "Large Titles", "", accessory, GetTypeInfo(vLargeTitles), ic8_bigfont)
-		  AddRow(section, "Navigation Bar Color", "", accessory, GetTypeInfo(vNavbar), ExtensionsXC.ColoredIcon(ic_menu, &c073F8000))
-		  AddRow(section, "ToolButtons", "", accessory, GetTypeInfo(vToolButton), ExtensionsXC.ColoredIcon(ic8_button, &c7F0FFE))
-		  AddRow(section, "View Color", "", accessory, GetTypeInfo(vBackground), ExtensionsXC.ImageOriginalXC(ic8_color))
+		  AddRow(section, "Navigation Bar Color", "", accessory, GetTypeInfo(vNavbar), ImageExtensionsXC.ImageWithColorXC(ic_menu, &c073F8000))
+		  AddRow(section, "ToolButtons", "", accessory, GetTypeInfo(vToolButton), ImageExtensionsXC.ImageWithColorXC(ic8_button, &c7F0FFE))
+		  AddRow(section, "View Color", "", accessory, GetTypeInfo(vBackground), ImageExtensionsXC.ImageOriginalXC(ic8_color))
 		  
 		  
 		  section = AddSection("Modal")
@@ -258,13 +258,13 @@ End
 		  'AddRow(section, "Modal View Curl", "", accessory, "modalcurl", ic8_paper)
 		  
 		  section = AddSection("UI Examples")
-		  AddRow(section, "Netflix", "", accessory, "netflix", ExtensionsXC.ColoredIcon(ic8_netflix, &ce50914))
+		  AddRow(section, "Netflix", "", accessory, "netflix", ImageExtensionsXC.ImageWithColorXC(ic8_netflix, &ce50914))
 		  
 		  
 		  
 		  section = AddSection("About")
-		  AddRow(section, "Beautiful icons by icons8.com", "", accessory, "icons", ExtensionsXC.ImageOriginalXC(ic8_icons8))
-		  AddRow(section, "Donate", "", accessory, "donate", ExtensionsXC.ImageOriginalXC(ic8_paypal))
+		  AddRow(section, "Beautiful icons by icons8.com", "", accessory, "icons", ImageExtensionsXC.ImageOriginalXC(ic8_icons8))
+		  AddRow(section, "Donate", "", accessory, "donate", ImageExtensionsXC.ImageOriginalXC(ic8_paypal))
 		  
 		  Me.DataSource = Self
 		End Sub
@@ -385,7 +385,7 @@ End
 		  
 		  Dim constructors() As Xojo.Introspection.ConstructorInfo = info.Constructors
 		  For Each c As Xojo.Introspection.ConstructorInfo In constructors
-		    If c.Parameters.Ubound = -1 Then
+		    If c.Parameters.LastRowIndex = -1 Then
 		      UseConstructor = c
 		      Exit For c
 		    End If
@@ -419,7 +419,9 @@ End
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="BackButtonTitle"
+		Visible=false
 		Group="Behavior"
+		InitialValue=""
 		Type="Text"
 		EditorType="MultiLineEditor"
 	#tag EndViewProperty
@@ -429,6 +431,7 @@ End
 		Group="ID"
 		InitialValue="-2147483648"
 		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Left"
@@ -436,37 +439,53 @@ End
 		Group="Position"
 		InitialValue="0"
 		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Name"
 		Visible=true
 		Group="ID"
+		InitialValue=""
 		Type="String"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="NavigationBarVisible"
+		Visible=false
 		Group="Behavior"
+		InitialValue=""
 		Type="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Super"
 		Visible=true
 		Group="ID"
+		InitialValue=""
 		Type="String"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="TabIcon"
+		Visible=false
 		Group="Behavior"
+		InitialValue=""
 		Type="iOSImage"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="TabTitle"
+		Visible=false
 		Group="Behavior"
+		InitialValue=""
 		Type="Text"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Title"
+		Visible=false
 		Group="Behavior"
+		InitialValue=""
 		Type="Text"
 		EditorType="MultiLineEditor"
 	#tag EndViewProperty
@@ -476,5 +495,6 @@ End
 		Group="Position"
 		InitialValue="0"
 		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 #tag EndViewBehavior

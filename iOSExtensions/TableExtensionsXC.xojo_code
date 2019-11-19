@@ -46,6 +46,14 @@ Protected Module TableExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 416C7465726E617469766520746F2053657444657461696C54657874436F6C6F725843
+		Sub DetailTextColorXC(extends cell As iOSTableCellData, assigns value As Color)
+		  
+		  
+		  cell.SetDetailTextColorXC(value)
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
 		Sub FlashScrollIndicatorsXC(extends table As iOSTable)
 		  Declare Sub flashScrollIndicators_ Lib "UIKit.framework" selector "flashScrollIndicators" (obj_id As ptr)
@@ -133,7 +141,10 @@ Protected Module TableExtensionsXC
 		    uic = New UIColor(value)
 		  End If
 		  
-		  action.BackgroundUIColorXC(uic)
+		  
+		  
+		  declare sub setBackgroundColor lib UIKitLib selector "setBackgroundColor:" (obj_id as ptr, col as ptr)
+		  setBackgroundColor(action.handle, uic)
 		End Sub
 	#tag EndMethod
 
@@ -530,7 +541,7 @@ Protected Module TableExtensionsXC
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
+	#tag Method, Flags = &h0, Description = 416C7465726E617469766520746F2053657454657874436F6C6F725843
 		Sub TextColorXC(extends cell As iOSTableCellData, assigns value As Color)
 		  
 		  
@@ -565,7 +576,9 @@ Protected Module TableExtensionsXC
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
@@ -573,12 +586,15 @@ Protected Module TableExtensionsXC
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -586,6 +602,7 @@ Protected Module TableExtensionsXC
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -593,6 +610,7 @@ Protected Module TableExtensionsXC
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Module

@@ -5,6 +5,9 @@ Inherits IOSApplication
 	#tag Note, Name = README
 		## History
 		
+		### Version 1.7.0 - Released 2019-11-19
+		* New ImageExtensionsXC module
+		
 		### Version 1.6.0 - Released 2019-04-06
 		* New iOSView hidekeyboard
 		* Fix iOSControl.SetAlphaValueXC for iOS 12.2 (Requires iOSKit)
@@ -82,7 +85,9 @@ Inherits IOSApplication
 	#tag ViewBehavior
 		#tag ViewProperty
 			Name="currentSplitMode"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="ViewExtensionsXC.UISplitViewControllerDisplayMode"
 			EditorType="Enum"
 			#tag EnumValues

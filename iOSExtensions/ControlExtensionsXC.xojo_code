@@ -34,6 +34,21 @@ Protected Module ControlExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 466C69707320616E20694F53436F6E74726F6C206F6E2074686520686F72697A6F6E74616C206178697320666F722052544C
+		Sub FlipHorizontalForRTLXC(extends c As iOSControl)
+		  //Flips an iOSControl on the horizontal axis for RTL
+		  
+		  Declare sub transform lib "UIKit.framework" selector "setTransform:" (obj_id as ptr, matrix as ExtensionsXC.xcCGAffineTransform)
+		  Declare function CGAffineTransformMakeScale lib "CoreGraphics.framework" (sx as CGFloat, sy as CGFloat) as ExtensionsXC.xcCGAffineTransform
+		  
+		  Dim scale As ExtensionsXC.xcCGAffineTransform
+		  scale = CGAffineTransformMakeScale(-1, 1)
+		  
+		  
+		  transform(c.Handle, scale)
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
 		Function GetBoundsXC(extends c as iOSControl) As xojo.Core.Rect
 		  
@@ -423,7 +438,9 @@ Protected Module ControlExtensionsXC
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
@@ -431,12 +448,15 @@ Protected Module ControlExtensionsXC
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -444,6 +464,7 @@ Protected Module ControlExtensionsXC
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -451,6 +472,7 @@ Protected Module ControlExtensionsXC
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Module

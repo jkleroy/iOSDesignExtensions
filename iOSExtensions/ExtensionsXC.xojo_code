@@ -20,7 +20,7 @@ Protected Module ExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
-		Protected Function ColoredIcon(icon as iOSImage, value as Color) As iOSImage
+		Attributes( deprecated = "Use Image.ImageWithColorXC instead" ) Protected Function ColoredIcon(icon as iOSImage, value as Color) As iOSImage
 		  
 		  
 		  
@@ -66,7 +66,7 @@ Protected Module ExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h1, Description = 52657475726E7320616E20696D61676520746861742077696C6C20616C776179732072656E646572207573696E6720697473207472756520636F6C6F7273
-		Protected Function ImageOriginalXC(image As iOSImage) As iOSImage
+		Attributes( deprecated = "Use image.ImageOriginalXC instead" ) Protected Function ImageOriginalXC(image As iOSImage) As iOSImage
 		  
 		  //Creates an image that will draw using the current Fillcolor
 		  
@@ -77,7 +77,7 @@ Protected Module ExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
-		Protected Function ImageWithMaskXC(image As iOSImage) As iOSImage
+		Attributes( deprecated = "Use image.ImageWithMaskXC instead" ) Protected Function ImageWithMaskXC(image As iOSImage) As iOSImage
 		  
 		  //Creates an image that will draw using the current Fillcolor
 		  
@@ -184,7 +184,7 @@ Protected Module ExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
-		Protected Function WithMaskXC(extends image As iOSImage) As iOSImage
+		Attributes( deprecated = "Use image.ImageWithMaskXC instaed" ) Protected Function WithMaskXC(extends image As iOSImage) As iOSImage
 		  
 		  //Creates an image that will draw using the current Fillcolor
 		  
@@ -195,6 +195,9 @@ Protected Module ExtensionsXC
 
 	#tag Note, Name = History
 		## History
+		
+		### Version 1.7.0 - Released 2019-11-19
+		* New ImageExtensionsXC module
 		
 		### Version 1.6.0 - Released 2019-04-06
 		* New iOSView hidekeyboard
@@ -261,6 +264,8 @@ Protected Module ExtensionsXC
 		
 		Jeremie LEROY
 		
+		
+		
 	#tag EndNote
 
 
@@ -308,7 +313,9 @@ Protected Module ExtensionsXC
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
@@ -316,12 +323,15 @@ Protected Module ExtensionsXC
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -329,6 +339,7 @@ Protected Module ExtensionsXC
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -336,6 +347,7 @@ Protected Module ExtensionsXC
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Module

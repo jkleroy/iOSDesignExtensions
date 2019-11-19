@@ -1,14 +1,20 @@
 #tag Module
-Protected Module UIKit
-	#tag CompatibilityFlags = ( TargetConsole and ( Target32Bit or Target64Bit ) ) or ( TargetWeb and ( Target32Bit or Target64Bit ) ) or ( TargetDesktop and ( Target32Bit or Target64Bit ) ) or ( TargetIOS and ( Target64Bit ) )
-	#tag Note, Name = README
-		
-		Delete this module if you are already using iOSKit by Jason King
-	#tag EndNote
+Protected Module AccessibilityExtensionsXC
+	#tag Method, Flags = &h0
+		Sub AccessibilityLabelXC(extends tb As iOSToolbutton, value As Text)
+		  Declare sub setAccessibilityLabel lib "Foundation.framework" selector "setAccessibilityLabel:" (obj as ptr, value as CFStringRef)
+		  
+		  setAccessibilityLabel(tb.Handle, value)
+		End Sub
+	#tag EndMethod
 
-
-	#tag Constant, Name = UIKitLib, Type = Text, Dynamic = False, Default = \"UIKit.framework", Scope = Public
-	#tag EndConstant
+	#tag Method, Flags = &h0
+		Sub MakeAccessibleXC(extends control As iOSControl, value As Boolean)
+		  Declare sub isAccessibilityElement lib "Foundation" selector "setIsAccessibilityElement:" (obj as ptr, value as boolean)
+		  
+		  isAccessibilityElement(control.Handle, value)
+		End Sub
+	#tag EndMethod
 
 
 	#tag ViewBehavior

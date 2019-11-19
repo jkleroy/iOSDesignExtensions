@@ -174,6 +174,52 @@ Protected Module ViewExtensionsXC
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 4F70656E7320616E2055524C20696E2074686520536166617269436F6E74726F6C6C6572
+		Sub PushToSafariControllerXC(extends v as iOSView, url as Text, BarTintColor as Color = &c000000FF, ControlTintColor as Color = &c000000FF)
+		  
+		  
+		  
+		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
+		  Declare Function alloc Lib "Foundation.framework" selector "alloc" (clsRef As ptr) As ptr
+		  
+		  declare function URLWithString_ lib FoundationLib selector "URLWithString:" (clsRef as ptr, URLString as CFStringRef) as ptr
+		  
+		  Declare function initWithURL_ lib "SafariServices.framework" selector "initWithURL:" (obj as ptr, url as ptr) as ptr
+		  Declare Sub presentViewController Lib "UIKit.framework" _
+		  Selector "presentViewController:animated:completion:" _
+		  (parentView As Ptr, viewControllerToPresent As Ptr, animated As Boolean, completion As Ptr)
+		  
+		  
+		  Dim nUrl as ptr = URLWithString_(NSClassFromString("NSURL"), url)
+		  Dim svc As ptr = initWithURL_(alloc(NSClassFromString("SFSafariViewController")), nUrl)
+		  
+		  
+		  if BarTintColor.Alpha <> 255 then
+		    Declare sub preferredBarTintColor_ lib "UIKit.framework" selector "setPreferredBarTintColor:" (obj as ptr, value as ptr)
+		    
+		    
+		    Dim uic As UIKit.UIColor
+		    uic = new UIKit.UIColor(BarTintColor)
+		    
+		    
+		    preferredBarTintColor_(svc, uic)
+		  end if
+		  
+		  if ControlTintColor.Alpha <> 255 then
+		    Declare sub preferredControlTintColor_ lib "UIKit.framework" selector "setPreferredControlTintColor:" (obj as ptr, value as ptr)
+		    
+		    Dim uic As UIKit.UIColor
+		    uic = new UIKit.UIColor(ControlTintColor)
+		    
+		    
+		    preferredControlTintColor_(svc, uic)
+		  end if
+		  
+		  presentViewController(v.Handle, svc, True, nil)
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
 		Sub PushToShowModalDissolveXC(extends parent As iOSView, v As iOSView, style As ViewExtensionsXC.UIModalPresentationStyle=ViewExtensionsXC.UIModalPresentationStyle.fullscreen, Animate As Boolean=True, callback As iOSBlock=Nil)
 		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
@@ -562,6 +608,53 @@ Protected Module ViewExtensionsXC
 		  declare sub setBarStyle lib "UIKit.framework" selector "setBarStyle:" (id as ptr, theStyle as integer)
 		  setBarStyle navBar, If(Dark, 1, 0) //UIStatusBarStyleLightContent
 		  
+		  
+		  Dim titleColor As Color = buttonColor
+		  
+		  if ExtensionsXC.GetiOSVersionXC >= 13 then
+		    
+		    declare function init lib "Foundation.framework" selector "init" (obj_id as ptr) as ptr
+		    Declare Function alloc Lib "Foundation.framework" selector "alloc" (clsRef As ptr) As ptr
+		    
+		    
+		    Dim navBarAppearance as ptr = init(alloc(NSClassFromString("UINavigationBarAppearance")))
+		    
+		    Declare sub setBackgroundColor lib UIKitLib selector "setBackgroundColor:" (obj as ptr, UIColor as ptr)
+		    
+		    If barColor.Alpha = 255 then
+		      setBackgroundColor navBarAppearance, UIColor.ClearColor
+		    Else
+		      setBackgroundColor navBarAppearance, new UIColor(barColor)
+		    End If
+		    
+		    
+		    Declare Function dictionaryWithObject Lib "Foundation.framework" selector "dictionaryWithObject:forKey:" _
+		    (class_id As Ptr, anObject As ptr, key As CFStringRef) As Ptr
+		    
+		    
+		    Dim constStr As Text = ExtensionsXC.StringConstantXC("UIKit", "NSForegroundColorAttributeName")
+		    
+		    Dim nsDic As Ptr
+		    nsDic = DictionaryWithObject(NSClassFromString("NSDictionary"), New UIColor(titleColor), constStr)
+		    
+		    
+		    Declare Sub setTitleTextAttributes Lib "UIKit.framework" selector "setTitleTextAttributes:" _
+		    (obj_id As ptr, att As ptr)
+		    setTitleTextAttributes(navBarAppearance, nsDic)
+		    
+		    
+		    Declare Sub setLargeTitleTextAttributes Lib "UIKit.framework" selector "setLargeTitleTextAttributes:" _
+		    (obj_id As ptr, att As ptr)
+		    setLargeTitleTextAttributes(navBarAppearance, nsDic)
+		    
+		    
+		    
+		    Declare sub setStandardAppearance lib UIKitLib selector "setStandardAppearance:" (obj as ptr, value as ptr)
+		    Declare sub setScrollEdgeAppearance lib UIKitLib selector "setScrollEdgeAppearance:" (obj as ptr, value as ptr)
+		    setStandardAppearance(navBar, navBarAppearance)
+		    setScrollEdgeAppearance(navBar, navBarAppearance)
+		    
+		  end if
 		End Sub
 	#tag EndMethod
 
@@ -673,6 +766,25 @@ Protected Module ViewExtensionsXC
 		  declare sub setBarStyle lib "UIKit.framework" selector "setBarStyle:" (id as ptr, theStyle as integer)
 		  setBarStyle navBar, 1 //UIStatusBarStyleLightContent
 		  
+		  
+		  if ExtensionsXC.GetiOSVersionXC >= 13 then
+		    
+		    Declare function standardAppearance lib UIKitLib selector "standardAppearance" (obj as ptr) as ptr
+		    Dim navBarAppearance as ptr = standardAppearance(navBar)
+		    
+		    Declare sub setBackgroundColor lib UIKitLib selector "setBackgroundColor:" (obj as ptr, UIColor as ptr)
+		    
+		    setBackgroundColor navBarAppearance, UIColor.ClearColor
+		    
+		    declare sub configureWithTransparentBackground lib UIKitLib selector "configureWithTransparentBackground" (obj as ptr)
+		    configureWithTransparentBackground(navBarAppearance)
+		    
+		    Declare sub setStandardAppearance lib UIKitLib selector "setStandardAppearance:" (obj as ptr, value as ptr)
+		    Declare sub setScrollEdgeAppearance lib UIKitLib selector "setScrollEdgeAppearance:" (obj as ptr, value as ptr)
+		    setStandardAppearance(navBar, navBarAppearance)
+		    setScrollEdgeAppearance(navBar, navBarAppearance)
+		    
+		  end if
 		End Sub
 	#tag EndMethod
 
@@ -817,7 +929,9 @@ Protected Module ViewExtensionsXC
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
@@ -825,12 +939,15 @@ Protected Module ViewExtensionsXC
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -838,6 +955,7 @@ Protected Module ViewExtensionsXC
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -845,6 +963,7 @@ Protected Module ViewExtensionsXC
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Module
