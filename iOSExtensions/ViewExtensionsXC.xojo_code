@@ -182,7 +182,7 @@ Protected Module ViewExtensionsXC
 		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
 		  Declare Function alloc Lib "Foundation.framework" selector "alloc" (clsRef As ptr) As ptr
 		  
-		  declare function URLWithString_ lib FoundationLib selector "URLWithString:" (clsRef as ptr, URLString as CFStringRef) as ptr
+		  declare function URLWithString_ lib "Foundation.framework" selector "URLWithString:" (clsRef as ptr, URLString as CFStringRef) as ptr
 		  
 		  Declare function initWithURL_ lib "SafariServices.framework" selector "initWithURL:" (obj as ptr, url as ptr) as ptr
 		  Declare Sub presentViewController Lib "UIKit.framework" _
