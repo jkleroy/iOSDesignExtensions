@@ -38,7 +38,7 @@ Begin iosView vScrollView
       Left            =   20
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   &c007AFF00
+      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
       Top             =   217
@@ -74,7 +74,7 @@ Begin iosView vScrollView
       Left            =   20
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   &c007AFF00
+      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
       Top             =   255
@@ -94,7 +94,7 @@ Begin iosView vScrollView
       Left            =   20
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   &c007AFF00
+      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
       Top             =   293
@@ -116,7 +116,7 @@ Begin iosView vScrollView
       Scope           =   0
       Text            =   "Bounce"
       TextAlignment   =   "2"
-      TextColor       =   &c00000000
+      TextColor       =   "&c00000000"
       TextFont        =   ""
       TextSize        =   0
       Top             =   217

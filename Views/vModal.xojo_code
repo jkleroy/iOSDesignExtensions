@@ -24,7 +24,7 @@ Begin iosView vModal
       Scope           =   2
       Text            =   "Apple recommends to place the ""Done""/""Close"" button on the right if there isn't any other Toolbutton. If there is another toolbutton, place the ""Done"" button on the left."
       TextAlignment   =   "0"
-      TextColor       =   &c00000000
+      TextColor       =   "&c00000000"
       TextFont        =   ""
       TextSize        =   0
       Top             =   80
@@ -46,7 +46,7 @@ Begin iosView vModal
       Scope           =   2
       Text            =   "Calling self.Close on a modal view has no effect. You must use self.DismissViewControllerXC"
       TextAlignment   =   "0"
-      TextColor       =   &c00000000
+      TextColor       =   "&c00000000"
       TextFont        =   ""
       TextSize        =   0
       Top             =   118

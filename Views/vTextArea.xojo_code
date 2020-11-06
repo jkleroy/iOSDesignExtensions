@@ -16,6 +16,8 @@ Begin iosView vTextArea
       AutoLayout      =   TextArea1, 2, <Parent>, 2, False, +1.00, 4, 1, -*kStdGapCtlToViewH, , True
       AutoLayout      =   TextArea1, 3, TopLayoutGuide, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
       AutoLayout      =   TextArea1, 8, , 0, False, +1.00, 4, 1, 169, , True
+      BorderColor     =   ""
+      BorderStyle     =   "0"
       Editable        =   False
       Height          =   169.0
       KeyboardType    =   "0"
@@ -24,7 +26,7 @@ Begin iosView vTextArea
       Scope           =   0
       Text            =   "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
       TextAlignment   =   "0"
-      TextColor       =   &c00000000
+      TextColor       =   "&c00000000"
       TextFont        =   ""
       TextSize        =   0
       Top             =   73
@@ -44,7 +46,7 @@ Begin iosView vTextArea
       Left            =   56
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   &c007AFF00
+      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
       Top             =   250
@@ -66,7 +68,7 @@ Begin iosView vTextArea
       Scope           =   0
       Text            =   "Unknown"
       TextAlignment   =   "2"
-      TextColor       =   &c00000000
+      TextColor       =   "&c00000000"
       TextFont        =   ""
       TextSize        =   0
       Top             =   250
@@ -86,7 +88,7 @@ Begin iosView vTextArea
       Left            =   110
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   &c007AFF00
+      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
       Top             =   288
@@ -106,7 +108,7 @@ Begin iosView vTextArea
       Left            =   73
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   &c007AFF00
+      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
       Top             =   326
@@ -126,7 +128,7 @@ Begin iosView vTextArea
       Left            =   73
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   &c007AFF00
+      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
       Top             =   364

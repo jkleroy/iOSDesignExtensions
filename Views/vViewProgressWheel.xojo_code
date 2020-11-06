@@ -22,7 +22,7 @@ Begin iosView vViewProgressWheel
       Left            =   20
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   &c007AFF00
+      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
       Top             =   90
@@ -42,7 +42,7 @@ Begin iosView vViewProgressWheel
       Left            =   200
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   &c007AFF00
+      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
       Top             =   90
@@ -64,7 +64,7 @@ Begin iosView vViewProgressWheel
       Scope           =   0
       Text            =   "With only one line of code, a big progresswheel is added in the center of the View."
       TextAlignment   =   "1"
-      TextColor       =   &c00000000
+      TextColor       =   "&c00000000"
       TextFont        =   ""
       TextSize        =   0
       Top             =   128

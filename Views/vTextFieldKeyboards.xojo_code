@@ -26,7 +26,7 @@ Begin iosView vTextFieldKeyboards
       Scope           =   0
       Text            =   ""
       TextAlignment   =   "0"
-      TextColor       =   &c00000000
+      TextColor       =   "&c00000000"
       TextFont        =   ""
       TextSize        =   0
       Top             =   95
@@ -50,7 +50,7 @@ Begin iosView vTextFieldKeyboards
       Scope           =   0
       Text            =   ""
       TextAlignment   =   "0"
-      TextColor       =   &c00000000
+      TextColor       =   "&c00000000"
       TextFont        =   ""
       TextSize        =   0
       Top             =   217
@@ -74,7 +74,7 @@ Begin iosView vTextFieldKeyboards
       Scope           =   0
       Text            =   ""
       TextAlignment   =   "0"
-      TextColor       =   &c00000000
+      TextColor       =   "&c00000000"
       TextFont        =   ""
       TextSize        =   0
       Top             =   278
@@ -98,7 +98,7 @@ Begin iosView vTextFieldKeyboards
       Scope           =   0
       Text            =   ""
       TextAlignment   =   "0"
-      TextColor       =   &c00000000
+      TextColor       =   "&c00000000"
       TextFont        =   ""
       TextSize        =   0
       Top             =   339
@@ -122,7 +122,7 @@ Begin iosView vTextFieldKeyboards
       Scope           =   0
       Text            =   ""
       TextAlignment   =   "0"
-      TextColor       =   &c00000000
+      TextColor       =   "&c00000000"
       TextFont        =   ""
       TextSize        =   0
       Top             =   400
@@ -146,7 +146,7 @@ Begin iosView vTextFieldKeyboards
       Scope           =   0
       Text            =   ""
       TextAlignment   =   "0"
-      TextColor       =   &c00000000
+      TextColor       =   "&c00000000"
       TextFont        =   ""
       TextSize        =   0
       Top             =   156

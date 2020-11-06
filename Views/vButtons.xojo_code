@@ -22,7 +22,7 @@ Begin iosView vButtons
       Left            =   110
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   &c007AFF00
+      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
       Top             =   95
@@ -42,7 +42,7 @@ Begin iosView vButtons
       Left            =   110
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   &c007AFF00
+      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
       Top             =   155
@@ -62,7 +62,7 @@ Begin iosView vButtons
       Left            =   110
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   &c007AFF00
+      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
       Top             =   215
@@ -82,7 +82,7 @@ Begin iosView vButtons
       Left            =   110
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   &c007AFF00
+      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
       Top             =   275
@@ -102,7 +102,7 @@ Begin iosView vButtons
       Left            =   40
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   &c007AFF00
+      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
       Top             =   355
@@ -122,7 +122,7 @@ Begin iosView vButtons
       Left            =   180
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   &c007AFF00
+      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
       Top             =   355
@@ -142,7 +142,7 @@ Begin iosView vButtons
       Left            =   110
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   &c007AFF00
+      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
       Top             =   415

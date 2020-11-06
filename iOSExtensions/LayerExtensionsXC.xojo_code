@@ -76,7 +76,7 @@ Protected Module LayerExtensionsXC
 	#tag Method, Flags = &h0
 		Sub SetShadowXC(extends cc As iOSControl, ShadowColor As Color, radius As Double, offset As Xojo.Core.Point)
 		  
-		  Declare Function layer_ Lib UIKitLib selector "layer" (id As ptr) As Ptr
+		  Declare Function layer_ Lib "UIKit" selector "layer" (id As ptr) As Ptr
 		  Dim layer As ptr = layer_(cc.Handle)
 		  
 		  Declare Sub masksToBounds_ Lib UIKitLib selector "setMasksToBounds:" (id As ptr, value As Boolean)

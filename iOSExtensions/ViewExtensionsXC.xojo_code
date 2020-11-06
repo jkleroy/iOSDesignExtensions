@@ -99,11 +99,17 @@ Protected Module ViewExtensionsXC
 
 	#tag Method, Flags = &h0
 		Sub HideKeyboardXC(extends v As iOSView)
+		  Dim myViewPtr As Ptr
 		  
-		  ' UIKit Declare to get a reference to a View from its ViewController
-		  Declare Function decl_GetView Lib "UIKit" selector "view" (aUIViewController As Ptr) As Ptr
-		  ' Here is the corresponding Xojo call (View.Self returns a ViewController)
-		  Dim myViewPtr As Ptr = decl_GetView(v.Handle)
+		  #if XojoVersion >= 2020.02
+		    myViewPtr = v.Handle
+		    
+		  #else
+		    ' UIKit Declare to get a reference to a View from its ViewController
+		    Declare Function decl_GetView Lib "UIKit" selector "view" (aUIViewController As Ptr) As Ptr
+		    ' Here is the corresponding Xojo call (View.Self returns a ViewController)
+		    myViewPtr = decl_GetView(v.Handle)
+		  #endif
 		  
 		  Declare Sub endEditing Lib "UIKit" selector "endEditing:" (obj_id As ptr, value As Boolean)
 		  endEditing(myViewPtr, True)
@@ -131,7 +137,7 @@ Protected Module ViewExtensionsXC
 		  declare function sharedApplication lib "UIKit" selector "sharedApplication" (obj_ref as ptr) as ptr
 		  declare function rootViewController lib "UIKit" selector "rootViewController" (obj_ref as ptr) as ptr
 		  declare function navigationBar lib "UIKit" selector "navigationBar" (obj_ref as ptr) as ptr
-		  declare function view lib "UIKit.framework" selector "view" (obj_ref as ptr) as ptr
+		  
 		  
 		  declare function navigationController lib "UIKit" selector "navigationController" (viewController as ptr) as ptr
 		  dim navigationControllerRef as ptr = navigationController(v.ViewControllerHandle)
@@ -158,14 +164,28 @@ Protected Module ViewExtensionsXC
 		  Const UIUserInterfaceLayoutDirectionRightToLeft = 1
 		  
 		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
-		  Declare Function view_ Lib "UIKit.framework" Selector "view" (UIViewController As Ptr) As Ptr
+		  
 		  
 		  Declare function userInterfaceLayoutDirection_ lib "UIKit" selector "userInterfaceLayoutDirectionForSemanticContentAttribute:" _
 		  (obj_ref as ptr, attribute as ptr) as UIUserInterfaceLayoutDirection
 		  
 		  Declare function semanticContentAttribute_ lib "UIKit" selector "semanticContentAttribute" (obj_ref as ptr) as ptr
 		  
-		  if userInterfaceLayoutDirection_(NSClassFromString("UIView"), semanticContentAttribute_(view_(view.Handle))) = UIUserInterfaceLayoutDirection.rightToLeft then
+		  
+		  
+		  Dim myViewPtr As Ptr
+		  
+		  #if XojoVersion >= 2020.02
+		    myViewPtr = view.Handle
+		    
+		  #else
+		    ' UIKit Declare to get a reference to a View from its ViewController
+		    Declare Function decl_GetView Lib "UIKit" selector "view" (aUIViewController As Ptr) As Ptr
+		    ' Here is the corresponding Xojo call (View.Self returns a ViewController)
+		    myViewPtr = decl_GetView(view.Handle)
+		  #endif
+		  
+		  if userInterfaceLayoutDirection_(NSClassFromString("UIView"), semanticContentAttribute_(myViewPtr)) = UIUserInterfaceLayoutDirection.rightToLeft then
 		    
 		    Return True
 		  end if
@@ -324,6 +344,17 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 536574732074686520636F6C6F72206F6620612056696577
+		Sub SetAnimationsEnabledXC(extends v As iOSView, value As Boolean)
+		  
+		  Declare Function NSClassFromString Lib "Foundation.framework" (clsName As CFStringRef) As ptr
+		  Declare sub setAnimationsEnabled lib UIKitLib selector "setAnimationsEnabled:" (obj as ptr, value as boolean)
+		  setAnimationsEnabled(NSClassFromString("UIView"), value)
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 536574732074686520636F6C6F72206F6620612056696577
 		Sub SetBackgroundColorXC(extends v As iOSView, c As Color)
 		  
 		  
@@ -337,10 +368,17 @@ Protected Module ViewExtensionsXC
 		  
 		  
 		  
-		  ' UIKit Declare to get a reference to a View from its ViewController
-		  Declare Function decl_GetView lib "UIKit.framework" selector "view" (aUIViewController As Ptr) As Ptr
-		  ' Here is the corresponding Xojo call (View.Self returns a ViewController)
-		  dim myViewPtr As Ptr = decl_GetView(v.Handle)
+		  Dim myViewPtr As Ptr
+		  
+		  #if XojoVersion >= 2020.02
+		    myViewPtr = v.Handle
+		    
+		  #else
+		    ' UIKit Declare to get a reference to a View from its ViewController
+		    Declare Function decl_GetView Lib "UIKit" selector "view" (aUIViewController As Ptr) As Ptr
+		    ' Here is the corresponding Xojo call (View.Self returns a ViewController)
+		    myViewPtr = decl_GetView(v.Handle)
+		  #endif
 		  
 		  ' UIKit Declare to set the backgound color of a View
 		  Declare Sub decl_SetBackgroundColor lib "UIKit.framework" selector "setBackgroundColor:" (aUIView As Ptr, aUIColor As Ptr)
@@ -388,10 +426,17 @@ Protected Module ViewExtensionsXC
 		  ' Here is the corresponding Xojo call, where we create a flashy green color
 		  Dim myUIColorObject As ptr = decl_GetcolorWithPatternImage(theUIColorClassRef, img.Handle)
 		  
-		  ' UIKit Declare to get a reference to a View from its ViewController
-		  Declare Function decl_GetView lib "UIKit.framework" selector "view" (aUIViewController As Ptr) As Ptr
-		  ' Here is the corresponding Xojo call (View.Self returns a ViewController)
-		  dim myViewPtr As Ptr = decl_GetView(v.Handle)
+		  Dim myViewPtr As Ptr
+		  
+		  #if XojoVersion >= 2020.02
+		    myViewPtr = v.Handle
+		    
+		  #else
+		    ' UIKit Declare to get a reference to a View from its ViewController
+		    Declare Function decl_GetView Lib "UIKit" selector "view" (aUIViewController As Ptr) As Ptr
+		    ' Here is the corresponding Xojo call (View.Self returns a ViewController)
+		    myViewPtr = decl_GetView(v.Handle)
+		  #endif
 		  
 		  ' UIKit Declare to set the backgound color of a View
 		  Declare Sub decl_SetBackgroundColor lib "UIKit.framework" selector "setBackgroundColor:" (aUIView As Ptr, aUIColor As Ptr)
@@ -744,7 +789,7 @@ Protected Module ViewExtensionsXC
 		  declare function sharedApplication lib "UIKit.framework" selector "sharedApplication" (obj_ref as ptr) as ptr
 		  declare function rootViewController lib "UIKit.framework" selector "rootViewController" (obj_ref as ptr) as ptr
 		  declare function navigationBar lib "UIKit.framework" selector "navigationBar" (obj_ref as ptr) as ptr
-		  Declare Function view Lib "UIKit.framework" selector "view" (obj_ref As ptr) As ptr
+		  
 		  
 		  declare function navigationController lib "UIKit.framework" selector "navigationController" (viewController as ptr) as ptr
 		  dim navigationControllerRef as ptr = navigationController(v.ViewControllerHandle)

@@ -37,7 +37,7 @@ Begin iosView vHTMLViewer
       Left            =   20
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   &c007AFF00
+      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
       Top             =   430
@@ -57,7 +57,7 @@ Begin iosView vHTMLViewer
       Left            =   280
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   &c007AFF00
+      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
       Top             =   430
@@ -77,7 +77,7 @@ Begin iosView vHTMLViewer
       Left            =   192
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   &c007AFF00
+      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
       Top             =   430
@@ -97,7 +97,7 @@ Begin iosView vHTMLViewer
       Left            =   108
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   &c007AFF00
+      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
       Top             =   430

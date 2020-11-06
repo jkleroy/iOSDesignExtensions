@@ -5,6 +5,12 @@ Inherits IOSApplication
 	#tag Note, Name = README
 		## History
 		
+		### Version 1.8 - Released 2020-11-06
+		* Ready for future versions of Xojo
+		
+		### Version 1.?? - Released 2020-??
+		* Added iOSDatePicker.SetTextColorXC
+		
 		### Version 1.7.0 - Released 2019-11-19
 		* New ImageExtensionsXC module
 		

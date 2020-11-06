@@ -24,7 +24,7 @@ Begin iosView vSelect
       Scope           =   2
       Text            =   "Select an example from the list on the left"
       TextAlignment   =   "1"
-      TextColor       =   &c00000000
+      TextColor       =   "&c00000000"
       TextFont        =   ""
       TextSize        =   0
       Top             =   225

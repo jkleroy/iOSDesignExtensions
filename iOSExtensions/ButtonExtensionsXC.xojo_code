@@ -39,7 +39,6 @@ Protected Module ButtonExtensionsXC
 		  
 		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
 		  Declare Function colorWithRGBA Lib "UIKit.framework" Selector "colorWithRed:green:blue:alpha:" ( UIColorClassRef As Ptr, red As CGFloat, green As CGFloat, blue As CGFloat, alpha As CGFloat) As Ptr
-		  Declare Function view Lib "UIKit.framework" Selector "view" (UIViewController As Ptr) As Ptr
 		  Declare Sub setBackgroundColor Lib "UIKit.framework" Selector "setBackgroundColor:" (UIView As Ptr, UIColor As Ptr)
 		  
 		  Dim UIColorClassPtr As Ptr =  NSClassFromString("UIColor")

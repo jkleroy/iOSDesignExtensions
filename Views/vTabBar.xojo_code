@@ -22,7 +22,7 @@ Begin iosView vTabBar
       Left            =   20
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   &c007AFF00
+      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
       Top             =   92
@@ -42,7 +42,7 @@ Begin iosView vTabBar
       Left            =   20
       LockedInPosition=   False
       Scope           =   2
-      TextColor       =   &c007AFF00
+      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
       Top             =   130
@@ -62,7 +62,7 @@ Begin iosView vTabBar
       Left            =   20
       LockedInPosition=   False
       Scope           =   2
-      TextColor       =   &c007AFF00
+      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
       Top             =   168

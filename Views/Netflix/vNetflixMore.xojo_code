@@ -43,7 +43,7 @@ Begin iosView vNetflixMore
       Left            =   110
       LockedInPosition=   False
       Scope           =   2
-      TextColor       =   &c007AFF00
+      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
       Top             =   114

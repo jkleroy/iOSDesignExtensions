@@ -196,6 +196,12 @@ Protected Module ExtensionsXC
 	#tag Note, Name = History
 		## History
 		
+		### Version 1.8 - Released 2020-11-06
+		* Ready for future versions of Xojo
+		
+		### Version 1.?? - Released 2020-??
+		* Added iOSDatePicker.SetTextColorXC
+		
 		### Version 1.7.0 - Released 2019-11-19
 		* New ImageExtensionsXC module
 		
@@ -272,7 +278,7 @@ Protected Module ExtensionsXC
 	#tag Constant, Name = kUseUIKit, Type = Boolean, Dynamic = False, Default = \"False", Scope = Protected
 	#tag EndConstant
 
-	#tag Constant, Name = kVersion, Type = Text, Dynamic = False, Default = \"1.6.0", Scope = Protected
+	#tag Constant, Name = kVersion, Type = Text, Dynamic = False, Default = \"1.8.0", Scope = Protected
 	#tag EndConstant
 
 

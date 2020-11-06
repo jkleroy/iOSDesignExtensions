@@ -53,11 +53,8 @@ Protected Module ControlExtensionsXC
 		Function GetBoundsXC(extends c as iOSControl) As xojo.Core.Rect
 		  
 		  
-		  'Declare Function view_ Lib "UIKit.framework" selector "view" (controlHandle As ptr) As Ptr
+		  
 		  Declare Function bounds Lib "UIKit.framework" selector "bounds" (obj_id As Ptr) As ExtensionsXC.xcCGRect
-		  
-		  'Dim view As Ptr = view_(c.handle)
-		  
 		  
 		  
 		  Dim re As ExtensionsXC.xcCGRect = bounds(c.handle)
@@ -259,6 +256,25 @@ Protected Module ControlExtensionsXC
 		  
 		  declare sub setOnTintColor lib "UIKit.framework" selector "setOnTintColor:" (id as ptr, UIColor as Ptr)
 		  setOnTintColor(s.Handle, uic)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 5365747320746865207465787420636F6C6F72206F66206120446174655069636B6572
+		Sub SetTextColorXC(extends picker as iOSDatePicker, value as Color)
+		  
+		  
+		  Dim uic As UIKit.UIColor
+		  
+		  If value.Alpha = 255 Then
+		    uic = UIKit.UIColor.ClearColor
+		  else
+		    uic = New UIKit.UIColor(value)
+		  end if
+		  
+		  
+		  
+		  declare sub setValue_ lib "Foundation" selector "setValue:forKey:" (obj_id as ptr, value as ptr, key as CFStringRef)
+		  setValue_(picker.Handle, uic, "textColor")
 		End Sub
 	#tag EndMethod
 

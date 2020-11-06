@@ -1,6 +1,6 @@
 Type=iOS
-RBProjectVersion=2019.02
-MinIDEVersion=20190200
+RBProjectVersion=2019.031
+MinIDEVersion=20140300
 OrigIDEVersion=20190200
 iOSView=vHTMLViewer;Views/vHTMLViewer.xojo_code;&h000000003D09EFFF;&h000000000E11DFFF;false
 Class=App;App.xojo_code;&h000000001FDD6FFF;&h0000000000000000;false
