@@ -14,7 +14,7 @@
 			End ScreenContent
 			Begin ScreenContent
 				ItemName = Tab 1
-				Target = 1552658431
+				Target = 1735585791
 				Icon = 0
 			End ScreenContent
 	End ScreenContent

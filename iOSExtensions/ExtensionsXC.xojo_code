@@ -1,7 +1,7 @@
 #tag Module
 Protected Module ExtensionsXC
 	#tag Method, Flags = &h1
-		Protected Function CGRectMake(x As CGFloat, y As CGFloat, width As CGFloat, height As CGFloat) As xcCGRect
+		Protected Function CGRectMake(x As CGFloat, y As CGFloat, width As CGFloat, height As CGFloat) As ExtensionsXC.xcCGRect
 		  
 		  Dim origin As ExtensionsXC.xcCGPoint
 		  origin.x = x

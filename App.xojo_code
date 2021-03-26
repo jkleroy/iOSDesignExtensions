@@ -5,6 +5,9 @@ Inherits IOSApplication
 	#tag Note, Name = README
 		## History
 		
+		### Version 1.8.1 - Released 2020-11-06
+		* Added unit testing of each extension method
+		
 		### Version 1.8 - Released 2020-11-06
 		* Ready for future versions of Xojo
 		
