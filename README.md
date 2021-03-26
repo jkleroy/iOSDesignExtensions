@@ -1,4 +1,4 @@
-[![XOJO 2018r1.1](https://img.shields.io/badge/XOJO-2018r1-71AF3A.svg)](https://www.xojo.com/)
+[![XOJO 2019r3](https://img.shields.io/badge/XOJO-2018r1-71AF3A.svg)](https://www.xojo.com/)
 [![Platforms iOS](https://img.shields.io/badge/Platforms-iOS-lightgray.svg?style=flat)](http://www.apple.com/ios/)
 [![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
@@ -148,6 +148,9 @@ A set of 100+ UI extensions for Xojo iOS framework.
 
 
 ## History
+
+### Version 1.8.1 - Released 2021-03-26
+* Added unit testing of each extension method
 
 ### Version 1.5.1 - Released 2019-02-21
 * New HTMLViewer Function LoadFileXC
