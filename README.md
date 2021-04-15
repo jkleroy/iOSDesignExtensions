@@ -210,7 +210,7 @@ and
 
 ### Version 1.0 - Released 2018-04-26
 
-Copy-paste the iOSExtensions folder into your project.
+Copy-paste the iOSDesignExtensions folder into your project.
 
 Most controls will then have additional methods, all ending with "XC"
 
