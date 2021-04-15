@@ -493,7 +493,7 @@ Inherits XojoUnitSuperClassTests
 
 	#tag Method, Flags = &h0
 		Sub IsNilTest()
-		  Dim d As Date
+		  Dim d As DateTime
 		  
 		  Assert.IsNil(d)
 		End Sub
@@ -584,8 +584,8 @@ Inherits XojoUnitSuperClassTests
 		  StartTestTimer("Part3")
 		  StartTestTimer("Unused")
 		  
-		  Dim target As Double = Microseconds + 250000.0
-		  While Microseconds < target
+		  Dim target As Double = System.Microseconds + 250000.0
+		  While System.Microseconds < target
 		    //
 		    // Wait
 		    //
@@ -595,8 +595,8 @@ Inherits XojoUnitSuperClassTests
 		  LogTestTimer("Part3", "before reset")
 		  StartTestTimer("Part3") // A Test Timer can be restarted at any time, even if not logged
 		  
-		  target = Microseconds + 500.0
-		  While Microseconds < target
+		  target = System.Microseconds + 500.0
+		  While System.Microseconds < target
 		    //
 		    // Wait
 		    //

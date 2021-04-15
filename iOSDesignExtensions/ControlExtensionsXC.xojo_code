@@ -1,9 +1,10 @@
 #tag Module
 Protected Module ControlExtensionsXC
 	#tag Method, Flags = &h0, Description = 41646A757374732074686520666F6E742073697A65206163636F7264696E6720746F20617661696C61626C65207769647468
-		Sub AdjustsFontSizeToFitWidthXC(extends label As iOSLabel, lines As Integer = -1)
+		Sub AdjustsFontSizeToFitWidthXC(extends label As MobileLabel, lines As Integer = -1)
 		  
-		  label.LineBreakMode = iOSLineBreakMode.BreakByTruncatingTail
+		  label.LineBreakMode = MobileLabel.LineBreakModes.TruncateEnd
+		  
 		  
 		  If lines > 0 Then
 		    Declare Sub setNumberOfLines Lib "UIKit.framework" selector "setNumberOfLines:" (id As ptr, value As Integer)
@@ -17,7 +18,7 @@ Protected Module ControlExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 506572666F726D7320616E20416C7068612070726F706572747920616E696D6174696F6E206F766572207365636F6E6473207365636F6E64732077697468207468652073656C65637465642063757276652E
-		Sub AnimateAlphaXC(extends ctrl as iOSControl, newAlpha as double, duration as double = 0.2, completion as iOSBlock = nil)
+		Sub AnimateAlphaXC(extends ctrl as MobileUIControl, newAlpha as double, duration as double = 0.2, completion as iOSBlock = nil)
 		  
 		  #If ExtensionsXC.kUseUIKit
 		    
@@ -35,8 +36,8 @@ Protected Module ControlExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 466C69707320616E20694F53436F6E74726F6C206F6E2074686520686F72697A6F6E74616C206178697320666F722052544C
-		Sub FlipHorizontalForRTLXC(extends c As iOSControl)
-		  //Flips an iOSControl on the horizontal axis for RTL
+		Sub FlipHorizontalForRTLXC(extends c As MobileUIControl)
+		  //Flips an MobileUIControl on the horizontal axis for RTL
 		  
 		  Declare sub transform lib "UIKit.framework" selector "setTransform:" (obj_id as ptr, matrix as ExtensionsXC.xcCGAffineTransform)
 		  Declare function CGAffineTransformMakeScale lib "CoreGraphics.framework" (sx as CGFloat, sy as CGFloat) as ExtensionsXC.xcCGAffineTransform
@@ -50,23 +51,26 @@ Protected Module ControlExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function GetBoundsXC(extends c as iOSControl) As xojo.Core.Rect
+		Function GetBoundsXC(extends c as MobileUIControl) As Rect
 		  
 		  
-		  
+		  'Declare Function view_ Lib "UIKit.framework" selector "view" (controlHandle As ptr) As Ptr
 		  Declare Function bounds Lib "UIKit.framework" selector "bounds" (obj_id As Ptr) As ExtensionsXC.xcCGRect
+		  
+		  'Dim view As Ptr = view_(c.handle)
+		  
 		  
 		  
 		  Dim re As ExtensionsXC.xcCGRect = bounds(c.handle)
 		  
 		  
-		  Return New xojo.Core.Rect(re.origin.x, re.origin.y, re.rsize.width, re.rsize.height)
+		  Return New Rect(re.origin.x, re.origin.y, re.rsize.width, re.rsize.height)
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function GetFrameXC(extends c as iOSControl) As xojo.Core.Rect
+		Function GetFrameXC(extends c as MobileUIControl) As Rect
 		  
 		  Dim viewRef As ptr = c.Handle
 		  
@@ -75,14 +79,14 @@ Protected Module ControlExtensionsXC
 		  Dim re As ExtensionsXC.xcCGRect = frame(viewRef)
 		  
 		  
-		  Return New xojo.Core.Rect(re.origin.x, re.origin.y, re.rsize.width, re.rsize.height)
+		  Return New Rect(re.origin.x, re.origin.y, re.rsize.width, re.rsize.height)
 		  
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 52657475726E7320746F2074686520696E697469616C207669657720696E20746865207669657720636F6E74726F6C6C657220737461636B
-		Sub PopToRootViewControllerXC(extends v As iOSView, animated As Boolean = true)
+		Sub PopToRootViewControllerXC(extends v As MobileScreen, animated As Boolean = true)
 		  
 		  //Reference to Navigation Controller
 		  declare function navigationController lib "UIKit.framework" selector "navigationController" (viewController as ptr) as ptr
@@ -97,7 +101,7 @@ Protected Module ControlExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 44656C6574657320616C6C20636F6E73747261696E74732066726F6D206120636F6E7461696E6572
-		Sub RemoveConstraintsXC(containerHandle as ptr)
+		Sub RemoveConstraintsXC(extends screen As MobileScreen)
 		  // http://stackoverflow.com/questions/13388104/remove-auto-layout-constraints-for-specific-object
 		  '[detailsPhotoView removeConstraints:detailsPhotoView.constraints];
 		  
@@ -106,34 +110,43 @@ Protected Module ControlExtensionsXC
 		  Declare sub removeConstraints lib "UIKit.framework" selector "removeConstraints:" (obj_id as ptr, constraints as ptr)
 		  Declare function constraints lib "UIKit.framework" selector "constraints" (obj_id as ptr) as ptr
 		  
-		  dim ctrs As ptr = constraints(containerHandle)
+		  dim ctrs As ptr = constraints(screen.handle)
 		  
-		  removeConstraints(containerHandle, ctrs)
+		  removeConstraints(screen.Handle, ctrs)
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0, Description = 4372656174657320616E642072657475726E732061206E657720696D616765206F626A656374207769746820746865207370656369666965642063617020696E736574732E
-		Function ResizableTiledImageXC(CapInsets As ExtensionsXC.xcUIEdgeInsets, img As iOSImage) As iOSImage
-		  
-		  Declare Function resizableImageWithCapInsets Lib "UIKit.framework" selector "resizableImageWithCapInsets:" (id As ptr, insets As ExtensionsXC.xcUIEdgeInsets) As ptr
-		  Return iOSImage.FromHandle (resizableImageWithCapInsets(img.handle, CapInsets))
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub SetActivityIndicatorViewStyleXC(extends progress As iOSProgressWheel, value As UIActivityIndicatorViewStyle)
+	#tag Method, Flags = &h0, Description = 44656C6574657320616C6C20636F6E73747261696E74732066726F6D206120636F6E7461696E6572
+		Sub RemoveConstraintsXC(extends container As MobileUIControl)
+		  // http://stackoverflow.com/questions/13388104/remove-auto-layout-constraints-for-specific-object
+		  '[detailsPhotoView removeConstraints:detailsPhotoView.constraints];
 		  
 		  
-		  declare sub setActivityIndicatorViewStyle lib "UIKit.framework" selector "setActivityIndicatorViewStyle:" (id as ptr, value as UIActivityIndicatorViewStyle)
-		  setActivityIndicatorViewStyle progress.Handle, value
 		  
+		  Declare sub removeConstraints lib "UIKit.framework" selector "removeConstraints:" (obj_id as ptr, constraints as ptr)
+		  Declare function constraints lib "UIKit.framework" selector "constraints" (obj_id as ptr) as ptr
 		  
+		  dim ctrs As ptr = constraints(container.Handle)
+		  
+		  removeConstraints(container.Handle, ctrs)
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetAlphaValueXC(extends ctrl As iOSControl, value As Double)
+		Sub SetActivityIndicatorViewStyleXC(extends progress As MobileProgressWheel, value As UIActivityIndicatorViewStyle)
+		  #if TargetIOS
+		    
+		    declare sub setActivityIndicatorViewStyle lib "UIKit.framework" selector "setActivityIndicatorViewStyle:" (id as ptr, value as UIActivityIndicatorViewStyle)
+		    setActivityIndicatorViewStyle progress.Handle, value
+		    
+		    
+		    
+		  #endif
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub SetAlphaValueXC(extends ctrl As MobileUIControl, value As Double)
 		  
 		  
 		  
@@ -160,7 +173,7 @@ Protected Module ControlExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 536574732074686520636F6C6F72206F6620612056696577
-		Sub SetBackgroundColorXC(extends ctrl As iOSControl, value As Color)
+		Sub SetBackgroundColorXC(extends ctrl As MobileUIControl, value As Color)
 		  
 		  
 		  Dim uic As UIKit.UIColor
@@ -240,8 +253,20 @@ Protected Module ControlExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Sub SetDatePickerStyleXC(extends datepicker As MobileDateTimePicker, style As ControlExtensionsXC.UIDatePickerStyle)
+		  
+		  if ExtensionsXC.GetiOSVersionXC >= 13.4 then
+		    declare sub preferredDatePickerStyle lib "UIKit.framework" selector "setPreferredDatePickerStyle:" (obj as ptr, mode as UIDatePickerStyle)
+		    
+		    preferredDatePickerStyle(datepicker.Handle, style)
+		    
+		  end if
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 536574732074686520636F6C6F72206F662074686520737769746368206261636B67726F756E64207768656E2076616C75652069732054727565
-		Sub SetOnTintColorXC(extends s As iOSSwitch, value As Color)
+		Sub SetOnTintColorXC(extends switch As MobileSwitch, value As Color)
 		  
 		  
 		  'declare sub setTintColor lib "UIKit.framework" selector "setTintColor:" (id as ptr, UIColor as Ptr)
@@ -255,12 +280,12 @@ Protected Module ControlExtensionsXC
 		  End If
 		  
 		  declare sub setOnTintColor lib "UIKit.framework" selector "setOnTintColor:" (id as ptr, UIColor as Ptr)
-		  setOnTintColor(s.Handle, uic)
+		  setOnTintColor(switch.Handle, uic)
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 5365747320746865207465787420636F6C6F72206F66206120446174655069636B6572
-		Sub SetTextColorXC(extends picker as iOSDatePicker, value as Color)
+		Sub SetTextColorXC(extends picker as MobileDateTimePicker, value as Color)
 		  
 		  
 		  Dim uic As UIKit.UIColor
@@ -279,18 +304,18 @@ Protected Module ControlExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 53657473207468652074696E7420636F6C6F7220666F72207468652076696577
-		Sub SetTintColorXC(extends handle As ptr, c As Color)
+		Sub SetTintColorXC(extends ctrl As MobileUIControl, c As Color)
 		  
 		  
 		  declare sub setTintColor lib "UIKit.framework" selector "setTintColor:" (id as ptr, UIColor as Ptr)
-		  setTintColor Handle, new UIColor(c)
+		  setTintColor ctrl.Handle, new UIColor(c)
 		  
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub StretchToParentXC(extends c As iOSControl, parentView As iOSControl)
+		Sub StretchToParentXC(extends c As MobileUIControl, parentView As MobileUIControl)
 		  
 		  
 		  
@@ -345,7 +370,7 @@ Protected Module ControlExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub StretchToViewXC(extends c As iOSControl, parentView As iOSView)
+		Sub StretchToViewXC(extends c As MobileUIControl, parentView As MobileScreen)
 		  
 		  Dim cons As iOSLayoutConstraint
 		  
@@ -427,6 +452,13 @@ Protected Module ControlExtensionsXC
 		  disabled
 		  selected
 		focused
+	#tag EndEnum
+
+	#tag Enum, Name = UIDatePickerStyle, Type = Integer, Flags = &h1
+		automatic = 0
+		  wheels
+		  compact
+		inline
 	#tag EndEnum
 
 	#tag Enum, Name = UIVIewAnimationCurve, Type = Integer, Flags = &h1

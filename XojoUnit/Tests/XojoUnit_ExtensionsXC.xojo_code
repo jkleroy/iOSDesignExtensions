@@ -51,9 +51,12 @@ Inherits XojoUnitSuperClassTests
 		Sub StringConstantXCTest()
 		  
 		  
-		  Dim constStr As Text = ExtensionsXC.StringConstantXC("UIKit", "NSForegroundColorAttributeName")
+		  Dim constStr As String = ExtensionsXC.StringConstantXC("UIKit", "NSForegroundColorAttributeName")
 		  
-		  Assert.AreDifferent(constStr, "")
+		  Dim actual As String = ""
+		  Dim msg As Text = ""
+		  
+		  Assert.AreDifferent(constStr, actual, msg)
 		End Sub
 	#tag EndMethod
 
@@ -71,86 +74,6 @@ Inherits XojoUnitSuperClassTests
 
 
 	#tag ViewBehavior
-		#tag ViewProperty
-			Name="Duration"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Double"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="FailedTestCount"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="IncludeGroup"
-			Visible=false
-			Group="Behavior"
-			InitialValue="True"
-			Type="Boolean"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="IsRunning"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Boolean"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="NotImplementedCount"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="PassedTestCount"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="RunTestCount"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="SkippedTestCount"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="StopTestOnFail"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Boolean"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="TestCount"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Integer"
-			EditorType=""
-		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
 			Visible=true

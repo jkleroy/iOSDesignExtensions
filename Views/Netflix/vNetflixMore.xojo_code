@@ -1,36 +1,42 @@
-#tag IOSView
-Begin iosView vNetflixMore
-   BackButtonTitle =   ""
+#tag MobileScreen
+Begin MobileScreen vNetflixMore
+   BackButtonCaption=   ""
    Compatibility   =   ""
-   LargeTitleMode  =   "2"
+   ControlCount    =   0
+   HasNavigationBar=   True
+   LargeTitleDisplayMode=   2
    Left            =   0
-   NavigationBarVisible=   True
-   TabIcon         =   ""
-   TabTitle        =   ""
+   TabBarVisible   =   True
+   TabIcon         =   0
+   TintColor       =   ""
    Title           =   ""
    Top             =   0
-   Begin iOSTable Table1
+   Begin iOSMobileTable Table1
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
       AllowRefresh    =   False
+      AllowSearch     =   False
       AutoLayout      =   Table1, 1, <Parent>, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Table1, 2, <Parent>, 2, False, +1.00, 4, 1, -0, , True
       AutoLayout      =   Table1, 3, TopLayoutGuide, 3, False, +1.00, 4, 1, 87, , True
       AutoLayout      =   Table1, 4, BottomLayoutGuide, 4, False, +1.00, 4, 1, 0, , True
+      ControlCount    =   0
       EditingEnabled  =   False
       EditingEnabled  =   False
+      Enabled         =   True
       EstimatedRowHeight=   -1
-      Format          =   "0"
-      Height          =   328.0
+      Format          =   0
+      Height          =   416
       Left            =   0
       LockedInPosition=   False
       Scope           =   2
       SectionCount    =   0
+      TintColor       =   ""
       Top             =   152
       Visible         =   True
-      Width           =   320.0
+      Width           =   320
    End
-   Begin iOSButton Button1
+   Begin MobileButton Button1
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
       AutoLayout      =   Button1, 4, Table1, 3, False, +1.00, 4, 1, -*kStdControlGapV, , True
@@ -38,26 +44,28 @@ Begin iosView vNetflixMore
       AutoLayout      =   Button1, 8, , 0, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   Button1, 7, , 0, False, +1.00, 4, 2, 100, , True
       Caption         =   "Manage Profiles"
+      CaptionColor    =   &c000000
+      ControlCount    =   0
       Enabled         =   True
-      Height          =   30.0
+      Height          =   30
       Left            =   110
       LockedInPosition=   False
       Scope           =   2
-      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
+      TintColor       =   ""
       Top             =   114
       Visible         =   True
-      Width           =   100.0
+      Width           =   100
    End
 End
-#tag EndIOSView
+#tag EndMobileScreen
 
 #tag WindowCode
 	#tag Event
-		Sub Activate()
+		Sub Activated()
 		  //Set the navigation color
-		  Self.SetNavBarColorXC(NetflixSettings.NavColor, NetflixSettings.IconColor, False, True)
+		  Self.SetNavBarColorXC(NetflixSettings.NavColor, NetflixSettings.IconColor, NetflixSettings.IconColor, False, True)
 		  'Self.setNavBarTransparent
 		  
 		  //Remove large titles
@@ -75,10 +83,9 @@ End
 	#tag EndEvent
 
 	#tag Event
-		Sub Open()
+		Sub Opening()
 		  //Set the view background color
 		  Self.SetBackgroundColorXC(NetflixSettings.NavColor)
-		  
 		  
 		  
 		  
@@ -90,7 +97,7 @@ End
 
 #tag Events Table1
 	#tag Event
-		Sub Open()
+		Sub Opening()
 		  
 		  //Hide separators
 		  Me.SetSeparatorStyleXC(TableExtensionsXC.separatorStyle.none)
@@ -101,16 +108,18 @@ End
 		  //Setup the table content
 		  Me.AddSection("")
 		  
-		  Dim cell As iOSTableCellData
+		  Dim cell As MobileTableCellData
 		  
-		  cell = Me.CreateCell("Notifications", "", ImageExtensionsXC.ImageWithColorXC(ic8_notification, NetflixSettings.CellTextColor), iOSTableCellData.AccessoryTypes.Disclosure)
+		  
+		  cell = Me.CreateCell("Notifications", "", ImageExtensionsXC.ImageWithColorXC(ic8_notification, NetflixSettings.CellTextColor), MobileTableCellData.AccessoryTypes.Disclosure)
 		  cell.SetBackgroundColorXC(&c000000FF)
 		  cell.SetTextColorXC(NetflixSettings.CellTextColor)
 		  cell.SetSelectedBackgroundColorXC(&c000000FF)
 		  cell.SetSelectedTextColorXC(NetflixSettings.CellSelectedTextColor)
 		  Me.AddRow(0, cell)
 		  
-		  cell = Me.CreateCell("My List", "", Nil, iOSTableCellData.AccessoryTypes.Disclosure)
+		  
+		  cell = Me.CreateCell("My List", "", Nil, MobileTableCellData.AccessoryTypes.Disclosure)
 		  cell.SetBackgroundColorXC(&c000000FF)
 		  cell.SetTextColorXC(NetflixSettings.CellTextColor)
 		  cell.SetSelectedBackgroundColorXC(&c000000FF)
@@ -151,7 +160,7 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub Action(section As Integer, row As Integer)
+		Sub SelectionChanged(section As Integer, row As Integer)
 		  #Pragma Unused section
 		  #Pragma Unused row
 		  
@@ -161,10 +170,10 @@ End
 #tag EndEvents
 #tag Events Button1
 	#tag Event
-		Sub Open()
+		Sub Opening()
 		  
-		  Me.TextColor = NetflixSettings.ButtonColor
-		  Me.SetTintColor(NetflixSettings.ButtonColor)
+		  Me.CaptionColor = NetflixSettings.ButtonColor
+		  Me.TintColor = NetflixSettings.ButtonColor
 		  Me.SetImageXC(ic_edit)
 		  
 		  Dim insets As ExtensionsXC.xcUIEdgeInsets
@@ -178,11 +187,19 @@ End
 #tag EndEvents
 #tag ViewBehavior
 	#tag ViewProperty
-		Name="LargeTitleMode"
+		Name="BackButtonCaption"
+		Visible=true
+		Group="Behavior"
+		InitialValue=""
+		Type="String"
+		EditorType="MultiLineEditor"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="LargeTitleDisplayMode"
 		Visible=true
 		Group="Behavior"
 		InitialValue="2"
-		Type="LargeTitleDisplayModes"
+		Type="MobileScreen.LargeTitleDisplayModes"
 		EditorType="Enum"
 		#tag EnumValues
 			"0 - Automatic"
@@ -191,12 +208,36 @@ End
 		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="BackButtonTitle"
+		Name="TintColor"
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="Text"
-		EditorType="MultiLineEditor"
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="HasNavigationBar"
+		Visible=true
+		Group="Behavior"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="TabBarVisible"
+		Visible=true
+		Group="Behavior"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Index"
@@ -223,14 +264,6 @@ End
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="NavigationBarVisible"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="Boolean"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
 		Name="Super"
 		Visible=true
 		Group="ID"
@@ -243,15 +276,7 @@ End
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="iOSImage"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="TabTitle"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="Text"
+		Type="Picture"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
@@ -259,7 +284,7 @@ End
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="Text"
+		Type="String"
 		EditorType="MultiLineEditor"
 	#tag EndViewProperty
 	#tag ViewProperty

@@ -4,7 +4,7 @@ Inherits XojoUnitSuperClassTests
 	#tag Method, Flags = &h0, Description = 41646A757374732074686520666F6E742073697A65206163636F7264696E6720746F20617661696C61626C65207769647468
 		Sub AdjustsFontSizeToFitWidthXCTest()
 		  
-		  Dim bt As new iOSButton
+		  Dim bt As new MobileButton
 		  bt.Caption = "One very long caption"
 		  
 		  bt.AdjustsFontSizeToFitWidthXC
@@ -25,10 +25,18 @@ Inherits XojoUnitSuperClassTests
 	#tag Method, Flags = &h0
 		Sub SetBackdropXCTest()
 		  
-		  Dim bt As new iOSButton
+		  Dim bt As new MobileButton
 		  
-		  Dim pic As new iOSBitmap(100, 100, 2)
-		  Dim img As iOSImage = pic.Image
+		  
+		  
+		  Dim pic As new Picture(100, 100)
+		  Dim g As Graphics = pic.Graphics
+		  g.DrawingColor = &cFF0000
+		  g.FillRectangle(0, 0, g.Width, g.Height)
+		  
+		  dim img As Picture = Picture.FromData(pic.ToData(Picture.Formats.PNG))
+		  
+		  img = Picture.FromHandle(pic.CopyOSHandle(Picture.HandleType.iOSUIImage))
 		  
 		  bt.SetBackdropXC(img)
 		  
@@ -39,7 +47,7 @@ Inherits XojoUnitSuperClassTests
 	#tag Method, Flags = &h0
 		Sub SetBackgroundColorXCTest()
 		  
-		  Dim bt As new iOSButton
+		  Dim bt As new MobileButton
 		  
 		  Dim value As color = &cFF0000
 		  
@@ -52,7 +60,7 @@ Inherits XojoUnitSuperClassTests
 	#tag Method, Flags = &h0
 		Sub SetBorderColorXCTest()
 		  
-		  Dim bt As new iOSButton
+		  Dim bt As new MobileButton
 		  
 		  bt.SetBorderColorXC(&cFF0000)
 		  
@@ -65,7 +73,7 @@ Inherits XojoUnitSuperClassTests
 	#tag Method, Flags = &h0
 		Sub SetBorderWidthXCTest()
 		  
-		  Dim bt As new iOSButton
+		  Dim bt As new MobileButton
 		  
 		  bt.SetBorderWidthXC(2.0)
 		  
@@ -77,7 +85,7 @@ Inherits XojoUnitSuperClassTests
 
 	#tag Method, Flags = &h0
 		Sub SetButtonInsetsXCTest()
-		  Dim bt As new iOSButton
+		  Dim bt As new MobileButton
 		  
 		  Dim insets As ExtensionsXC.xcUIEdgeInsets = ExtensionsXC.UIEdgeInsetMake(2, 0, 2, 0)
 		  
@@ -90,10 +98,10 @@ Inherits XojoUnitSuperClassTests
 	#tag Method, Flags = &h0
 		Sub SetButtonTiledBackgroundXC()
 		  
-		  Dim bt As new iOSButton
+		  Dim bt As new MobileButton
 		  
-		  Dim pic As new iOSBitmap(100, 100, 2)
-		  Dim img As iOSImage = pic.Image
+		  Dim img As new Picture(100, 100)
+		  
 		  
 		  bt.SetButtonTiledBackgroundXC(img)
 		  
@@ -106,7 +114,7 @@ Inherits XojoUnitSuperClassTests
 	#tag Method, Flags = &h0
 		Sub SetImageInsetsXCTest()
 		  
-		  Dim bt As new iOSButton
+		  Dim bt As new MobileButton
 		  
 		  Dim insets As ExtensionsXC.xcUIEdgeInsets = ExtensionsXC.UIEdgeInsetMake(2, 0, 2, 0)
 		  
@@ -120,10 +128,12 @@ Inherits XojoUnitSuperClassTests
 	#tag Method, Flags = &h0
 		Sub SetImageXCTest()
 		  
-		  Dim bt As new iOSButton
+		  Dim bt As new MobileButton
 		  
-		  Dim pic As new iOSBitmap(100, 100, 2)
-		  Dim img As iOSImage = pic.Image
+		  
+		  
+		  Dim img As new Picture(100, 100)
+		  
 		  
 		  bt.SetImageXC(img)
 		  bt.SetImageXC(img, ControlExtensionsXC.UIControlState.disabled)
@@ -143,7 +153,7 @@ Inherits XojoUnitSuperClassTests
 	#tag Method, Flags = &h0
 		Sub SetLineBreakModeXCTest()
 		  
-		  Dim bt As new iOSButton
+		  Dim bt As new MobileButton
 		  
 		  bt.SetLineBreakModeXC(ControlExtensionsXC.NSLineBreakMode.CharacterWrap)
 		  bt.SetLineBreakModeXC(ControlExtensionsXC.NSLineBreakMode.Clip)
@@ -159,7 +169,7 @@ Inherits XojoUnitSuperClassTests
 	#tag Method, Flags = &h0
 		Sub SetNumberOfLinesXCTest()
 		  
-		  Dim bt As new iOSButton
+		  Dim bt As new MobileButton
 		  
 		  bt.Caption = "One very long caption"
 		  
@@ -173,9 +183,26 @@ Inherits XojoUnitSuperClassTests
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub SetRoleXC()
+		  
+		  Dim bt As new MobileButton
+		  
+		  
+		  bt.SetRoleXC(ButtonExtensionsXC.UIButtonRole.normal)
+		  bt.SetRoleXC(ButtonExtensionsXC.UIButtonRole.cancel)
+		  bt.SetRoleXC(ButtonExtensionsXC.UIButtonRole.primary)
+		  bt.SetRoleXC(ButtonExtensionsXC.UIButtonRole.destructive)
+		  
+		  Assert.Pass
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub SetTextAlignmentXCTest()
 		  
-		  Dim bt As new iOSButton
+		  Dim bt As new MobileButton
 		  
 		  bt.Caption = "One very long caption"
 		  
@@ -193,7 +220,7 @@ Inherits XojoUnitSuperClassTests
 	#tag Method, Flags = &h0
 		Sub SetTitleEdgeInsetsXCTest()
 		  
-		  Dim bt As new iOSButton
+		  Dim bt As new MobileButton
 		  
 		  Dim insets As ExtensionsXC.xcUIEdgeInsets = ExtensionsXC.UIEdgeInsetMake(2, 0, 2, 0)
 		  
@@ -205,86 +232,6 @@ Inherits XojoUnitSuperClassTests
 
 
 	#tag ViewBehavior
-		#tag ViewProperty
-			Name="Duration"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Double"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="FailedTestCount"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="IncludeGroup"
-			Visible=false
-			Group="Behavior"
-			InitialValue="True"
-			Type="Boolean"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="IsRunning"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Boolean"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="NotImplementedCount"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="PassedTestCount"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="RunTestCount"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="SkippedTestCount"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="StopTestOnFail"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Boolean"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="TestCount"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Integer"
-			EditorType=""
-		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
 			Visible=true

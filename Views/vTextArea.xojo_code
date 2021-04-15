@@ -1,39 +1,45 @@
-#tag IOSView
-Begin iosView vTextArea
-   BackButtonTitle =   ""
+#tag MobileScreen
+Begin MobileScreen vTextArea
+   BackButtonCaption=   ""
    Compatibility   =   ""
-   LargeTitleMode  =   "2"
+   ControlCount    =   0
+   HasNavigationBar=   True
+   LargeTitleDisplayMode=   2
    Left            =   0
-   NavigationBarVisible=   True
-   TabIcon         =   ""
-   TabTitle        =   ""
+   TabBarVisible   =   True
+   TabIcon         =   0
+   TintColor       =   ""
    Title           =   "TextArea Extensions"
    Top             =   0
-   Begin iOSTextArea TextArea1
+   Begin MobileTextArea TextArea1
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      Alignment       =   0
+      AllowAutoCorrection=   False
+      AllowSpellChecking=   False
+      AutoCapitalizationType=   0
       AutoLayout      =   TextArea1, 1, <Parent>, 1, False, +1.00, 4, 1, *kStdGapCtlToViewH, , True
       AutoLayout      =   TextArea1, 2, <Parent>, 2, False, +1.00, 4, 1, -*kStdGapCtlToViewH, , True
       AutoLayout      =   TextArea1, 3, TopLayoutGuide, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
       AutoLayout      =   TextArea1, 8, , 0, False, +1.00, 4, 1, 169, , True
-      BorderColor     =   ""
-      BorderStyle     =   "0"
-      Editable        =   False
-      Height          =   169.0
-      KeyboardType    =   "0"
+      BorderStyle     =   0
+      ControlCount    =   0
+      Enabled         =   True
+      Height          =   169
       Left            =   20
       LockedInPosition=   True
+      ReadOnly        =   False
       Scope           =   0
       Text            =   "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
-      TextAlignment   =   "0"
-      TextColor       =   "&c00000000"
+      TextColor       =   &c00000000
       TextFont        =   ""
       TextSize        =   0
+      TintColor       =   ""
       Top             =   73
       Visible         =   True
-      Width           =   280.0
+      Width           =   280
    End
-   Begin iOSButton btGetScrollPos
+   Begin MobileButton btGetScrollPos
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
       AutoLayout      =   btGetScrollPos, 9, <Parent>, 9, False, +1.00, 4, 1, -54, , True
@@ -41,41 +47,45 @@ Begin iosView vTextArea
       AutoLayout      =   btGetScrollPos, 3, TextArea1, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
       AutoLayout      =   btGetScrollPos, 8, , 0, False, +1.00, 4, 1, 30, , True
       Caption         =   "Get ScrollPos"
+      CaptionColor    =   &c000000
+      ControlCount    =   0
       Enabled         =   True
-      Height          =   30.0
+      Height          =   30
       Left            =   56
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
+      TintColor       =   ""
       Top             =   250
       Visible         =   True
-      Width           =   100.0
+      Width           =   100
    End
-   Begin iOSLabel lblScrollPos
+   Begin MobileLabel lblScrollPos
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      Alignment       =   0
       AutoLayout      =   lblScrollPos, 1, btGetScrollPos, 2, False, +1.00, 4, 1, *kStdControlGapH, , True
       AutoLayout      =   lblScrollPos, 7, , 0, False, +1.00, 4, 1, 100, , True
       AutoLayout      =   lblScrollPos, 3, btGetScrollPos, 3, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   lblScrollPos, 8, , 0, False, +1.00, 4, 1, 30, , True
+      ControlCount    =   0
       Enabled         =   True
-      Height          =   30.0
+      Height          =   30
       Left            =   164
-      LineBreakMode   =   "0"
+      LineBreakMode   =   0
       LockedInPosition=   False
       Scope           =   0
       Text            =   "Unknown"
-      TextAlignment   =   "2"
-      TextColor       =   "&c00000000"
+      TextColor       =   &c00000000
       TextFont        =   ""
       TextSize        =   0
+      TintColor       =   ""
       Top             =   250
       Visible         =   True
-      Width           =   100.0
+      Width           =   100
    End
-   Begin iOSButton btScrollTop
+   Begin MobileButton btScrollTop
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
       AutoLayout      =   btScrollTop, 9, <Parent>, 9, False, +1.00, 4, 1, 0, , True
@@ -83,19 +93,21 @@ Begin iosView vTextArea
       AutoLayout      =   btScrollTop, 3, <Parent>, 3, False, +1.00, 4, 1, 288, , True
       AutoLayout      =   btScrollTop, 8, , 0, False, +1.00, 4, 1, 30, , True
       Caption         =   "Scroll to Top"
+      CaptionColor    =   &c000000
+      ControlCount    =   0
       Enabled         =   True
-      Height          =   30.0
+      Height          =   30
       Left            =   110
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
+      TintColor       =   ""
       Top             =   288
       Visible         =   True
-      Width           =   100.0
+      Width           =   100
    End
-   Begin iOSButton btSearchQui
+   Begin MobileButton btSearchQui
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
       AutoLayout      =   btSearchQui, 9, <Parent>, 9, False, +1.00, 4, 1, 0, , True
@@ -103,19 +115,21 @@ Begin iosView vTextArea
       AutoLayout      =   btSearchQui, 3, <Parent>, 3, False, +1.00, 4, 1, 326, , True
       AutoLayout      =   btSearchQui, 8, , 0, False, +1.00, 4, 1, 30, , True
       Caption         =   "Search word ""qui"""
+      CaptionColor    =   &c000000
+      ControlCount    =   0
       Enabled         =   True
-      Height          =   30.0
+      Height          =   30
       Left            =   73
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
+      TintColor       =   ""
       Top             =   326
       Visible         =   True
-      Width           =   173.0
+      Width           =   173
    End
-   Begin iOSButton btClearSelection
+   Begin MobileButton btClearSelection
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
       AutoLayout      =   btClearSelection, 1, btSearchQui, 1, False, +1.00, 4, 1, 0, , True
@@ -123,30 +137,33 @@ Begin iosView vTextArea
       AutoLayout      =   btClearSelection, 3, btSearchQui, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
       AutoLayout      =   btClearSelection, 8, , 0, False, +1.00, 4, 1, 30, , True
       Caption         =   "Clear selection"
+      CaptionColor    =   &c000000
+      ControlCount    =   0
       Enabled         =   True
-      Height          =   30.0
+      Height          =   30
       Left            =   73
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
+      TintColor       =   ""
       Top             =   364
       Visible         =   True
-      Width           =   173.0
+      Width           =   173
    End
 End
-#tag EndIOSView
+#tag EndMobileScreen
 
 #tag WindowCode
 #tag EndWindowCode
 
 #tag Events btGetScrollPos
 	#tag Event
-		Sub Action()
+		Sub Pressed()
 		  
-		  Dim pt As Xojo.Core.Point
+		  Dim pt As Point
 		  pt = TextArea1.GetScrollPositionXC
+		  
 		  lblScrollPos.Text = pt.X.ToText(xojo.core.locale.raw, "0") + " x " + pt.Y.ToText(xojo.core.locale.raw, "0")
 		  
 		  
@@ -155,16 +172,16 @@ End
 #tag EndEvents
 #tag Events lblScrollPos
 	#tag Event
-		Sub Open()
+		Sub Opening()
 		  'me.Text = ""
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events btScrollTop
 	#tag Event
-		Sub Action()
+		Sub Pressed()
 		  
-		  Dim pt As New Xojo.Core.Point(0, 0)
+		  Dim pt As New Point(0, 0)
 		  
 		  Dim animated As Boolean = True
 		  
@@ -174,10 +191,10 @@ End
 #tag EndEvents
 #tag Events btSearchQui
 	#tag Event
-		Sub Action()
+		Sub Pressed()
 		  
-		  Dim needle As Text = "qui"
-		  Dim haystack As Text = TextArea1.Text
+		  Dim needle As String = "qui"
+		  Dim haystack As String = TextArea1.Text
 		  
 		  Static lastPos As Integer
 		  
@@ -207,7 +224,7 @@ End
 #tag EndEvents
 #tag Events btClearSelection
 	#tag Event
-		Sub Action()
+		Sub Pressed()
 		  
 		  
 		  //Scrolling to position
@@ -223,11 +240,19 @@ End
 #tag EndEvents
 #tag ViewBehavior
 	#tag ViewProperty
-		Name="LargeTitleMode"
+		Name="BackButtonCaption"
+		Visible=true
+		Group="Behavior"
+		InitialValue=""
+		Type="String"
+		EditorType="MultiLineEditor"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="LargeTitleDisplayMode"
 		Visible=true
 		Group="Behavior"
 		InitialValue="2"
-		Type="LargeTitleDisplayModes"
+		Type="MobileScreen.LargeTitleDisplayModes"
 		EditorType="Enum"
 		#tag EnumValues
 			"0 - Automatic"
@@ -236,12 +261,36 @@ End
 		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="BackButtonTitle"
+		Name="TintColor"
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="Text"
-		EditorType="MultiLineEditor"
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="HasNavigationBar"
+		Visible=true
+		Group="Behavior"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="TabBarVisible"
+		Visible=true
+		Group="Behavior"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Index"
@@ -268,14 +317,6 @@ End
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="NavigationBarVisible"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="Boolean"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
 		Name="Super"
 		Visible=true
 		Group="ID"
@@ -288,15 +329,7 @@ End
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="iOSImage"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="TabTitle"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="Text"
+		Type="Picture"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
@@ -304,7 +337,7 @@ End
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="Text"
+		Type="String"
 		EditorType="MultiLineEditor"
 	#tag EndViewProperty
 	#tag ViewProperty

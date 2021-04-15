@@ -1,9 +1,9 @@
 #tag Module
 Protected Module ViewExtensionsXC
 	#tag Method, Flags = &h0, Description = 416464732061206269672070726F6772657373576865656C20696E207468652063656E746572206F662074686520436F6E7461696E6572
-		Sub AddProgressXC(extends mView As iOSContainerControl, ByRef Progress As iOSProgressWheel, DarkBackground As Boolean = False)
+		Sub AddProgressXC(extends mView As MobileContainer, ByRef Progress As MobileProgressWheel, DarkBackground As Boolean = False)
 		  
-		  Progress = new iOSProgressWheel
+		  Progress = new MobileProgressWheel
 		  
 		  If DarkBackground Then
 		    Progress.SetActivityIndicatorViewStyleXC(ControlExtensionsXC.UIActivityIndicatorViewStyle.whiteLarge)
@@ -42,9 +42,9 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 416464732061206269672070726F6772657373576865656C20696E207468652063656E746572206F66207468652056696577
-		Sub AddProgressXC(extends mView As iOSView, ByRef Progress As iOSProgressWheel, DarkBackground As Boolean = False)
+		Sub AddProgressXC(extends mView As MobileScreen, ByRef Progress As MobileProgressWheel, DarkBackground As Boolean = False)
 		  
-		  Progress = New iOSProgressWheel
+		  Progress = New MobileProgressWheel
 		  
 		  Progress.SetActivityIndicatorViewStyleXC(ControlExtensionsXC.UIActivityIndicatorViewStyle.whiteLarge)
 		  
@@ -82,7 +82,7 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 436C6F73657320612076696577207468617420776173206F70656E6564206173206D6F64616C2E
-		Sub DismissViewControllerXC(extends v As iOSView, animated As Boolean = True, callback as iOSBlock = nil)
+		Sub DismissViewControllerXC(extends v as MobileScreen, animated as Boolean = True, callback as iOSBlock = nil)
 		  
 		  Declare Sub dismissViewController_ Lib "UIKit.framework" _
 		  Selector "dismissViewControllerAnimated:completion:" _
@@ -94,11 +94,15 @@ Protected Module ViewExtensionsXC
 		  Else
 		    dismissViewController_(v.ViewControllerHandle, animated, Nil)
 		  End If
+		  
+		  //Completely close it
+		  Declare Sub removeFromParentViewController Lib "UIKit" selector "removeFromParentViewController" (obj As ptr)
+		  removeFromParentViewController(v.ViewControllerHandle)
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub HideKeyboardXC(extends v As iOSView)
+		Sub HideKeyboardXC(extends v As MobileScreen)
 		  Dim myViewPtr As Ptr
 		  
 		  #if XojoVersion >= 2020.02
@@ -117,7 +121,7 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub HideNavBarShadowXC(extends v as iOSView)
+		Sub HideNavBarShadowXC(extends v As MobileScreen)
 		  
 		  
 		  
@@ -137,7 +141,7 @@ Protected Module ViewExtensionsXC
 		  declare function sharedApplication lib "UIKit" selector "sharedApplication" (obj_ref as ptr) as ptr
 		  declare function rootViewController lib "UIKit" selector "rootViewController" (obj_ref as ptr) as ptr
 		  declare function navigationBar lib "UIKit" selector "navigationBar" (obj_ref as ptr) as ptr
-		  
+		  declare function view lib "UIKit.framework" selector "view" (obj_ref as ptr) as ptr
 		  
 		  declare function navigationController lib "UIKit" selector "navigationController" (viewController as ptr) as ptr
 		  dim navigationControllerRef as ptr = navigationController(v.ViewControllerHandle)
@@ -157,7 +161,7 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 52657475726E732054727565206966207468652063757272656E7420646973706C61792069732052696768742D546F2D4C65667420284172616269632C204865627265772E2E2E29
-		Function isRightToLeftXC(extends view As iOSView) As Boolean
+		Function isRightToLeftXC(extends view As MobileScreen) As Boolean
 		  
 		  
 		  Const UIUserInterfaceLayoutDirectionLeftToRight = 0
@@ -195,9 +199,8 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 4F70656E7320616E2055524C20696E2074686520536166617269436F6E74726F6C6C6572
-		Sub PushToSafariControllerXC(extends v as iOSView, url as Text, BarTintColor as Color = &c000000FF, ControlTintColor as Color = &c000000FF)
-		  
-		  
+		Sub PushToSafariControllerXC(extends v as MobileScreen, url as String, BarTintColor as Color = &c000000FF, ControlTintColor as Color = &c000000FF)
+		  //New in version 2.0
 		  
 		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
 		  Declare Function alloc Lib "Foundation.framework" selector "alloc" (clsRef As ptr) As ptr
@@ -235,13 +238,15 @@ Protected Module ViewExtensionsXC
 		    preferredControlTintColor_(svc, uic)
 		  end if
 		  
-		  presentViewController(v.Handle, svc, True, nil)
+		  presentViewController(v.ViewControllerHandle, svc, True, nil)
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub PushToShowModalDissolveXC(extends parent As iOSView, v As iOSView, style As ViewExtensionsXC.UIModalPresentationStyle=ViewExtensionsXC.UIModalPresentationStyle.fullscreen, Animate As Boolean=True, callback As iOSBlock=Nil)
+		Attributes( deprecated = "Use MobileScreen.ShowModal instead" )  Sub PushToShowModalDissolveXC(extends parent As MobileScreen, v As MobileScreen, style As ViewExtensionsXC.UIModalPresentationStyle = ViewExtensionsXC.UIModalPresentationStyle.fullscreen, Animate As Boolean = True, callback As iOSBlock = Nil)
+		  
+		  
 		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
 		  Declare Function alloc Lib "Foundation.framework" selector "alloc" (clsRef As ptr) As ptr
 		  Declare Function initWithRootViewController_ Lib "Foundation" selector "initWithRootViewController:" (obj_id As ptr, rootViewController As ptr) As ptr
@@ -276,7 +281,9 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub PushToShowModalFlipXC(extends parent As iOSView, v As iOSView, style As ViewExtensionsXC.UIModalPresentationStyle=ViewExtensionsXC.UIModalPresentationStyle.fullscreen, Animate As Boolean=True, callback As iOSBlock=Nil)
+		Attributes( deprecated = "Use MobileScreen.ShowModal instead" )  Sub PushToShowModalFlipXC(extends parent As MobileScreen, v As MobileScreen, style As ViewExtensionsXC.UIModalPresentationStyle = ViewExtensionsXC.UIModalPresentationStyle.fullscreen, Animate As Boolean = True, callback As iOSBlock = Nil)
+		  
+		  
 		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
 		  Declare Function alloc Lib "Foundation.framework" selector "alloc" (clsRef As ptr) As ptr
 		  Declare Function initWithRootViewController_ Lib "Foundation" selector "initWithRootViewController:" (obj_id As ptr, rootViewController As ptr) As ptr
@@ -311,7 +318,9 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub PushToShowModalXC(extends parent As iOSView, v As iOSView, style As ViewExtensionsXC.UIModalPresentationStyle=ViewExtensionsXC.UIModalPresentationStyle.fullscreen, Animate As Boolean=True, callback As iOSBlock=Nil)
+		Attributes( deprecated = "Use MobileScreen.ShowModal instead" )  Sub PushToShowModalXC(extends parent As MobileScreen, v As MobileScreen, style As ViewExtensionsXC.UIModalPresentationStyle = ViewExtensionsXC.UIModalPresentationStyle.automatic, Animate As Boolean = True, callback As iOSBlock = Nil, fullModal As Boolean = False)
+		  
+		  
 		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
 		  Declare Function alloc Lib "Foundation.framework" selector "alloc" (clsRef As ptr) As ptr
 		  Declare Function initWithRootViewController_ Lib "Foundation" selector "initWithRootViewController:" (obj_id As ptr, rootViewController As ptr) As ptr
@@ -324,10 +333,17 @@ Protected Module ViewExtensionsXC
 		  
 		  Dim navController As ptr = initWithRootViewController_( alloc(NSClassFromString("UINavigationController")), v.ViewControllerHandle ) 
 		  
+		  if (XojoVersion < 2019.03 or ExtensionsXC.GetiOSVersionXC < 13.0) and style = UIModalPresentationStyle.automatic then
+		    style = UIModalPresentationStyle.formSheet
+		  end if
 		  
 		  modalPresentationStyle_(navController, style)
 		  
 		  
+		  if fullModal and ExtensionsXC.GetiOSVersionXC >= 13.0 then
+		    Declare sub setModalInPresentation lib "UIKit.framework" Selector "setModalInPresentation:" (obj_id as ptr, value as Boolean)
+		    setModalInPresentation(navController, true)
+		  end if
 		  
 		  If callback <> Nil Then
 		    Break
@@ -335,19 +351,21 @@ Protected Module ViewExtensionsXC
 		  end if
 		  
 		  If callback Is Nil Then
-		    presentViewController(parent.Handle, navController, Animate, Nil)
+		    presentViewController(parent.ViewControllerHandle, navController, Animate, Nil)
 		  Else
-		    presentViewController(parent.Handle, navController, Animate, callback.handle)
+		    presentViewController(parent.ViewControllerHandle, navController, Animate, callback.handle)
 		  End If
 		  
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0, Description = 536574732074686520636F6C6F72206F6620612056696577
-		Sub SetAnimationsEnabledXC(extends v As iOSView, value As Boolean)
+	#tag Method, Flags = &h0, Description = 456E61626C65732F44697361626C657320616E696D6174696F6E73206F6E206120766965772E
+		Sub SetAnimationsEnabledXC(extends v As MobileScreen, value As Boolean)
+		  #Pragma Unused v
 		  
 		  Declare Function NSClassFromString Lib "Foundation.framework" (clsName As CFStringRef) As ptr
-		  Declare sub setAnimationsEnabled lib UIKitLib selector "setAnimationsEnabled:" (obj as ptr, value as boolean)
+		  Declare sub setAnimationsEnabled lib "UIKit.framework" selector "setAnimationsEnabled:" (obj as ptr, value as boolean)
+		  
 		  setAnimationsEnabled(NSClassFromString("UIView"), value)
 		  
 		  
@@ -355,7 +373,7 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 536574732074686520636F6C6F72206F6620612056696577
-		Sub SetBackgroundColorXC(extends v As iOSView, c As Color)
+		Sub SetBackgroundColorXC(extends v As MobileScreen, c As Color)
 		  
 		  
 		  Dim uic As UIKit.UIColor
@@ -390,7 +408,7 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetBackgroundImageXC(extends v As iOSView, img As iOSImage)
+		Attributes( deprecated = "Use a background MobileImageView" )  Sub SetBackgroundImageXC(extends v As MobileScreen, img As Picture)
 		  
 		  
 		  dim resizedImg As iOSBitmap = new iOSBitmap(v.ContentSize.Width, v.ContentSize.Height, 1)
@@ -448,7 +466,7 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetDisplayMode(Extends scr As iOSSplitView, mode As ViewExtensionsXC.UISplitViewControllerDisplayMode)
+		Sub SetDisplayModeXC(Extends scr As iOSSplitView, mode As ViewExtensionsXC.UISplitViewControllerDisplayMode)
 		  //Changes the SplitView in portrait mode
 		  
 		  Declare Sub setPreferredDisplayMode Lib "UIKit" _
@@ -460,7 +478,7 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetFrameXC(extends tb As iOSToolButton, frame As ExtensionsXC.xcCGRect)
+		Sub SetFrameXC(extends tb As MobileToolbarButton, frame As ExtensionsXC.xcCGRect)
 		  #Pragma unused tb
 		  #pragma unused frame
 		  
@@ -481,8 +499,18 @@ Protected Module ViewExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 44697361626C657320737769706520646F776E206F6E206D6F64616C207669657773
+		Sub SetFullModalXC(extends v As MobileScreen)
+		  If ExtensionsxC.GetiOSVersionXC >= 13.0 then
+		    Declare sub setModalInPresentation lib "UIKit.framework" Selector "setModalInPresentation:" (obj_id as ptr, value as Boolean)
+		    setModalInPresentation(v.ViewControllerHandle, true)
+		  end if
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
-		Sub SetHideNavBarOnSwipeXC(extends v as iOSView, hide As Boolean)
+		Sub SetHideNavBarOnSwipeXC(extends v As MobileScreen, hide As Boolean)
 		  
 		  
 		  
@@ -498,7 +526,7 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetHidesBackButtonXC(Extends v As iOSView, value As Boolean)
+		Sub SetHidesBackButtonXC(extends v As MobileScreen, value As Boolean)
 		  
 		  
 		  
@@ -510,7 +538,7 @@ Protected Module ViewExtensionsXC
 		  'Dim navBar As ptr = navigationBar(navigationControllerRef)
 		  
 		  Declare Function navigationItem Lib "UIKit.framework" selector "navigationItem" (obj_ref As ptr) As ptr
-		  Dim navItem As ptr = navigationItem(v.Handle)
+		  Dim navItem As ptr = navigationItem(v.ViewControllerHandle)
 		  
 		  
 		  Declare Sub hidesBackButton Lib "UIKit.framework" selector "setHidesBackButton:" (obj_id As ptr, value As Boolean)
@@ -520,7 +548,7 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetLargeTitleDisplayModeXC(Extends v As iOSView, mode As ViewExtensionsXC.LargeTitleDisplayMode)
+		Sub SetLargeTitleDisplayModeXC(extends v As MobileScreen, mode As ViewExtensionsXC.LargeTitleDisplayMode)
 		  
 		  
 		  Static sSystemVersion As Double
@@ -532,10 +560,10 @@ Protected Module ViewExtensionsXC
 		    Declare Function currentDevice_ Lib "UIKit.framework" selector "currentDevice" (clsRef As ptr) As ptr
 		    Declare Function systemversion_ Lib "UIKit.framework" selector "systemVersion" (obj_id As ptr) As CFStringRef
 		    Dim device As Ptr = currentDevice_(NSClassFromString("UIDevice"))
-		    Dim systemVersion As Text = systemversion_(device)
+		    Dim systemVersion As String = systemversion_(device)
 		    
 		    Try
-		      sSystemVersion = Double.FromText(systemVersion)
+		      sSystemVersion = Double.FromString(systemVersion)
 		    Catch
 		    End Try
 		    
@@ -570,25 +598,9 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 53657473206C61726765207469746C657320746F206120566965772028694F5331312B29
-		Sub SetLargeTitlesXC(extends v As iOSView, value As Boolean, displayMode as LargeTitleDisplayMode = LargeTitleDisplayMode.automatic)
+		Sub SetLargeTitlesXC(extends v as MobileScreen, value as Boolean, displayMode as ViewExtensionsXC.LargeTitleDisplayMode = ViewExtensionsXC.LargeTitleDisplayMode.automatic)
 		  
-		  Static sSystemVersion As Double
-		  
-		  //Get sSystemVersion only once
-		  if sSystemVersion = 0.0 then
-		    
-		    Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
-		    Declare Function currentDevice_ Lib "UIKit.framework" selector "currentDevice" (clsRef As ptr) As ptr
-		    Declare Function systemversion_ Lib "UIKit.framework" selector "systemVersion" (obj_id As ptr) As CFStringRef
-		    Dim device As Ptr = currentDevice_(NSClassFromString("UIDevice"))
-		    Dim systemVersion As Text = systemversion_(device)
-		    
-		    Try
-		      sSystemVersion = Double.FromText(systemVersion)
-		    Catch
-		    End Try
-		    
-		  End If
+		  Dim sSystemVersion as Double = ExtensionsXC.GetiOSVersionXC
 		  
 		  //Use new API
 		  If sSystemVersion >= 11.0 Then
@@ -604,7 +616,7 @@ Protected Module ViewExtensionsXC
 		    prefersLargeTitles(navBar, value)
 		    
 		    Declare Function navigationItem Lib "UIKit.framework" selector "navigationItem" (obj_ref As ptr) As ptr
-		    Dim navItem As ptr = navigationItem(v.Handle)
+		    Dim navItem As ptr = navigationItem(v.ViewControllerHandle)
 		    
 		    Dim mode As LargeTitleDisplayMode
 		    mode = displayMode
@@ -613,7 +625,9 @@ Protected Module ViewExtensionsXC
 		    largeTitleDisplayMode(navItem, mode)
 		    
 		  Else
-		    
+		    #Pragma Unused v
+		    #Pragma Unused value
+		    #Pragma Unused displayMode
 		    
 		    
 		  End If
@@ -621,7 +635,7 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 5365747320746865204E617669676174696F6E2062617220636F6C6F722E20536574204461726B20746F205472756520696620796F752077616E74207468652074696D6520616E64207374617475732062617220746F206265207768697465
-		Sub SetNavBarColorXC(extends v as iOSView, barColor as color, buttonColor as color, translucent as boolean = false, Dark As Boolean = False)
+		Sub SetNavBarColorXC(extends v As MobileScreen, barColor As color, buttonColor As color, titleColor As Color, translucent As boolean = false, Dark As Boolean = False)
 		  
 		  
 		  declare function NSClassFromString lib "Foundation" (classname as CFStringRef) as ptr
@@ -639,11 +653,14 @@ Protected Module ViewExtensionsXC
 		  setTintColor navBar, new UIColor(buttonColor)
 		  
 		  declare sub setBarTintColor lib "UIKit.framework" selector "setBarTintColor:" (id as ptr, UIColor as Ptr)
+		  
+		  Dim uic As UIColor
 		  If barColor.Alpha = 255 then
-		    setBarTintColor navBar, UIColor.ClearColor
+		    uic = UIColor.ClearColor
 		  Else
-		    setBarTintColor navBar, new UIColor(barColor)
+		    uic = new UIColor(barColor)
 		  End If
+		  setBarTintColor(navBar, uic)
 		  
 		  
 		  declare sub setTranslucent lib "UIKit.framework" selector "setTranslucent:" (id as ptr, value as Boolean)
@@ -654,7 +671,7 @@ Protected Module ViewExtensionsXC
 		  setBarStyle navBar, If(Dark, 1, 0) //UIStatusBarStyleLightContent
 		  
 		  
-		  Dim titleColor As Color = buttonColor
+		  
 		  
 		  if ExtensionsXC.GetiOSVersionXC >= 13 then
 		    
@@ -664,7 +681,7 @@ Protected Module ViewExtensionsXC
 		    
 		    Dim navBarAppearance as ptr = init(alloc(NSClassFromString("UINavigationBarAppearance")))
 		    
-		    Declare sub setBackgroundColor lib UIKitLib selector "setBackgroundColor:" (obj as ptr, UIColor as ptr)
+		    Declare sub setBackgroundColor lib "UIKit.framework" selector "setBackgroundColor:" (obj as ptr, UIColor as ptr)
 		    
 		    If barColor.Alpha = 255 then
 		      setBackgroundColor navBarAppearance, UIColor.ClearColor
@@ -677,7 +694,7 @@ Protected Module ViewExtensionsXC
 		    (class_id As Ptr, anObject As ptr, key As CFStringRef) As Ptr
 		    
 		    
-		    Dim constStr As Text = ExtensionsXC.StringConstantXC("UIKit", "NSForegroundColorAttributeName")
+		    Dim constStr As String = ExtensionsXC.StringConstantXC("UIKit", "NSForegroundColorAttributeName")
 		    
 		    Dim nsDic As Ptr
 		    nsDic = DictionaryWithObject(NSClassFromString("NSDictionary"), New UIColor(titleColor), constStr)
@@ -694,8 +711,8 @@ Protected Module ViewExtensionsXC
 		    
 		    
 		    
-		    Declare sub setStandardAppearance lib UIKitLib selector "setStandardAppearance:" (obj as ptr, value as ptr)
-		    Declare sub setScrollEdgeAppearance lib UIKitLib selector "setScrollEdgeAppearance:" (obj as ptr, value as ptr)
+		    Declare sub setStandardAppearance lib "UIKit.framework" selector "setStandardAppearance:" (obj as ptr, value as ptr)
+		    Declare sub setScrollEdgeAppearance lib "UIKit.framework" selector "setScrollEdgeAppearance:" (obj as ptr, value as ptr)
 		    setStandardAppearance(navBar, navBarAppearance)
 		    setScrollEdgeAppearance(navBar, navBarAppearance)
 		    
@@ -703,8 +720,25 @@ Protected Module ViewExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 5365747320746865204E617669676174696F6E2062617220636F6C6F722E20536574204461726B20746F205472756520696620796F752077616E74207468652074696D6520616E64207374617475732062617220746F206265207768697465
+		Sub SetNavBarTintColorXC(extends screen As MobileScreen, tintColor As Color)
+		  //New in version 2.0
+		  
+		  declare function navigationBar lib "UIKit.framework" selector "navigationBar" (obj_ref as ptr) as ptr
+		  
+		  declare function navigationController lib "UIKit.framework" selector "navigationController" (viewController as ptr) as ptr
+		  dim navigationControllerRef as ptr = navigationController(screen.ViewControllerHandle)
+		  dim navBar as ptr = navigationBar(navigationControllerRef)
+		  
+		  declare sub setTintColor lib "UIKit.framework" selector "setTintColor:" (id as ptr, UIColor as Ptr)
+		  setTintColor navBar, new UIColor(tintColor)
+		  
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 536574732074686520636F6C6F72206F6620746865207465787420696E20746865204E61766261722E
-		Sub SetNavBarTitleColorXC(extends v as iOSView, value As Color)
+		Sub SetNavBarTitleColorXC(extends v As MobileScreen, value As Color)
 		  
 		  Declare Function navigationBar Lib "UIKit.framework" selector "navigationBar" (obj_ref As ptr) As ptr
 		  Declare Function navigationController Lib "UIKit.framework" selector "navigationController" (viewController As ptr) As ptr
@@ -717,7 +751,7 @@ Protected Module ViewExtensionsXC
 		  
 		  
 		  
-		  Dim constStr As Text = ExtensionsXC.StringConstantXC("UIKit", "NSForegroundColorAttributeName")
+		  Dim constStr As String = ExtensionsXC.StringConstantXC("UIKit", "NSForegroundColorAttributeName")
 		  
 		  Dim constRef As CFStringRef = constStr
 		  
@@ -742,7 +776,7 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 5365747320616E20696D61676520696E7374656164206F66204E6176626172207469746C65
-		Sub SetNavBarTitleImageXC(extends v as iOSView, image As iOSImage)
+		Sub SetNavBarTitleImageXC(extends v As MobileScreen, image As Picture)
 		  
 		  declare function navigationController lib "UIKit.framework" selector "navigationController" (viewController as ptr) as ptr
 		  declare function navigationBar lib "UIKit.framework" selector "navigationBar" (obj_ref as ptr) as ptr
@@ -770,9 +804,9 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetNavBarTransparentXC(extends v as iOSView)
+		Sub SetNavBarTranslucentXC(extends v As MobileScreen, value As Boolean)
 		  
-		  
+		  //New in version 2.0
 		  
 		  '[self.navigationController.navigationBar setBackgroundImage:[UIImage new]
 		  '                     forBarMetrics:UIBarMetricsDefault];
@@ -798,6 +832,44 @@ Protected Module ViewExtensionsXC
 		  'Dim view As ptr = view(navigationControllerRef)
 		  
 		  
+		  
+		  declare sub setTranslucent lib "UIKit.framework" selector "setTranslucent:" (id as ptr, value as Boolean)
+		  setTranslucent navBar, value
+		  
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub SetNavBarTransparentXC(extends v As MobileScreen)
+		  
+		  
+		  
+		  '[self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+		  '                     forBarMetrics:UIBarMetricsDefault];
+		  'self.navigationController.navigationBar.shadowImage = [UIImage new];
+		  'self.navigationController.navigationBar.translucent = YES;
+		  'self.navigationController.view.backgroundColor = [UIColor clearColor];
+		  'self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
+		  
+		  
+		  Declare Function NSClassFromString Lib "Foundation.framework" (clsName As CFStringRef) As ptr
+		  Declare Function alloc Lib "Foundation.framework" selector "alloc" (clsRef As Ptr) As ptr
+		  Declare Function init Lib "Foundation.framework" selector "init" (obj_id As ptr) As ptr
+		  declare function keyWindow lib "UIKit.framework" selector "keyWindow" (obj_ref as ptr) as ptr
+		  declare function sharedApplication lib "UIKit.framework" selector "sharedApplication" (obj_ref as ptr) as ptr
+		  declare function rootViewController lib "UIKit.framework" selector "rootViewController" (obj_ref as ptr) as ptr
+		  declare function navigationBar lib "UIKit.framework" selector "navigationBar" (obj_ref as ptr) as ptr
+		  Declare Function view Lib "UIKit.framework" selector "view" (obj_ref As ptr) As ptr
+		  
+		  declare function navigationController lib "UIKit.framework" selector "navigationController" (viewController as ptr) as ptr
+		  dim navigationControllerRef as ptr = navigationController(v.ViewControllerHandle)
+		  
+		  dim navBar as ptr = navigationBar(navigationControllerRef)
+		  'Dim view As ptr = view(navigationControllerRef)
+		  
+		  
 		  Declare sub setBackgroundImage lib "UIKit.framework" selector "setBackgroundImage:forBarMetrics:" (id as ptr, image as ptr, metrics as Integer)
 		  setBackgroundImage(navBar, init(alloc(NSClassFromString("UIImage"))) , 0)
 		  
@@ -814,18 +886,18 @@ Protected Module ViewExtensionsXC
 		  
 		  if ExtensionsXC.GetiOSVersionXC >= 13 then
 		    
-		    Declare function standardAppearance lib UIKitLib selector "standardAppearance" (obj as ptr) as ptr
+		    Declare function standardAppearance lib "UIKit.framework" selector "standardAppearance" (obj as ptr) as ptr
 		    Dim navBarAppearance as ptr = standardAppearance(navBar)
 		    
-		    Declare sub setBackgroundColor lib UIKitLib selector "setBackgroundColor:" (obj as ptr, UIColor as ptr)
+		    Declare sub setBackgroundColor lib "UIKit.framework" selector "setBackgroundColor:" (obj as ptr, UIColor as ptr)
 		    
 		    setBackgroundColor navBarAppearance, UIColor.ClearColor
 		    
-		    declare sub configureWithTransparentBackground lib UIKitLib selector "configureWithTransparentBackground" (obj as ptr)
+		    declare sub configureWithTransparentBackground lib "UIKit.framework" selector "configureWithTransparentBackground" (obj as ptr)
 		    configureWithTransparentBackground(navBarAppearance)
 		    
-		    Declare sub setStandardAppearance lib UIKitLib selector "setStandardAppearance:" (obj as ptr, value as ptr)
-		    Declare sub setScrollEdgeAppearance lib UIKitLib selector "setScrollEdgeAppearance:" (obj as ptr, value as ptr)
+		    Declare sub setStandardAppearance lib "UIKit.framework" selector "setStandardAppearance:" (obj as ptr, value as ptr)
+		    Declare sub setScrollEdgeAppearance lib "UIKit.framework" selector "setScrollEdgeAppearance:" (obj as ptr, value as ptr)
 		    setStandardAppearance(navBar, navBarAppearance)
 		    setScrollEdgeAppearance(navBar, navBarAppearance)
 		    
@@ -833,8 +905,22 @@ Protected Module ViewExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 53657473207468652053746174757320626172207465787420636F6C6F722E
+		Attributes( Deprecated = "Use App.SetStatusBarStyleXC instead" )  Sub SetStatusBarStyleXC(extends v As MobileScreen, style As AppExtensionsXC.UIStatusBarStyle)
+		  #Pragma Unused v
+		  
+		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
+		  Declare Function sharedApplication Lib "UIKit" Selector "sharedApplication" (obj As Ptr) As Ptr
+		  Declare sub setStatusBarStyle lib "UIKit" selector "setStatusBarStyle:" (obj as ptr, style as AppExtensionsXC.UIStatusBarStyle)
+		  
+		  Dim sharedApp As Ptr = sharedApplication(NSClassFromString("UIApplication"))
+		  setStatusBarStyle(sharedApp, style)
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 4368616E6765732074686520636F6C6F72206F66206120546F6F6C627574746F6E
-		Sub SetTintColorXC(extends tb As iOSToolButton, value As Color)
+		Sub SetTintColorXC(extends tb As MobileToolbarButton, value As Color)
 		  
 		  Declare Sub setTintColor Lib "UIKit.framework" selector "setTintColor:" (id As ptr, UIColor As Ptr)
 		  setTintColor tb.handle, New UIColor(value)
@@ -844,7 +930,7 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 4368616E67657320746865206261636B67726F756E6420636F6C6F72206F66206120546162426172
-		Sub SetToolBarBackgroundColorXC(extends v as iOSView, barColor as color, translucent as boolean = false)
+		Sub SetToolBarBackgroundColorXC(extends v as MobileScreen, barColor as color, translucent as boolean = false)
 		  
 		  
 		  Declare Function toolbar_ Lib "UIKit.framework" selector "toolbar" (o As Ptr) As Ptr
@@ -868,7 +954,7 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 4368616E67657320746865206261636B67726F756E6420636F6C6F72206F66206120546162426172
-		Sub SetToolBarColorXC(extends v as iOSView, barColor as color)
+		Sub SetToolBarColorXC(extends v as MobileScreen, barColor as color)
 		  
 		  
 		  Declare Function toolbar_ Lib "UIKit.framework" selector "toolbar" (o As Ptr) As Ptr
@@ -880,43 +966,9 @@ Protected Module ViewExtensionsXC
 		  Dim toolbar As Ptr = toolbar_(navigationControllerRef)
 		  
 		  
-		  Declare Sub tintColor_ Lib UIKitLib selector "setTintColor:" (obj_id As ptr, tintColor As ptr)
+		  Declare Sub tintColor_ Lib "UIKit.framework" selector "setTintColor:" (obj_id As ptr, tintColor As ptr)
 		  
 		  tintColor_ toolbar, New UIColor(barColor)
-		  
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0, Description = 43616C6C20746869732066756E6374696F6E20696620796F7520757365206120636F6D62696E6174696F6E206F66204C617267655469746C657320616E64204C617267655469746C65446973706C61794D6F64652E6E65766572
-		Sub SetWindowColorXC(extends app As iOSApplication, value as color)
-		  #Pragma unused app
-		  
-		  Dim uic As UIKit.UIColor
-		  
-		  If value.Alpha = 255 Then
-		    uic = UIKit.UIColor.ClearColor
-		  Else
-		    uic = New UIKit.UIColor(value)
-		  End If
-		  
-		  Declare Function NSClassFromString Lib "UIKit.framework" (clsName As CFStringRef) As ptr
-		  Declare Function sharedApplication Lib "UIKit.framework" selector "sharedApplication" (clsRef As ptr) As ptr
-		  Declare Function keyWindow Lib "UIKit.framework" selector "keyWindow" (obj_id As ptr) As ptr
-		  
-		  Dim myWindowPtr As ptr = keyWindow(sharedApplication(NSClassFromString("UIApplication")))
-		  
-		  
-		  If myWindowPtr = Nil Then
-		    Break
-		    //this needs to be called from the Activate event, not the Open event
-		    Return
-		  End If
-		  
-		  
-		  
-		  Declare Sub setBackgroundColor Lib UIKitLib selector "setBackgroundColor:" (obj_id As ptr, col As ptr)
-		  setBackgroundColor(myWindowPtr, uic)
 		  
 		  
 		End Sub
@@ -938,7 +990,8 @@ Protected Module ViewExtensionsXC
 		  overFullScreen
 		  overCurrentContext
 		  popover
-		none = -1
+		  none = -1
+		automatic = -2
 	#tag EndEnum
 
 	#tag Enum, Name = UIModalTransitionStyle, Type = Integer, Flags = &h1
@@ -957,10 +1010,10 @@ Protected Module ViewExtensionsXC
 	#tag EndEnum
 
 	#tag Enum, Name = UISplitViewControllerDisplayMode, Type = Integer, Flags = &h1
-		Automatic
-		  PrimaryHidden
-		  AllVisible
-		PrimaryOverlay
+		Automatic = 0
+		  secondaryOnly
+		  oneBesideSecondary
+		oneOverSecondary
 	#tag EndEnum
 
 	#tag Enum, Name = UIUserInterfaceLayoutDirection, Type = Integer, Flags = &h1

@@ -1,14 +1,17 @@
 #tag IOSContainerControl
-Begin iOSCustomTableCell cellGeneric
+Begin MobileTableCustomCell cellGeneric
    AccessibilityHint=   ""
    AccessibilityLabel=   ""
+   AllowDynamicHeight=   False
    Compatibility   =   ""
-   Height          =   44.0
-   Left            =   0.0
-   Top             =   0.0
-   UseDynamicHeight=   False
+   ControlCount    =   0
+   Enabled         =   True
+   Height          =   48
+   Left            =   0
+   TintColor       =   0
+   Top             =   0
    Visible         =   True
-   Width           =   320.0
+   Width           =   320
 End
 #tag EndIOSContainerControl
 
@@ -17,35 +20,27 @@ End
 
 #tag ViewBehavior
 	#tag ViewProperty
-		Name="UseDynamicHeight"
-		Visible=true
-		Group="Behavior"
-		InitialValue="False"
-		Type="Boolean"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="AccessibilityHint"
+		Name="TintColor"
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="Text"
+		Type="ColorGroup"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="AccessibilityLabel"
+		Name="ControlCount"
 		Visible=false
 		Group="Behavior"
-		InitialValue=""
-		Type="Text"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Left"
-		Visible=true
-		Group="Position"
 		InitialValue=""
 		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Enabled"
+		Visible=true
+		Group="UI Control"
+		InitialValue="True"
+		Type="Boolean"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
@@ -60,8 +55,16 @@ End
 		Name="Super"
 		Visible=true
 		Group="ID"
-		InitialValue="iOSCustomTableCell"
+		InitialValue="MobileTableCustomCell"
 		Type="String"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Left"
+		Visible=true
+		Group="Position"
+		InitialValue=""
+		Type="Integer"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
@@ -73,6 +76,22 @@ End
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
+		Name="AccessibilityHint"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="String"
+		EditorType="MultiLineEditor"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="AccessibilityLabel"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="String"
+		EditorType="MultiLineEditor"
+	#tag EndViewProperty
+	#tag ViewProperty
 		Name="Visible"
 		Visible=true
 		Group="Behavior"
@@ -81,11 +100,19 @@ End
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
+		Name="AllowDynamicHeight"
+		Visible=true
+		Group="Behavior"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
 		Name="Width"
 		Visible=false
 		Group=""
 		InitialValue="320"
-		Type="Double"
+		Type="Integer"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
@@ -93,7 +120,7 @@ End
 		Visible=false
 		Group=""
 		InitialValue="480"
-		Type="Double"
+		Type="Integer"
 		EditorType=""
 	#tag EndViewProperty
 #tag EndViewBehavior

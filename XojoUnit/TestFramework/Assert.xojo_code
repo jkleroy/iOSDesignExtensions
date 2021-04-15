@@ -10,7 +10,7 @@ Protected Class Assert
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0, CompatibilityFlags = (not TargetHasGUI and not TargetWeb and not TargetIOS) or  (TargetWeb) or  (TargetHasGUI)
+	#tag Method, Flags = &h0
 		Sub AreDifferent(expected As String, actual As String, message As Text = "")
 		  If expected.Encoding <> actual.Encoding Or StrComp(expected, actual, 0) <> 0 Then
 		    Pass()
@@ -844,7 +844,7 @@ Protected Class Assert
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h21, CompatibilityFlags = (not TargetHasGUI and not TargetWeb and not TargetIOS) or  (TargetWeb) or  (TargetHasGUI)
+	#tag Method, Flags = &h21
 		Private Function StringToText(s As String) As Text
 		  // Before a String can be converted to Text, it must have a valid encoding
 		  // to avoid an exception. If the encoding is not valid, we will hex-encode the string instead.

@@ -16,7 +16,7 @@ Inherits XojoUnitSuperClassTests
 	#tag Method, Flags = &h0, Description = 506572666F726D7320616E20416C7068612070726F706572747920616E696D6174696F6E206F766572207365636F6E6473207365636F6E64732077697468207468652073656C65637465642063757276652E
 		Sub AnimateAlphaXCTest()
 		  
-		  Dim lbl As new iOSLabel
+		  Dim lbl As new MobileLabel
 		  
 		  lbl.AnimateAlphaXC(0.0)
 		  
@@ -90,9 +90,9 @@ Inherits XojoUnitSuperClassTests
 		Sub RemoveConstraintsXCTest()
 		  
 		  
-		  Dim cc As new iOSContainerControl
+		  Dim cc As new MobileContainer
 		  
-		  Dim lbl As new iOSLabel
+		  Dim lbl As new MobileLabel
 		  
 		  cc.AddControl(lbl)
 		  
@@ -105,7 +105,7 @@ Inherits XojoUnitSuperClassTests
 		  0)
 		  cc.AddConstraint(top)
 		  
-		  RemoveConstraintsXC(cc.Handle)
+		  cc.RemoveConstraintsXC
 		  
 		  Assert.Pass
 		End Sub
@@ -157,6 +157,8 @@ Inherits XojoUnitSuperClassTests
 		    Assert.Pass
 		  #else
 		    
+		    #Pragma Unused bt
+		    
 		    Assert.Fail("This test will fail if iOSKit is not installed in the project")
 		    
 		    
@@ -192,7 +194,7 @@ Inherits XojoUnitSuperClassTests
 	#tag Method, Flags = &h0, Description = 5365747320746865207465787420636F6C6F72206F66206120446174655069636B6572
 		Sub SetTextColorXCTest()
 		  
-		  Dim picker As new iOSDatePicker
+		  Dim picker As new MobileDateTimePicker
 		  
 		  picker.SetTextColorXC(&cFF0000)
 		  picker.SetTextColorXC(&c000000FF)
@@ -204,9 +206,9 @@ Inherits XojoUnitSuperClassTests
 	#tag Method, Flags = &h0, Description = 53657473207468652074696E7420636F6C6F7220666F72207468652076696577
 		Sub SetTintColorXCTest()
 		  
-		  Dim cc As new iOSContainerControl
+		  Dim cc As new MobileContainer
 		  
-		  cc.Handle.setTintColorXC(&cff0000)
+		  cc.setTintColorXC(&cff0000)
 		  
 		  Assert.Pass
 		End Sub
@@ -244,86 +246,6 @@ Inherits XojoUnitSuperClassTests
 
 
 	#tag ViewBehavior
-		#tag ViewProperty
-			Name="Duration"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Double"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="FailedTestCount"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="IncludeGroup"
-			Visible=false
-			Group="Behavior"
-			InitialValue="True"
-			Type="Boolean"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="IsRunning"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Boolean"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="NotImplementedCount"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="PassedTestCount"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="RunTestCount"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="SkippedTestCount"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Integer"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="StopTestOnFail"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Boolean"
-			EditorType=""
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="TestCount"
-			Visible=false
-			Group="Behavior"
-			InitialValue=""
-			Type="Integer"
-			EditorType=""
-		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
 			Visible=true

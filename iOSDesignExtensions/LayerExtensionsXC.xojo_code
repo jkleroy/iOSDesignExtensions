@@ -1,7 +1,7 @@
 #tag Module
 Protected Module LayerExtensionsXC
 	#tag Method, Flags = &h0
-		Function GetLayerXC(extends c as iOSControl) As ptr
+		Function GetLayerXC(extends c as MobileUIControl) As ptr
 		  
 		  Declare Function layer_ Lib "UIKit.framework" selector "layer" (id As ptr) As Ptr
 		  Dim layer As ptr = layer_(c.Handle)
@@ -11,7 +11,7 @@ Protected Module LayerExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 41646A757374732074686520666F6E742073697A65206163636F7264696E6720746F20617661696C61626C65207769647468
-		Sub SetBorderColorXC(extends c As iOSControl, value As Color)
+		Sub SetBorderColorXC(extends c As MobileUIControl, value As Color)
 		  
 		  Dim layer as ptr = c.GetLayerXC
 		  
@@ -28,7 +28,7 @@ Protected Module LayerExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 41646A757374732074686520666F6E742073697A65206163636F7264696E6720746F20617661696C61626C65207769647468
-		Sub SetBorderWidthXC(extends c As iOSControl, width As Double)
+		Sub SetBorderWidthXC(extends c As MobileUIControl, width As Double)
 		  
 		  
 		  Dim layer As ptr = c.GetLayerXC
@@ -39,7 +39,7 @@ Protected Module LayerExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 5365747320726F756E6420636F726E65727320746F20616E20694F53436F6E74726F6C
-		Sub SetCornerRadiusXC(extends ctrl As iOSControl, radius As Double)
+		Sub SetCornerRadiusXC(extends ctrl As MobileUIControl, radius As Double)
 		  
 		  Declare Function layer_ Lib "UIKit.framework" selector "layer" (id As ptr) As Ptr
 		  Dim layer As ptr = layer_(ctrl.Handle)
@@ -50,7 +50,7 @@ Protected Module LayerExtensionsXC
 		  
 		  setCornerRadius layer, radius
 		  
-		  if ctrl isa iOSButton then
+		  if ctrl isa MobileButton then
 		    
 		    Dim insets As ExtensionsXC.xcUIEdgeInsets
 		    insets.Left = radius
@@ -58,7 +58,7 @@ Protected Module LayerExtensionsXC
 		    insets.Right = radius
 		    insets.Bottom = 0
 		    
-		    iosButton(ctrl).SetButtonInsetsXC(insets)
+		    MobileButton(ctrl).SetButtonInsetsXC(insets)
 		    
 		  else
 		    
@@ -74,12 +74,12 @@ Protected Module LayerExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetShadowXC(extends cc As iOSControl, ShadowColor As Color, radius As Double, offset As Xojo.Core.Point)
+		Sub SetShadowXC(extends control As MobileUIControl, ShadowColor As Color, radius As Double, offset As Point)
 		  
-		  Declare Function layer_ Lib "UIKit" selector "layer" (id As ptr) As Ptr
-		  Dim layer As ptr = layer_(cc.Handle)
+		  Declare Function layer_ Lib "UIKit.framework" selector "layer" (id As ptr) As Ptr
+		  Dim layer As ptr = layer_(control.Handle)
 		  
-		  Declare Sub masksToBounds_ Lib UIKitLib selector "setMasksToBounds:" (id As ptr, value As Boolean)
+		  Declare Sub masksToBounds_ Lib "UIKit.framework" selector "setMasksToBounds:" (id As ptr, value As Boolean)
 		  masksToBounds_(layer, False)
 		  
 		  Declare Sub shadowColor_ Lib QuartzCoreLib selector "setShadowColor:" (id As ptr, col As ptr)

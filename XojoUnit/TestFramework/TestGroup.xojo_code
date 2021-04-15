@@ -28,7 +28,7 @@ Protected Class TestGroup
 		  If CurrentClone Is Nil Then
 		    elapsed = 0.0
 		  Else
-		    elapsed = (Microseconds - TestDuration) / 1000000.0
+		    elapsed = (System.Microseconds - TestDuration) / 1000000.0
 		  End If
 		  
 		  CurrentTestResult.Duration = elapsed
@@ -217,7 +217,7 @@ Protected Class TestGroup
 
 	#tag Method, Flags = &h1
 		Protected Function GetTestTimer(key As Text = "") As Double
-		  Dim endTime As Double = Microseconds
+		  Dim endTime As Double = System.Microseconds
 		  Dim startTime As Double = TestTimers.Value(key)
 		  Dim duration As Double = endTime - startTime
 		  
@@ -273,7 +273,7 @@ Protected Class TestGroup
 
 	#tag Method, Flags = &h21
 		Private Sub ResetTestDuration()
-		  TestDuration = Microseconds
+		  TestDuration = System.Microseconds
 		End Sub
 	#tag EndMethod
 
@@ -440,7 +440,7 @@ Protected Class TestGroup
 		    TestTimers = New Xojo.Core.Dictionary
 		  End If
 		  
-		  TestTimers.Value(key) = Microseconds
+		  TestTimers.Value(key) = System.Microseconds
 		  
 		End Sub
 	#tag EndMethod

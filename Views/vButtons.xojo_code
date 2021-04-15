@@ -1,95 +1,105 @@
-#tag IOSView
-Begin iosView vButtons
-   BackButtonTitle =   ""
+#tag MobileScreen
+Begin MobileScreen vButtons
+   BackButtonCaption=   ""
    Compatibility   =   ""
-   LargeTitleMode  =   "2"
+   ControlCount    =   0
+   HasNavigationBar=   True
+   LargeTitleDisplayMode=   2
    Left            =   0
-   NavigationBarVisible=   True
-   TabIcon         =   ""
-   TabTitle        =   ""
+   TabBarVisible   =   True
+   TabIcon         =   0
+   TintColor       =   0
    Title           =   "Buttons"
    Top             =   0
-   Begin iOSButton Button1
+   Begin MobileButton btBackgroundColor
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
-      AutoLayout      =   Button1, 9, <Parent>, 9, False, +1.00, 4, 1, 0, , True
-      AutoLayout      =   Button1, 8, , 0, False, +1.00, 4, 1, 30, , True
-      AutoLayout      =   Button1, 3, TopLayoutGuide, 4, False, +1.00, 4, 1, 30, , True
-      AutoLayout      =   Button1, 7, , 0, False, +1.00, 4, 1, 100, , True
-      Caption         =   "Button"
+      AutoLayout      =   btBackgroundColor, 9, <Parent>, 9, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   btBackgroundColor, 8, , 0, False, +1.00, 4, 1, 30, , True
+      AutoLayout      =   btBackgroundColor, 3, TopLayoutGuide, 4, False, +1.00, 4, 1, 30, , True
+      AutoLayout      =   btBackgroundColor, 7, , 0, False, +1.00, 4, 2, 100, , True
+      Caption         =   "Background Color"
+      CaptionColor    =   &c000000
+      ControlCount    =   0
       Enabled         =   True
-      Height          =   30.0
+      Height          =   30
       Left            =   110
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
+      TintColor       =   ""
       Top             =   95
       Visible         =   True
-      Width           =   100.0
+      Width           =   100
    End
-   Begin iOSButton Button2
+   Begin MobileButton btCornerRadius
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
-      AutoLayout      =   Button2, 8, , 0, False, +1.00, 4, 1, 30, , True
-      AutoLayout      =   Button2, 1, Button1, 1, False, +1.00, 4, 1, 0, , True
-      AutoLayout      =   Button2, 3, Button1, 4, False, +1.00, 4, 1, 30, , True
-      AutoLayout      =   Button2, 7, , 0, False, +1.00, 4, 1, 100, , True
-      Caption         =   "Button"
+      AutoLayout      =   btCornerRadius, 8, , 0, False, +1.00, 4, 1, 30, , True
+      AutoLayout      =   btCornerRadius, 1, btBackgroundColor, 1, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   btCornerRadius, 3, btBackgroundColor, 4, False, +1.00, 4, 1, 30, , True
+      AutoLayout      =   btCornerRadius, 7, , 0, False, +1.00, 4, 1, 100, , True
+      Caption         =   "Corner radius"
+      CaptionColor    =   &c000000
+      ControlCount    =   0
       Enabled         =   True
-      Height          =   30.0
+      Height          =   30
       Left            =   110
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
+      TintColor       =   ""
       Top             =   155
       Visible         =   True
-      Width           =   100.0
+      Width           =   100
    End
-   Begin iOSButton Button3
+   Begin MobileButton btCaptionAndImage
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
-      AutoLayout      =   Button3, 8, , 0, False, +1.00, 4, 1, 30, , True
-      AutoLayout      =   Button3, 1, Button2, 1, False, +1.00, 4, 1, 0, , True
-      AutoLayout      =   Button3, 3, Button2, 4, False, +1.00, 4, 1, 30, , True
-      AutoLayout      =   Button3, 7, , 0, False, +1.00, 4, 1, 100, , True
-      Caption         =   "Button"
+      AutoLayout      =   btCaptionAndImage, 8, , 0, False, +1.00, 4, 1, 30, , True
+      AutoLayout      =   btCaptionAndImage, 1, btCornerRadius, 1, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   btCaptionAndImage, 3, btCornerRadius, 4, False, +1.00, 4, 1, 30, , True
+      AutoLayout      =   btCaptionAndImage, 7, , 0, False, +1.00, 4, 2, 100, , True
+      Caption         =   "Image & Caption"
+      CaptionColor    =   &c000000
+      ControlCount    =   0
       Enabled         =   True
-      Height          =   30.0
+      Height          =   30
       Left            =   110
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
+      TintColor       =   ""
       Top             =   215
       Visible         =   True
-      Width           =   100.0
+      Width           =   100
    End
-   Begin iOSButton Button4
+   Begin MobileButton Button4
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
       AutoLayout      =   Button4, 8, , 0, False, +1.00, 4, 1, 50, , True
-      AutoLayout      =   Button4, 1, Button3, 1, False, +1.00, 4, 1, 0, , True
-      AutoLayout      =   Button4, 3, Button3, 4, False, +1.00, 4, 1, 30, , True
+      AutoLayout      =   Button4, 1, btCaptionAndImage, 1, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   Button4, 3, btCaptionAndImage, 4, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   Button4, 7, , 0, False, +1.00, 4, 1, 100, , True
-      Caption         =   "Button"
+      Caption         =   "First line\nSecond line"
+      CaptionColor    =   &c000000
+      ControlCount    =   0
       Enabled         =   True
-      Height          =   50.0
+      Height          =   50
       Left            =   110
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
+      TintColor       =   ""
       Top             =   275
       Visible         =   True
-      Width           =   100.0
+      Width           =   100
    End
-   Begin iOSButton Button5
+   Begin MobileButton Button5
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
       AutoLayout      =   Button5, 8, , 0, False, +1.00, 4, 1, 30, , True
@@ -97,19 +107,21 @@ Begin iosView vButtons
       AutoLayout      =   Button5, 3, Button4, 4, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   Button5, 7, , 0, False, +1.00, 4, 1, 100, , True
       Caption         =   "Clipped Caption"
+      CaptionColor    =   &c000000
+      ControlCount    =   0
       Enabled         =   True
-      Height          =   30.0
+      Height          =   30
       Left            =   40
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
+      TintColor       =   ""
       Top             =   355
       Visible         =   True
-      Width           =   100.0
+      Width           =   100
    End
-   Begin iOSButton Button6
+   Begin MobileButton Button6
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
       AutoLayout      =   Button6, 8, , 0, False, +1.00, 4, 1, 30, , True
@@ -117,73 +129,100 @@ Begin iosView vButtons
       AutoLayout      =   Button6, 3, Button5, 3, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Button6, 7, , 0, False, +1.00, 4, 1, 100, , True
       Caption         =   "Adjusted Caption"
+      CaptionColor    =   &c000000
+      ControlCount    =   0
       Enabled         =   True
-      Height          =   30.0
+      Height          =   30
       Left            =   180
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
+      TintColor       =   ""
       Top             =   355
       Visible         =   True
-      Width           =   100.0
+      Width           =   100
    End
-   Begin iOSButton Button7
+   Begin MobileButton Button7
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
-      AutoLayout      =   Button7, 8, , 0, False, +1.00, 4, 1, 30, , True
-      AutoLayout      =   Button7, 1, Button4, 1, False, +1.00, 4, 1, 0, , True
-      AutoLayout      =   Button7, 3, Button6, 4, False, +1.00, 4, 1, 30, , True
+      AutoLayout      =   Button7, 1, Button5, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Button7, 7, , 0, False, +1.00, 4, 1, 100, , True
-      Caption         =   "Button"
+      AutoLayout      =   Button7, 3, <Parent>, 3, False, +1.00, 4, 1, 414, , True
+      AutoLayout      =   Button7, 8, , 0, False, +1.00, 4, 1, 30, , True
+      Caption         =   "Border 1px"
+      CaptionColor    =   &c000000
+      ControlCount    =   0
       Enabled         =   True
-      Height          =   30.0
-      Left            =   110
+      Height          =   30
+      Left            =   40
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
-      Top             =   415
+      TintColor       =   ""
+      Top             =   414
       Visible         =   True
-      Width           =   100.0
+      Width           =   100
+   End
+   Begin MobileButton Button8
+      AccessibilityHint=   ""
+      AccessibilityLabel=   ""
+      AutoLayout      =   Button8, 1, Button6, 1, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   Button8, 7, , 0, False, +1.00, 4, 1, 100, , True
+      AutoLayout      =   Button8, 10, Button7, 10, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   Button8, 8, , 0, False, +1.00, 4, 1, 30, , True
+      Caption         =   "Border 0.5px"
+      CaptionColor    =   &c000000
+      ControlCount    =   0
+      Enabled         =   True
+      Height          =   30
+      Left            =   180
+      LockedInPosition=   False
+      Scope           =   0
+      TextFont        =   ""
+      TextSize        =   0
+      TintColor       =   ""
+      Top             =   414
+      Visible         =   True
+      Width           =   100
    End
 End
-#tag EndIOSView
+#tag EndMobileScreen
 
 #tag WindowCode
 #tag EndWindowCode
 
-#tag Events Button1
+#tag Events btBackgroundColor
 	#tag Event
-		Sub Open()
+		Sub Opening()
 		  
 		  Me.SetBackgroundColorXC(&c06BEBD)
-		  Me.TextColor = &cFFFFFF
+		  Me.CaptionColor = &cFFFFFF
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events Button2
+#tag Events btCornerRadius
 	#tag Event
-		Sub Open()
+		Sub Opening()
 		  
 		  Me.SetBackgroundColorXC(&c06BEBD)
 		  Me.SetCornerRadiusXC(8)
-		  Me.TextColor = &cFFFFFF
+		  Me.CaptionColor = &cFFFFFF
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events Button3
+#tag Events btCaptionAndImage
 	#tag Event
-		Sub Open()
+		Sub Opening()
 		  '
 		  'Dim img As iOSImage = ExtensionsXC.ImageOriginal(img_green_pattern)
 		  'Me.SetBackdropXC(img)
 		  
 		  Me.SetBackgroundColorXC(&cFB010600)
-		  Me.SetTintColor(&cFFFFFF)
-		  Me.TextColor = &cF7f6f5
+		  
+		  Me.TintColor = &cFFFFFF
+		  Me.CaptionColor = &cF7f6f5
 		  Dim insets As ExtensionsXC.xcUIEdgeInsets
 		  insets.Left = 0
 		  insets.Top = 0
@@ -198,10 +237,10 @@ End
 #tag EndEvents
 #tag Events Button4
 	#tag Event
-		Sub Open()
+		Sub Opening()
 		  
 		  Me.SetBackgroundColorXC(&cDFE2E200)
-		  Me.TextColor = &c2E2E2E00
+		  Me.CaptionColor = &c2E2E2E00
 		  Me.Caption = "First line" + &u0A + "Second line"
 		  Me.SetTextAlignmentXC(ControlExtensionsXC.NSTextAlignment.center)
 		  Me.SetLineBreakModeXC(ControlExtensionsXC.NSLineBreakMode.WordWrap)
@@ -211,7 +250,7 @@ End
 #tag EndEvents
 #tag Events Button5
 	#tag Event
-		Sub Open()
+		Sub Opening()
 		  
 		  Me.SetBackgroundColorXC(&cDFE2E200)
 		End Sub
@@ -219,7 +258,7 @@ End
 #tag EndEvents
 #tag Events Button6
 	#tag Event
-		Sub Open()
+		Sub Opening()
 		  
 		  Me.SetBackgroundColorXC(&cDFE2E200)
 		  Me.AdjustsFontSizeToFitWidthXC
@@ -228,7 +267,7 @@ End
 #tag EndEvents
 #tag Events Button7
 	#tag Event
-		Sub Open()
+		Sub Opening()
 		  
 		  Me.SetBorderWidthXC(1.0)
 		  Me.SetBorderColorXC(&cFF0000AA)
@@ -236,13 +275,31 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
+#tag Events Button8
+	#tag Event
+		Sub Opening()
+		  
+		  Me.SetBorderWidthXC(1.0/ExtensionsXC.MainScreenScaleXC)
+		  Me.SetBorderColorXC(&cFF0000AA)
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag ViewBehavior
 	#tag ViewProperty
-		Name="LargeTitleMode"
+		Name="BackButtonCaption"
+		Visible=true
+		Group="Behavior"
+		InitialValue=""
+		Type="String"
+		EditorType="MultiLineEditor"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="LargeTitleDisplayMode"
 		Visible=true
 		Group="Behavior"
 		InitialValue="2"
-		Type="LargeTitleDisplayModes"
+		Type="MobileScreen.LargeTitleDisplayModes"
 		EditorType="Enum"
 		#tag EnumValues
 			"0 - Automatic"
@@ -251,12 +308,36 @@ End
 		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="BackButtonTitle"
+		Name="TintColor"
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="Text"
-		EditorType="MultiLineEditor"
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="HasNavigationBar"
+		Visible=true
+		Group="Behavior"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="TabBarVisible"
+		Visible=true
+		Group="Behavior"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Index"
@@ -283,14 +364,6 @@ End
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="NavigationBarVisible"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="Boolean"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
 		Name="Super"
 		Visible=true
 		Group="ID"
@@ -303,15 +376,7 @@ End
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="iOSImage"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="TabTitle"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="Text"
+		Type="Picture"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
@@ -319,7 +384,7 @@ End
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="Text"
+		Type="String"
 		EditorType="MultiLineEditor"
 	#tag EndViewProperty
 	#tag ViewProperty

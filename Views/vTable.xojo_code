@@ -1,53 +1,59 @@
-#tag IOSView
-Begin iosView vTable Implements iOSTableDataSource,iOSTableDataSourceEditing
-   BackButtonTitle =   ""
+#tag MobileScreen
+Begin MobileScreen vTable Implements iOSMobileTableDataSource,iOSMobileTableDataSourceEditing
+   BackButtonCaption=   ""
    Compatibility   =   ""
-   LargeTitleMode  =   "2"
+   ControlCount    =   0
+   HasNavigationBar=   True
+   LargeTitleDisplayMode=   2
    Left            =   0
-   NavigationBarVisible=   True
-   TabIcon         =   ""
-   TabTitle        =   ""
+   TabBarVisible   =   True
+   TabIcon         =   0
+   TintColor       =   "&h00000000"
    Title           =   "Table"
    Top             =   0
-   Begin iOSTable Table1
+   Begin iOSMobileTable Table1
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
       AllowRefresh    =   False
+      AllowSearch     =   False
       AutoLayout      =   Table1, 4, BottomLayoutGuide, 4, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Table1, 1, <Parent>, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Table1, 3, TopLayoutGuide, 3, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Table1, 7, <Parent>, 7, False, +1.00, 4, 1, 0, , True
+      ControlCount    =   0
       EditingEnabled  =   False
       EditingEnabled  =   False
+      Enabled         =   True
       EstimatedRowHeight=   -1
-      Format          =   "1"
-      Height          =   415.0
+      Format          =   1
+      Height          =   503
       Left            =   0
       LockedInPosition=   True
       Scope           =   0
       SectionCount    =   0
+      TintColor       =   ""
       Top             =   65
       Visible         =   True
-      Width           =   320.0
+      Width           =   320
    End
 End
-#tag EndIOSView
+#tag EndMobileScreen
 
 #tag WindowCode
 	#tag Method, Flags = &h0
-		Sub AddRow(section As Integer, text As Text, detail As Text, Accessory As iOSTableCellData.AccessoryTypes, tag As Auto, image As iOSImage = nil)
+		Sub AddRow(section As Integer, title As Text, detail As Text, Accessory As MobileTableCellData.AccessoryTypes, tag As Auto, image As iOSImage = nil)
 		  
-		  'section As Integer, Text As Text, detail As Text, Accessory As iOSTableCellData.AccessoryTypes = iOSTableCellData.AccessoryTypes.Disclosure, tag As Auto, image As iOSImage = Nil
+		  'section As Integer, Text As Text, detail As Text, Accessory As MobileTableCellData.AccessoryTypes = MobileTableCellData.AccessoryTypes.Disclosure, tag As Auto, image As iOSImage = Nil
 		  
 		  dim nd As new Dictionary
-		  nd.Value("text") = Text
+		  nd.Value("text") = title
 		  nd.Value("detail") = detail
 		  nd.Value("accessory") = Accessory
 		  nd.Value("image") = image
 		  nd.Value("tag") = tag
 		  
 		  
-		  Dim rows() As xojo.Core.Dictionary
+		  Dim rows() As Dictionary
 		  
 		  if sections(section).HasKey("rows") then
 		    rows = sections(section).Value("rows")
@@ -63,9 +69,9 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub AddSection(title As text, tag As Auto = nil)
+		Sub AddSection(title As String, tag As Auto = nil)
 		  
-		  Dim d As new xojo.Core.Dictionary
+		  Dim d As new Dictionary
 		  d.Value("title") = title
 		  d.Value("tag") = tag
 		  d.Value("collapsed") = False
@@ -86,8 +92,22 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function RowCount(table as iOSTable, section As Integer) As Integer
-		  // Part of the iOSTableDataSource interface.
+		Function AllowRowEditing(table As iOSMobileTable, section As Integer, row As Integer) As Boolean
+		  
+		  
+		  
+		  Select Case Me.RowData(table, section, row).Tag
+		    
+		  Case "slide"
+		    
+		    Return True
+		  End Select
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function RowCount(table as iOSMobileTable, section As Integer) As Integer
+		  // Part of the iOSMobileTableDataSource interface.
 		  
 		  #Pragma Unused table
 		  
@@ -95,13 +115,13 @@ End
 		    Return 0
 		  End If
 		  
-		  Dim sectionDic As xojo.Core.Dictionary = sections(section)
+		  Dim sectionDic As Dictionary = sections(section)
 		  
 		  
 		  If sectionDic.HasKey("rows") Then
 		    
 		    
-		    Dim rows() As xojo.Core.Dictionary = sections(section).Value("rows")
+		    Dim rows() As Dictionary = sections(section).Value("rows")
 		    
 		    
 		    Return rows.Ubound + 1
@@ -114,10 +134,10 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function RowData(table as iOSTable, section As Integer, row As Integer) As iOSTableCellData
-		  // Part of the iOSTableDataSource interface.
+		Function RowData(table As iOSMobileTable, section As Integer, row As Integer) As MobileTableCellData
+		  // Part of the iOSMobileTableDataSource interface.
 		  
-		  Dim cell As iOSTableCellData
+		  Dim cell As MobileTableCellData
 		  Dim rows() As Dictionary = sections(section).Value("rows")
 		  
 		  
@@ -167,8 +187,8 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub RowEditingCompleted(table As iOSTable, section As Integer, row As Integer, action As iOSTable.RowEditingStyles)
-		  // Part of the iOSTableDataSourceEditing interface.
+		Sub RowEditingCompleted(table As iOSMobileTable, section As Integer, row As Integer, action As iOSMobileTable.RowEditingStyles)
+		  // Part of the iOSMobileTableDataSourceEditing interface.
 		  
 		  #Pragma Unused table
 		  #Pragma Unused section
@@ -179,8 +199,8 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function RowIsEditable(table As iOSTable, section As Integer, row As Integer) As Boolean
-		  // Part of the iOSTableDataSourceEditing interface.
+		Function RowIsEditable(table As iOSMobileTable, section As Integer, row As Integer) As Boolean
+		  // Part of the iOSMobileTableDataSourceEditing interface.
 		  
 		  Select Case Me.RowData(table, section, row).Tag
 		    
@@ -192,8 +212,8 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function SectionCount(table as iOSTable) As Integer
-		  // Part of the iOSTableDataSource interface.
+		Function SectionCount(table as iOSMobileTable) As Integer
+		  // Part of the iOSMobileTableDataSource interface.
 		  #Pragma Unused table
 		  
 		  Return sections.Ubound+1
@@ -203,8 +223,8 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function SectionTitle(table as iOSTable, section As Integer) As Text
-		  // Part of the iOSTableDataSource interface.
+		Function SectionTitle(table As iOSMobileTable, section As Integer) As String
+		  // Part of the iOSMobileTableDataSource interface.
 		  
 		  #Pragma Unused table
 		  
@@ -216,7 +236,7 @@ End
 
 
 	#tag Property, Flags = &h1
-		Protected sections() As xojo.Core.Dictionary
+		Protected sections() As Dictionary
 	#tag EndProperty
 
 
@@ -224,34 +244,43 @@ End
 
 #tag Events Table1
 	#tag Event
-		Sub Open()
+		Sub Opening()
 		  
 		  Dim section As Integer
 		  
 		  section = Self.AddSection("Custom Action Button")
-		  Self.AddRow(section, "Slide me to the left", "", iOSTableCellData.AccessoryTypes.None, "slide")
-		  
+		  Self.AddRow(section, "Slide me to the left", "", MobileTableCellData.AccessoryTypes.None, "slide")
+		  #if False
+		    
+		    Self.AddRow(section, "Slide me to the left", "", MobileTableCellData.AccessoryTypes.None, "slide")
+		    
+		  #endif
 		  
 		  section = Self.AddSection("Table Style")
-		  Self.AddRow(section, "Cell font", "", iOSTableCellData.AccessoryTypes.None, "font")
-		  Self.AddRow(section, "Cell color", "", iOSTableCellData.AccessoryTypes.None, "cellcolor")
-		  Self.AddRow(section, "Cell text color", "", iOSTableCellData.AccessoryTypes.None, "textcolor")
-		  Self.AddRow(section, "Cell detail color", "Detail text", iOSTableCellData.AccessoryTypes.None, "detailcolor")
-		  Self.AddRow(section, "Cell selected color", "", iOSTableCellData.AccessoryTypes.None, "selectedcolor")
-		  Self.AddRow(section, "This is wrapped text that will appear on two lines", "", iOSTableCellData.AccessoryTypes.None, "wrap")
-		  Self.AddRow(section, "No selection", "", iOSTableCellData.AccessoryTypes.None, "noselect")
+		  Self.AddRow(section, "Cell font", "", MobileTableCellData.AccessoryTypes.None, "font")
+		  Self.AddRow(section, "Cell color", "", MobileTableCellData.AccessoryTypes.None, "cellcolor")
+		  Self.AddRow(section, "Cell text color", "", MobileTableCellData.AccessoryTypes.None, "textcolor")
+		  Self.AddRow(section, "Cell detail color", "Detail text", MobileTableCellData.AccessoryTypes.None, "detailcolor")
+		  Self.AddRow(section, "Cell selected color", "", MobileTableCellData.AccessoryTypes.None, "selectedcolor")
+		  Self.AddRow(section, "This is wrapped text that will appear on two lines", "", MobileTableCellData.AccessoryTypes.None, "wrap")
+		  Self.AddRow(section, "No selection", "", MobileTableCellData.AccessoryTypes.None, "noselect")
 		  
 		  
 		  section = Self.AddSection("Table Options")
-		  Self.AddRow(section, "Allow Selection", "", iOSTableCellData.AccessoryTypes.Checkmark, "selection")
-		  Self.AddRow(section, "Enable Bounce", "", iOSTableCellData.AccessoryTypes.Checkmark, "bounce")
-		  Self.AddRow(section, "Hide Separators", "", iOSTableCellData.AccessoryTypes.none, "separators")
-		  Self.AddRow(section, "Hide Remaining Separators", "", iOSTableCellData.AccessoryTypes.none, "remaining")
+		  Self.AddRow(section, "Allow Selection", "", MobileTableCellData.AccessoryTypes.Checkmark, "selection")
+		  
+		  
+		  Self.AddRow(section, "Enable Bounce", "", MobileTableCellData.AccessoryTypes.Checkmark, "bounce")
+		  Self.AddRow(section, "Enable Scroll", "", MobileTableCellData.AccessoryTypes.Checkmark, "scroll")
+		  Self.AddRow(section, "Hide Separators", "", MobileTableCellData.AccessoryTypes.none, "separators")
+		  Self.AddRow(section, "Separator Color", "", MobileTableCellData.AccessoryTypes.none, "SeparatorColor")
+		  Self.AddRow(section, "Hide Remaining Separators", "", MobileTableCellData.AccessoryTypes.none, "remaining")
 		  
 		  
 		  
 		  section = Self.AddSection("Other")
-		  Self.AddRow(section, "Flash scroll indicators", "", iOSTableCellData.AccessoryTypes.none, "flash")
+		  Self.AddRow(section, "Flash scroll indicators", "", MobileTableCellData.AccessoryTypes.none, "flash")
+		  Self.AddRow(section, "Get ScrollPosition", "", MobileTableCellData.AccessoryTypes.none, "scrollposition")
 		  
 		  Me.DataSource = Self
 		  
@@ -259,26 +288,35 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Function ActionsForRow(section As Integer, row As Integer) As iOSTableRowAction()
+		Function ApplyActionsForRow(section As Integer, row As Integer) As iOSMobileTableRowAction()
 		  
-		  Dim cell As iOSTableCellData = Me.RowData(section, row)
+		  Dim cell As MobileTableCellData = Me.RowCellData(section, row)
 		  
 		  If cell.Tag = Nil Then
 		    Return Nil
 		  End If
 		  
-		  Dim actions() As iOSTableRowAction
+		  Dim actions() As iOSMobileTableRowAction
 		  
 		  Select Case cell.Tag
 		    
 		  Case "slide"
 		    
-		    //Creating a row action with no text
-		    Dim action As iOSTableRowAction
-		    action = New iOSTableRowAction(iOSTableRowAction.Styles.Normal, "", Nil)
-		    action.SetIconXC(ic8_camera, &c21FE8000)
-		    
+		    Dim action As iOSMobileTableRowAction
+		    action = New iOSMobileTableRowAction(iOSMobileTableRowAction.Styles.Normal, "First", Nil)
+		    action.SetBackgroundColorXC(&cFF8D0000)
 		    actions.Append action
+		    
+		    action = New iOSMobileTableRowAction(iOSMobileTableRowAction.Styles.Normal, "Second", Nil)
+		    action.SetBackgroundColorXC(&c68B1FF00)
+		    actions.Append action
+		    
+		    //Creating a row action with no text
+		    'Dim action As iOSMobileTableRowAction
+		    'action = New iOSMobileTableRowAction(iOSMobileTableRowAction.Styles.Normal, "", Nil)
+		    'action.SetIconXC(ic8_camera, &c21FE8000)
+		    
+		    'actions.Append action
 		    Return actions
 		    
 		    
@@ -286,12 +324,12 @@ End
 		End Function
 	#tag EndEvent
 	#tag Event
-		Sub Action(section As Integer, row As Integer)
+		Sub SelectionChanged(section As Integer, row As Integer)
 		  
-		  Dim cell As iOSTableCellData = Me.RowData(section, row)
+		  Dim cell As MobileTableCellData = Me.RowCellData(section, row)
 		  
 		  Dim value As Boolean
-		  If cell.AccessoryType = iOSTableCellData.AccessoryTypes.None Then
+		  If cell.AccessoryType = MobileTableCellData.AccessoryTypes.None Then
 		    value = True
 		  Else
 		    value = False
@@ -302,6 +340,9 @@ End
 		  Case "Bounce"
 		    
 		    Me.setBouncesXC(value)
+		    
+		  Case "Scroll"
+		    me.SetScrollEnabledXC(value)
 		    
 		  Case "selection"
 		    Me.SetAllowsSelectionXC(value)
@@ -316,10 +357,17 @@ End
 		    
 		  Case "separators"
 		    
-		    If Not value Then
+		    If value Then
 		      Me.SetSeparatorStyleXC(TableExtensionsXC.separatorStyle.singleLine)
 		    Else
 		      Me.SetSeparatorStyleXC(TableExtensionsXC.separatorStyle.none)
+		    End If
+		    
+		  Case "SeparatorColor"
+		    If not value then
+		      me.SetSeparatorColorXC(&cFF0000)
+		    Else
+		      me.SetSeparatorColorXC(&cDDDDDD)
 		    End If
 		    
 		    
@@ -327,6 +375,13 @@ End
 		    Me.FlashScrollIndicatorsXC
 		    Me.UnselectTableRowXC
 		    Return
+		    
+		  Case "scrollposition"
+		    Dim pos() as Integer = me.GetScrollPositionXC
+		    Dim rows() As Dictionary = sections(section).Value("rows")
+		    Dim nd As Dictionary = rows(row)
+		    nd.Value("detail") = pos(0).ToString + ":" + pos(1).ToString
+		    
 		    
 		  Else
 		    Me.UnselectTableRowXC
@@ -338,18 +393,26 @@ End
 		  Dim rows() As Dictionary = sections(section).Value("rows")
 		  Dim nd As Dictionary = rows(row)
 		  
-		  nd.Value("accessory") = If(value, iOSTableCellData.AccessoryTypes.Checkmark, iOSTableCellData.AccessoryTypes.None)
+		  nd.Value("accessory") = If(value, MobileTableCellData.AccessoryTypes.Checkmark, MobileTableCellData.AccessoryTypes.None)
 		  Me.ReloadRow(section, row)
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
 	#tag ViewProperty
-		Name="LargeTitleMode"
+		Name="BackButtonCaption"
+		Visible=true
+		Group="Behavior"
+		InitialValue=""
+		Type="String"
+		EditorType="MultiLineEditor"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="LargeTitleDisplayMode"
 		Visible=true
 		Group="Behavior"
 		InitialValue="2"
-		Type="LargeTitleDisplayModes"
+		Type="MobileScreen.LargeTitleDisplayModes"
 		EditorType="Enum"
 		#tag EnumValues
 			"0 - Automatic"
@@ -358,12 +421,36 @@ End
 		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="BackButtonTitle"
+		Name="TintColor"
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="Text"
-		EditorType="MultiLineEditor"
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="HasNavigationBar"
+		Visible=true
+		Group="Behavior"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="TabBarVisible"
+		Visible=true
+		Group="Behavior"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Index"
@@ -390,14 +477,6 @@ End
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="NavigationBarVisible"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="Boolean"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
 		Name="Super"
 		Visible=true
 		Group="ID"
@@ -410,15 +489,7 @@ End
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="iOSImage"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="TabTitle"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="Text"
+		Type="Picture"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
@@ -426,7 +497,7 @@ End
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="Text"
+		Type="String"
 		EditorType="MultiLineEditor"
 	#tag EndViewProperty
 	#tag ViewProperty

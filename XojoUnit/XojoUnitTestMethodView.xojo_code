@@ -2,7 +2,7 @@
 Begin iosView XojoUnitTestMethodView
    BackButtonTitle =   ""
    Compatibility   =   ""
-   LargeTitleMode  =   "2"
+   LargeTitleMode  =   2
    Left            =   0
    NavigationBarVisible=   True
    TabIcon         =   ""
@@ -20,8 +20,8 @@ Begin iosView XojoUnitTestMethodView
       EditingEnabled  =   False
       EditingEnabled  =   False
       EstimatedRowHeight=   -1
-      Format          =   "0"
-      Height          =   415.0
+      Format          =   0
+      Height          =   503.0
       Left            =   0
       LockedInPosition=   False
       Scope           =   0
@@ -83,7 +83,7 @@ End
 		      detail.TestNameLabel.Text = tr.TestName
 		      detail.TestResultLabel.Text = tr.Result
 		      detail.TestResultsArea.Text = tr.Message
-		      detail.TestDurationLabel.Text = tr.Duration.ToText(Locale.Current, "#,##0.0000000") + "s"
+		      detail.TestDurationLabel.Text = tr.Duration.ToText(Xojo.core.Locale.Current, "#,##0.0000000") + "s"
 		    End If
 		  End If
 		End Sub

@@ -1,5 +1,5 @@
 #tag Module
-Protected Module SegmentedControlExtensionsXC
+Protected Module SegmentedControlExtensionsXC_API1
 	#tag Method, Flags = &h0, Description = 43616C6C2066726F6D20694F53566965772E4163746976617465206576656E742E2041646A757374732074686520666F6E742073697A65206163636F7264696E6720746F20617661696C61626C65207769647468
 		Sub AdjustFontSizeToFitWidthXC(extends seg As iOSSegmentedControl)
 		  //Requires UIKit
@@ -98,8 +98,8 @@ Protected Module SegmentedControlExtensionsXC
 	#tag Method, Flags = &h0
 		Sub SetNormalColorXC(extends seg As iOSSegmentedControl, c As color)
 		  
-		  Declare Sub setBackgroundImage_ Lib "UIKit.framework" selector "setBackgroundImage:forState:barMetrics:" (obj_id As ptr, image As ptr, state As UIControlState, barMetrics As Integer)
-		  setBackgroundImage_(seg.Handle, imageWithColor(new UIColor(c)), UIControlState.Normal, 0)
+		  Declare Sub setBackgroundImage_ Lib "UIKit.framework" selector "setBackgroundImage:forState:barMetrics:" (obj_id As ptr, image As ptr, state As SegmentedControlExtensionsXC.UIControlState, barMetrics As Integer)
+		  setBackgroundImage_(seg.Handle, imageWithColor(new UIColor(c)), SegmentedControlExtensionsXC.UIControlState.Normal, 0)
 		  
 		  
 		End Sub
@@ -111,9 +111,9 @@ Protected Module SegmentedControlExtensionsXC
 		  
 		  
 		  Declare Sub setDividerImage Lib "UIKit.framework" selector "setDividerImage:forLeftSegmentState:rightSegmentState:barMetrics:" _
-		  (obj_id As ptr, image As ptr, leftSegmentState As UIControlState, rightSegmentState As UIControlState, barMetrics As Integer)
+		  (obj_id As ptr, image As ptr, leftSegmentState As SegmentedControlExtensionsXC.UIControlState, rightSegmentState As SegmentedControlExtensionsXC.UIControlState, barMetrics As Integer)
 		  
-		  setDividerImage(seg.Handle, ImageWithColor(UIColor.ClearColor), UIControlState.Normal, UIControlState.Normal, 0)
+		  setDividerImage(seg.Handle, ImageWithColor(UIColor.ClearColor), SegmentedControlExtensionsXC.UIControlState.Normal, SegmentedControlExtensionsXC.UIControlState.Normal, 0)
 		  
 		  
 		  
@@ -123,9 +123,9 @@ Protected Module SegmentedControlExtensionsXC
 	#tag Method, Flags = &h0
 		Sub SetSelectedColorXC(extends seg As iOSSegmentedControl, c as color)
 		  
-		  Declare Sub setBackgroundImage_ Lib "UIKit.framework" selector "setBackgroundImage:forState:barMetrics:" (obj_id As ptr, image As ptr, state As UIControlState, barMetrics As Integer)
+		  Declare Sub setBackgroundImage_ Lib "UIKit.framework" selector "setBackgroundImage:forState:barMetrics:" (obj_id As ptr, image As ptr, state As SegmentedControlExtensionsXC.UIControlState, barMetrics As Integer)
 		  
-		  setBackgroundImage_(seg.Handle, imageWithColor(New UIColor(c)), UIControlState.Selected, 0)
+		  setBackgroundImage_(seg.Handle, imageWithColor(New UIColor(c)), SegmentedControlExtensionsXC.UIControlState.Selected, 0)
 		  
 		End Sub
 	#tag EndMethod
@@ -144,7 +144,7 @@ Protected Module SegmentedControlExtensionsXC
 		    
 		    
 		    Declare Sub setTitleTextAttributes Lib "UIKit" selector "setTitleTextAttributes:forState:" _
-		    (obj_id As ptr, att As ptr, state As UIControlState)
+		    (obj_id As ptr, att As ptr, state As SegmentedControlExtensionsXC.UIControlState)
 		    
 		    setTitleTextAttributes(seg.Handle, nsDic, state)
 		    
@@ -157,14 +157,6 @@ Protected Module SegmentedControlExtensionsXC
 		  #EndIf
 		End Sub
 	#tag EndMethod
-
-
-	#tag Enum, Name = UIControlState, Type = Integer, Flags = &h1
-		Normal = 0
-		  Highlighted = 1
-		  Disabled = 2
-		Selected = 4
-	#tag EndEnum
 
 
 	#tag ViewBehavior

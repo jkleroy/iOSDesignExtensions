@@ -1,15 +1,42 @@
 #tag Class
 Protected Class App
-Inherits IOSApplication
+Inherits MobileApplication
 	#tag CompatibilityFlags = TargetIOS
+	#tag Event
+		Sub Opening()
+		  
+		  'Dim b As new iosbitmap(10, 10, 2)
+		  'Dim g As iosgraphics = b.Graphics
+		  'g.Scale(b.Scale, b.Scale)
+		  'g.FillColor = &cFF0000
+		  'g.FillRect(0, 0, g.Width, g.Height)
+		  '
+		  'Dim aniOSImage As iOSImage = b.image
+		  'Dim p As Picture = Picture.FromHandle(aniOSImage.Handle)
+		  '
+		  'Dim r As RGBSurface = p.RGBSurface
+		  '
+		  'Dim val As color = r.Pixel(0, 0)
+		  '
+		  'Dim p2 As new Picture(10, 10)
+		  '
+		  'Dim img2 As iOSImage = p2
+		End Sub
+	#tag EndEvent
+
+
 	#tag Note, Name = README
 		## History
 		
-		### Version 1.8.1 - Released 2021-03-26
-		* Added unit testing of each extension method
+		### Version 2.0 - Released 2021-04-15
+		* Now compatible with Xojo 2020r2+ (iOS Framework API 2)
+		** Added MobileButton.SetRoleXC
+		** Added MobileDateTimePicker.SetDatePickerStyleXC
+		** Added MobileTableCellData.SetTextAlignmentXC
+		** Added MobileScreen.SetNavBarTintColorXC
+		** Added MobileScreen.SetNavBarTranslucentXC
+		** Added MobileScreen.PushToSafariControllerXC
 		
-		### Version 1.8 - Released 2020-11-06
-		* Ready for future versions of Xojo
 		
 		### Version 1.?? - Released 2020-??
 		* Added iOSDatePicker.SetTextColorXC
@@ -92,6 +119,110 @@ Inherits IOSApplication
 
 
 	#tag ViewBehavior
+		#tag ViewProperty
+			Name="Name"
+			Visible=true
+			Group="ID"
+			InitialValue=""
+			Type="String"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Index"
+			Visible=true
+			Group="ID"
+			InitialValue="-2147483648"
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Super"
+			Visible=true
+			Group="ID"
+			InitialValue=""
+			Type="String"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Left"
+			Visible=true
+			Group="Position"
+			InitialValue="0"
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Top"
+			Visible=true
+			Group="Position"
+			InitialValue="0"
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="_LaunchOptionsHandled"
+			Visible=false
+			Group="Behavior"
+			InitialValue="False"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="TintColor"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="ColorGroup"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="NonReleaseVersion"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="MinorVersion"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="MajorVersion"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="IconBadgeNumber"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="BugVersion"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="StageCode"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
 		#tag ViewProperty
 			Name="currentSplitMode"
 			Visible=false

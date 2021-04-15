@@ -1,4 +1,4 @@
-#tag IOSScreen
+#tag IOSLayout
 	OrientationPortrait = True
 	OrientationLandscapeLeft = True
 	OrientationLandscapeRight = True
@@ -18,4 +18,4 @@
 				Icon = 0
 			End ScreenContent
 	End ScreenContent
-#tag EndIOSScreen
+#tag EndIOSLayout

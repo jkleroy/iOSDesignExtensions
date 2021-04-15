@@ -1,7 +1,7 @@
 #tag Module
-Protected Module HTMLViewerExtensionsXC
-	#tag DelegateDeclaration, Flags = &h0
-		Delegate Sub ExecuteJavascriptDelegateXC(result As Auto, error As RuntimeException)
+Protected Module HTMLViewerExtensionsXC_API1
+	#tag DelegateDeclaration, Flags = &h1
+		Protected Delegate Sub ExecuteJavascriptDelegateXC(result As Auto, error As RuntimeException)
 	#tag EndDelegateDeclaration
 
 	#tag Method, Flags = &h0

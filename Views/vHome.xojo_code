@@ -1,67 +1,73 @@
-#tag IOSView
-Begin iosView vHome Implements iOSTableDataSource
-   BackButtonTitle =   ""
+#tag MobileScreen
+Begin MobileScreen vHome Implements iOSMobileTableDataSource
+   BackButtonCaption=   ""
    Compatibility   =   ""
-   LargeTitleMode  =   "2"
+   ControlCount    =   0
+   HasNavigationBar=   True
+   LargeTitleDisplayMode=   2
    Left            =   0
-   NavigationBarVisible=   True
-   TabIcon         =   ""
-   TabTitle        =   ""
+   TabBarVisible   =   True
+   TabIcon         =   0
+   TintColor       =   "&h00000000"
    Title           =   "iOS Design Extensions"
    Top             =   0
-   Begin iOSTable Table
+   Begin iOSMobileTable Table
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
       AllowRefresh    =   False
+      AllowSearch     =   False
       AutoLayout      =   Table, 1, <Parent>, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Table, 2, <Parent>, 2, False, +1.00, 4, 1, -0, , True
       AutoLayout      =   Table, 3, TopLayoutGuide, 3, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Table, 4, BottomLayoutGuide, 4, False, +1.00, 4, 1, 0, , True
+      ControlCount    =   0
       EditingEnabled  =   False
       EditingEnabled  =   False
+      Enabled         =   True
       EstimatedRowHeight=   -1
-      Format          =   "1"
-      Height          =   415.0
+      Format          =   1
+      Height          =   503
       Left            =   0
       LockedInPosition=   True
       Scope           =   0
       SectionCount    =   0
+      TintColor       =   ""
       Top             =   65
       Visible         =   True
-      Width           =   320.0
+      Width           =   320
    End
 End
-#tag EndIOSView
+#tag EndMobileScreen
 
 #tag WindowCode
 	#tag Event
-		Sub Activate()
+		Sub Activated()
 		  
 		  
 		  Self.SetLargeTitlesXC(False, ViewExtensionsXC.LargeTitleDisplayMode.automatic)
 		  
-		  If Self.ParentSplitView <> Nil and app.currentSplitMode <> ViewExtensionsXC.UISplitViewControllerDisplayMode.PrimaryHidden and _
-		    app.currentSplitMode <> ViewExtensionsXC.UISplitViewControllerDisplayMode.PrimaryOverlay then
+		  If Self.ParentSplitView <> Nil and app.currentSplitMode <> ViewExtensionsXC.UISplitViewControllerDisplayMode.secondaryOnly and _
+		    app.currentSplitMode <> ViewExtensionsXC.UISplitViewControllerDisplayMode.oneOverSecondary then
 		    
-		    Self.ParentSplitView.setDisplayMode(ViewExtensionsXC.UISplitViewControllerDisplayMode.AllVisible)
-		    app.currentSplitMode = ViewExtensionsXC.UISplitViewControllerDisplayMode.AllVisible
+		    Self.ParentSplitView.setDisplayModeXC(ViewExtensionsXC.UISplitViewControllerDisplayMode.oneBesideSecondary)
+		    app.currentSplitMode = ViewExtensionsXC.UISplitViewControllerDisplayMode.oneBesideSecondary
 		    
 		  End If
 		End Sub
 	#tag EndEvent
 
 	#tag Event
-		Sub Open()
-		  me.BackButtonTitle = " "
+		Sub Opening()
+		  me.BackButtonCaption = " "
 		  
 		End Sub
 	#tag EndEvent
 
 
 	#tag Method, Flags = &h21
-		Private Sub AddRow(section As Integer, text As Text, detail As Text, Accessory As iOSTableCellData.AccessoryTypes, tag As Auto, image As iOSImage = nil)
+		Private Sub AddRow(section As Integer, text As Text, detail As Text, Accessory As MobileTableCellData.AccessoryTypes, tag As Auto, image As Picture = nil)
 		  
-		  'section As Integer, Text As Text, detail As Text, Accessory As iOSTableCellData.AccessoryTypes = iOSTableCellData.AccessoryTypes.Disclosure, tag As Auto, image As iOSImage = Nil
+		  'section As Integer, Text As Text, detail As Text, Accessory As MobileTableCellData.AccessoryTypes = MobileTableCellData.AccessoryTypes.Disclosure, tag As Auto, image As iOSImage = Nil
 		  
 		  dim nd As new Dictionary
 		  nd.Value("text") = Text
@@ -71,7 +77,7 @@ End
 		  nd.Value("tag") = tag
 		  
 		  
-		  Dim rows() As xojo.Core.Dictionary
+		  Dim rows() As Dictionary
 		  
 		  if sections(section).HasKey("rows") then
 		    rows = sections(section).Value("rows")
@@ -89,7 +95,7 @@ End
 	#tag Method, Flags = &h21
 		Private Sub AddSection(title As text, tag As Auto = nil)
 		  
-		  Dim d As new xojo.Core.Dictionary
+		  Dim d As new Dictionary
 		  d.Value("title") = title
 		  d.Value("tag") = tag
 		  d.Value("collapsed") = False
@@ -124,21 +130,21 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Function RowCount(table as iOSTable, section As Integer) As Integer
+		Private Function RowCount(table as iOSMobileTable, section As Integer) As Integer
 		  #Pragma Unused table
 		  
-		  // Part of the iOSTableDataSource interface.
+		  // Part of the iOSMobileTableDataSource interface.
 		  
 		  If section = -1 Or section > sections.Ubound Then
 		    Return 0
 		  End If
 		  
-		  Dim sectionDic As xojo.Core.Dictionary = sections(section)
+		  Dim sectionDic As Dictionary = sections(section)
 		  
 		  
 		  If sectionDic.HasKey("rows") Then
 		    
-		    Dim rows() As xojo.Core.Dictionary = sections(section).Value("rows")
+		    Dim rows() As Dictionary = sections(section).Value("rows")
 		    
 		    Return rows.Ubound + 1
 		    
@@ -150,10 +156,10 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Function RowData(table as iOSTable, section As Integer, row As Integer) As iOSTableCellData
-		  // Part of the iOSTableDataSource interface.
+		Private Function RowData(table As iOSMobileTable, section As Integer, row As Integer) As MobileTableCellData
+		  // Part of the iOSMobileTableDataSource interface.
 		  
-		  Dim cell As iOSTableCellData
+		  Dim cell As MobileTableCellData
 		  Dim rows() As Dictionary = sections(section).Value("rows")
 		  
 		  Dim rowDic As Dictionary = rows(row)
@@ -164,7 +170,7 @@ End
 		  cell.Text = rowDic.lookup("text", "")
 		  cell.DetailText = rowDic.lookup("detail", "")
 		  cell.Image = rowDic.Lookup("image", Nil)
-		  cell.AccessoryType = rowDic.lookup("accessory", iOSTableCellData.AccessoryTypes.None)
+		  cell.AccessoryType = rowDic.lookup("accessory", MobileTableCellData.AccessoryTypes.None)
 		  cell.Tag = rowDic.lookup("tag", Nil)
 		  
 		  
@@ -173,8 +179,8 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Function SectionCount(table as iOSTable) As Integer
-		  // Part of the iOSTableDataSource interface.
+		Private Function SectionCount(table as iOSMobileTable) As Integer
+		  // Part of the iOSMobileTableDataSource interface.
 		  #Pragma Unused table
 		  
 		  Return sections.Ubound()+1
@@ -182,8 +188,8 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Function SectionTitle(table as iOSTable, section As Integer) As Text
-		  // Part of the iOSTableDataSource interface.
+		Private Function SectionTitle(table As iOSMobileTable, section As Integer) As String
+		  // Part of the iOSMobileTableDataSource interface.
 		  
 		  #Pragma Unused table
 		  
@@ -194,15 +200,15 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub ShowView(parentView As iOSView, childView As iOSView)
+		Sub ShowView(parentView As MobileScreen, childView As iOSView)
 		  #Pragma Unused parentView
 		  #Pragma Unused childView
 		End Sub
 	#tag EndMethod
 
 
-	#tag Property, Flags = &h1
-		Protected sections() As xojo.Core.Dictionary
+	#tag Property, Flags = &h0
+		sections() As Dictionary
 	#tag EndProperty
 
 
@@ -210,25 +216,34 @@ End
 
 #tag Events Table
 	#tag Event
-		Sub Open()
+		Sub Opening()
 		  
 		  Dim section As Integer
-		  Dim accessory As iOSTableCellData.AccessoryTypes = iOSTableCellData.AccessoryTypes.Disclosure
+		  Dim accessory As MobileTableCellData.AccessoryTypes = MobileTableCellData.AccessoryTypes.Disclosure
+		  Dim img As Picture
 		  
 		  section = AddSection("Button Extensions")
 		  
-		  AddRow(section, "Buttons", "", accessory, GetTypeInfo(vButtons), ImageExtensionsXC.ImageWithColorXC(ic8_button, &c0F7FFE00))
+		  img = ic8_button
+		  AddRow(section, "Buttons", "", accessory, GetTypeInfo(vButtons), ImageExtensionsXC.ImageWithColorXC(img, &c0F7FFE00))
 		  
 		  
 		  section = AddSection("HTMLViewer Extensions")
-		  AddRow(section, "HTMLViewer Examples", "", accessory, GetTypeInfo(vHTMLViewer), ImageExtensionsXC.ImageWithColorXC(ic8_html, &cE34E25))
+		  img = ic8_html
+		  AddRow(section, "HTMLViewer Examples", "", accessory, GetTypeInfo(vHTMLViewer), ImageExtensionsXC.ImageWithColorXC(img, &cE34E25))
 		  
 		  section = AddSection("TabBar Extensions")
 		  AddRow(section, "TabBar Examples", "", accessory, "tabbar")
 		  
 		  
+		  section = AddSection("Image Extensions")
+		  img = ic8_picture
+		  AddRow(section, "Image Examples", "", accessory, GetTypeInfo(vImageExtensions), ImageExtensionsXC.ImageWithColorXC(img, Color.Blue))
+		  
+		  
 		  section = AddSection("Scroll Extensions")
-		  AddRow(section, "Scroll Examples", "", accessory, GetTypeInfo(vScrollView), ImageExtensionsXC.ImageWithColorXC(ic8_updown, &cFC800800))
+		  img = ic8_updown
+		  AddRow(section, "Scroll Examples", "", accessory, GetTypeInfo(vScrollView), ImageExtensionsXC.ImageWithColorXC(img, &cFC800800))
 		  
 		  
 		  section = AddSection("Table Extensions")
@@ -253,8 +268,11 @@ End
 		  
 		  section = AddSection("Modal")
 		  AddRow(section, "Modal View", "", accessory, "modal") 
-		  AddRow(section, "Modal View Flip", "", accessory, "modalflip", ic8_flip_vertical)
-		  AddRow(section, "Modal View Dissolve", "", accessory, "modaldissolve", ic8_direction)
+		  AddRow(section, "Modal View (Swipe disabled)", "", accessory, "modalfull") 
+		  
+		  //Deprecatedd
+		  'AddRow(section, "Modal View Flip", "", accessory, "modalflip", ic8_flip_vertical)
+		  'AddRow(section, "Modal View Dissolve", "", accessory, "modaldissolve", ic8_direction)
 		  'AddRow(section, "Modal View Curl", "", accessory, "modalcurl", ic8_paper)
 		  
 		  section = AddSection("UI Examples")
@@ -270,13 +288,13 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub Action(section As Integer, row As Integer)
+		Sub SelectionChanged(section As Integer, row As Integer)
 		  
-		  Dim tag As Auto = Me.RowData(section, row).Tag
+		  Dim tag As Auto = Me.RowCellData(section, row).Tag
 		  
 		  If Self.ParentSplitView <> Nil Then
 		    
-		    Self.ParentSplitView.setDisplayMode(ViewExtensionsXC.UISplitViewControllerDisplayMode.AllVisible)
+		    Self.ParentSplitView.setDisplayModeXC(ViewExtensionsXC.UISplitViewControllerDisplayMode.oneBesideSecondary)
 		    
 		  End If
 		  
@@ -314,6 +332,13 @@ End
 		      Dim v As New vModal
 		      Self.PushToShowModalXC(v, ViewExtensionsXC.UIModalPresentationStyle.formSheet)
 		      
+		    Case "modalfull"
+		      
+		      Dim v As New vModal
+		      Self.PushToShowModalXC(v, ViewExtensionsXC.UIModalPresentationStyle.formSheet)
+		      
+		      v.SetFullModalXC
+		      
 		    Case "modaldissolve"
 		      
 		      Dim v As New vModal
@@ -348,7 +373,7 @@ End
 		      tView.AddTab(v2)
 		      
 		      
-		      App.CurrentScreen.Content = tView
+		      App.CurrentLayout.Content = tView
 		      
 		    Case "netflix"
 		      
@@ -356,17 +381,17 @@ End
 		      
 		      Dim v1 As New vNetflixHome
 		      v1.TabIcon = ic8_home
-		      v1.TabTitle = "Home"
+		      'v1.TabTitle = "Home"
 		      tView.AddTab(v1)
 		      
 		      
 		      Dim v2 As New vNetflixMore
-		      v2.TabTitle = "More"
 		      v2.TabIcon = ic_menu
+		      'v2.TabTitle = "More"
 		      tView.AddTab(v2)
 		      
 		      
-		      App.CurrentScreen.Content = tView
+		      App.CurrentLayout.Content = tView
 		      
 		    End Select
 		    
@@ -391,7 +416,7 @@ End
 		    End If
 		  Next c
 		  
-		  Dim v As iOSView = useConstructor.Invoke
+		  Dim v As MobileScreen = useConstructor.Invoke
 		  
 		  If Self.ParentSplitView.Available Then
 		    Self.ParentSplitView.Detail = v
@@ -405,11 +430,19 @@ End
 #tag EndEvents
 #tag ViewBehavior
 	#tag ViewProperty
-		Name="LargeTitleMode"
+		Name="BackButtonCaption"
+		Visible=true
+		Group="Behavior"
+		InitialValue=""
+		Type="String"
+		EditorType="MultiLineEditor"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="LargeTitleDisplayMode"
 		Visible=true
 		Group="Behavior"
 		InitialValue="2"
-		Type="LargeTitleDisplayModes"
+		Type="MobileScreen.LargeTitleDisplayModes"
 		EditorType="Enum"
 		#tag EnumValues
 			"0 - Automatic"
@@ -418,12 +451,36 @@ End
 		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="BackButtonTitle"
+		Name="TintColor"
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="Text"
-		EditorType="MultiLineEditor"
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="HasNavigationBar"
+		Visible=true
+		Group="Behavior"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="TabBarVisible"
+		Visible=true
+		Group="Behavior"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Index"
@@ -450,14 +507,6 @@ End
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="NavigationBarVisible"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="Boolean"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
 		Name="Super"
 		Visible=true
 		Group="ID"
@@ -470,15 +519,7 @@ End
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="iOSImage"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="TabTitle"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="Text"
+		Type="Picture"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
@@ -486,7 +527,7 @@ End
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="Text"
+		Type="String"
 		EditorType="MultiLineEditor"
 	#tag EndViewProperty
 	#tag ViewProperty
