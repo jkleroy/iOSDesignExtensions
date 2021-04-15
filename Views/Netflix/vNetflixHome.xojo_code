@@ -1,12 +1,14 @@
-#tag IOSView
-Begin iosView vNetflixHome
-   BackButtonTitle =   ""
+#tag MobileScreen
+Begin MobileScreen vNetflixHome
+   BackButtonCaption=   ""
    Compatibility   =   ""
-   LargeTitleMode  =   "2"
+   ControlCount    =   0
+   HasNavigationBar=   True
+   LargeTitleDisplayMode=   2
    Left            =   0
-   NavigationBarVisible=   True
-   TabIcon         =   ""
-   TabTitle        =   ""
+   TabBarVisible   =   True
+   TabIcon         =   0
+   TintColor       =   0
    Title           =   "Netflix"
    Top             =   0
    Begin iOSScrollableArea ScrollableArea1
@@ -16,7 +18,7 @@ Begin iosView vNetflixHome
       AutoLayout      =   ScrollableArea1, 2, <Parent>, 2, False, +1.00, 4, 1, -0, , True
       AutoLayout      =   ScrollableArea1, 3, TopLayoutGuide, 3, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   ScrollableArea1, 4, BottomLayoutGuide, 4, False, +1.00, 4, 1, 0, , True
-      Height          =   415.0
+      Height          =   503.0
       Left            =   0
       LockedInPosition=   False
       Scope           =   2
@@ -25,27 +27,28 @@ Begin iosView vNetflixHome
       Visible         =   True
       Width           =   320.0
    End
-   Begin iOSToolButton tbChromecast
+   Begin MobileToolbarButton tbChromecast
       Caption         =   ""
       Enabled         =   True
       Height          =   22
-      Image           =   "1243428863"
-      Image           =   "1243428863"
-      Left            =   290
+      Icon            =   1243428863
+      Left            =   304
       LockedInPosition=   False
       Scope           =   2
       Top             =   32
-      Type            =   "1001"
+      Type            =   1001
       Width           =   22.0
    End
 End
-#tag EndIOSView
+#tag EndMobileScreen
 
 #tag WindowCode
 	#tag Event
-		Sub Activate()
+		Sub Activated()
 		  //Set the navigation color
-		  Self.SetNavBarColorXC(NetflixSettings.NavColor, NetflixSettings.IconColor, False, True)
+		  Self.SetNavBarColorXC(NetflixSettings.NavColor, NetflixSettings.IconColor, NetflixSettings.IconColor, False, True)
+		  
+		  self.SetStatusBarStyleXC(AppExtensionsXC.UIStatusBarStyle.LightContent)
 		  
 		  //Remove large titles
 		  Self.SetLargeTitlesXC(False)
@@ -64,28 +67,28 @@ End
 	#tag EndEvent
 
 	#tag Event
-		Sub Open()
+		Sub Opening()
 		  //Set the view background color
 		  Self.SetBackgroundColorXC(NetflixSettings.BackColor)
 		  
-		  Dim tb As iOSToolButton = iOSToolButton.NewPlain("Exit")
-		  Self.LeftNavigationToolbar.Add tb
+		  Dim tb As MobileToolbarButton = new MobileToolbarButton(MobileToolbarButton.Types.Done, "Exit")
+		  Self.LeftNavigationToolbar.AddButton tb
 		  
 		  tbChromecast.Enabled = False
 		End Sub
 	#tag EndEvent
 
 	#tag Event
-		Sub ToolbarPressed(button As iOSToolButton)
+		Sub ToolbarButtonPressed(button As MobileToolbarButton)
 		  #Pragma Unused button
 		  
 		  If Self.ParentSplitView.Available Then
-		    Dim scr As New iPadScreen
-		    app.CurrentScreen.Content =  scr.Content
+		    Dim scr As New iPadLayout
+		    app.CurrentLayout.Content =  scr.Content
 		    
 		  Else
-		    Dim scr As New iphoneScreen
-		    App.CurrentScreen.Content = scr.Content
+		    Dim scr As New iPhoneLayout
+		    App.CurrentLayout.Content = scr.Content
 		    
 		  End If
 		End Sub
@@ -96,11 +99,19 @@ End
 
 #tag ViewBehavior
 	#tag ViewProperty
-		Name="LargeTitleMode"
+		Name="BackButtonCaption"
+		Visible=true
+		Group="Behavior"
+		InitialValue=""
+		Type="String"
+		EditorType="MultiLineEditor"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="LargeTitleDisplayMode"
 		Visible=true
 		Group="Behavior"
 		InitialValue="2"
-		Type="LargeTitleDisplayModes"
+		Type="MobileScreen.LargeTitleDisplayModes"
 		EditorType="Enum"
 		#tag EnumValues
 			"0 - Automatic"
@@ -109,12 +120,36 @@ End
 		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="BackButtonTitle"
+		Name="TintColor"
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="Text"
-		EditorType="MultiLineEditor"
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="HasNavigationBar"
+		Visible=true
+		Group="Behavior"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="TabBarVisible"
+		Visible=true
+		Group="Behavior"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Index"
@@ -141,14 +176,6 @@ End
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="NavigationBarVisible"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="Boolean"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
 		Name="Super"
 		Visible=true
 		Group="ID"
@@ -161,15 +188,7 @@ End
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="iOSImage"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="TabTitle"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="Text"
+		Type="Picture"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
@@ -177,7 +196,7 @@ End
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="Text"
+		Type="String"
 		EditorType="MultiLineEditor"
 	#tag EndViewProperty
 	#tag ViewProperty

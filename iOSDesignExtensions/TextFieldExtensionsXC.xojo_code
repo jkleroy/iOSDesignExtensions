@@ -20,14 +20,14 @@ Protected Module TextFieldExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 526574756E73207468652063757272656E74207363726F6C6C20706F736974696F6E
-		Function GetScrollPositionXC(extends area As iOSTextArea) As Xojo.Core.Point
+		Function GetScrollPositionXC(extends area As MobileTextArea) As Point
 		  
-		  Dim offset As xojo.core.point
+		  Dim offset As point
 		  
 		  
 		  Declare Function ContentOffset_ Lib "UIKit.framework" selector "contentOffset" (obj_id As ptr) As ExtensionsXC.xcCGPoint
 		  Dim pt As ExtensionsXC.xcCGPoint = ContentOffset_(area.Handle)
-		  offset = New Xojo.Core.Point(pt.x, pt.y)
+		  offset = New Point(pt.x, pt.y)
 		  
 		  
 		  
@@ -36,7 +36,7 @@ Protected Module TextFieldExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function GetSelectedRangeXC(Extends area As iOSTextArea) As TextFieldExtensionsXC.NSRangeXC
+		Function GetSelectedRangeXC(Extends area As MobileTextArea) As TextFieldExtensionsXC.NSRangeXC
 		  
 		  
 		  Declare Function selectedRange_ Lib "UIKit.framework" selector "selectedRange" (obj_id As ptr) As NSRangeXC
@@ -46,7 +46,7 @@ Protected Module TextFieldExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 5363726F6C6C7320746F207468652070726F76696465642072616E676520706F736974696F6E2E
-		Sub ScrollToRangeXC(Extends area As iOSTextArea, range As TextFieldExtensionsXC.NSRangeXC)
+		Sub ScrollToRangeXC(Extends area As MobileTextArea, range As TextFieldExtensionsXC.NSRangeXC)
 		  
 		  
 		  
@@ -57,7 +57,7 @@ Protected Module TextFieldExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 5363726F6C6C7320746F2074686520646566696E656420636F6F7264696E61746573
-		Sub ScrollToXC(extends area as iOSTextArea, point As Xojo.Core.Point, animated As Boolean = True)
+		Sub ScrollToXC(extends area As MobileTextArea, point As Point, animated As Boolean = True)
 		  
 		  Declare Sub setContentOffsetAnimated Lib "UIKit.framework" selector "setContentOffset:animated:" (id As ptr, value As ExtensionsXC.xcCGPoint, animated As Boolean)
 		  
@@ -70,7 +70,7 @@ Protected Module TextFieldExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetAutocapitalizationTypeXC(extends field As iOSTextField, value As TextFieldExtensionsXC.UITextAutocapitalizationType)
+		Sub SetAutocapitalizationTypeXC(extends field As MobileTextField, value As TextFieldExtensionsXC.UITextAutocapitalizationType)
 		  
 		  Declare Sub setAutocapitalizationType_ Lib "UIKit.framework" selector "setAutocapitalizationType:" (obj_id As ptr, value As UITextAutoCapitalizationType)
 		  
@@ -79,7 +79,7 @@ Protected Module TextFieldExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetAutocorrectionTypeXC(extends area As iOSTextArea, value As TextFieldExtensionsXC.UITextAutocorrectionType)
+		Sub SetAutocorrectionTypeXC(extends area As MobileTextArea, value As TextFieldExtensionsXC.UITextAutocorrectionType)
 		  
 		  Declare Sub setAutocorrectionType_ Lib "UIKit.framework" selector "setAutocorrectionType:" (obj_id As ptr, value As UITextAutocorrectionType)
 		  
@@ -88,7 +88,7 @@ Protected Module TextFieldExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetAutocorrectionTypeXC(extends field As iOSTextField, value As TextFieldExtensionsXC.UITextAutocorrectionType)
+		Sub SetAutocorrectionTypeXC(extends field As MobileTextField, value As TextFieldExtensionsXC.UITextAutocorrectionType)
 		  
 		  Declare Sub setAutocorrectionType_ Lib "UIKit.framework" selector "setAutocorrectionType:" (obj_id As ptr, value As UITextAutocorrectionType)
 		  
@@ -97,13 +97,19 @@ Protected Module TextFieldExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetBorderColorXC(extends field As iOSTextField, C As Color)
+		Sub SetBorderColorXC(extends field As MobileTextField, C As Color)
 		  
 		  
 		  Declare Function layer_ Lib "UIKit.framework" selector "layer" (id As ptr) As Ptr
 		  Dim layer As ptr = layer_(field.Handle)
 		  
-		  Dim uic As New UIColor(C)
+		  Dim uic As UIKit.UIColor
+		  
+		  if c.Alpha = 255 then
+		    uic = UIKit.UIColor.ClearColor
+		  else
+		    uic = new UIKit.UIColor(c)
+		  end if
 		  
 		  declare sub setBorderColor lib "UIKit.framework" selector "setBorderColor:" (obj_id as ptr, col as ptr)
 		  setBorderColor(layer, uic.CGColor)
@@ -111,7 +117,7 @@ Protected Module TextFieldExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetBorderStyleXC(extends field As iOSTextField, style As UITextFieldBorderStyle)
+		Sub SetBorderStyleXC(extends field As MobileTextField, style As TextFieldExtensionsXC.UITextFieldBorderStyle)
 		  
 		  
 		  declare sub setBorderStyle lib "UIKit.framework" selector "setBorderStyle:" (obj_id as ptr, st as UITextFieldBorderStyle)
@@ -120,7 +126,7 @@ Protected Module TextFieldExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetBorderWidthXC(extends field As iOSTextField, value As Double)
+		Sub SetBorderWidthXC(extends field As MobileTextField, value As Double)
 		  
 		  
 		  Declare Function layer_ Lib "UIKit.framework" selector "layer" (id As ptr) As Ptr
@@ -133,23 +139,23 @@ Protected Module TextFieldExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetKeyboardAppearanceXC(extends field As iOSTextField, appearance As TextFieldExtensionsXC.UIKeyboardAppearance)
+		Sub SetKeyboardAppearanceXC(extends field As MobileTextField, appearance As TextFieldExtensionsXC.UIKeyboardAppearance)
 		  Declare Sub setKeyboardAppearance Lib "UIKit.framework" selector "setKeyboardAppearance:" (id As ptr, value As UIKeyboardAppearance)
 		  setKeyboardAppearance field.Handle, appearance
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetKeyboardTypeXC(extends field As iOSTextField, type As TextFieldExtensionsXC.UIKeyboardType)
+		Sub SetKeyboardTypeXC(extends field As MobileTextField, type As TextFieldExtensionsXC.UIKeyboardType)
 		  Declare Sub setKeyboardType Lib "UIKit.framework" selector "setKeyboardType:" (id As ptr, value As UIKeyboardType)
 		  setKeyboardType field.Handle, type
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetLeftViewIconXC(extends field as iOSTextField, image As iOSImage, addIndent As Integer = 0)
+		Sub SetLeftViewIconXC(extends field As MobileTextField, image As Picture, addIndent As Double = 0.0)
 		  
-		  dim spacerView As new iOSImageView
+		  dim spacerView As new MobileImageViewer
 		  spacerView.Image = image
 		  
 		  Declare Function frame_ Lib "UIKit.framework" selector "frame" (obj_id As ptr) As ExtensionsXC.xcCGRect
@@ -176,9 +182,9 @@ Protected Module TextFieldExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 536574732074686520706C616365686F6C64657220616E6420706C616365686F6C64657220636F6C6F722E2052657175697265732055494B6974
-		Sub SetPlaceholderColorXC(extends field as iOSTextField, placeholder As Text, aColor As Color)
+		Sub SetPlaceholderColorXC(extends field As MobileTextField, placeholder As String, aColor As Color)
 		  
-		  if placeholder.trim.Empty then Return
+		  if placeholder.trim.isEmpty then Return
 		  
 		  #If ExtensionsXC.kUseUIKit
 		    
@@ -229,7 +235,7 @@ Protected Module TextFieldExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetReturnKeyTypeXC(extends field as iOSTextField, value as TextFieldExtensionsXC.UIReturnKeyType)
+		Sub SetReturnKeyTypeXC(extends field as MobileTextField, value as TextFieldExtensionsXC.UIReturnKeyType)
 		  
 		  Declare Sub setReturnKeyType_ Lib "UIKit.framework" selector "setReturnKeyType:" (obj_id As ptr, value As UIReturnKeyType)
 		  setReturnKeyType_(field.Handle, value)
@@ -237,7 +243,7 @@ Protected Module TextFieldExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 446566696E657320696620746865205465787441726561207363726F6C6C7320746F2074686520746F70207768656E20646F75626C652074617070696E67207468652074696D6520696E64696361746F722E
-		Sub SetScrollsToTopXC(extends area as iOSTextArea, value As Boolean)
+		Sub SetScrollsToTopXC(extends area As MobileTextArea, value As Boolean)
 		  
 		  Declare Sub scrollsToTop_ Lib "UIKit.framework" selector "setScrollsToTop:" (obj_id As ptr, value As Boolean)
 		  
@@ -246,7 +252,7 @@ Protected Module TextFieldExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetSelectedRangeXC(Extends area As iOSTextArea, range As TextFieldExtensionsXC.NSRangeXC)
+		Sub SetSelectedRangeXC(Extends area As MobileTextArea, range As TextFieldExtensionsXC.NSRangeXC)
 		  
 		  
 		  Declare Sub selectedRange Lib "UIKit.framework" selector "setSelectedRange:" (obj_id As ptr, rng As NSRangeXC)
@@ -260,7 +266,7 @@ Protected Module TextFieldExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetTabOrder(extends field As iOSTextField, value As Integer)
+		Sub SetTabOrder(extends field As MobileTextField, value As Integer)
 		  
 		  declare sub setTag lib "UIKit.framework" selector "setTag:" (obj_id as ptr, value as Integer)
 		  
@@ -269,7 +275,7 @@ Protected Module TextFieldExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, CompatibilityFlags = (TargetConsole and (Target32Bit or Target64Bit)) or  (TargetWeb and (Target32Bit or Target64Bit)) or  (TargetDesktop and (Target32Bit or Target64Bit)) or  (TargetIOS and (Target32Bit or Target64Bit))
-		Sub SetTextIndentXC(extends field as iOSTextField, indent As Integer)
+		Sub SetTextIndentXC(extends field as MobileTextField, indent As Integer)
 		  
 		  Declare Function alloc Lib "Foundation.framework" selector "alloc" (clsRef As ptr) As ptr
 		  Declare Function NSClassFromString Lib "Foundation.framework" (clsName As CFStringRef) As ptr
@@ -303,7 +309,7 @@ Protected Module TextFieldExtensionsXC
 
 	#tag Note, Name = About
 		
-		For better organization of code, this module has iOSTextField and iOSTextArea extensions.
+		For better organization of code, this module has MobileTextField and MobileTextArea extensions.
 		
 	#tag EndNote
 

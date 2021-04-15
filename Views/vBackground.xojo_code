@@ -1,40 +1,42 @@
-#tag IOSView
-Begin iosView vBackground
-   BackButtonTitle =   ""
+#tag MobileScreen
+Begin MobileScreen vBackground
+   BackButtonCaption=   ""
    Compatibility   =   ""
-   LargeTitleMode  =   "2"
+   ControlCount    =   0
+   HasNavigationBar=   True
+   LargeTitleDisplayMode=   2
    Left            =   0
-   NavigationBarVisible=   True
-   TabIcon         =   ""
-   TabTitle        =   ""
+   TabBarVisible   =   True
+   TabIcon         =   0
+   TintColor       =   0
    Title           =   "View Background"
    Top             =   0
 End
-#tag EndIOSView
+#tag EndMobileScreen
 
 #tag WindowCode
 	#tag Event
-		Sub Open()
+		Sub Opening()
 		  
 		  SetColor
 		  
-		  Dim tb As iOSToolButton
+		  Dim tb As MobileToolbarButton
 		  
-		  tb = iOSToolButton.NewPlain("Color")
+		  tb = new MobileToolbarButton(MobileToolbarButton.Types.Plain, "Color")
 		  tb.Tag = "color"
-		  Self.Toolbar.Add tb
+		  Self.Toolbar.AddButton tb
 		  
-		  tb = iOSToolButton.FlexibleSpace
-		  Self.Toolbar.Add tb
+		  tb = new MobileToolbarButton(MobileToolbarButton.Types.FlexibleSpace)
+		  Self.Toolbar.AddButton tb
 		  
-		  tb = iOSToolButton.NewPlain("Pattern")
+		  tb = new MobileToolbarButton(MobileToolbarButton.Types.Plain, "Pattern")
 		  tb.Tag = "Pattern"
-		  Self.Toolbar.Add tb
+		  Self.Toolbar.AddButton tb
 		End Sub
 	#tag EndEvent
 
 	#tag Event
-		Sub ToolbarPressed(button As iOSToolButton)
+		Sub ToolbarButtonPressed(button As MobileToolbarButton)
 		  
 		  Select Case button.Tag
 		    
@@ -67,11 +69,19 @@ End
 
 #tag ViewBehavior
 	#tag ViewProperty
-		Name="LargeTitleMode"
+		Name="BackButtonCaption"
+		Visible=true
+		Group="Behavior"
+		InitialValue=""
+		Type="String"
+		EditorType="MultiLineEditor"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="LargeTitleDisplayMode"
 		Visible=true
 		Group="Behavior"
 		InitialValue="2"
-		Type="LargeTitleDisplayModes"
+		Type="MobileScreen.LargeTitleDisplayModes"
 		EditorType="Enum"
 		#tag EnumValues
 			"0 - Automatic"
@@ -80,12 +90,36 @@ End
 		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="BackButtonTitle"
+		Name="TintColor"
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="Text"
-		EditorType="MultiLineEditor"
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="HasNavigationBar"
+		Visible=true
+		Group="Behavior"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="TabBarVisible"
+		Visible=true
+		Group="Behavior"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Index"
@@ -112,14 +146,6 @@ End
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="NavigationBarVisible"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="Boolean"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
 		Name="Super"
 		Visible=true
 		Group="ID"
@@ -132,15 +158,7 @@ End
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="iOSImage"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="TabTitle"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="Text"
+		Type="Picture"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
@@ -148,7 +166,7 @@ End
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="Text"
+		Type="String"
 		EditorType="MultiLineEditor"
 	#tag EndViewProperty
 	#tag ViewProperty

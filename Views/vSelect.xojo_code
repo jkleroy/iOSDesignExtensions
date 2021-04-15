@@ -1,70 +1,74 @@
-#tag IOSView
-Begin iosView vSelect
-   BackButtonTitle =   ""
+#tag MobileScreen
+Begin MobileScreen vSelect
+   BackButtonCaption=   ""
    Compatibility   =   ""
-   LargeTitleMode  =   "2"
+   ControlCount    =   0
+   HasNavigationBar=   True
+   LargeTitleDisplayMode=   2
    Left            =   0
-   NavigationBarVisible=   True
-   TabIcon         =   ""
-   TabTitle        =   ""
+   TabBarVisible   =   True
+   TabIcon         =   0
+   TintColor       =   ""
    Title           =   ""
    Top             =   0
-   Begin iOSLabel Label1
+   Begin MobileLabel Label1
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      Alignment       =   0
       AutoLayout      =   Label1, 9, <Parent>, 9, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Label1, 8, , 0, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   Label1, 10, <Parent>, 10, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Label1, 7, , 0, False, +1.00, 4, 1, 300, , True
+      ControlCount    =   0
       Enabled         =   True
-      Height          =   30.0
+      Height          =   30
       Left            =   10
-      LineBreakMode   =   "0"
+      LineBreakMode   =   0
       LockedInPosition=   False
       Scope           =   2
       Text            =   "Select an example from the list on the left"
-      TextAlignment   =   "1"
-      TextColor       =   "&c00000000"
+      TextColor       =   &c00000000
       TextFont        =   ""
       TextSize        =   0
-      Top             =   225
+      TintColor       =   ""
+      Top             =   269
       Visible         =   True
-      Width           =   300.0
+      Width           =   300
    End
 End
-#tag EndIOSView
+#tag EndMobileScreen
 
 #tag WindowCode
 	#tag Event
-		Sub Open()
+		Sub Opening()
 		  
-		  Dim tb As iOSToolButton = iOSToolButton.NewPlain("FullScreen")
+		  Dim tb As MobileToolbarButton = new MobileToolbarButton(MobileToolbarButton.Types.Plain, "FullScreen")
 		  tb.Tag = "fullscreen"
-		  self.RightNavigationToolbar.Add tb
+		  self.RightNavigationToolbar.AddButton tb
 		  
 		  
-		  tb = iOSToolButton.NewPlain("List")
+		  tb = new MobileToolbarButton(MobileToolbarButton.Types.Plain, "List")
 		  tb.Tag = "menu"
-		  self.LeftNavigationToolbar.Add tb
+		  self.LeftNavigationToolbar.AddButton tb
 		End Sub
 	#tag EndEvent
 
 	#tag Event
-		Sub ToolbarPressed(button As iOSToolButton)
+		Sub ToolbarButtonPressed(button As MobileToolbarButton)
 		  
 		  Select case button.Tag
 		    
 		  Case "fullscreen"
-		    if app.currentSplitMode = ViewExtensionsXC.UISplitViewControllerDisplayMode.PrimaryHidden then
-		      Self.ParentSplitView.setDisplayMode(ViewExtensionsXC.UISplitViewControllerDisplayMode.Automatic)
+		    if app.currentSplitMode = ViewExtensionsXC.UISplitViewControllerDisplayMode.secondaryOnly then
+		      Self.ParentSplitView.setDisplayModeXC(ViewExtensionsXC.UISplitViewControllerDisplayMode.Automatic)
 		      app.currentSplitMode = ViewExtensionsXC.UISplitViewControllerDisplayMode.Automatic
 		    Else
-		      Self.ParentSplitView.setDisplayMode(ViewExtensionsXC.UISplitViewControllerDisplayMode.PrimaryHidden)
-		      app.currentSplitMode = ViewExtensionsXC.UISplitViewControllerDisplayMode.PrimaryHidden
+		      Self.ParentSplitView.setDisplayModeXC(ViewExtensionsXC.UISplitViewControllerDisplayMode.secondaryOnly)
+		      app.currentSplitMode = ViewExtensionsXC.UISplitViewControllerDisplayMode.secondaryOnly
 		    end if
 		    
 		  Case "menu"
-		    Self.ParentSplitView.setDisplayMode(ViewExtensionsXC.UISplitViewControllerDisplayMode.PrimaryOverlay)
+		    Self.ParentSplitView.setDisplayModeXC(ViewExtensionsXC.UISplitViewControllerDisplayMode.oneOverSecondary)
 		    
 		  End Select
 		End Sub
@@ -75,11 +79,19 @@ End
 
 #tag ViewBehavior
 	#tag ViewProperty
-		Name="LargeTitleMode"
+		Name="BackButtonCaption"
+		Visible=true
+		Group="Behavior"
+		InitialValue=""
+		Type="String"
+		EditorType="MultiLineEditor"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="LargeTitleDisplayMode"
 		Visible=true
 		Group="Behavior"
 		InitialValue="2"
-		Type="LargeTitleDisplayModes"
+		Type="MobileScreen.LargeTitleDisplayModes"
 		EditorType="Enum"
 		#tag EnumValues
 			"0 - Automatic"
@@ -88,12 +100,36 @@ End
 		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="BackButtonTitle"
+		Name="TintColor"
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="Text"
-		EditorType="MultiLineEditor"
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="HasNavigationBar"
+		Visible=true
+		Group="Behavior"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="TabBarVisible"
+		Visible=true
+		Group="Behavior"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Index"
@@ -120,14 +156,6 @@ End
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="NavigationBarVisible"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="Boolean"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
 		Name="Super"
 		Visible=true
 		Group="ID"
@@ -140,15 +168,7 @@ End
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="iOSImage"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="TabTitle"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="Text"
+		Type="Picture"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
@@ -156,7 +176,7 @@ End
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="Text"
+		Type="String"
 		EditorType="MultiLineEditor"
 	#tag EndViewProperty
 	#tag ViewProperty

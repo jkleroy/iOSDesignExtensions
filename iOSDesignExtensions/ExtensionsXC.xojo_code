@@ -1,7 +1,7 @@
 #tag Module
 Protected Module ExtensionsXC
 	#tag Method, Flags = &h1
-		Protected Function CGRectMake(x As CGFloat, y As CGFloat, width As CGFloat, height As CGFloat) As ExtensionsXC.xcCGRect
+		Protected Function CGRectMake(x As CGFloat, y As CGFloat, width As CGFloat, height As CGFloat) As xcCGRect
 		  
 		  Dim origin As ExtensionsXC.xcCGPoint
 		  origin.x = x
@@ -20,27 +20,6 @@ Protected Module ExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
-		Attributes( deprecated = "Use Image.ImageWithColorXC instead" ) Protected Function ColoredIcon(icon as iOSImage, value as Color) As iOSImage
-		  
-		  
-		  
-		  If icon Is Nil Then Return Nil
-		  
-		  Dim b As New iOSBitmap(Icon.Width, icon.Height, Icon.Scale)
-		  Dim g As iOSGraphics = b.Graphics
-		  Dim tmp As iOSImage = ImageWithMaskXC(icon)
-		  
-		  g.FillColor = value
-		  
-		  g.DrawImage(tmp, 0, 0, tmp.Width*tmp.Scale, tmp.Height*tmp.Scale)
-		  
-		  Return b.Image
-		  
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h1
 		Protected Function GetiOSVersionXC() As Double
 		  
 		  Static sSystemVersion As Double
@@ -52,10 +31,10 @@ Protected Module ExtensionsXC
 		    Declare Function systemversion_ Lib "UIKit.framework" selector "systemVersion" (obj_id As ptr) As CFStringRef
 		    Declare Function NSClassFromString Lib "Foundation" (name As CFStringRef) As Ptr
 		    Dim device As Ptr = currentDevice_(NSClassFromString("UIDevice"))
-		    Dim systemVersion As Text = systemversion_(device)
+		    Dim systemVersion As String = systemversion_(device)
 		    
 		    Try
-		      sSystemVersion = Double.FromText(systemVersion)
+		      sSystemVersion = Double.FromString(systemVersion)
 		    Catch
 		    End Try
 		    
@@ -65,34 +44,14 @@ Protected Module ExtensionsXC
 		End Function
 	#tag EndMethod
 
-	#tag Method, Flags = &h1, Description = 52657475726E7320616E20696D61676520746861742077696C6C20616C776179732072656E646572207573696E6720697473207472756520636F6C6F7273
-		Attributes( deprecated = "Use image.ImageOriginalXC instead" ) Protected Function ImageOriginalXC(image As iOSImage) As iOSImage
-		  
-		  //Creates an image that will draw using the current Fillcolor
-		  
-		  Declare Function imageWithRenderingMode Lib "UIKit.framework" selector "imageWithRenderingMode:" (id As ptr, RenderingMode As Integer) As ptr
-		  
-		  Return iOSImage.FromHandle(imageWithRenderingMode(image.Handle, 1))
-		End Function
-	#tag EndMethod
-
 	#tag Method, Flags = &h1
-		Attributes( deprecated = "Use image.ImageWithMaskXC instead" ) Protected Function ImageWithMaskXC(image As iOSImage) As iOSImage
-		  
-		  //Creates an image that will draw using the current Fillcolor
-		  
-		  Declare Function imageWithRenderingMode lib "UIKit.framework" selector "imageWithRenderingMode:" (id as ptr, RenderingMode as Integer) as ptr
-		  
-		  Return iOSImage.FromHandle(imageWithRenderingMode(image.Handle, 2))
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h1
-		Protected Function LoadConstantXC(frameworkName as Text, constName as Text) As Ptr
+		Protected Function LoadConstantXC(frameworkName as String, constName as String) As Ptr
 		  Declare Function dlsym Lib "/usr/lib/libSystem.dylib" ( handle As Ptr, name As CString ) As ptr
 		  dim libPtr as Ptr = LoadFrameworkXC(frameworkName)
 		  
-		  dim constPtr as Ptr = dlsym(libPtr, constName.ToCString(xojo.core.TextEncoding.UTF8))
+		  Dim cstr As CString = constName
+		  
+		  dim constPtr as Ptr = dlsym(libPtr, cstr)
 		  Return constPtr
 		  
 		  Return nil
@@ -100,8 +59,8 @@ Protected Module ExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
-		Protected Function LoadFrameworkXC(frameworkName as Text) As Ptr
-		  static frameworkHandlesDict as xojo.Core.Dictionary = new xojo.Core.Dictionary
+		Protected Function LoadFrameworkXC(frameworkName as String) As Ptr
+		  static frameworkHandlesDict as Dictionary = new Dictionary
 		  
 		  if frameworkHandlesDict.HasKey(frameworkName) then Return frameworkHandlesDict.Value(frameworkName)
 		  
@@ -111,13 +70,17 @@ Protected Module ExtensionsXC
 		  Const RTLD_LAZY = 1
 		  Const RTLD_GLOBAL = 8
 		  
-		  dim path as Text =  "/System/Library/Frameworks/" + frameworkName + ".framework/" + frameworkName
-		  Dim result As ptr = dlopen(path.ToCString(xojo.core.TextEncoding.UTF8), RTLD_LAZY Or RTLD_GLOBAL )
+		  dim path as String =  "/System/Library/Frameworks/" + frameworkName + ".framework/" + frameworkName
+		  
+		  Dim pathCstr As CString = path
+		  
+		  Dim result As ptr = dlopen(pathCstr, RTLD_LAZY Or RTLD_GLOBAL )
 		  
 		  If result = Nil Then
-		    Dim reason As Text = Text.FromCString(dlerror(), Xojo.Core.TextEncoding.UTF8)
-		    Dim exc As New Xojo.Core.InvalidArgumentException
-		    exc.Reason = reason
+		    'Dim reason As Text = Text.FromCString(dlerror(), Xojo.Core.TextEncoding.UTF8)
+		    Dim reason As String = dlerror
+		    Dim exc As New InvalidArgumentException
+		    exc.message = reason
 		    Raise exc
 		    Return nil
 		  end if
@@ -127,8 +90,22 @@ Protected Module ExtensionsXC
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h1, Description = 52657475726E7320746865207363616C65206F66207468652063757272656E74204D61696E53637265656E
+		Protected Function MainScreenScaleXC() As Double
+		  //declare function NSClassFromString lib "Foundation.Framework" (aClassName as CFStringRef) as Ptr
+		  Declare Function NSClassFromString Lib "Foundation" (aClassName As CFStringRef) As Ptr
+		  Soft Declare Function scale Lib "UIKit" selector "scale" (classRef As Ptr) As CGFloat
+		  Soft Declare Function mainScreen Lib "UIKit" selector "mainScreen" (classRef As Ptr) As ptr
+		  
+		  
+		  Dim scale As Double = scale(mainScreen(NSClassFromString("UIScreen")))
+		  
+		  Return scale
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
-		Sub OpeniOSSettingsXC(extends app As iOSApplication)
+		Sub OpeniOSSettingsXC(extends app As MobileApplication)
 		  #Pragma Unused app
 		  
 		  
@@ -161,7 +138,7 @@ Protected Module ExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
-		Protected Function StringConstantXC(frameworkName as Text, constName as Text) As Text
+		Protected Function StringConstantXC(frameworkName as String, constName as String) As String
 		  Dim constPtr As Ptr = LoadConstantXC(frameworkName, constName)
 		  if constPtr <> nil then
 		    Return constPtr.CFStringRef(0)
@@ -183,21 +160,9 @@ Protected Module ExtensionsXC
 		End Function
 	#tag EndMethod
 
-	#tag Method, Flags = &h1
-		Attributes( deprecated = "Use image.ImageWithMaskXC instaed" ) Protected Function WithMaskXC(extends image As iOSImage) As iOSImage
-		  
-		  //Creates an image that will draw using the current Fillcolor
-		  
-		  Return ImageWithMaskXC(image)
-		End Function
-	#tag EndMethod
-
 
 	#tag Note, Name = History
 		## History
-		
-		### Version 1.8 - Released 2020-11-06
-		* Ready for future versions of Xojo
 		
 		### Version 1.?? - Released 2020-??
 		* Added iOSDatePicker.SetTextColorXC
@@ -278,7 +243,7 @@ Protected Module ExtensionsXC
 	#tag Constant, Name = kUseUIKit, Type = Boolean, Dynamic = False, Default = \"False", Scope = Protected
 	#tag EndConstant
 
-	#tag Constant, Name = kVersion, Type = Text, Dynamic = False, Default = \"1.8.0", Scope = Protected
+	#tag Constant, Name = kVersion, Type = Text, Dynamic = False, Default = \"2.0.0", Scope = Protected
 	#tag EndConstant
 
 

@@ -1,151 +1,169 @@
-#tag IOSView
-Begin iosView vScrollView
-   BackButtonTitle =   ""
+#tag MobileScreen
+Begin MobileScreen vScrollView
+   BackButtonCaption=   ""
    Compatibility   =   ""
-   LargeTitleMode  =   "2"
+   ControlCount    =   0
+   HasNavigationBar=   True
+   LargeTitleDisplayMode=   2
    Left            =   0
-   NavigationBarVisible=   True
-   TabIcon         =   ""
-   TabTitle        =   ""
+   TabBarVisible   =   True
+   TabIcon         =   0
+   TintColor       =   0
    Title           =   "ScrollView"
    Top             =   0
-   Begin iOSScrollableArea Scroll1
+   Begin MobileScrollableArea Scroll1
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
       AutoLayout      =   Scroll1, 8, <Parent>, 8, False, +0.30, 4, 1, 0, , True
       AutoLayout      =   Scroll1, 1, <Parent>, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Scroll1, 2, <Parent>, 2, False, +1.00, 4, 1, -0, , True
       AutoLayout      =   Scroll1, 3, TopLayoutGuide, 3, False, +1.00, 4, 1, 0, , True
-      Height          =   144.0
+      ControlCount    =   0
+      Enabled         =   True
+      Height          =   170
       Left            =   0
       LockedInPosition=   False
       Scope           =   0
       ScrollContent   =   1916108799
+      TintColor       =   ""
       Top             =   65
       Visible         =   True
-      Width           =   320.0
+      Width           =   320
    End
-   Begin iOSButton Button1
+   Begin MobileButton btFlashScrolls
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
-      AutoLayout      =   Button1, 1, <Parent>, 1, False, +1.00, 4, 1, *kStdGapCtlToViewH, , True
-      AutoLayout      =   Button1, 7, , 0, False, +1.00, 4, 1, 100, , True
-      AutoLayout      =   Button1, 3, Scroll1, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
-      AutoLayout      =   Button1, 8, , 0, False, +1.00, 4, 1, 30, , True
+      AutoLayout      =   btFlashScrolls, 1, <Parent>, 1, False, +1.00, 4, 1, *kStdGapCtlToViewH, , True
+      AutoLayout      =   btFlashScrolls, 7, , 0, False, +1.00, 4, 1, 100, , True
+      AutoLayout      =   btFlashScrolls, 3, Scroll1, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
+      AutoLayout      =   btFlashScrolls, 8, , 0, False, +1.00, 4, 1, 30, , True
       Caption         =   "Flash Scrolls"
+      CaptionColor    =   &c000000
+      ControlCount    =   0
       Enabled         =   True
-      Height          =   30.0
+      Height          =   29
       Left            =   20
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
-      Top             =   217
+      TintColor       =   ""
+      Top             =   243
       Visible         =   True
-      Width           =   100.0
+      Width           =   100
    End
-   Begin iOSScrollableArea Scroll2
+   Begin MobileScrollableArea Scroll2
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
       AutoLayout      =   Scroll2, 4, BottomLayoutGuide, 4, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Scroll2, 8, <Parent>, 8, False, +0.30, 4, 1, 0, , True
       AutoLayout      =   Scroll2, 1, Scroll1, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Scroll2, 7, <Parent>, 7, False, +1.00, 4, 1, 0, , True
-      Height          =   144.0
+      ControlCount    =   0
+      Enabled         =   True
+      Height          =   170
       Left            =   0
       LockedInPosition=   False
       Scope           =   0
       ScrollContent   =   734832639
-      Top             =   336
+      TintColor       =   ""
+      Top             =   397
       Visible         =   True
-      Width           =   320.0
+      Width           =   320
    End
-   Begin iOSButton Button2
+   Begin MobileButton btScrollBothToTop
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
-      AutoLayout      =   Button2, 1, Button1, 1, False, +1.00, 4, 1, 0, , True
-      AutoLayout      =   Button2, 7, , 0, False, +1.00, 4, 2, 119, , True
-      AutoLayout      =   Button2, 3, Button1, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
-      AutoLayout      =   Button2, 8, , 0, False, +1.00, 4, 1, 30, , True
+      AutoLayout      =   btScrollBothToTop, 1, btFlashScrolls, 1, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   btScrollBothToTop, 7, , 0, False, +1.00, 4, 2, 119, , True
+      AutoLayout      =   btScrollBothToTop, 3, btFlashScrolls, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
+      AutoLayout      =   btScrollBothToTop, 8, , 0, False, +1.00, 4, 1, 30, , True
       Caption         =   "Scroll both to Bottom"
+      CaptionColor    =   &c000000
+      ControlCount    =   0
       Enabled         =   True
-      Height          =   30.0
+      Height          =   30
       Left            =   20
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
-      Top             =   255
+      TintColor       =   ""
+      Top             =   281
       Visible         =   True
-      Width           =   119.0
+      Width           =   119
    End
-   Begin iOSButton Button3
+   Begin MobileButton btScrollTop2
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
-      AutoLayout      =   Button3, 1, Button2, 1, False, +1.00, 4, 1, 0, , True
-      AutoLayout      =   Button3, 7, , 0, False, +1.00, 4, 2, 119, , True
-      AutoLayout      =   Button3, 3, Button2, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
-      AutoLayout      =   Button3, 8, , 0, False, +1.00, 4, 1, 30, , True
+      AutoLayout      =   btScrollTop2, 1, btScrollBothToTop, 1, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   btScrollTop2, 7, , 0, False, +1.00, 4, 2, 119, , True
+      AutoLayout      =   btScrollTop2, 3, btScrollBothToTop, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
+      AutoLayout      =   btScrollTop2, 8, , 0, False, +1.00, 4, 1, 30, , True
       Caption         =   "Scroll second to top"
+      CaptionColor    =   &c000000
+      ControlCount    =   0
       Enabled         =   True
-      Height          =   30.0
+      Height          =   30
       Left            =   20
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
-      Top             =   293
+      TintColor       =   ""
+      Top             =   319
       Visible         =   True
-      Width           =   119.0
+      Width           =   119
    End
-   Begin iOSLabel Label1
+   Begin MobileLabel Label1
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      Alignment       =   0
       AutoLayout      =   Label1, 8, , 0, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   Label1, 2, swBounce, 1, False, +1.00, 4, 1, -*kStdControlGapH, , True
       AutoLayout      =   Label1, 3, Scroll1, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
       AutoLayout      =   Label1, 7, , 0, False, +1.00, 4, 1, 100, , True
+      ControlCount    =   0
       Enabled         =   True
-      Height          =   30.0
+      Height          =   29
       Left            =   141
-      LineBreakMode   =   "0"
+      LineBreakMode   =   0
       LockedInPosition=   False
       Scope           =   0
       Text            =   "Bounce"
-      TextAlignment   =   "2"
-      TextColor       =   "&c00000000"
+      TextColor       =   &c00000000
       TextFont        =   ""
       TextSize        =   0
-      Top             =   217
+      TintColor       =   ""
+      Top             =   243
       Visible         =   True
-      Width           =   100.0
+      Width           =   100
    End
-   Begin iOSSwitch swBounce
+   Begin MobileSwitch swBounce
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
       AutoLayout      =   swBounce, 8, , 0, True, +1.00, 4, 1, 31, , True
       AutoLayout      =   swBounce, 2, <Parent>, 2, False, +1.00, 4, 1, -*kStdGapCtlToViewH, , True
       AutoLayout      =   swBounce, 3, Label1, 3, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   swBounce, 7, , 0, True, +1.00, 4, 1, 51, , True
+      ControlCount    =   0
       Enabled         =   True
-      Height          =   31.0
+      Height          =   30
       Left            =   249
       LockedInPosition=   False
       Scope           =   0
-      Top             =   217
+      TintColor       =   ""
+      Top             =   243
       Value           =   True
       Visible         =   True
-      Width           =   51.0
+      Width           =   51
    End
 End
-#tag EndIOSView
+#tag EndMobileScreen
 
 #tag WindowCode
 	#tag Event
-		Sub Open()
+		Sub Opening()
 		  
 		  
 		  
@@ -163,9 +181,9 @@ End
 
 #tag EndWindowCode
 
-#tag Events Button1
+#tag Events btFlashScrolls
 	#tag Event
-		Sub Action()
+		Sub Pressed()
 		  
 		  Scroll1.FlashScrollIndicatorsXC
 		  
@@ -173,35 +191,35 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events Button2
+#tag Events btScrollBothToTop
 	#tag Event
-		Sub Action()
+		Sub Pressed()
 		  
-		  Dim frame1, frame2 As Xojo.Core.Rect
+		  Dim frame1, frame2 As Rect
 		  
 		  //We need to get the height of the current content
 		  
-		  frame1 = Scroll1.Content.getFrameXC
-		  frame2 = Scroll2.Content.getFrameXC
+		  frame1 = Scroll1.Container.getFrameXC
+		  frame2 = Scroll2.Container.getFrameXC
 		  
 		  //We also need the height of the scroll itself
 		  Dim scroll1Height As Integer = Scroll1.getFrameXC.Height
 		  Dim scroll2Height As Integer = Scroll2.getFrameXC.Height
 		  
 		  //We need to calculate the difference between content height and scroll height
-		  Scroll1.ScrollToXC(New Xojo.Core.Point(0, frame1.Height - scroll1Height), True)
-		  Scroll2.ScrollToXC(New Xojo.Core.Point(0, frame2.Height - scroll2Height), True)
+		  Scroll1.ScrollToXC(New Point(0, frame1.Height - scroll1Height), True)
+		  Scroll2.ScrollToXC(New Point(0, frame2.Height - scroll2Height), True)
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events Button3
+#tag Events btScrollTop2
 	#tag Event
-		Sub Action()
+		Sub Pressed()
 		  
 		  
 		  
 		  
-		  Scroll2.ScrollToXC(New Xojo.Core.Point(0, 0), True)
+		  Scroll2.ScrollToXC(New Point(0, 0), True)
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -213,18 +231,26 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub Open()
+		Sub Opening()
 		  me.SetOnTintColorXC(&c0F7FFE00)
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
 	#tag ViewProperty
-		Name="LargeTitleMode"
+		Name="BackButtonCaption"
+		Visible=true
+		Group="Behavior"
+		InitialValue=""
+		Type="String"
+		EditorType="MultiLineEditor"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="LargeTitleDisplayMode"
 		Visible=true
 		Group="Behavior"
 		InitialValue="2"
-		Type="LargeTitleDisplayModes"
+		Type="MobileScreen.LargeTitleDisplayModes"
 		EditorType="Enum"
 		#tag EnumValues
 			"0 - Automatic"
@@ -233,12 +259,36 @@ End
 		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="BackButtonTitle"
+		Name="TintColor"
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="Text"
-		EditorType="MultiLineEditor"
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="HasNavigationBar"
+		Visible=true
+		Group="Behavior"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="TabBarVisible"
+		Visible=true
+		Group="Behavior"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Index"
@@ -265,14 +315,6 @@ End
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="NavigationBarVisible"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="Boolean"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
 		Name="Super"
 		Visible=true
 		Group="ID"
@@ -285,15 +327,7 @@ End
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="iOSImage"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="TabTitle"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="Text"
+		Type="Picture"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
@@ -301,7 +335,7 @@ End
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="Text"
+		Type="String"
 		EditorType="MultiLineEditor"
 	#tag EndViewProperty
 	#tag ViewProperty

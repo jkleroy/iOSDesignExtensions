@@ -3,7 +3,7 @@ Begin iosView LaunchScreen
    BackButtonTitle =   ""
    BackgroundColor =   &cFFFFFF00
    Compatibility   =   ""
-   LargeTitleMode  =   "2"
+   LargeTitleMode  =   2
    Left            =   0
    NavigationBarVisible=   False
    TabIcon         =   ""
@@ -18,39 +18,10 @@ End
 
 #tag ViewBehavior
 	#tag ViewProperty
-		Name="LargeTitleMode"
-		Visible=true
-		Group="Behavior"
-		InitialValue="2"
-		Type="LargeTitleDisplayModes"
-		EditorType="Enum"
-		#tag EnumValues
-			"0 - Automatic"
-			"1 - Always"
-			"2 - Never"
-		#tag EndEnumValues
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="BackButtonTitle"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="Text"
-		EditorType="MultiLineEditor"
-	#tag EndViewProperty
-	#tag ViewProperty
 		Name="Index"
 		Visible=true
 		Group="ID"
 		InitialValue="-2147483648"
-		Type="Integer"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Left"
-		Visible=true
-		Group="Position"
-		InitialValue="0"
 		Type="Integer"
 		EditorType=""
 	#tag EndViewProperty
@@ -63,19 +34,43 @@ End
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="NavigationBarVisible"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="Boolean"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
 		Name="Super"
 		Visible=true
 		Group="ID"
 		InitialValue=""
 		Type="String"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Left"
+		Visible=true
+		Group="Position"
+		InitialValue="0"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Top"
+		Visible=true
+		Group="Position"
+		InitialValue="0"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="BackButtonTitle"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Text"
+		EditorType="MultiLineEditor"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="NavigationBarVisible"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Boolean"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
@@ -103,11 +98,16 @@ End
 		EditorType="MultiLineEditor"
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="Top"
+		Name="LargeTitleMode"
 		Visible=true
-		Group="Position"
-		InitialValue="0"
-		Type="Integer"
-		EditorType=""
+		Group="Behavior"
+		InitialValue="2"
+		Type="LargeTitleDisplayModes"
+		EditorType="Enum"
+		#tag EnumValues
+			"0 - Automatic"
+			"1 - Always"
+			"2 - Never"
+		#tag EndEnumValues
 	#tag EndViewProperty
 #tag EndViewBehavior

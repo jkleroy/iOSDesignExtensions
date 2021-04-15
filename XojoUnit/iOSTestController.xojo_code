@@ -14,6 +14,7 @@ Inherits TestController
 		  group = new XojoUnit_LayerExtensions(self, "Layer Extensions")
 		  group = new XojoUnit_ExtensionsXC(self, "Extensions")
 		  group = new XojoUnit_ScrollViewExtensionsXC(self, "ScrollView Extensions")
+		  group = new XojoUnit_SegmentedControlExtensions(self, "SegmentedControl Extensions")
 		End Sub
 	#tag EndEvent
 

@@ -8,7 +8,7 @@ Protected Class TestController
 
 	#tag Method, Flags = &h21
 		Private Sub CalculateDuration()
-		  mFinishMS = Microseconds
+		  mFinishMS = System.Microseconds
 		  
 		End Sub
 	#tag EndMethod
@@ -248,7 +248,7 @@ Protected Class TestController
 
 	#tag Method, Flags = &h21
 		Private Sub ResetDuration()
-		  mStartMS = Microseconds
+		  mStartMS = System.Microseconds
 		  mFinishMS = 0.0
 		  
 		  
@@ -375,7 +375,7 @@ Protected Class TestController
 			Get
 			  Dim duration As Double
 			  If mFinishMS = 0.0 Then
-			    duration = Microseconds - mStartMS
+			    duration = System.Microseconds - mStartMS
 			  Else
 			    duration = mFinishMS - mStartMS
 			  End If

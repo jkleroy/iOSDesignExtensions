@@ -1,15 +1,18 @@
 #tag Module
 Protected Module AccessibilityExtensionsXC
 	#tag Method, Flags = &h0
-		Sub AccessibilityLabelXC(extends tb As iOSToolbutton, value As Text)
+		Sub AccessibilityLabelXC(extends tb As MobileToolbarButton, value As String)
+		  
+		  
 		  Declare sub setAccessibilityLabel lib "Foundation.framework" selector "setAccessibilityLabel:" (obj as ptr, value as CFStringRef)
 		  
 		  setAccessibilityLabel(tb.Handle, value)
+		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub MakeAccessibleXC(extends control As iOSControl, value As Boolean)
+		Sub MakeAccessibleXC(extends control As MobileUIControl, value As Boolean)
 		  Declare sub isAccessibilityElement lib "Foundation" selector "setIsAccessibilityElement:" (obj as ptr, value as boolean)
 		  
 		  isAccessibilityElement(control.Handle, value)

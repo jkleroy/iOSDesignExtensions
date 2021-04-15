@@ -1,7 +1,7 @@
 #tag Module
 Protected Module ButtonExtensionsXC
 	#tag Method, Flags = &h0, Description = 41646A757374732074686520666F6E742073697A65206163636F7264696E6720746F20617661696C61626C65207769647468
-		Sub AdjustsFontSizeToFitWidthXC(extends bt As iOSButton, lines As Integer = -1)
+		Sub AdjustsFontSizeToFitWidthXC(extends bt As MobileButton, lines As Integer = -1)
 		  
 		  Dim label As ptr
 		  
@@ -22,23 +22,32 @@ Protected Module ButtonExtensionsXC
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
-		Sub SetBackdropXC(extends bt As iOSButton, backdrop as iOSImage)
+	#tag Method, Flags = &h0, Description = 5365747320746865206261636B64726F7020696D616765206F662074686520627574746F6E2E
+		Sub SetBackdropXC(extends bt as MobileButton, backdrop as Picture)
 		  'This method was posted by Jim McKay in the https://forum.xojo.com/18184-button-and-view-colours-ios/last thread
 		  'on 12/12/2014
 		  
 		  Declare Sub setBackgroundImage Lib "UIKit" selector "setBackgroundImage:forState:" (obj As ptr, value As ptr, state As Integer)
-		  setBackgroundImage(bt.Handle, backdrop.Handle, 0)
+		  
+		  if backdrop is nil then
+		    setBackgroundImage(bt.Handle, nil, 0)
+		    
+		  else
+		    Dim bestImage As Picture = ImageExtensionsXC.BestRepresentationXC(backdrop)
+		    
+		    setBackgroundImage(bt.Handle, bestImage.Handle, 0)
+		  end if
 		  
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetBackgroundColorXC(Extends bt As iOSButton, value As color)
+		Sub SetBackgroundColorXC(Extends bt As MobileButton, value As color)
 		  
 		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
 		  Declare Function colorWithRGBA Lib "UIKit.framework" Selector "colorWithRed:green:blue:alpha:" ( UIColorClassRef As Ptr, red As CGFloat, green As CGFloat, blue As CGFloat, alpha As CGFloat) As Ptr
+		  Declare Function view Lib "UIKit.framework" Selector "view" (UIViewController As Ptr) As Ptr
 		  Declare Sub setBackgroundColor Lib "UIKit.framework" Selector "setBackgroundColor:" (UIView As Ptr, UIColor As Ptr)
 		  
 		  Dim UIColorClassPtr As Ptr =  NSClassFromString("UIColor")
@@ -49,7 +58,7 @@ Protected Module ButtonExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetBorderColorXC(extends bt As iOSButton, value As Color)
+		Sub SetBorderColorXC(extends bt As MobileButton, value As Color)
 		  
 		  
 		  Declare Function layer_ Lib "UIKit.framework" selector "layer" (id As ptr) As Ptr
@@ -68,7 +77,7 @@ Protected Module ButtonExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetBorderWidthXC(extends bt As iOSButton, value As Double)
+		Sub SetBorderWidthXC(extends bt As MobileButton, value As Double)
 		  
 		  
 		  Declare Function layer_ Lib "UIKit.framework" selector "layer" (id As ptr) As Ptr
@@ -81,7 +90,7 @@ Protected Module ButtonExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetButtonInsetsXC(extends bt As iOSButton, value As ExtensionsXC.xcUIEdgeInsets)
+		Sub SetButtonInsetsXC(extends bt As MobileButton, value As ExtensionsXC.xcUIEdgeInsets)
 		  
 		  Declare Sub setContentEdgeInsets Lib "UIKit.framework" selector "setContentEdgeInsets:" (id As ptr, value As ExtensionsXC.xcUIEdgeInsets)
 		  setContentEdgeInsets (bt.handle, value)
@@ -90,7 +99,7 @@ Protected Module ButtonExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetButtonTiledBackgroundXC(extends bt As iOSButton, img As iOSImage)
+		Sub SetButtonTiledBackgroundXC(extends bt As MobileButton, img As Picture)
 		  
 		  
 		  
@@ -101,9 +110,9 @@ Protected Module ButtonExtensionsXC
 		  insets.Bottom = 12
 		  insets.Right = 12
 		  
-		  Dim resizedImg as iOSImage
+		  Dim resizedImg as Picture
 		  
-		  resizedImg = ResizableTiledImageXC(insets, img)
+		  resizedImg = ImageExtensionsXC.ResizableTiledImageXC(insets, img)
 		  
 		  
 		  bt.SetBackdropXC(resizedImg)
@@ -115,7 +124,7 @@ Protected Module ButtonExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetImageInsetsXC(extends bt As iOSButton, value As ExtensionsXC.xcUIEdgeInsets)
+		Sub SetImageInsetsXC(extends bt As MobileButton, value As ExtensionsXC.xcUIEdgeInsets)
 		  
 		  
 		  Declare Sub setImageEdgeInsets Lib "UIKit.framework" selector "setImageEdgeInsets:" (id As ptr, value As ExtensionsXC.xcUIEdgeInsets)
@@ -125,8 +134,8 @@ Protected Module ButtonExtensionsXC
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
-		Sub SetImageXC(extends bt As iOSButton, image As iOSImage, state As ControlExtensionsXC.UIControlState=ControlExtensionsXC.UIControlState.normal)
+	#tag Method, Flags = &h0, Description = 5365747320746865205069637475726520746F2062652075736564206E65787420746F207468652063617074696F6E2E
+		Sub SetImageXC(extends bt As MobileButton, image As Picture, state As ControlExtensionsXC.UIControlState = ControlExtensionsXC.UIControlState.normal)
 		  'This method was posted by Jim McKay in the https://forum.xojo.com/18184-button-and-view-colours-ios/last thread
 		  'on 12/12/2014
 		  
@@ -135,14 +144,16 @@ Protected Module ButtonExtensionsXC
 		  If image Is Nil Then
 		    setImage(bt.Handle, Nil, state)
 		  Else
-		    setImage(bt.Handle, image.Handle, state)
+		    Dim bestImg As Picture = ImageExtensionsXC.BestRepresentationXC(image)
+		    
+		    setImage(bt.Handle, bestImg.Handle, state)
 		    
 		  End If
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetLineBreakModeXC(extends bt As iOSButton, mode As ControlExtensionsXC.NSLineBreakMode)
+		Sub SetLineBreakModeXC(extends bt As MobileButton, mode As ControlExtensionsXC.NSLineBreakMode)
 		  Dim label As ptr
 		  Declare Function getTextLabel Lib "UIKit.framework" selector "titleLabel" (obj_ref As ptr) As ptr
 		  label = getTextLabel(bt.Handle)
@@ -155,7 +166,7 @@ Protected Module ButtonExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetNumberOfLinesXC(extends bt As iOSButton, lines As Integer)
+		Sub SetNumberOfLinesXC(extends bt As MobileButton, lines As Integer)
 		  Dim label As ptr
 		  Declare Function getTextLabel Lib "UIKit.framework" selector "titleLabel" (obj_ref As ptr) As ptr
 		  label = getTextLabel(bt.Handle)
@@ -171,7 +182,20 @@ Protected Module ButtonExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetTextAlignmentXC(extends bt As iOSButton, alignment As ControlExtensionsXC.NSTextAlignment)
+		Sub SetRoleXC(extends bt As MobileButton, value As ButtonExtensionsXC.UIButtonRole)
+		  //New in version 2.0
+		  
+		  
+		  if ExtensionsXC.GetiOSVersionXC >= 14.0 then
+		    Declare Sub setRole Lib "UIKit.framework" selector "setRole:" (obj_id As ptr, aRole As UIButtonRole)
+		    setRole(bt.handle, value)
+		    
+		  end if
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub SetTextAlignmentXC(extends bt As MobileButton, alignment As ControlExtensionsXC.NSTextAlignment)
 		  Dim label As ptr
 		  Declare Function getTextLabel Lib "UIKit.framework" selector "titleLabel" (obj_ref As ptr) As ptr
 		  label = getTextLabel(bt.Handle)
@@ -185,13 +209,21 @@ Protected Module ButtonExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetTitleEdgeInsetsXC(extends bt As iOSButton, value As ExtensionsXC.xcUIEdgeInsets)
+		Sub SetTitleEdgeInsetsXC(extends bt As MobileButton, value As ExtensionsXC.xcUIEdgeInsets)
 		  
 		  Declare Sub setTitleEdgeInsets_ Lib "UIKit.framework" selector "setTitleEdgeInsets:" (id As ptr, value As ExtensionsXC.xcUIEdgeInsets)
 		  setTitleEdgeInsets_ (bt.handle, value)
 		  
 		End Sub
 	#tag EndMethod
+
+
+	#tag Enum, Name = UIButtonRole, Type = Integer, Flags = &h0
+		normal = 0
+		  primary
+		  cancel
+		destructive
+	#tag EndEnum
 
 
 	#tag ViewBehavior

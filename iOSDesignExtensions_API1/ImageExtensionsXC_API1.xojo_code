@@ -1,7 +1,9 @@
 #tag Module
-Protected Module ImageExtensionsXC
+Protected Module ImageExtensionsXC_API1
 	#tag Method, Flags = &h1, Description = 52657475726E7320616E20696D6167652074686174206973206175746F6D61746963616C6C7920666C697070656420666F722052544C206C616E677561676573
 		Protected Function ImageForRTLXC(image As iOSImage) As iOSImage
+		  
+		  if image is nil then Return nil
 		  
 		  //Creates an image that will draw using the current Fillcolor
 		  
@@ -16,6 +18,8 @@ Protected Module ImageExtensionsXC
 
 	#tag Method, Flags = &h1, Description = 52657475726E7320616E20696D61676520746861742077696C6C20616C776179732072656E646572207573696E6720697473207472756520636F6C6F7273
 		Protected Function ImageOriginalXC(image As iOSImage) As iOSImage
+		  
+		  if image is nil then Return nil
 		  
 		  //Creates an image that will draw using the current Fillcolor
 		  
@@ -51,6 +55,8 @@ Protected Module ImageExtensionsXC
 
 	#tag Method, Flags = &h1
 		Protected Function ImageWithMaskXC(image As iOSImage) As iOSImage
+		  
+		  if image is nil then Return nil
 		  
 		  //Creates an image that will draw using the current Fillcolor
 		  

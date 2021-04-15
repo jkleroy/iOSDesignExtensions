@@ -1,30 +1,35 @@
-#tag IOSView
-Begin iosView vHTMLViewer
-   BackButtonTitle =   ""
+#tag MobileScreen
+Begin MobileScreen vHTMLViewer
+   BackButtonCaption=   ""
    Compatibility   =   ""
-   LargeTitleMode  =   "2"
+   ControlCount    =   0
+   HasNavigationBar=   True
+   LargeTitleDisplayMode=   2
    Left            =   0
-   NavigationBarVisible=   True
-   TabIcon         =   ""
-   TabTitle        =   ""
+   TabBarVisible   =   True
+   TabIcon         =   0
+   TintColor       =   0
    Title           =   "HTMLViewer"
    Top             =   0
-   Begin iOSHTMLViewer HTMLViewer1
+   Begin MobileHTMLViewer HTMLViewer1
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
       AutoLayout      =   HTMLViewer1, 4, btLoad, 3, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   HTMLViewer1, 1, <Parent>, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   HTMLViewer1, 2, <Parent>, 2, False, +1.00, 4, 1, -0, , True
       AutoLayout      =   HTMLViewer1, 3, TopLayoutGuide, 3, False, +1.00, 4, 1, 0, , True
-      Height          =   365.0
+      ControlCount    =   0
+      Enabled         =   True
+      Height          =   453
       Left            =   0
       LockedInPosition=   False
       Scope           =   0
+      TintColor       =   ""
       Top             =   65
       Visible         =   True
-      Width           =   320.0
+      Width           =   320
    End
-   Begin iOSButton btLoad
+   Begin MobileButton btLoad
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
       AutoLayout      =   btLoad, 4, <Parent>, 4, False, +1.00, 4, 1, -*kStdGapCtlToViewV, , True
@@ -32,19 +37,21 @@ Begin iosView vHTMLViewer
       AutoLayout      =   btLoad, 1, <Parent>, 1, False, +1.00, 4, 1, *kStdGapCtlToViewH, , True
       AutoLayout      =   btLoad, 7, , 0, False, +1.00, 4, 1, 80, , True
       Caption         =   "Load Page"
+      CaptionColor    =   &c000000
+      ControlCount    =   0
       Enabled         =   True
-      Height          =   30.0
+      Height          =   30
       Left            =   20
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
-      Top             =   430
+      TintColor       =   ""
+      Top             =   518
       Visible         =   True
-      Width           =   80.0
+      Width           =   80
    End
-   Begin iOSButton btCalcPi
+   Begin MobileButton btCalcPi
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
       AutoLayout      =   btCalcPi, 2, <Parent>, 2, False, +1.00, 4, 1, -*kStdGapCtlToViewH, , True
@@ -52,19 +59,21 @@ Begin iosView vHTMLViewer
       AutoLayout      =   btCalcPi, 8, , 0, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   btCalcPi, 10, btLoad, 10, False, +1.00, 4, 1, 0, , True
       Caption         =   "Pi"
+      CaptionColor    =   &c000000
+      ControlCount    =   0
       Enabled         =   True
-      Height          =   30.0
+      Height          =   30
       Left            =   280
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
-      Top             =   430
+      TintColor       =   ""
+      Top             =   518
       Visible         =   True
-      Width           =   20.0
+      Width           =   20
    End
-   Begin iOSButton btJavascript
+   Begin MobileButton btJavascript
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
       AutoLayout      =   btJavascript, 2, btCalcPi, 1, False, +1.00, 4, 1, -*kStdControlGapH, , True
@@ -72,40 +81,44 @@ Begin iosView vHTMLViewer
       AutoLayout      =   btJavascript, 8, , 0, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   btJavascript, 4, btLoad, 4, False, +1.00, 4, 1, 0, , True
       Caption         =   "Exec Javascript"
+      CaptionColor    =   &c000000
+      ControlCount    =   0
       Enabled         =   True
-      Height          =   30.0
+      Height          =   30
       Left            =   192
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
-      Top             =   430
+      TintColor       =   ""
+      Top             =   518
       Visible         =   True
-      Width           =   80.0
+      Width           =   80
    End
-   Begin iOSButton btUserAgent
+   Begin MobileButton btUserAgent
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
       AutoLayout      =   btUserAgent, 1, btLoad, 2, False, +1.00, 4, 1, *kStdControlGapH, , True
       AutoLayout      =   btUserAgent, 7, , 0, False, +1.00, 4, 1, 80, , True
       AutoLayout      =   btUserAgent, 8, , 0, False, +1.00, 4, 1, 30, , True
-      AutoLayout      =   btUserAgent, 11, btLoad, 11, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   btUserAgent, 10, btLoad, 10, False, +1.00, 4, 1, 0, , True
       Caption         =   "UserAgent"
+      CaptionColor    =   &c000000
+      ControlCount    =   0
       Enabled         =   True
-      Height          =   30.0
+      Height          =   30
       Left            =   108
       LockedInPosition=   False
       Scope           =   0
-      TextColor       =   "&c007AFF00"
       TextFont        =   ""
       TextSize        =   0
-      Top             =   430
+      TintColor       =   ""
+      Top             =   518
       Visible         =   True
-      Width           =   80.0
+      Width           =   80
    End
 End
-#tag EndIOSView
+#tag EndMobileScreen
 
 #tag WindowCode
 	#tag Method, Flags = &h21
@@ -124,10 +137,10 @@ End
 		  
 		  Dim res As Double = value
 		  
-		  Dim msg As New iOSMessageBox
+		  Dim msg As New MobileMessageBox
 		  msg.Buttons = Array("OK")
 		  msg.Title = "Calculated Pi"
-		  msg.Message = res.ToText(locale.Current, "0.00000000000")
+		  msg.Message = res.ToString(Locale.Current, "0.00000000000")
 		  msg.Show
 		  
 		End Sub
@@ -143,7 +156,7 @@ End
 		    Return
 		  End If
 		  
-		  Dim msg As New iOSMessageBox
+		  Dim msg As New MobileMessageBox
 		  msg.Buttons = Array("OK")
 		  msg.Title = "UserAgent"
 		  msg.Message = value
@@ -173,8 +186,7 @@ End
 
 #tag Events btLoad
 	#tag Event
-		Sub Action()
-		  
+		Sub Pressed()
 		  HTMLViewer1.loadPageXC(kHTML)
 		  
 		  loaded = True
@@ -184,12 +196,12 @@ End
 #tag EndEvents
 #tag Events btCalcPi
 	#tag Event
-		Sub Action()
+		Sub Pressed()
 		  
 		  //Calculating Pi using Javascript
 		  
 		  
-		  Dim js As Text = kJSPie
+		  Dim js As String = kJSPie
 		  
 		  Call HTMLViewer1.ExecuteJavascriptXC(js, WeakAddressOf PiResult)
 		  
@@ -198,7 +210,7 @@ End
 #tag EndEvents
 #tag Events btJavascript
 	#tag Event
-		Sub Action()
+		Sub Pressed()
 		  If Not loaded Then
 		    Dim msg As New iOSMessageBox
 		    msg.Buttons = Array("OK")
@@ -229,33 +241,30 @@ End
 #tag EndEvents
 #tag Events btUserAgent
 	#tag Event
-		Sub Action()
+		Sub Pressed()
 		  
-		  #If XojoVersion < 2018.02
-		    Dim agent As Text = HTMLViewer1.UserAgentXC
-		    
-		    Dim msg As New iOSMessageBox
-		    msg.Buttons = Array("OK")
-		    msg.Title = "UserAgent"
-		    msg.Message = agent
-		    msg.Show
-		    
-		    
-		  #Else
-		    
-		    Call HTMLViewer1.UserAgentXC( WeakAddressOf UserAgentResult )
-		    
-		  #EndIf
+		  
+		  
+		  HTMLViewer1.UserAgentXC( WeakAddressOf UserAgentResult )
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
 	#tag ViewProperty
-		Name="LargeTitleMode"
+		Name="BackButtonCaption"
+		Visible=true
+		Group="Behavior"
+		InitialValue=""
+		Type="String"
+		EditorType="MultiLineEditor"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="LargeTitleDisplayMode"
 		Visible=true
 		Group="Behavior"
 		InitialValue="2"
-		Type="LargeTitleDisplayModes"
+		Type="MobileScreen.LargeTitleDisplayModes"
 		EditorType="Enum"
 		#tag EnumValues
 			"0 - Automatic"
@@ -264,12 +273,36 @@ End
 		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="BackButtonTitle"
+		Name="TintColor"
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="Text"
-		EditorType="MultiLineEditor"
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="HasNavigationBar"
+		Visible=true
+		Group="Behavior"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="TabBarVisible"
+		Visible=true
+		Group="Behavior"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Index"
@@ -296,14 +329,6 @@ End
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="NavigationBarVisible"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="Boolean"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
 		Name="Super"
 		Visible=true
 		Group="ID"
@@ -316,15 +341,7 @@ End
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="iOSImage"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="TabTitle"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="Text"
+		Type="Picture"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
@@ -332,7 +349,7 @@ End
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="Text"
+		Type="String"
 		EditorType="MultiLineEditor"
 	#tag EndViewProperty
 	#tag ViewProperty

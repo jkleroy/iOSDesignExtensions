@@ -1,5 +1,5 @@
 #tag Module
-Protected Module TableExtensionsXC
+Protected Module TableExtensionsXC_API1
 	#tag Method, Flags = &h0, Description = 41646A757374732074686520666F6E742073697A65206163636F7264696E6720746F20617661696C61626C65207769647468
 		Sub AdjustsFontSizeToFitWidthDetailXC(extends cell As iOSTableCellData, lines As Integer = -1)
 		  
@@ -143,7 +143,7 @@ Protected Module TableExtensionsXC
 		  
 		  
 		  
-		  declare sub setBackgroundColor lib UIKitLib selector "setBackgroundColor:" (obj_id as ptr, col as ptr)
+		  declare sub setBackgroundColor lib "UIKit" selector "setBackgroundColor:" (obj_id as ptr, col as ptr)
 		  setBackgroundColor(action.handle, uic)
 		End Sub
 	#tag EndMethod
@@ -432,7 +432,7 @@ Protected Module TableExtensionsXC
 	#tag Method, Flags = &h0
 		Sub SetSelectionStyleXC(extends cell As iOSTableCellData, style As TableExtensionsXC.selectionStyle)
 		  
-		  Declare Sub setselectionStyle_ Lib "UIKit.framework" selector "setSelectionStyle:" (obj_id As ptr, style As selectionStyle)
+		  Declare Sub setselectionStyle_ Lib "UIKit.framework" selector "setSelectionStyle:" (obj_id As ptr, style As TableExtensionsXC.selectionStyle)
 		  
 		  setselectionStyle_(cell.Handle, style)
 		End Sub
@@ -456,7 +456,7 @@ Protected Module TableExtensionsXC
 
 	#tag Method, Flags = &h0, Description = 52656D6F76657320616C6C20726F772073656C656374696F6E73
 		Sub SetSeparatorStyleXC(extends table As iOSTable, value As TableExtensionsXC.separatorStyle)
-		  Declare Sub setSeparatorStyle Lib "UIKit.framework" selector "setSeparatorStyle:"(o As ptr, mode As separatorStyle)
+		  Declare Sub setSeparatorStyle Lib "UIKit.framework" selector "setSeparatorStyle:"(o As ptr, mode As TableExtensionsXC.separatorStyle)
 		  
 		  setSeparatorStyle(table.handle, value)
 		End Sub
@@ -510,6 +510,24 @@ Protected Module TableExtensionsXC
 		  SetBackgroundColor(label, new UIColor(&cFFFFFF))
 		  
 		  cell.AdjustsFontSizeToFitWidthXC()
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 5365747320746865205465787420616C69676E6D6E657420696E207468652063656C6C2E
+		Sub SetTextAlignmentXC(extends cell As iOSTableCellData, alignment As ControlExtensionsXC.NSTextAlignment)
+		  
+		  
+		  Dim label As Ptr
+		  
+		  
+		  Declare Function getTextLabel Lib "UIKit.framework" selector "textLabel" (obj_ref As ptr) As ptr
+		  label = getTextLabel(cell.Handle)
+		  
+		  
+		  Declare Sub setTextAlignment Lib "UIKit.framework" selector "setTextAlignment:" (id As ptr, value As ControlExtensionsXC.NSTextAlignment)
+		  setTextAlignment(label, alignment)
+		  
 		  
 		End Sub
 	#tag EndMethod

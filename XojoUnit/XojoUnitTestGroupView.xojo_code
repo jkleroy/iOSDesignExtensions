@@ -2,7 +2,7 @@
 Begin iosView XojoUnitTestGroupView
    BackButtonTitle =   "Groups"
    Compatibility   =   ""
-   LargeTitleMode  =   "2"
+   LargeTitleMode  =   2
    Left            =   0
    NavigationBarVisible=   True
    TabIcon         =   ""
@@ -20,8 +20,8 @@ Begin iosView XojoUnitTestGroupView
       EditingEnabled  =   False
       EditingEnabled  =   False
       EstimatedRowHeight=   -1
-      Format          =   "0"
-      Height          =   415.0
+      Format          =   0
+      Height          =   503.0
       Left            =   0
       LockedInPosition=   False
       Scope           =   0
@@ -32,14 +32,14 @@ Begin iosView XojoUnitTestGroupView
    End
    Begin iOSTestController Controller
       Height          =   0
-      Height          =   "0"
+      Height          =   0
       Left            =   0
-      Left            =   "0"
+      Left            =   0
       LockedInPosition=   False
       Top             =   0
-      Top             =   "0"
+      Top             =   0
       Width           =   0
-      Width           =   "0"
+      Width           =   0
    End
 End
 #tag EndIOSView
@@ -112,7 +112,7 @@ End
 		Private Sub RunTests()
 		  If Self.ParentSplitView.Available Then
 		    Dim detail As XojoUnitTestDetailsView = XojoUnitTestDetailsView(Self.ParentSplitView.Detail)
-		    detail.StartLabel.Text = Date.Now.ToText(Locale.Current, Date.FormatStyles.Medium)
+		    detail.StartLabel.Text = Xojo.Core.Date.Now.ToText(Xojo.Core.Locale.Current, Xojo.Core.Date.FormatStyles.Medium)
 		    
 		    Controller.Start
 		    RunButton.Enabled = False
@@ -125,7 +125,7 @@ End
 		Private Sub UpdateSummary()
 		  Dim detail As XojoUnitTestDetailsView = XojoUnitTestDetailsView(Self.ParentSplitView.Detail)
 		  
-		  detail.DurationValueLabel.Text = Controller.Duration.ToText(Locale.Current, "#,##0.0000000") + "s"
+		  detail.DurationValueLabel.Text = Controller.Duration.ToText(Xojo.Core.Locale.Current, "#,##0.0000000") + "s"
 		  
 		  Dim allTestCount As Integer = Controller.AllTestCount
 		  Dim runTestCount As Integer = Controller.RunTestCount
@@ -142,11 +142,11 @@ End
 		  Dim pct As Double
 		  pct = (Controller.PassedCount / runTestCount) * 100.0
 		  detail.PassedCountLabel.Text = Controller.PassedCount.ToText + _
-		  If(runTestCount = 0, "", " (" + pct.ToText(Locale.Current, "#0.00") + "%)")
+		  If(runTestCount = 0, "", " (" + pct.ToText(Xojo.Core.Locale.Current, "#0.00") + "%)")
 		  
 		  pct = (Controller.FailedCount / runTestCount) * 100.0
 		  detail.FailedCountLabel.Text = Controller.FailedCount.ToText + _
-		  If(runTestCount = 0, "", " (" + pct.ToText(Locale.Current, "#0.00") + "%)")
+		  If(runTestCount = 0, "", " (" + pct.ToText(Xojo.Core.Locale.Current, "#0.00") + "%)")
 		  detail.SkippedCountLabel.Text = Controller.SkippedCount.ToText
 		  detail.NotImplementedCountLabel.Text = Controller.NotImplementedCount.ToText
 		End Sub

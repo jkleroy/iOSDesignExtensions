@@ -1,184 +1,219 @@
-#tag IOSView
-Begin iosView vTextFields
-   BackButtonTitle =   ""
+#tag MobileScreen
+Begin MobileScreen vTextFields
+   BackButtonCaption=   ""
    Compatibility   =   ""
-   LargeTitleMode  =   "2"
+   ControlCount    =   0
+   HasNavigationBar=   True
+   LargeTitleDisplayMode=   2
    Left            =   0
-   NavigationBarVisible=   True
-   TabIcon         =   ""
-   TabTitle        =   ""
+   TabBarVisible   =   True
+   TabIcon         =   0
+   TintColor       =   0
    Title           =   "TextFields"
    Top             =   0
-   Begin iOSTextField TextField1
+   Begin MobileTextField TextField1
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      Alignment       =   0
+      AllowAutoCorrection=   False
+      AllowSpellChecking=   False
+      AutoCapitalizationType=   0
       AutoLayout      =   TextField1, 9, <Parent>, 9, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   TextField1, 8, , 0, True, +1.00, 4, 1, 31, , True
       AutoLayout      =   TextField1, 3, TopLayoutGuide, 4, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   TextField1, 7, , 0, False, +1.00, 4, 1, 200, , True
+      BorderStyle     =   3
+      ControlCount    =   0
       Enabled         =   True
-      Height          =   31.0
-      KeyboardType    =   "0"
+      Height          =   31
+      Hint            =   "With an icon"
+      InputType       =   0
       Left            =   60
       LockedInPosition=   False
       Password        =   False
-      PlaceHolder     =   "With an icon"
+      ReadOnly        =   False
+      ReturnCaption   =   0
       Scope           =   0
       Text            =   ""
-      TextAlignment   =   "0"
-      TextColor       =   "&c00000000"
+      TextColor       =   &c00000000
       TextFont        =   ""
       TextSize        =   0
+      TintColor       =   ""
       Top             =   95
       Visible         =   True
-      Width           =   200.0
+      Width           =   200
    End
-   Begin iOSTextField TextField2
+   Begin MobileTextField TextField2
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      Alignment       =   0
+      AllowAutoCorrection=   False
+      AllowSpellChecking=   False
+      AutoCapitalizationType=   0
       AutoLayout      =   TextField2, 8, , 0, True, +1.00, 4, 1, 31, , True
       AutoLayout      =   TextField2, 1, TextField1, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   TextField2, 3, TextField1, 4, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   TextField2, 7, , 0, False, +1.00, 4, 1, 200, , True
+      BorderStyle     =   3
+      ControlCount    =   0
       Enabled         =   True
-      Height          =   31.0
-      KeyboardType    =   "0"
+      Height          =   31
+      Hint            =   "Border color"
+      InputType       =   0
       Left            =   60
       LockedInPosition=   False
       Password        =   False
-      PlaceHolder     =   "Border color"
+      ReadOnly        =   False
+      ReturnCaption   =   0
       Scope           =   0
       Text            =   ""
-      TextAlignment   =   "0"
-      TextColor       =   "&c00000000"
+      TextColor       =   &c00000000
       TextFont        =   ""
       TextSize        =   0
+      TintColor       =   ""
       Top             =   156
       Visible         =   True
-      Width           =   200.0
+      Width           =   200
    End
-   Begin iOSTextField TextField3
+   Begin MobileTextField TextField3
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      Alignment       =   0
+      AllowAutoCorrection=   False
+      AllowSpellChecking=   False
+      AutoCapitalizationType=   0
       AutoLayout      =   TextField3, 8, , 0, True, +1.00, 4, 1, 31, , True
       AutoLayout      =   TextField3, 1, TextField2, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   TextField3, 3, TextField2, 4, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   TextField3, 7, , 0, False, +1.00, 4, 1, 200, , True
+      BorderStyle     =   3
+      ControlCount    =   0
       Enabled         =   True
-      Height          =   31.0
-      KeyboardType    =   "0"
+      Height          =   31
+      Hint            =   "Bezel Border"
+      InputType       =   0
       Left            =   60
       LockedInPosition=   False
       Password        =   False
-      PlaceHolder     =   "Bezel Border"
+      ReadOnly        =   False
+      ReturnCaption   =   0
       Scope           =   0
       Text            =   ""
-      TextAlignment   =   "0"
-      TextColor       =   "&c00000000"
+      TextColor       =   &c00000000
       TextFont        =   ""
       TextSize        =   0
+      TintColor       =   ""
       Top             =   217
       Visible         =   True
-      Width           =   200.0
+      Width           =   200
    End
-   Begin iOSTextField TextField4
+   Begin MobileTextField TextField4
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      Alignment       =   0
+      AllowAutoCorrection=   False
+      AllowSpellChecking=   False
+      AutoCapitalizationType=   0
       AutoLayout      =   TextField4, 8, , 0, True, +1.00, 4, 1, 31, , True
       AutoLayout      =   TextField4, 1, TextField3, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   TextField4, 3, TextField3, 4, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   TextField4, 7, , 0, False, +1.00, 4, 1, 200, , True
+      BorderStyle     =   3
+      ControlCount    =   0
       Enabled         =   True
-      Height          =   31.0
-      KeyboardType    =   "0"
+      Height          =   31
+      Hint            =   "No Border"
+      InputType       =   0
       Left            =   60
       LockedInPosition=   False
       Password        =   False
-      PlaceHolder     =   "No Border"
+      ReadOnly        =   False
+      ReturnCaption   =   0
       Scope           =   0
       Text            =   ""
-      TextAlignment   =   "0"
-      TextColor       =   "&c00000000"
+      TextColor       =   &c00000000
       TextFont        =   ""
       TextSize        =   0
+      TintColor       =   ""
       Top             =   278
       Visible         =   True
-      Width           =   200.0
+      Width           =   200
    End
-   Begin iOSTextField TextField6
+   Begin MobileTextField TextField6
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      Alignment       =   0
+      AllowAutoCorrection=   False
+      AllowSpellChecking=   False
+      AutoCapitalizationType=   0
       AutoLayout      =   TextField6, 8, , 0, True, +1.00, 4, 1, 31, , True
       AutoLayout      =   TextField6, 1, TextField4, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   TextField6, 3, TextField5, 4, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   TextField6, 7, , 0, False, +1.00, 4, 1, 200, , True
+      BorderStyle     =   3
+      ControlCount    =   0
       Enabled         =   True
-      Height          =   31.0
-      KeyboardType    =   "0"
+      Height          =   31
+      Hint            =   ""
+      InputType       =   0
       Left            =   60
       LockedInPosition=   False
       Password        =   False
-      PlaceHolder     =   ""
+      ReadOnly        =   False
+      ReturnCaption   =   0
       Scope           =   0
       Text            =   ""
-      TextAlignment   =   "0"
-      TextColor       =   "&c00000000"
+      TextColor       =   &c00000000
       TextFont        =   ""
       TextSize        =   0
+      TintColor       =   ""
       Top             =   400
       Visible         =   True
-      Width           =   200.0
+      Width           =   200
    End
-   Begin iOSTextField TextField5
+   Begin MobileTextField TextField5
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      Alignment       =   0
+      AllowAutoCorrection=   False
+      AllowSpellChecking=   False
+      AutoCapitalizationType=   0
       AutoLayout      =   TextField5, 8, , 0, True, +1.00, 4, 1, 31, , True
       AutoLayout      =   TextField5, 1, TextField4, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   TextField5, 3, TextField4, 4, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   TextField5, 7, , 0, False, +1.00, 4, 1, 200, , True
+      BorderStyle     =   3
+      ControlCount    =   0
       Enabled         =   True
-      Height          =   31.0
-      KeyboardType    =   "0"
+      Height          =   31
+      Hint            =   ""
+      InputType       =   0
       Left            =   60
       LockedInPosition=   False
       Password        =   False
-      PlaceHolder     =   ""
+      ReadOnly        =   False
+      ReturnCaption   =   0
       Scope           =   0
       Text            =   "Indented text"
-      TextAlignment   =   "0"
-      TextColor       =   "&c00000000"
+      TextColor       =   &c00000000
       TextFont        =   ""
       TextSize        =   0
+      TintColor       =   ""
       Top             =   339
       Visible         =   True
-      Width           =   200.0
+      Width           =   200
    End
 End
-#tag EndIOSView
+#tag EndMobileScreen
 
 #tag WindowCode
-	#tag Event
-		Sub Activate()
-		  
-		  
-		End Sub
-	#tag EndEvent
-
-	#tag Event
-		Sub Open()
-		  
-		  
-		End Sub
-	#tag EndEvent
-
-
 #tag EndWindowCode
 
 #tag Events TextField1
 	#tag Event
-		Sub Open()
+		Sub Opening()
 		  
-		  Dim ic As iOSImage
+		  Dim ic As Picture
 		  
 		  //Change the icon to grey color
 		  ic = ImageExtensionsXC.ImageWithColorXC(ic8_lock, &c7F7F7F00)
@@ -190,7 +225,7 @@ End
 #tag EndEvents
 #tag Events TextField2
 	#tag Event
-		Sub Open()
+		Sub Opening()
 		  Me.SetCornerRadiusXC(8.0)
 		  Me.SetBorderColorXC(&cFF0000)
 		  Me.SetBorderWidthXC(1.0)
@@ -201,14 +236,14 @@ End
 #tag EndEvents
 #tag Events TextField3
 	#tag Event
-		Sub Open()
+		Sub Opening()
 		  me.SetBorderStyleXC(TextFieldExtensionsXC.UITextFieldBorderStyle.Bezel)
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events TextField4
 	#tag Event
-		Sub Open()
+		Sub Opening()
 		  Me.SetBorderStyleXC(TextFieldExtensionsXC.UITextFieldBorderStyle.None)
 		  Me.setBackgroundColorXC(&cDDDDDD)
 		End Sub
@@ -216,7 +251,7 @@ End
 #tag EndEvents
 #tag Events TextField6
 	#tag Event
-		Sub Open()
+		Sub Opening()
 		  If ExtensionsXC.kUseUIKit Then
 		    Me.setPlaceholderColorXC("Placeholder is red", &cFF0000)
 		  Else
@@ -227,7 +262,7 @@ End
 #tag EndEvents
 #tag Events TextField5
 	#tag Event
-		Sub Open()
+		Sub Opening()
 		  
 		  Me.SetTextIndentXC(20)
 		  
@@ -236,11 +271,19 @@ End
 #tag EndEvents
 #tag ViewBehavior
 	#tag ViewProperty
-		Name="LargeTitleMode"
+		Name="BackButtonCaption"
+		Visible=true
+		Group="Behavior"
+		InitialValue=""
+		Type="String"
+		EditorType="MultiLineEditor"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="LargeTitleDisplayMode"
 		Visible=true
 		Group="Behavior"
 		InitialValue="2"
-		Type="LargeTitleDisplayModes"
+		Type="MobileScreen.LargeTitleDisplayModes"
 		EditorType="Enum"
 		#tag EnumValues
 			"0 - Automatic"
@@ -249,12 +292,36 @@ End
 		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="BackButtonTitle"
+		Name="TintColor"
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="Text"
-		EditorType="MultiLineEditor"
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="HasNavigationBar"
+		Visible=true
+		Group="Behavior"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="TabBarVisible"
+		Visible=true
+		Group="Behavior"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Index"
@@ -281,14 +348,6 @@ End
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="NavigationBarVisible"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="Boolean"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
 		Name="Super"
 		Visible=true
 		Group="ID"
@@ -301,15 +360,7 @@ End
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="iOSImage"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="TabTitle"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="Text"
+		Type="Picture"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
@@ -317,7 +368,7 @@ End
 		Visible=false
 		Group="Behavior"
 		InitialValue=""
-		Type="Text"
+		Type="String"
 		EditorType="MultiLineEditor"
 	#tag EndViewProperty
 	#tag ViewProperty

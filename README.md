@@ -7,7 +7,7 @@ A set of 100+ UI extensions for Xojo iOS framework.
 
 ## Currently implemented extensions
 
-### iOSButton
+### MobileButton
 * Adjust font size to fit width
 * Backdrop
 * Background color
@@ -20,19 +20,20 @@ A set of 100+ UI extensions for Xojo iOS framework.
 * Image
 * Line break
 * Number of lines
+* Role (iOS14+)
 * Text alignment
 * Title edge insets
 
-### iOSHTMLViewer
+### MobileHTMLViewer
 * Load Page
 * Load File
 * Execute Javascript
 * User Agent
 
-### iOSLabel
+### MobileLabel
 * Adjust font size to fit width
 
-### iOSControl
+### MobileUIControl
 * Background color
 * Animate Alpha (requires iOSKit)
 * Get Frame
@@ -43,13 +44,13 @@ A set of 100+ UI extensions for Xojo iOS framework.
 * Stretch to Parent
 * Stretch to View
 
-### iOSProgressWheel
+### MobileProgressWheel
 * Indicator style
 
-### iOSSwitch
+### MobileSwitch
 * On Tint Color
 
-### iOSScrollableArea
+### MobileScrollableArea
 * Flash scroll indicators
 * Scroll position
 * Scroll to
@@ -59,13 +60,13 @@ A set of 100+ UI extensions for Xojo iOS framework.
 * Disable scroll
 * Scrolls to top
 
-### iOSSegmentedControl
+### MobileSegmentedButton
 * Adjust font size to fit width
 * Remove borders
 * Selected color
 * Text color
 
-### iOSTable
+### iOSMobileTable
 * Flash Scroll indicators
 * Disable selection
 * Bounces
@@ -76,7 +77,7 @@ A set of 100+ UI extensions for Xojo iOS framework.
 * Separator style
 * Unselect table row
 
-### iOSTableCell
+### MobileTableCellData
 * Adjust font size to fit width
 * Background color
 * Text color
@@ -88,12 +89,13 @@ A set of 100+ UI extensions for Xojo iOS framework.
 * Selection style
 * Text break mode
 * Detail text break mode
+* Text alignment
 
-### iOSTableRowAction
+### iOSMobileTableRowAction
 * Background color
 * Icon
 
-### iOSTextField
+### MobileTextField
 * Auto-capitalization
 * Auto-correction
 * Border color
@@ -107,14 +109,14 @@ A set of 100+ UI extensions for Xojo iOS framework.
 * Return key
 * Text indentation
 
-### iOSTextArea
+### MobileTextArea
 * Auto-correction
 * Scroll position (get and set)
 * Scrolls to top
 * Scroll to specific range in text
 * Selected range (get and set)
 
-### iOSView
+### MobileScreen
 * Add big progress in center
 * Close modal view
 * Hide Navbar shadow
@@ -134,7 +136,7 @@ A set of 100+ UI extensions for Xojo iOS framework.
 * Pop to root view
 * Pushto and hide Tabbar
 
-### iOSToolbutton
+### MobileToolbarButton
 * Tint color
 
 ### iOSSplitView
@@ -148,6 +150,15 @@ A set of 100+ UI extensions for Xojo iOS framework.
 
 
 ## History
+
+### Version 2.0 - Released 2021-04-15
+* Now compatible with Xojo 2020r2+ (iOS Framework API 2)
+* Added MobileButton.SetRoleXC
+* Added MobileDateTimePicker.SetDatePickerStyleXC
+* Added MobileTableCellData.SetTextAlignmentXC
+* Added MobileScreen.SetNavBarTintColorXC
+* Added MobileScreen.SetNavBarTranslucentXC
+* Added MobileScreen.PushToSafariControllerXC
 
 ### Version 1.8.1 - Released 2021-03-26
 * Added unit testing of each extension method
