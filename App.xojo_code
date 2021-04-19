@@ -28,6 +28,9 @@ Inherits MobileApplication
 	#tag Note, Name = README
 		## History
 		
+		### Version 2.0.1 - Released 2021-04-20
+		** Added NotificationContent.UseDefaultSoundXC
+		
 		### Version 2.0 - Released 2021-04-15
 		* Now compatible with Xojo 2020r2+ (iOS Framework API 2)
 		** Added MobileButton.SetRoleXC
@@ -232,9 +235,9 @@ Inherits MobileApplication
 			EditorType="Enum"
 			#tag EnumValues
 				"0 - Automatic"
-				"1 - PrimaryHidden"
-				"2 - AllVisible"
-				"3 - PrimaryOverlay"
+				"1 - secondaryOnly"
+				"2 - oneBesideSecondary"
+				"3 - oneOverSecondary"
 			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior

@@ -160,9 +160,35 @@ Protected Module ExtensionsXC
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Sub UseDefaultSoundXC(extends content As NotificationContent)
+		  //new in version 2.0.1
+		  
+		  Declare Function defaultSound lib "UserNotifications" selector "defaultSound" (obj as ptr) as ptr
+		  declare function NSClassFromString lib "Foundation" (clsName as CFStringRef) as ptr
+		  
+		  declare sub setSound lib "UserNotifications" Selector "setSound:" (obj as ptr, snd as ptr)
+		  
+		  setSound(content.Handle, defaultSound(NSClassFromString("UNNotificationSound")))
+		End Sub
+	#tag EndMethod
+
 
 	#tag Note, Name = History
 		## History
+		
+		### Version 2.0.1 - Released 2021-04-20
+		** Added NotificationContent.UseDefaultSoundXC
+		
+		### Version 2.0 - Released 2021-04-15
+		* Now compatible with Xojo 2020r2+ (iOS Framework API 2)
+		** Added MobileButton.SetRoleXC
+		** Added MobileDateTimePicker.SetDatePickerStyleXC
+		** Added MobileTableCellData.SetTextAlignmentXC
+		** Added MobileScreen.SetNavBarTintColorXC
+		** Added MobileScreen.SetNavBarTranslucentXC
+		** Added MobileScreen.PushToSafariControllerXC
+		
 		
 		### Version 1.?? - Released 2020-??
 		* Added iOSDatePicker.SetTextColorXC
@@ -243,7 +269,7 @@ Protected Module ExtensionsXC
 	#tag Constant, Name = kUseUIKit, Type = Boolean, Dynamic = False, Default = \"False", Scope = Protected
 	#tag EndConstant
 
-	#tag Constant, Name = kVersion, Type = Text, Dynamic = False, Default = \"2.0.0", Scope = Protected
+	#tag Constant, Name = kVersion, Type = Text, Dynamic = False, Default = \"2.0.1", Scope = Protected
 	#tag EndConstant
 
 
