@@ -1,5 +1,38 @@
 #tag Module
 Protected Module AppExtensionsXC
+	#tag Method, Flags = &h0
+		Sub OpeniOSSettingsXC(extends app As MobileApplication)
+		  #Pragma Unused app
+		  
+		  
+		  Declare Function NSClassFromString Lib "Foundation.framework" (clsName As CFStringRef) As ptr
+		  Declare Function URLWithString Lib "Foundation" Selector "URLWithString:" ( id As Ptr, URLString As CFStringRef ) As Ptr
+		  
+		  Dim openSettingsURL As ptr = LoadConstantXC("UIKit", "UIApplicationOpenSettingsURLString")
+		  Declare Function stringWithString Lib "Foundation.framework" selector "stringWithString:" (clsRef As ptr, Str As ptr) As CFStringRef
+		  
+		  
+		  Dim nsURL As ptr = URLWithString(NSClassFromString("NSURL"), openSettingsURL.CFStringRef(0))
+		  
+		  Declare Function sharedApplication Lib "UIKit" Selector "sharedApplication" (obj As Ptr) As Ptr
+		  Dim sharedApp As Ptr = sharedApplication(NSClassFromString("UIApplication"))
+		  
+		  
+		  If getiOSVersionXC >= 10.0 Then
+		    
+		    Declare Sub openURL Lib "UIKit" Selector "openURL:options:completionHandler:" (id As Ptr, nsurl As Ptr, options As ptr, completion As ptr)
+		    openURL(sharedApp, nsURL, nil, nil)
+		    
+		  Else
+		    
+		    Declare Function openURL Lib "UIKit" Selector "openURL:" (id As Ptr, nsurl As Ptr) As Boolean
+		    call openURL(sharedApp, nsURL)
+		    
+		    
+		  End If
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 53657473207468652053746174757320626172207465787420636F6C6F722E
 		Sub SetStatusBarStyleXC(extends app As MobileApplication, style As AppExtensionsXC.UIStatusBarStyle)
 		  #Pragma Unused app
