@@ -529,7 +529,7 @@ Protected Module ViewExtensionsXC_API1
 		  'Dim navBar As ptr = navigationBar(navigationControllerRef)
 		  
 		  Declare Function navigationItem Lib "UIKit.framework" selector "navigationItem" (obj_ref As ptr) As ptr
-		  Dim navItem As ptr = navigationItem(v.Handle)
+		  Dim navItem As ptr = navigationItem(v.ViewControllerHandle)
 		  
 		  
 		  Declare Sub hidesBackButton Lib "UIKit.framework" selector "setHidesBackButton:" (obj_id As ptr, value As Boolean)
@@ -571,7 +571,7 @@ Protected Module ViewExtensionsXC_API1
 		    'Dim navBar As ptr = navigationBar(navigationControllerRef)
 		    
 		    Declare Function navigationItem Lib "UIKit.framework" selector "navigationItem" (obj_ref As ptr) As ptr
-		    Dim navItem As ptr = navigationItem(v.Handle)
+		    Dim navItem As ptr = navigationItem(v.ViewControllerHandle)
 		    
 		    
 		    Declare Sub largeTitleDisplayMode Lib "UIKit.framework" selector "setLargeTitleDisplayMode:" (obj_id As ptr, value As ViewExtensionsXC.LargeTitleDisplayMode)
@@ -623,7 +623,7 @@ Protected Module ViewExtensionsXC_API1
 		    prefersLargeTitles(navBar, value)
 		    
 		    Declare Function navigationItem Lib "UIKit.framework" selector "navigationItem" (obj_ref As ptr) As ptr
-		    Dim navItem As ptr = navigationItem(v.Handle)
+		    Dim navItem As ptr = navigationItem(v.ViewControllerHandle)
 		    
 		    Dim mode As LargeTitleDisplayMode
 		    mode = displayMode
