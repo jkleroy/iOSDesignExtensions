@@ -270,6 +270,9 @@ End
 		  AddRow(section, "Modal View", "", accessory, "modal") 
 		  AddRow(section, "Modal View (Swipe disabled)", "", accessory, "modalfull") 
 		  
+		  section = AddSection("Application extensions")
+		  AddRow(section, "Open Settings", "", accessory, "opensettings")
+		  
 		  //Deprecatedd
 		  'AddRow(section, "Modal View Flip", "", accessory, "modalflip", ic8_flip_vertical)
 		  'AddRow(section, "Modal View Dissolve", "", accessory, "modaldissolve", ic8_direction)
@@ -356,7 +359,9 @@ End
 		      'Dim v As New vModal
 		      'Self.PushToShowModalCurlXC(v, ViewExtensionsXC.UIModalPresentationStyle.formSheet)
 		      
+		    Case "opensettings"
 		      
+		      app.OpeniOSSettingsXC
 		      
 		    Case "tabbar"
 		      

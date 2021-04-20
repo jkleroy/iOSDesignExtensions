@@ -11,25 +11,16 @@ Protected Module AppExtensionsXC
 		  Dim openSettingsURL As ptr = ExtensionsXC.LoadConstantXC("UIKit", "UIApplicationOpenSettingsURLString")
 		  Declare Function stringWithString Lib "Foundation.framework" selector "stringWithString:" (clsRef As ptr, Str As ptr) As CFStringRef
 		  
-		  
+		  Dim temp As Text = openSettingsURL.CFStringRef(0)
 		  Dim nsURL As ptr = URLWithString(NSClassFromString("NSURL"), openSettingsURL.CFStringRef(0))
 		  
 		  Declare Function sharedApplication Lib "UIKit" Selector "sharedApplication" (obj As Ptr) As Ptr
 		  Dim sharedApp As Ptr = sharedApplication(NSClassFromString("UIApplication"))
 		  
 		  
-		  If ExtensionsXC.getiOSVersionXC >= 10.0 Then
-		    
-		    Declare Sub openURL Lib "UIKit" Selector "openURL:options:completionHandler:" (id As Ptr, nsurl As Ptr, options As ptr, completion As ptr)
-		    openURL(sharedApp, nsURL, nil, nil)
-		    
-		  Else
-		    
-		    Declare Function openURL Lib "UIKit" Selector "openURL:" (id As Ptr, nsurl As Ptr) As Boolean
-		    call openURL(sharedApp, nsURL)
-		    
-		    
-		  End If
+		  Declare Sub openURL Lib "UIKit" Selector "openURL:options:completionHandler:" (id As Ptr, nsurl As Ptr, options As ptr, completion As ptr)
+		  openURL(sharedApp, nsURL, nil, nil)
+		  
 		End Sub
 	#tag EndMethod
 

@@ -31,15 +31,22 @@ Begin iosView XojoUnitTestGroupView
       Width           =   320.0
    End
    Begin iOSTestController Controller
-      Height          =   0
-      Height          =   0
-      Left            =   0
+      AllTestCount    =   0
+      Duration        =   0.0
+      FailedCount     =   0
+      GroupCount      =   0
+      IsRunning       =   False
       Left            =   0
       LockedInPosition=   False
+      NotImplementedCount=   0
+      PanelIndex      =   -1
+      Parent          =   ""
+      PassedCount     =   0
+      RunGroupCount   =   0
+      RunTestCount    =   0
+      Scope           =   0
+      SkippedCount    =   0
       Top             =   0
-      Top             =   0
-      Width           =   0
-      Width           =   0
    End
 End
 #tag EndIOSView
