@@ -8,7 +8,7 @@ Protected Module AppExtensionsXC
 		  Declare Function NSClassFromString Lib "Foundation.framework" (clsName As CFStringRef) As ptr
 		  Declare Function URLWithString Lib "Foundation" Selector "URLWithString:" ( id As Ptr, URLString As CFStringRef ) As Ptr
 		  
-		  Dim openSettingsURL As ptr = LoadConstantXC("UIKit", "UIApplicationOpenSettingsURLString")
+		  Dim openSettingsURL As ptr = ExtensionsXC.LoadConstantXC("UIKit", "UIApplicationOpenSettingsURLString")
 		  Declare Function stringWithString Lib "Foundation.framework" selector "stringWithString:" (clsRef As ptr, Str As ptr) As CFStringRef
 		  
 		  
@@ -18,7 +18,7 @@ Protected Module AppExtensionsXC
 		  Dim sharedApp As Ptr = sharedApplication(NSClassFromString("UIApplication"))
 		  
 		  
-		  If getiOSVersionXC >= 10.0 Then
+		  If ExtensionsXC.getiOSVersionXC >= 10.0 Then
 		    
 		    Declare Sub openURL Lib "UIKit" Selector "openURL:options:completionHandler:" (id As Ptr, nsurl As Ptr, options As ptr, completion As ptr)
 		    openURL(sharedApp, nsURL, nil, nil)
