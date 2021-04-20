@@ -500,10 +500,10 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 44697361626C657320737769706520646F776E206F6E206D6F64616C207669657773
-		Sub SetFullModalXC(extends v As MobileScreen)
+		Sub SetFullModalXC(extends v As MobileScreen, value As Boolean = True)
 		  If ExtensionsxC.GetiOSVersionXC >= 13.0 then
 		    Declare sub setModalInPresentation lib "UIKit.framework" Selector "setModalInPresentation:" (obj_id as ptr, value as Boolean)
-		    setModalInPresentation(v.ViewControllerHandle, true)
+		    setModalInPresentation(v.ViewControllerHandle, value)
 		  end if
 		  
 		End Sub
