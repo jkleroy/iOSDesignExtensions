@@ -28,6 +28,14 @@ Inherits MobileApplication
 	#tag Note, Name = README
 		## History
 		
+		### Version 2.0.2 - Released 2021-09-17
+		** New TableSearchExtensionsXC module
+		** Added iOSMobileTable.GetSearchFilterIndexXC
+		** Added iOSMobileTable.SetSearchActiveXC
+		** Added iOSMobileTable.SetSearchFieldTextColorXC (iOS13+)
+		** Added iOSMobileTable.SetSearchFiltersXC
+		
+		
 		### Version 2.0.1 - Released 2021-04-20
 		** Added NotificationContent.UseDefaultSoundXC
 		

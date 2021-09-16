@@ -8,7 +8,7 @@ Begin MobileScreen vButtons
    Left            =   0
    TabBarVisible   =   True
    TabIcon         =   0
-   TintColor       =   "&h00000000"
+   TintColor       =   0
    Title           =   "Buttons"
    Top             =   0
    Begin MobileButton btBackgroundColor

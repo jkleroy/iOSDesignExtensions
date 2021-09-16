@@ -272,7 +272,7 @@ End
 		  
 		  Self.AddRow(section, "Enable Bounce", "", MobileTableCellData.AccessoryTypes.Checkmark, "bounce")
 		  Self.AddRow(section, "Enable Scroll", "", MobileTableCellData.AccessoryTypes.Checkmark, "scroll")
-		  Self.AddRow(section, "Hide Separators", "", MobileTableCellData.AccessoryTypes.none, "separators")
+		  Self.AddRow(section, "Hide Separators", "", MobileTableCellData.AccessoryTypes.Checkmark, "separators")
 		  Self.AddRow(section, "Separator Color", "", MobileTableCellData.AccessoryTypes.none, "SeparatorColor")
 		  Self.AddRow(section, "Hide Remaining Separators", "", MobileTableCellData.AccessoryTypes.none, "remaining")
 		  
@@ -364,7 +364,7 @@ End
 		    End If
 		    
 		  Case "SeparatorColor"
-		    If not value then
+		    If value then
 		      me.SetSeparatorColorXC(&cFF0000)
 		    Else
 		      me.SetSeparatorColorXC(&cDDDDDD)

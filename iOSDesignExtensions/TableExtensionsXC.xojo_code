@@ -521,8 +521,6 @@ Protected Module TableExtensionsXC
 		  setNumberOfLines label, 3
 		  
 		  
-		  declare sub setBackgroundColor lib "UIKit.framework" selector "setBackgroundColor:" (obj_id as ptr, col as ptr)
-		  SetBackgroundColor(label, New UIColor(&cFFFFFF))
 		  
 		  cell.AdjustsFontSizeToFitWidthXC()
 		  
