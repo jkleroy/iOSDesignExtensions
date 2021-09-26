@@ -152,20 +152,20 @@ A set of 100+ UI extensions for Xojo iOS framework.
 ## History
 
 ### Version 2.0.3 - Released 2021-09-26
-** Fixed Me.SetBackgroundColorXC(aColorGroup)
-** Fixed Me.SetBorderColorXC(aColorGroup)
-** Fixed some deprecations
+* Fixed Me.SetBackgroundColorXC(aColorGroup)
+* Fixed Me.SetBorderColorXC(aColorGroup)
+* Fixed some deprecations
 
 ### Version 2.0.2 - Released 2021-09-17
-** New TableSearchExtensionsXC module
-** Added iOSMobileTable.GetSearchFilterIndexXC
-** Added iOSMobileTable.SetSearchActiveXC
-** Added iOSMobileTable.SetSearchFieldTextColorXC (iOS13+)
-** Added iOSMobileTable.SetSearchFiltersXC
+* New TableSearchExtensionsXC module
+* Added iOSMobileTable.GetSearchFilterIndexXC
+* Added iOSMobileTable.SetSearchActiveXC
+* Added iOSMobileTable.SetSearchFieldTextColorXC (iOS13+)
+* Added iOSMobileTable.SetSearchFiltersXC
 
 
 ### Version 2.0.1 - Released 2021-04-20
-** Added NotificationContent.UseDefaultSoundXC
+* Added NotificationContent.UseDefaultSoundXC
 
 ### Version 2.0 - Released 2021-04-15
 * Now compatible with Xojo 2020r2+ (iOS Framework API 2)
