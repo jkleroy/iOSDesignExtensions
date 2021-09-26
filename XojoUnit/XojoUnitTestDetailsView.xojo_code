@@ -405,7 +405,7 @@ Begin iosView XojoUnitTestDetailsView
       TextColor       =   &c00000000
       TextFont        =   "System Bold		"
       TextSize        =   0
-      Top             =   196
+      Top             =   240
       Visible         =   True
       Width           =   294.0
    End
@@ -425,7 +425,7 @@ Begin iosView XojoUnitTestDetailsView
       Left            =   20
       LockedInPosition=   False
       Scope           =   0
-      Top             =   234
+      Top             =   278
       Visible         =   True
       Width           =   280.0
       Begin iOSLabel TestNameLabel
@@ -448,7 +448,7 @@ Begin iosView XojoUnitTestDetailsView
          TextColor       =   &c00000000
          TextFont        =   ""
          TextSize        =   0
-         Top             =   254
+         Top             =   298
          Visible         =   True
          Width           =   190.0
       End
@@ -472,7 +472,7 @@ Begin iosView XojoUnitTestDetailsView
          TextColor       =   &c00000000
          TextFont        =   ""
          TextSize        =   0
-         Top             =   254
+         Top             =   298
          Visible         =   True
          Width           =   100.0
       End
@@ -496,7 +496,7 @@ Begin iosView XojoUnitTestDetailsView
          TextColor       =   &c00000000
          TextFont        =   "System Bold		"
          TextSize        =   0
-         Top             =   292
+         Top             =   336
          Visible         =   True
          Width           =   75.0
       End
@@ -520,7 +520,7 @@ Begin iosView XojoUnitTestDetailsView
          TextColor       =   &c00000000
          TextFont        =   ""
          TextSize        =   0
-         Top             =   292
+         Top             =   336
          Visible         =   True
          Width           =   169.0
       End
@@ -544,7 +544,7 @@ Begin iosView XojoUnitTestDetailsView
          TextColor       =   &c00000000
          TextFont        =   "System Bold		"
          TextSize        =   0
-         Top             =   330
+         Top             =   374
          Visible         =   True
          Width           =   100.0
       End
@@ -570,7 +570,7 @@ Begin iosView XojoUnitTestDetailsView
          TextColor       =   &c00000000
          TextFont        =   ""
          TextSize        =   0
-         Top             =   368
+         Top             =   412
          Visible         =   True
          Width           =   240.0
       End

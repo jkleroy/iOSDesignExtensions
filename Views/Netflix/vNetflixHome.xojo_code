@@ -8,24 +8,25 @@ Begin MobileScreen vNetflixHome
    Left            =   0
    TabBarVisible   =   True
    TabIcon         =   0
-   TintColor       =   0
+   TintColor       =   "&h00000000"
    Title           =   "Netflix"
    Top             =   0
-   Begin iOSScrollableArea ScrollableArea1
+   Begin MobileScrollableArea ScrollableArea1
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
       AutoLayout      =   ScrollableArea1, 1, <Parent>, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   ScrollableArea1, 2, <Parent>, 2, False, +1.00, 4, 1, -0, , True
       AutoLayout      =   ScrollableArea1, 3, TopLayoutGuide, 3, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   ScrollableArea1, 4, BottomLayoutGuide, 4, False, +1.00, 4, 1, 0, , True
-      Height          =   503.0
+      Enabled         =   True
+      Height          =   503
       Left            =   0
       LockedInPosition=   False
       Scope           =   2
       ScrollContent   =   134291455
       Top             =   65
       Visible         =   True
-      Width           =   320.0
+      Width           =   320
    End
    Begin MobileToolbarButton tbChromecast
       Caption         =   ""

@@ -8,7 +8,7 @@ Begin MobileScreen vTable Implements iOSMobileTableDataSource,iOSMobileTableData
    Left            =   0
    TabBarVisible   =   True
    TabIcon         =   0
-   TintColor       =   0
+   TintColor       =   "&h00000000"
    Title           =   "Table"
    Top             =   0
    Begin iOSMobileTable Table1
@@ -87,7 +87,7 @@ End
 		  
 		  AddSection(title, tag)
 		  
-		  Return Sections.Ubound
+		  Return Sections.LastIndex
 		End Function
 	#tag EndMethod
 
@@ -111,7 +111,7 @@ End
 		  
 		  #Pragma Unused table
 		  
-		  If section = -1 Or section > sections.Ubound Then
+		  If section = -1 Or section > sections.LastIndex Then
 		    Return 0
 		  End If
 		  
@@ -124,7 +124,7 @@ End
 		    Dim rows() As Dictionary = sections(section).Value("rows")
 		    
 		    
-		    Return rows.Ubound + 1
+		    Return rows.LastIndex + 1
 		    
 		    
 		  End If
@@ -216,7 +216,7 @@ End
 		  // Part of the iOSMobileTableDataSource interface.
 		  #Pragma Unused table
 		  
-		  Return sections.Ubound+1
+		  Return sections.LastIndex+1
 		  
 		  
 		End Function

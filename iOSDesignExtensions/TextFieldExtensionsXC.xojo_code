@@ -97,26 +97,6 @@ Protected Module TextFieldExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetBorderColorXC(extends field As MobileTextField, C As Color)
-		  
-		  
-		  Declare Function layer_ Lib "UIKit.framework" selector "layer" (id As ptr) As Ptr
-		  Dim layer As ptr = layer_(field.Handle)
-		  
-		  Dim uic As UIKit.UIColor
-		  
-		  if c.Alpha = 255 then
-		    uic = UIKit.UIColor.ClearColor
-		  else
-		    uic = new UIKit.UIColor(c)
-		  end if
-		  
-		  declare sub setBorderColor lib "UIKit.framework" selector "setBorderColor:" (obj_id as ptr, col as ptr)
-		  setBorderColor(layer, uic.CGColor)
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
 		Sub SetBorderStyleXC(extends field As MobileTextField, style As TextFieldExtensionsXC.UITextFieldBorderStyle)
 		  
 		  
@@ -303,6 +283,26 @@ Protected Module TextFieldExtensionsXC
 		  declare sub setLeftView lib "UIKit.framework" selector "setLeftView:" (id as ptr, view as ptr)
 		  setLeftView field.Handle, spacerView
 		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, CompatibilityFlags = (TargetConsole and (Target32Bit or Target64Bit)) or  (TargetWeb and (Target32Bit or Target64Bit)) or  (TargetDesktop and (Target32Bit or Target64Bit))
+		Sub x_SetBorderColorXC(extends field As MobileTextField, C As Color)
+		  
+		  
+		  Declare Function layer_ Lib "UIKit.framework" selector "layer" (id As ptr) As Ptr
+		  Dim layer As ptr = layer_(field.Handle)
+		  
+		  Dim uic As UIKit.UIColor
+		  
+		  if c.Alpha = 255 then
+		    uic = UIKit.UIColor.ClearColor
+		  else
+		    uic = new UIKit.UIColor(c)
+		  end if
+		  
+		  declare sub setBorderColor lib "UIKit.framework" selector "setBorderColor:" (obj_id as ptr, col as ptr)
+		  setBorderColor(layer, uic.CGColor)
 		End Sub
 	#tag EndMethod
 

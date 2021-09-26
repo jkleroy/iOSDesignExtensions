@@ -67,9 +67,9 @@ Protected Module TableSearchExtensionsXC
 		  Declare Function arrayWithCapacity Lib "Foundation" selector "arrayWithCapacity:" (cls As ptr, count as UInteger) As ptr
 		  Declare Sub addObject Lib "Foundation" selector "addObject:" (arr As ptr, obj As CFStringRef)
 		  
-		  Dim nsarray As ptr = arrayWithCapacity(NSClassFromString("NSMutableArray"), UBound(value)+1)
+		  Dim nsarray As ptr = arrayWithCapacity(NSClassFromString("NSMutableArray"), value.LastIndex+1)
 		  
-		  For i As Integer = 0 To UBound(value)
+		  For i As Integer = 0 To value.LastIndex
 		    addObject(nsarray, value(i))
 		  Next
 		  
@@ -84,7 +84,7 @@ Protected Module TableSearchExtensionsXC
 		  
 		  // Enable it if the count > 0
 		  Declare Sub setShowsScopeBar Lib "UIKit" selector "setShowsScopeBar:" (obj As ptr, value As Boolean)
-		  setShowsScopeBar(searchBarObj, UBound(value)>-1)
+		  setShowsScopeBar(searchBarObj, value.LastIndex>-1)
 		End Sub
 	#tag EndMethod
 

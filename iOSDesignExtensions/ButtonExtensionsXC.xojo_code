@@ -43,40 +43,6 @@ Protected Module ButtonExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetBackgroundColorXC(Extends bt As MobileButton, value As color)
-		  
-		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
-		  Declare Function colorWithRGBA Lib "UIKit.framework" Selector "colorWithRed:green:blue:alpha:" ( UIColorClassRef As Ptr, red As CGFloat, green As CGFloat, blue As CGFloat, alpha As CGFloat) As Ptr
-		  Declare Function view Lib "UIKit.framework" Selector "view" (UIViewController As Ptr) As Ptr
-		  Declare Sub setBackgroundColor Lib "UIKit.framework" Selector "setBackgroundColor:" (UIView As Ptr, UIColor As Ptr)
-		  
-		  Dim UIColorClassPtr As Ptr =  NSClassFromString("UIColor")
-		  Dim colorPtr As ptr = colorWithRGBA(UIColorClassPtr, (value.red / 255.0), (value.Green / 255.0), (value.Blue / 255.0), (1.0-value.Alpha/255.0))
-		  Dim viewPtr As Ptr = bt.Handle
-		  SetBackgroundColor(viewPtr, colorPtr)
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub SetBorderColorXC(extends bt As MobileButton, value As Color)
-		  
-		  
-		  Declare Function layer_ Lib "UIKit.framework" selector "layer" (id As ptr) As Ptr
-		  Dim layer As ptr = layer_(bt.Handle)
-		  
-		  Dim uic As UIKit.UIColor
-		  If value.Alpha = 255 Then
-		    uic = UIKit.UIColor.ClearColor
-		  Else
-		    uic = New UIColor(value)
-		  End If 
-		  
-		  declare sub setBorderColor lib "UIKit.framework" selector "setBorderColor:" (obj_id as ptr, col as ptr)
-		  setBorderColor(layer, uic.CGColor)
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
 		Sub SetBorderWidthXC(extends bt As MobileButton, value As Double)
 		  
 		  
@@ -214,6 +180,40 @@ Protected Module ButtonExtensionsXC
 		  Declare Sub setTitleEdgeInsets_ Lib "UIKit.framework" selector "setTitleEdgeInsets:" (id As ptr, value As ExtensionsXC.xcUIEdgeInsets)
 		  setTitleEdgeInsets_ (bt.handle, value)
 		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, CompatibilityFlags = (TargetConsole and (Target32Bit or Target64Bit)) or  (TargetWeb and (Target32Bit or Target64Bit)) or  (TargetDesktop and (Target32Bit or Target64Bit))
+		Sub x_SetBackgroundColorXC(Extends bt As MobileButton, value As color)
+		  
+		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
+		  Declare Function colorWithRGBA Lib "UIKit.framework" Selector "colorWithRed:green:blue:alpha:" ( UIColorClassRef As Ptr, red As CGFloat, green As CGFloat, blue As CGFloat, alpha As CGFloat) As Ptr
+		  Declare Function view Lib "UIKit.framework" Selector "view" (UIViewController As Ptr) As Ptr
+		  Declare Sub setBackgroundColor Lib "UIKit.framework" Selector "setBackgroundColor:" (UIView As Ptr, UIColor As Ptr)
+		  
+		  Dim UIColorClassPtr As Ptr =  NSClassFromString("UIColor")
+		  Dim colorPtr As ptr = colorWithRGBA(UIColorClassPtr, (value.red / 255.0), (value.Green / 255.0), (value.Blue / 255.0), (1.0-value.Alpha/255.0))
+		  Dim viewPtr As Ptr = bt.Handle
+		  SetBackgroundColor(viewPtr, colorPtr)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, CompatibilityFlags = (TargetConsole and (Target32Bit or Target64Bit)) or  (TargetWeb and (Target32Bit or Target64Bit)) or  (TargetDesktop and (Target32Bit or Target64Bit))
+		Sub x_SetBorderColorXC(extends bt As MobileButton, value As Color)
+		  
+		  
+		  Declare Function layer_ Lib "UIKit.framework" selector "layer" (id As ptr) As Ptr
+		  Dim layer As ptr = layer_(bt.Handle)
+		  
+		  Dim uic As UIKit.UIColor
+		  If value.Alpha = 255 Then
+		    uic = UIKit.UIColor.ClearColor
+		  Else
+		    uic = New UIColor(value)
+		  End If 
+		  
+		  declare sub setBorderColor lib "UIKit.framework" selector "setBorderColor:" (obj_id as ptr, col as ptr)
+		  setBorderColor(layer, uic.CGColor)
 		End Sub
 	#tag EndMethod
 

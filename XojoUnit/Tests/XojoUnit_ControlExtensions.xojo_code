@@ -4,7 +4,7 @@ Inherits XojoUnitSuperClassTests
 	#tag Method, Flags = &h0, Description = 41646A757374732074686520666F6E742073697A65206163636F7264696E6720746F20617661696C61626C65207769647468
 		Sub AdjustsFontSizeToFitWidthXCTest()
 		  
-		  Dim lbl As new iOSLabel
+		  Dim lbl As new MobileLabel
 		  
 		  lbl.AdjustsFontSizeToFitWidthXC
 		  lbl.AdjustsFontSizeToFitWidthXC(2)
@@ -39,7 +39,7 @@ Inherits XojoUnitSuperClassTests
 	#tag Method, Flags = &h0, Description = 466C69707320616E20694F53436F6E74726F6C206F6E2074686520686F72697A6F6E74616C206178697320666F722052544C
 		Sub FlipHorizontalForRTLXCTest()
 		  
-		  Dim scroll As new iOSScrollableArea
+		  Dim scroll As new MobileScrollableArea
 		  
 		  scroll.FlipHorizontalForRTLXC
 		  
@@ -50,9 +50,9 @@ Inherits XojoUnitSuperClassTests
 	#tag Method, Flags = &h0
 		Sub GetBoundsXCTest()
 		  
-		  Dim bt As new iOSButton
+		  Dim bt As new MobileButton
 		  
-		  Dim rect As Xojo.Core.Rect = bt.GetBoundsXC
+		  Dim rect As Rect = bt.GetBoundsXC
 		  
 		  Assert.IsNotNil(rect)
 		  
@@ -63,9 +63,9 @@ Inherits XojoUnitSuperClassTests
 	#tag Method, Flags = &h0
 		Sub GetFrameXCTest()
 		  
-		  Dim bt As new iOSButton
+		  Dim bt As new MobileButton
 		  
-		  Dim rect As Xojo.Core.Rect = bt.GetBoundsXC
+		  Dim rect As Rect = bt.GetBoundsXC
 		  
 		  Assert.IsNotNil(rect)
 		  
@@ -130,7 +130,7 @@ Inherits XojoUnitSuperClassTests
 	#tag Method, Flags = &h0
 		Sub SetActivityIndicatorViewStyleXCTest()
 		  
-		  Dim progress As new iOSProgressWheel
+		  Dim progress As new MobileProgressWheel
 		  
 		  progress.SetActivityIndicatorViewStyleXC(ControlExtensionsXC.UIActivityIndicatorViewStyle.gray)
 		  progress.SetActivityIndicatorViewStyleXC(ControlExtensionsXC.UIActivityIndicatorViewStyle.whiteLarge)
@@ -170,10 +170,15 @@ Inherits XojoUnitSuperClassTests
 		Sub SetBackgroundColorXCTest()
 		  
 		  
-		  Dim lbl As new iOSLabel
+		  Dim lbl As new MobileLabel
 		  
 		  lbl.SetBackgroundColorXC(&cFF0000)
 		  lbl.SetBackgroundColorXC(&c000000FF)
+		  
+		  Dim cgValue As new ColorGroup(&cFF0000, &c00FF00)
+		  lbl.SetBackgroundColorXC(cgValue)
+		  
+		  
 		  
 		  Assert.Pass
 		End Sub
@@ -182,7 +187,7 @@ Inherits XojoUnitSuperClassTests
 	#tag Method, Flags = &h0, Description = 536574732074686520636F6C6F72206F662074686520737769746368206261636B67726F756E64207768656E2076616C75652069732054727565
 		Sub SetOnTintColorXCTest()
 		  
-		  Dim sw As new iOSSwitch
+		  Dim sw As new MobileSwitch
 		  
 		  sw.SetOnTintColorXC(&cFF0000)
 		  sw.SetOnTintColorXC(&c000000FF)
@@ -217,9 +222,9 @@ Inherits XojoUnitSuperClassTests
 	#tag Method, Flags = &h0
 		Sub StretchToParentXCTest()
 		  
-		  Dim parent As new iOSContainerControl
+		  Dim parent As new MobileContainer
 		  
-		  Dim cc As new iOSContainerControl
+		  Dim cc As new MobileContainer
 		  
 		  parent.AddControl(cc)
 		  
@@ -232,9 +237,9 @@ Inherits XojoUnitSuperClassTests
 	#tag Method, Flags = &h0
 		Sub StretchToViewXCTest()
 		  
-		  Dim parent As new iOSView
+		  Dim parent As new MobileScreen
 		  
-		  Dim cc As new iOSContainerControl
+		  Dim cc As new MobileContainer
 		  
 		  parent.AddControl(cc)
 		  
@@ -246,6 +251,86 @@ Inherits XojoUnitSuperClassTests
 
 
 	#tag ViewBehavior
+		#tag ViewProperty
+			Name="Duration"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="FailedTestCount"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="IncludeGroup"
+			Visible=false
+			Group="Behavior"
+			InitialValue="True"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="IsRunning"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="NotImplementedCount"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="PassedTestCount"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="RunTestCount"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="SkippedTestCount"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="StopTestOnFail"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="TestCount"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
 			Visible=true

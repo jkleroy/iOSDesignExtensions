@@ -28,6 +28,11 @@ Inherits MobileApplication
 	#tag Note, Name = README
 		## History
 		
+		### Version 2.0.3 - Released 2021-09-26
+		** Fixed Me.SetBackgroundColorXC(aColorGroup)
+		** Fixed Me.SetBorderColorXC(aColorGroup)
+		** Fixed some deprecations
+		
 		### Version 2.0.2 - Released 2021-09-17
 		** New TableSearchExtensionsXC module
 		** Added iOSMobileTable.GetSearchFilterIndexXC
