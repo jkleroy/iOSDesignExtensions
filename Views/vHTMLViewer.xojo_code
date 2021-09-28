@@ -8,19 +8,19 @@ Begin MobileScreen vHTMLViewer
    Left            =   0
    TabBarVisible   =   True
    TabIcon         =   0
-   TintColor       =   0
+   TintColor       =   "&h00000000"
    Title           =   "HTMLViewer"
    Top             =   0
    Begin MobileHTMLViewer HTMLViewer1
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
-      AutoLayout      =   HTMLViewer1, 4, btLoad, 3, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   HTMLViewer1, 4, BottomLayoutGuide, 4, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   HTMLViewer1, 1, <Parent>, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   HTMLViewer1, 2, <Parent>, 2, False, +1.00, 4, 1, -0, , True
       AutoLayout      =   HTMLViewer1, 3, TopLayoutGuide, 3, False, +1.00, 4, 1, 0, , True
       ControlCount    =   0
       Enabled         =   True
-      Height          =   453
+      Height          =   503
       Left            =   0
       LockedInPosition=   False
       Scope           =   0
@@ -29,100 +29,96 @@ Begin MobileScreen vHTMLViewer
       Visible         =   True
       Width           =   320
    End
-   Begin MobileButton btLoad
-      AccessibilityHint=   ""
-      AccessibilityLabel=   ""
-      AutoLayout      =   btLoad, 4, <Parent>, 4, False, +1.00, 4, 1, -*kStdGapCtlToViewV, , True
-      AutoLayout      =   btLoad, 8, , 0, False, +1.00, 4, 1, 30, , True
-      AutoLayout      =   btLoad, 1, <Parent>, 1, False, +1.00, 4, 1, *kStdGapCtlToViewH, , True
-      AutoLayout      =   btLoad, 7, , 0, False, +1.00, 4, 1, 80, , True
-      Caption         =   "Load Page"
-      CaptionColor    =   &c000000
-      ControlCount    =   0
-      Enabled         =   True
-      Height          =   30
-      Left            =   20
-      LockedInPosition=   False
-      Scope           =   0
-      TextFont        =   ""
-      TextSize        =   0
-      TintColor       =   ""
-      Top             =   518
-      Visible         =   True
-      Width           =   80
-   End
-   Begin MobileButton btCalcPi
-      AccessibilityHint=   ""
-      AccessibilityLabel=   ""
-      AutoLayout      =   btCalcPi, 2, <Parent>, 2, False, +1.00, 4, 1, -*kStdGapCtlToViewH, , True
-      AutoLayout      =   btCalcPi, 7, , 0, False, +1.00, 4, 1, 20, , True
-      AutoLayout      =   btCalcPi, 8, , 0, False, +1.00, 4, 1, 30, , True
-      AutoLayout      =   btCalcPi, 10, btLoad, 10, False, +1.00, 4, 1, 0, , True
-      Caption         =   "Pi"
-      CaptionColor    =   &c000000
-      ControlCount    =   0
-      Enabled         =   True
-      Height          =   30
-      Left            =   280
-      LockedInPosition=   False
-      Scope           =   0
-      TextFont        =   ""
-      TextSize        =   0
-      TintColor       =   ""
-      Top             =   518
-      Visible         =   True
-      Width           =   20
-   End
-   Begin MobileButton btJavascript
-      AccessibilityHint=   ""
-      AccessibilityLabel=   ""
-      AutoLayout      =   btJavascript, 2, btCalcPi, 1, False, +1.00, 4, 1, -*kStdControlGapH, , True
-      AutoLayout      =   btJavascript, 7, , 0, False, +1.00, 4, 1, 80, , True
-      AutoLayout      =   btJavascript, 8, , 0, False, +1.00, 4, 1, 30, , True
-      AutoLayout      =   btJavascript, 4, btLoad, 4, False, +1.00, 4, 1, 0, , True
-      Caption         =   "Exec Javascript"
-      CaptionColor    =   &c000000
-      ControlCount    =   0
-      Enabled         =   True
-      Height          =   30
-      Left            =   192
-      LockedInPosition=   False
-      Scope           =   0
-      TextFont        =   ""
-      TextSize        =   0
-      TintColor       =   ""
-      Top             =   518
-      Visible         =   True
-      Width           =   80
-   End
-   Begin MobileButton btUserAgent
-      AccessibilityHint=   ""
-      AccessibilityLabel=   ""
-      AutoLayout      =   btUserAgent, 1, btLoad, 2, False, +1.00, 4, 1, *kStdControlGapH, , True
-      AutoLayout      =   btUserAgent, 7, , 0, False, +1.00, 4, 1, 80, , True
-      AutoLayout      =   btUserAgent, 8, , 0, False, +1.00, 4, 1, 30, , True
-      AutoLayout      =   btUserAgent, 10, btLoad, 10, False, +1.00, 4, 1, 0, , True
-      Caption         =   "UserAgent"
-      CaptionColor    =   &c000000
-      ControlCount    =   0
-      Enabled         =   True
-      Height          =   30
-      Left            =   108
-      LockedInPosition=   False
-      Scope           =   0
-      TextFont        =   ""
-      TextSize        =   0
-      TintColor       =   ""
-      Top             =   518
-      Visible         =   True
-      Width           =   80
-   End
 End
 #tag EndMobileScreen
 
 #tag WindowCode
+	#tag Event
+		Sub Opening()
+		  
+		  dim tb As MobileToolbarButton
+		  
+		  tb = new MobileToolbarButton(MobileToolbarButton.Types.Plain, "Load Page")
+		  tb.tag = "Load"
+		  self.Toolbar.AddButton tb
+		  
+		  
+		  tb = new MobileToolbarButton(MobileToolbarButton.Types.Plain, "User Agent")
+		  tb.tag = "useragent"
+		  self.Toolbar.AddButton tb
+		  
+		  
+		  tb = new MobileToolbarButton(MobileToolbarButton.Types.Plain, "Javascript")
+		  tb.tag = "javascript"
+		  self.Toolbar.AddButton tb
+		  
+		  
+		  tb = new MobileToolbarButton(MobileToolbarButton.Types.Plain, "Calc PI")
+		  tb.tag = "pi"
+		  self.Toolbar.AddButton tb
+		  
+		  
+		  
+		End Sub
+	#tag EndEvent
+
+	#tag Event
+		Sub ToolbarButtonPressed(button As MobileToolbarButton)
+		  
+		  Select case button.Tag
+		    
+		  Case "load"
+		    HTMLViewer1.loadPageXC(kHTML)
+		    
+		    loaded = True
+		    
+		    
+		  Case "useragent"
+		    
+		    
+		    HTMLViewer1.UserAgentXC( WeakAddressOf UserAgentResult )
+		    
+		    
+		  Case "javascript"
+		    
+		    If Not loaded Then
+		      Dim msg As New iOSMessageBox
+		      msg.Buttons = Array("OK")
+		      msg.Title = "Error"
+		      msg.Message = "First tap on Load Page button"
+		      msg.Show
+		      Return
+		    End If
+		    
+		    Static index As Integer
+		    
+		    Select Case index
+		      
+		    Case 0
+		      Call HTMLViewer1.ExecuteJavascriptXC("document.body.style.color = ""magenta"";")
+		    Case 1
+		      Call HTMLViewer1.ExecuteJavascriptXC("document.body.style.color = ""blue"";")
+		      
+		    Case 2
+		      
+		      Call HTMLViewer1.ExecuteJavascriptXC("document.body.style.color = ""red"";")
+		      
+		    End Select
+		    
+		    index = (index+1) Mod 3
+		    
+		  Case "pi"
+		    Dim js As String = kJSPie
+		    
+		    Call HTMLViewer1.ExecuteJavascriptXC(js, WeakAddressOf PiResult)
+		    
+		  End Select
+		End Sub
+	#tag EndEvent
+
+
 	#tag Method, Flags = &h21
-		Private Sub PiResult(value As Auto, error As RuntimeException)
+		Private Sub PiResult(value As Variant, error As RuntimeException)
 		  
 		  If error <> Nil Then
 		    
@@ -147,7 +143,7 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub UserAgentResult(value As Auto, error As RuntimeException)
+		Private Sub UserAgentResult(value As Variant, error As RuntimeException)
 		  gotresult = True
 		  If error <> Nil Then
 		    
@@ -184,72 +180,6 @@ End
 
 #tag EndWindowCode
 
-#tag Events btLoad
-	#tag Event
-		Sub Pressed()
-		  HTMLViewer1.loadPageXC(kHTML)
-		  
-		  loaded = True
-		  
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events btCalcPi
-	#tag Event
-		Sub Pressed()
-		  
-		  //Calculating Pi using Javascript
-		  
-		  
-		  Dim js As String = kJSPie
-		  
-		  Call HTMLViewer1.ExecuteJavascriptXC(js, WeakAddressOf PiResult)
-		  
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events btJavascript
-	#tag Event
-		Sub Pressed()
-		  If Not loaded Then
-		    Dim msg As New iOSMessageBox
-		    msg.Buttons = Array("OK")
-		    msg.Title = "Error"
-		    msg.Message = "First tap on Load Page button"
-		    msg.Show
-		    Return
-		  End If
-		  
-		  Static index As Integer
-		  
-		  Select Case index
-		    
-		  Case 0
-		    Call HTMLViewer1.ExecuteJavascriptXC("document.body.style.color = ""magenta"";")
-		  Case 1
-		    Call HTMLViewer1.ExecuteJavascriptXC("document.body.style.color = ""blue"";")
-		    
-		  Case 2
-		    
-		    Call HTMLViewer1.ExecuteJavascriptXC("document.body.style.color = ""red"";")
-		    
-		  End Select
-		  
-		  index = (index+1) Mod 3
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events btUserAgent
-	#tag Event
-		Sub Pressed()
-		  
-		  
-		  
-		  HTMLViewer1.UserAgentXC( WeakAddressOf UserAgentResult )
-		  
-		End Sub
-	#tag EndEvent
-#tag EndEvents
 #tag ViewBehavior
 	#tag ViewProperty
 		Name="BackButtonCaption"
