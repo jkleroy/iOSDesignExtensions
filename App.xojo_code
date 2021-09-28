@@ -28,6 +28,12 @@ Inherits MobileApplication
 	#tag Note, Name = README
 		## History
 		
+		### Version 2.0.4 - Released 2021-09-28
+		* Fixed MobileScreen.SetNavBarTitleImageXC
+		* New example for MobileScreen.SetNavBarTitleImageXC
+		* Updated HTMLViewerExtensionsXC.ExecuteJavascriptXC to use a Variant
+		* Improved HTMLViewer example
+		
 		### Version 2.0.3 - Released 2021-09-26
 		** Fixed Me.SetBackgroundColorXC(aColorGroup)
 		** Fixed Me.SetBorderColorXC(aColorGroup)
