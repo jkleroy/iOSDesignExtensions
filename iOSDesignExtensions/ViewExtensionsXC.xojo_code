@@ -796,7 +796,15 @@ Protected Module ViewExtensionsXC
 		  dim navItem as ptr = topItem(navBar)
 		  
 		  //Create imageView with the passed image
-		  Dim iView As Ptr = initWithImage( alloc( NSClassFromString("UIImageView")), image.Handle)
+		  
+		  Dim imgHandle As Ptr
+		  if image.Handle = nil then
+		    imgHandle = image.CopyOSHandle(Picture.HandleType.iOSUIImage)
+		  else
+		    imgHandle = image.handle
+		  end if
+		  
+		  Dim iView As Ptr = initWithImage( alloc( NSClassFromString("UIImageView")), imgHandle)
 		  
 		  //Set Title item to use the imageView
 		  setTitleView(navItem, iView)

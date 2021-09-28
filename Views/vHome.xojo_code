@@ -8,7 +8,7 @@ Begin MobileScreen vHome Implements iOSMobileTableDataSource
    Left            =   0
    TabBarVisible   =   True
    TabIcon         =   0
-   TintColor       =   0
+   TintColor       =   "&h00000000"
    Title           =   "iOS Design Extensions"
    Top             =   0
    Begin iOSMobileTable Table
@@ -261,7 +261,7 @@ End
 		  AddRow(section, "Big Progress Wheel", "", accessory, GetTypeInfo(vViewProgressWheel), ImageExtensionsXC.ImageWithColorXC(ic8_loading, &c80808000))
 		  AddRow(section, "Hide Navigator on Swipe", "", accessory, GetTypeInfo(vHideNavigator), ic8_hide)
 		  AddRow(section, "Large Titles", "", accessory, GetTypeInfo(vLargeTitles), ic8_bigfont)
-		  AddRow(section, "Navigation Bar Color", "", accessory, GetTypeInfo(vNavbar), ImageExtensionsXC.ImageWithColorXC(ic_menu, &c073F8000))
+		  AddRow(section, "Navigation Bar Color / Image", "", accessory, GetTypeInfo(vNavbar), ImageExtensionsXC.ImageWithColorXC(ic_menu, &c073F8000))
 		  AddRow(section, "ToolButtons", "", accessory, GetTypeInfo(vToolButton), ImageExtensionsXC.ImageWithColorXC(ic8_button, &c7F0FFE))
 		  AddRow(section, "View Color", "", accessory, GetTypeInfo(vBackground), ImageExtensionsXC.ImageOriginalXC(ic8_color))
 		  
