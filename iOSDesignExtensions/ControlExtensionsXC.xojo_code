@@ -1,6 +1,56 @@
 #tag Module
 Protected Module ControlExtensionsXC
 	#tag Method, Flags = &h0, Description = 41646A757374732074686520666F6E742073697A65206163636F7264696E6720746F20617661696C61626C65207769647468
+		Sub AdjustsFontForContentSizeCategoryXC(extends label As MobileLabel, textStyle As ControlExtensionsXC.UIFontTextStyle)
+		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
+		  Declare Function alloc Lib "Foundation.framework" selector "alloc" (clsRef As ptr) As ptr
+		  Declare Function initFont Lib "UIKit.framework" selector "fontWithName:size:" (obj_id As ptr, name As CFStringRef, size As CGFloat) As ptr
+		  Declare Function preferredFontForTextStyle Lib "UIKit.framework" selector "preferredFontForTextStyle:" (obj_id As ptr, mode As CFStringRef) As ptr
+		  
+		  
+		  Dim constName As String
+		  Select case textStyle
+		  Case UIFontTextStyle.body
+		    constName = "UIFontTextStyleBody"
+		  Case UIFontTextStyle.callout
+		    constName = "UIFontTextStyleCallout"
+		  Case UIFontTextStyle.caption1
+		    constName = "UIFontTextStyleCaption1"
+		  Case UIFontTextStyle.caption2
+		    constName = "UIFontTextStyleCaption2"
+		  Case UIFontTextStyle.footnote
+		    constName = "UIFontTextStyleFootnote"
+		  Case UIFontTextStyle.headline
+		    constName = "UIFontTextStyleHeadline"
+		  Case UIFontTextStyle.subHeadline
+		    constName = "UIFontTextStyleSubheadline"
+		  Case UIFontTextStyle.largeTitle
+		    constName = "UIFontTextStyleLargeTitle"
+		  Case UIFontTextStyle.title1
+		    constName = "UIFontTextStyleTitle1"
+		  Case UIFontTextStyle.title2
+		    constName = "UIFontTextStyleTitle2"
+		  case UIFontTextStyle.title3
+		    constName = "UIFontTextStyleTitle3"
+		  End Select
+		  
+		  
+		  Dim textStylePtr As Ptr = ExtensionsXC.LoadConstantXC("UIKit", constName)
+		  
+		  
+		  Dim fontPtr As ptr
+		  fontPtr = preferredFontForTextStyle((NSClassFromString("UIFont")), textStylePtr.CFStringRef(0))
+		  
+		  Declare sub setFont lib "UIKit.framework" selector "setFont:" (obj_ref as ptr, fontRef as ptr)
+		  Declare Sub setAdjustsFontForContentSizeCategory Lib "UIKit.framework" Selector "setAdjustsFontForContentSizeCategory:" (obj_ref as ptr, value as Boolean)
+		  
+		  setFont(label.Handle, fontPtr)
+		  
+		  setAdjustsFontForContentSizeCategory label.Handle, True
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 41646A757374732074686520666F6E742073697A65206163636F7264696E6720746F20617661696C61626C65207769647468
 		Sub AdjustsFontSizeToFitWidthXC(extends label As MobileLabel, lines As Integer = -1)
 		  
 		  label.LineBreakMode = MobileLabel.LineBreakModes.TruncateEnd
@@ -148,27 +198,11 @@ Protected Module ControlExtensionsXC
 	#tag Method, Flags = &h0
 		Sub SetAlphaValueXC(extends ctrl As MobileUIControl, value As Double)
 		  
+		  Declare Sub setAlphaValue Lib "UIKit.framework" selector "setAlpha:" (id As ptr, value As CGFloat)
+		  
+		  setAlphaValue ctrl.handle, value
 		  
 		  
-		  
-		  #if ExtensionsXC.kUseUIKit
-		    //Following code works with any version of iOS
-		    Dim v As new UIKit.UIView(ctrl.handle)
-		    v.alpha = value
-		    
-		  #else
-		    #Pragma Unused ctrl
-		    #Pragma Unused value
-		    
-		    
-		    break
-		    //Following code does not work with iOS 12.2 anymore
-		    'Declare Sub setAlphaValue Lib "UIKit.framework" selector "setAlpha:" (id As ptr, value As CGFloat)
-		    '
-		    'setAlphaValue ctrl.handle, value
-		    
-		    
-		  #endif
 		End Sub
 	#tag EndMethod
 
@@ -459,6 +493,20 @@ Protected Module ControlExtensionsXC
 		  wheels
 		  compact
 		inline
+	#tag EndEnum
+
+	#tag Enum, Name = UIFontTextStyle, Type = Integer, Flags = &h1
+		body
+		  callout
+		  caption1
+		  caption2
+		  footnote
+		  headline
+		  subHeadline
+		  largeTitle
+		  title1
+		  title2
+		title3
 	#tag EndEnum
 
 	#tag Enum, Name = UIVIewAnimationCurve, Type = Integer, Flags = &h1

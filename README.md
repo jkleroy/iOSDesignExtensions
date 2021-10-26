@@ -9,6 +9,7 @@ A set of 100+ UI extensions for Xojo iOS framework.
 
 ### MobileButton
 * Adjust font size to fit width
+* Adjust font for ContentSize category
 * Backdrop
 * Background color
 * Border color
@@ -32,6 +33,7 @@ A set of 100+ UI extensions for Xojo iOS framework.
 
 ### MobileLabel
 * Adjust font size to fit width
+* Adjust font for ContentSize category
 
 ### MobileUIControl
 * Background color
@@ -150,6 +152,11 @@ A set of 100+ UI extensions for Xojo iOS framework.
 
 
 ## History
+
+### Version 2.0.5 - Released 2021-10-26
+* New MobileLabel.AdjustsFontForContentSizeCategoryXC
+* New MobileButton.AdjustsFontForContentSizeCategoryXC
+* Fixed MobileUIControl.SetAlphaValueXC
 
 ### Version 2.0.4 - Released 2021-09-28
 * Fixed MobileScreen.SetNavBarTitleImageXC

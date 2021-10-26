@@ -8,7 +8,7 @@ Begin MobileScreen vNetflixHome
    Left            =   0
    TabBarVisible   =   True
    TabIcon         =   0
-   TintColor       =   "&h00000000"
+   TintColor       =   0
    Title           =   "Netflix"
    Top             =   0
    Begin MobileScrollableArea ScrollableArea1
@@ -18,12 +18,14 @@ Begin MobileScreen vNetflixHome
       AutoLayout      =   ScrollableArea1, 2, <Parent>, 2, False, +1.00, 4, 1, -0, , True
       AutoLayout      =   ScrollableArea1, 3, TopLayoutGuide, 3, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   ScrollableArea1, 4, BottomLayoutGuide, 4, False, +1.00, 4, 1, 0, , True
+      ControlCount    =   0
       Enabled         =   True
       Height          =   503
       Left            =   0
       LockedInPosition=   False
       Scope           =   2
       ScrollContent   =   134291455
+      TintColor       =   ""
       Top             =   65
       Visible         =   True
       Width           =   320

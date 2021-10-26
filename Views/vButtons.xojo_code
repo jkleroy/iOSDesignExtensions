@@ -8,7 +8,7 @@ Begin MobileScreen vButtons
    Left            =   0
    TabBarVisible   =   True
    TabIcon         =   0
-   TintColor       =   0
+   TintColor       =   "&h00000000"
    Title           =   "Buttons"
    Top             =   0
    Begin MobileButton btBackgroundColor
@@ -199,6 +199,8 @@ End
 		  
 		  Me.SetBackgroundColorXC(&c06BEBD)
 		  Me.CaptionColor = &cFFFFFF
+		  
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents

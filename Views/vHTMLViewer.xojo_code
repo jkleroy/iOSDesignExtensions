@@ -8,7 +8,7 @@ Begin MobileScreen vHTMLViewer
    Left            =   0
    TabBarVisible   =   True
    TabIcon         =   0
-   TintColor       =   "&h00000000"
+   TintColor       =   0
    Title           =   "HTMLViewer"
    Top             =   0
    Begin MobileHTMLViewer HTMLViewer1

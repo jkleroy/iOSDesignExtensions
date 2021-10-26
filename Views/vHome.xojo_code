@@ -227,6 +227,11 @@ End
 		  img = ic8_button
 		  AddRow(section, "Buttons", "", accessory, GetTypeInfo(vButtons), ImageExtensionsXC.ImageWithColorXC(img, &c0F7FFE00))
 		  
+		  section = AddSection("Label Extensions")
+		  'img = ic8_button
+		  AddRow(section, "Labels", "", accessory, GetTypeInfo(vLabels), ImageExtensionsXC.ImageWithColorXC(img, &c0F7FFE00))
+		  
+		  
 		  
 		  section = AddSection("HTMLViewer Extensions")
 		  img = ic8_html

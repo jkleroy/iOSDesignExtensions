@@ -982,6 +982,95 @@ Protected Module ViewExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, CompatibilityFlags = (TargetConsole and (Target32Bit or Target64Bit)) or  (TargetWeb and (Target32Bit or Target64Bit)) or  (TargetDesktop and (Target32Bit or Target64Bit))
+		Attributes( hidden = "Need to fix" )  Sub ShowSheetXC(extends v As MobileScreen, parentScreen As MobileScreen, height As UISheetPresentationControllerDetent = UISheetPresentationControllerDetent.large, showGrabber As Boolean = False, Animate As Boolean = True)
+		  //Source https://sarunw.com/posts/bottom-sheet-in-ios-15-with-uisheetpresentationcontroller/
+		  
+		  if ExtensionsXC.GetiOSVersionXC < 15.0 then
+		    Dim err As new UnsupportedOperationException
+		    err.Reason = CurrentMethodName + " requires iOS15+"
+		    Raise err
+		  end if
+		  
+		  
+		  
+		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
+		  Declare Function alloc Lib "Foundation.framework" selector "alloc" (clsRef As ptr) As ptr
+		  Declare Function initWithRootViewController_ Lib "Foundation" selector "initWithRootViewController:" (obj_id As ptr, rootViewController As ptr) As ptr
+		  Declare Sub presentViewController Lib "UIKit.framework" _
+		  Selector "presentViewController:animated:completion:" _
+		  (parentView As Ptr, viewControllerToPresent As Ptr, animated As Boolean, completion As Ptr)
+		  Declare Sub modalPresentationStyle_ Lib "UIKit.framework" selector "setModalPresentationStyle:" (obj_id As ptr, modalPresentationStyle As UIModalPresentationStyle)
+		  
+		  Declare Function sheetPresentationController lib "UIKit" selector "sheetPresentationController" (obj as ptr) as ptr
+		  Declare sub setDetents lib "UIKit" selector "setDetents:" (obj as ptr value as ptr)
+		  Declare Function init Lib "Foundation.framework" selector "init" (obj_id As ptr) As ptr
+		  Declare function largeDetent_ lib "UIKit" selector "largeDetent" (obj as ptr) as ptr
+		  Declare function mediumDetent_ lib "UIKit" selector "mediumDetent" (obj as ptr) as ptr
+		  
+		  Dim navController As ptr = initWithRootViewController_( alloc(NSClassFromString("UINavigationController")), v.ViewControllerHandle ) 
+		  
+		  style = UIModalPresentationStyle.pageSheet
+		  
+		  
+		  modalPresentationStyle_(navController, style)
+		  
+		  Dim sheet As Ptr = sheetPresentationController(navController)
+		  
+		  if sheet <> nil then
+		    
+		    Declare Function arrayWithCapacity Lib "Foundation" selector "arrayWithCapacity:" (cls As ptr, count as UInteger) As ptr
+		    Declare Sub addObject Lib "Foundation" selector "addObject:" (arr As ptr, obj As CFStringRef)
+		    
+		    Dim detentArray As ptr
+		    
+		    Select case height
+		    Case UISheetPresentationControllerDetent.medium
+		      
+		      detentArray = arrayWithCapacity(NSClassFromString("NSMutableArray"), 1)
+		      
+		      Dim mediumDetent As Ptr = mediumDetent_(init(alloc(NSClassFromString("UISheetPresentationControllerDetent"))))
+		      
+		      addObject(detentArray, mediumDetent)
+		      
+		    Case UISheetPresentationControllerDetent.large
+		      detentArray = arrayWithCapacity(NSClassFromString("NSMutableArray"), 1)
+		      
+		      Dim largeDetent As Ptr = largeDetent_(init(alloc(NSClassFromString("UISheetPresentationControllerDetent"))))
+		      
+		      addObject(detentArray, largeDetent)
+		      
+		    Case UISheetPresentationControllerDetent.medium_large
+		      detentArray = arrayWithCapacity(NSClassFromString("NSMutableArray"), 1)
+		      
+		      Dim mediumDetent As Ptr = mediumDetent_(init(alloc(NSClassFromString("UISheetPresentationControllerDetent"))))
+		      Dim largeDetent As Ptr = largeDetent_(init(alloc(NSClassFromString("UISheetPresentationControllerDetent"))))
+		      
+		      addObject(detentArray, mediumDetent)
+		      addObject(detentArray, largeDetent)
+		      
+		    End Select
+		    
+		    
+		    setDetents(sheet, detentArray)
+		    
+		    
+		    //Grabber
+		    if showGrabber then
+		      declare sub setPrefersGrabberVisible lib "UIKit" selector "setPrefersGrabberVisible:" (obj as ptr, value as Boolean)
+		      setPrefersGrabberVisible(sheet, True)
+		    end if
+		    
+		  end if
+		  
+		  
+		  
+		  presentViewController(parentScreen.ViewControllerHandle, navController, Animate, Nil)
+		  
+		  
+		End Sub
+	#tag EndMethod
+
 
 	#tag Enum, Name = LargeTitleDisplayMode, Type = Integer, Flags = &h1
 		automatic = 0
@@ -1015,6 +1104,12 @@ Protected Module ViewExtensionsXC
 		  TopRight = 2
 		  BottomLeft = 4
 		BottomRight = 8
+	#tag EndEnum
+
+	#tag Enum, Name = UISheetPresentationControllerDetent, Type = Integer, Flags = &h1
+		medium
+		  large
+		medium_large
 	#tag EndEnum
 
 	#tag Enum, Name = UISplitViewControllerDisplayMode, Type = Integer, Flags = &h1

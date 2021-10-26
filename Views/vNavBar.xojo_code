@@ -8,7 +8,7 @@ Begin MobileScreen vNavBar
    Left            =   0
    TabBarVisible   =   True
    TabIcon         =   0
-   TintColor       =   "&h00000000"
+   TintColor       =   0
    Title           =   "Navigation Bar Color"
    Top             =   0
    Begin MobileButton Button1
@@ -16,7 +16,7 @@ Begin MobileScreen vNavBar
       AccessibilityLabel=   ""
       AutoLayout      =   Button1, 9, <Parent>, 9, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Button1, 8, , 0, False, +1.00, 4, 1, 30, , True
-      AutoLayout      =   Button1, 3, , 0, False, +1.00, 4, 1, 175, , True
+      AutoLayout      =   Button1, 3, <Parent>, 3, False, +1.00, 4, 1, 175, , True
       AutoLayout      =   Button1, 7, , 0, False, +1.00, 4, 1, 200, , True
       Caption         =   "Use Picture (SF Symbol)"
       CaptionColor    =   &c007AFF00

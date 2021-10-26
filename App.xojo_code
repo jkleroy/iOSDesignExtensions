@@ -28,6 +28,14 @@ Inherits MobileApplication
 	#tag Note, Name = README
 		## History
 		
+		
+		
+		### Version 2.0.5 - Released 2021-10-26
+		* New MobileLabel.AdjustsFontForContentSizeCategoryXC
+		* New MobileButton.AdjustsFontForContentSizeCategoryXC
+		* Fixed MobileUIControl.SetAlphaValueXC
+		
+		
 		### Version 2.0.4 - Released 2021-09-28
 		* Fixed MobileScreen.SetNavBarTitleImageXC
 		* New example for MobileScreen.SetNavBarTitleImageXC
@@ -138,6 +146,10 @@ Inherits MobileApplication
 	#tag Property, Flags = &h0
 		currentSplitMode As ViewExtensionsXC.UISplitViewControllerDisplayMode
 	#tag EndProperty
+
+
+	#tag Constant, Name = isBeta, Type = Boolean, Dynamic = False, Default = \"False", Scope = Public
+	#tag EndConstant
 
 
 	#tag ViewBehavior

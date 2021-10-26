@@ -117,6 +117,7 @@ iOSView=XojoUnitTestMethodView;XojoUnit/XojoUnitTestMethodView.xojo_code;&h00000
 iOSView=XojoUnitTestDetailsView;XojoUnit/XojoUnitTestDetailsView.xojo_code;&h00000000215E17FF;&h000000002516B04D;false
 Module=AppExtensionsXC;iOSDesignExtensions/AppExtensionsXC.xojo_code;&h000000004EC367FF;&h000000000D697FFF;false
 Module=TableSearchExtensionsXC;iOSDesignExtensions/TableSearchExtensionsXC.xojo_code;&h000000005AE597FF;&h000000000D697FFF;false
+MobileScreen=vLabels;Views/vLabels.xojo_code;&h00000000043F3FFF;&h000000000E11DFFF;false
 DefaultLayout=iPhoneLayout
 DefaultTabletLayout=iPadLayout
 MajorVersion=2

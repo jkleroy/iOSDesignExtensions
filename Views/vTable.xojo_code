@@ -8,7 +8,7 @@ Begin MobileScreen vTable Implements iOSMobileTableDataSource,iOSMobileTableData
    Left            =   0
    TabBarVisible   =   True
    TabIcon         =   0
-   TintColor       =   "&h00000000"
+   TintColor       =   0
    Title           =   "Table"
    Top             =   0
    Begin iOSMobileTable Table1

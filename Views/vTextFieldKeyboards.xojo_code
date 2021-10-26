@@ -8,7 +8,7 @@ Begin MobileScreen vTextFieldKeyboards
    Left            =   0
    TabBarVisible   =   True
    TabIcon         =   0
-   TintColor       =   "&h00000000"
+   TintColor       =   0
    Title           =   "TextField Keyboards"
    Top             =   0
    Begin MobileTextField TextField1
