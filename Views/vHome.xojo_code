@@ -4,7 +4,7 @@ Begin MobileScreen vHome Implements iOSMobileTableDataSource
    Compatibility   =   ""
    ControlCount    =   0
    HasNavigationBar=   True
-   LargeTitleDisplayMode=   2
+   LargeTitleDisplayMode=   1
    Left            =   0
    TabBarVisible   =   True
    TabIcon         =   0
