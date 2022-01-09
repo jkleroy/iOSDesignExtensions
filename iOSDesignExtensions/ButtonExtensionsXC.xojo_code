@@ -91,7 +91,7 @@ Protected Module ButtonExtensionsXC
 		  else
 		    Dim bestImage As Picture = ImageExtensionsXC.BestRepresentationXC(backdrop)
 		    
-		    setBackgroundImage(bt.Handle, bestImage.Handle, 0)
+		    setBackgroundImage(bt.Handle, bestImage.CopyOSHandle(Picture.HandleType.iOSUIImage), 0)
 		  end if
 		  
 		  

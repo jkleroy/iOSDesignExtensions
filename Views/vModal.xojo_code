@@ -3,12 +3,14 @@ Begin MobileScreen vModal
    BackButtonCaption=   ""
    Compatibility   =   ""
    ControlCount    =   0
+   Device = 1
    HasNavigationBar=   True
    LargeTitleDisplayMode=   2
    Left            =   0
+   Orientation = 0
    TabBarVisible   =   True
    TabIcon         =   0
-   TintColor       =   0
+   TintColor       =   &c00000000
    Title           =   "Modal View"
    Top             =   0
    Begin MobileLabel Label1
@@ -30,7 +32,7 @@ Begin MobileScreen vModal
       TextColor       =   &c00000000
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   80
       Visible         =   True
       Width           =   280
@@ -50,11 +52,11 @@ Begin MobileScreen vModal
       LineBreakMode   =   0
       LockedInPosition=   False
       Scope           =   2
-      Text            =   "Calling self.Close on a modal view has no effect. You must use self.DismissViewControllerXC"
+      Text            =   "Calling self.Close on a modal view has no effect. You must use self.DismissViewControllerXC\n\nOn iPad this Screen has a size of 500x300 thanks to aScreen.SetPreferredContentSizeXC(New Size(500, 300))"
       TextColor       =   &c00000000
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   118
       Visible         =   True
       Width           =   280

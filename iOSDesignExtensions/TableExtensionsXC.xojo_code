@@ -306,7 +306,7 @@ Protected Module TableExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Attributes( hidden )  Sub SetIconXC(extends action As iOSMobileTableRowAction, icon As Picture, backColor As Color, width As Integer = 70, height As Integer = 44)
+		Sub SetIconXC(extends action As iOSMobileTableRowAction, icon As Picture, backColor As Color, width As Integer = 70, height As Integer = 44)
 		  
 		  #if DebugBuild
 		    Break //This function does not work anymore
@@ -347,7 +347,7 @@ Protected Module TableExtensionsXC
 		    
 		    //Creating a UIColor using the bitmap as a pattern
 		    Declare Function decl_GetColorWithRGBA Lib "UIKit" selector "colorWithPatternImage:" (UIColorClassRef As Ptr, imgRef As Ptr) As Ptr
-		    Dim uic As ptr = decl_GetColorWithRGBA(theUIColorClassRef, bitmap.Handle)
+		    Dim uic As ptr = decl_GetColorWithRGBA(theUIColorClassRef, bitmap.CopyOSHandle(Picture.HandleType.iOSUIImage))
 		    
 		    Declare Sub setBackgroundColor Lib "UIKit.framework" selector "setBackgroundColor:" (obj_id As ptr, col As ptr)
 		    SetBackgroundColor(action.handle, uic)

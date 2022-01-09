@@ -1,7 +1,7 @@
 #tag Module
 Protected Module ControlExtensionsXC
 	#tag Method, Flags = &h0, Description = 41646A757374732074686520666F6E742073697A65206163636F7264696E6720746F20617661696C61626C65207769647468
-		Sub AdjustsFontForContentSizeCategoryXC(extends label As MobileLabel, textStyle As ControlExtensionsXC.UIFontTextStyle)
+		Sub AdjustsFontForContentSizeCategoryXC(extends label As MobileLabel, textStyle As ControlExtensionsXC.UIFontTextStyle, customFont As Font = nil, maxPointSize As Double = 0.0)
 		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
 		  Declare Function alloc Lib "Foundation.framework" selector "alloc" (clsRef As ptr) As ptr
 		  Declare Function initFont Lib "UIKit.framework" selector "fontWithName:size:" (obj_id As ptr, name As CFStringRef, size As CGFloat) As ptr
@@ -37,9 +37,43 @@ Protected Module ControlExtensionsXC
 		  
 		  Dim textStylePtr As Ptr = ExtensionsXC.LoadConstantXC("UIKit", constName)
 		  
-		  
 		  Dim fontPtr As ptr
-		  fontPtr = preferredFontForTextStyle((NSClassFromString("UIFont")), textStylePtr.CFStringRef(0))
+		  
+		  if customFont <> nil then
+		    
+		    
+		    Declare function metricsForTextStyle lib "UIKit.framework" selector "metricsForTextStyle:" (clsRef as ptr, mode As CFStringRef) as ptr
+		    Declare function scaledFontForFontmaximumPointSize lib "UIKit.framework" selector "scaledFontForFont:maximumPointSize:" (obj as ptr, font as ptr, pointSize As CGFloat) as ptr
+		    Declare function scaledFontForFont lib "UIKit.framework" selector "scaledFontForFont:" (obj as ptr, font as ptr) as ptr
+		    Declare Function initFont Lib "UIKit.framework" selector "fontWithName:size:" (obj_id As ptr, name As CFStringRef, size As CGFloat) As ptr
+		    
+		    
+		    Dim fontMetricsPtr As Ptr = metricsForTextStyle((NSClassFromString("UIFontMetrics")), textStylePtr.CFStringRef(0))
+		    
+		    
+		    Dim customFontPtr As Ptr
+		    customFontPtr = initFont(NSClassFromString("UIFont"), customFont.Name, customFont.Size)
+		    
+		    
+		    if maxPointSize > 0.0 then
+		      
+		      //Returns a version of the specified font that adopts the current font metrics and is constrained to the specified maximum size.
+		      fontPtr = scaledFontForFontmaximumPointSize(fontMetricsPtr, customFontPtr, maxPointSize)
+		      
+		    Else
+		      
+		      //Returns a version of the specified font that adopts the current font metrics.
+		      fontPtr = scaledFontForFont(fontMetricsPtr, customFontPtr)
+		      
+		    end if
+		    
+		    
+		  Else
+		    
+		    fontPtr = preferredFontForTextStyle((NSClassFromString("UIFont")), textStylePtr.CFStringRef(0))
+		    
+		    
+		  end if
 		  
 		  Declare sub setFont lib "UIKit.framework" selector "setFont:" (obj_ref as ptr, fontRef as ptr)
 		  Declare Sub setAdjustsFontForContentSizeCategory Lib "UIKit.framework" Selector "setAdjustsFontForContentSizeCategory:" (obj_ref as ptr, value as Boolean)

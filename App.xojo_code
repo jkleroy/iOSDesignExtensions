@@ -28,7 +28,11 @@ Inherits MobileApplication
 	#tag Note, Name = README
 		## History
 		
-		
+		### Version 2.1 - Released 2022-01-09
+		* New MobileScreen.ShowSheetXC
+		* New SliderExtensionsXC
+		* New MobileScreen.SetPreferredContentSizeXC method
+		* Updated MobileLabel.AdjustsFontForContentSizeCategoryXC to allow for custom fonts
 		
 		### Version 2.0.5 - Released 2021-10-26
 		* New MobileLabel.AdjustsFontForContentSizeCategoryXC

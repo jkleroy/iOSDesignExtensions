@@ -3,12 +3,14 @@ Begin MobileScreen vHome Implements iOSMobileTableDataSource
    BackButtonCaption=   ""
    Compatibility   =   ""
    ControlCount    =   0
+   Device = 1
    HasNavigationBar=   True
-   LargeTitleDisplayMode=   2
+   LargeTitleDisplayMode=   1
    Left            =   0
+   Orientation = 0
    TabBarVisible   =   True
    TabIcon         =   0
-   TintColor       =   "&h00000000"
+   TintColor       =   &c00000000
    Title           =   "iOS Design Extensions"
    Top             =   0
    Begin iOSMobileTable Table
@@ -31,7 +33,7 @@ Begin MobileScreen vHome Implements iOSMobileTableDataSource
       LockedInPosition=   True
       Scope           =   0
       SectionCount    =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   65
       Visible         =   True
       Width           =   320
@@ -274,6 +276,7 @@ End
 		  section = AddSection("Modal")
 		  AddRow(section, "Modal View", "", accessory, "modal") 
 		  AddRow(section, "Modal View (Swipe disabled)", "", accessory, "modalfull") 
+		  AddRow(section, "Sheet (iOS 15+)", "", accessory, "sheet")
 		  
 		  section = AddSection("Application extensions")
 		  AddRow(section, "Open Settings", "", accessory, "opensettings")
@@ -334,11 +337,18 @@ End
 		      
 		      Return
 		      
+		    Case "sheet"
+		      Dim v As new vModal
+		      v.showsheetXC(self, ViewExtensionsXC.UISheetPresentationControllerDetent.medium_large, True)
+		      
 		      
 		    Case "modal"
 		      
 		      Dim v As New vModal
 		      Self.PushToShowModalXC(v, ViewExtensionsXC.UIModalPresentationStyle.formSheet)
+		      
+		      
+		      v.SetPreferredContentSizeXC(new Size(500, 300))
 		      
 		    Case "modalfull"
 		      

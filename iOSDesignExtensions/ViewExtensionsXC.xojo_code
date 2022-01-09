@@ -913,6 +913,20 @@ Protected Module ViewExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 53657473206C61726765207469746C657320746F206120566965772028694F5331312B29
+		Sub SetPreferredContentSizeXC(extends v As MobileScreen, sz As Size)
+		  
+		  Dim aSize As ExtensionsXC.xcCGSize
+		  
+		  aSize.width = sz.Width
+		  aSize.height = sz.Height
+		  
+		  Declare sub setPreferredContentSize lib "UIKit" Selector "setPreferredContentSize:" (obj as ptr, value as ExtensionsXC.xcCGSize)
+		  
+		  setPreferredContentSize(v.ViewControllerHandle, aSize)
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 53657473207468652053746174757320626172207465787420636F6C6F722E
 		Attributes( Deprecated = "Use App.SetStatusBarStyleXC instead" )  Sub SetStatusBarStyleXC(extends v As MobileScreen, style As AppExtensionsXC.UIStatusBarStyle)
 		  #Pragma Unused v
@@ -982,8 +996,8 @@ Protected Module ViewExtensionsXC
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0, CompatibilityFlags = (TargetConsole and (Target32Bit or Target64Bit)) or  (TargetWeb and (Target32Bit or Target64Bit)) or  (TargetDesktop and (Target32Bit or Target64Bit))
-		Attributes( hidden = "Need to fix" )  Sub ShowSheetXC(extends v As MobileScreen, parentScreen As MobileScreen, height As UISheetPresentationControllerDetent = UISheetPresentationControllerDetent.large, showGrabber As Boolean = False, Animate As Boolean = True)
+	#tag Method, Flags = &h0
+		Sub ShowSheetXC(extends v As MobileScreen, parentScreen As MobileScreen, height As UISheetPresentationControllerDetent = UISheetPresentationControllerDetent.large, showGrabber As Boolean = False, Animate As Boolean = True)
 		  //Source https://sarunw.com/posts/bottom-sheet-in-ios-15-with-uisheetpresentationcontroller/
 		  
 		  if ExtensionsXC.GetiOSVersionXC < 15.0 then
@@ -1003,13 +1017,15 @@ Protected Module ViewExtensionsXC
 		  Declare Sub modalPresentationStyle_ Lib "UIKit.framework" selector "setModalPresentationStyle:" (obj_id As ptr, modalPresentationStyle As UIModalPresentationStyle)
 		  
 		  Declare Function sheetPresentationController lib "UIKit" selector "sheetPresentationController" (obj as ptr) as ptr
-		  Declare sub setDetents lib "UIKit" selector "setDetents:" (obj as ptr value as ptr)
+		  Declare sub setDetents lib "UIKit" selector "setDetents:" (obj as ptr, value as ptr)
 		  Declare Function init Lib "Foundation.framework" selector "init" (obj_id As ptr) As ptr
 		  Declare function largeDetent_ lib "UIKit" selector "largeDetent" (obj as ptr) as ptr
 		  Declare function mediumDetent_ lib "UIKit" selector "mediumDetent" (obj as ptr) as ptr
 		  
 		  Dim navController As ptr = initWithRootViewController_( alloc(NSClassFromString("UINavigationController")), v.ViewControllerHandle ) 
 		  
+		  
+		  Dim style As ViewExtensionsXC.UIModalPresentationStyle
 		  style = UIModalPresentationStyle.pageSheet
 		  
 		  
@@ -1020,7 +1036,7 @@ Protected Module ViewExtensionsXC
 		  if sheet <> nil then
 		    
 		    Declare Function arrayWithCapacity Lib "Foundation" selector "arrayWithCapacity:" (cls As ptr, count as UInteger) As ptr
-		    Declare Sub addObject Lib "Foundation" selector "addObject:" (arr As ptr, obj As CFStringRef)
+		    Declare Sub addObject Lib "Foundation" selector "addObject:" (arr As ptr, obj As ptr)
 		    
 		    Dim detentArray As ptr
 		    
@@ -1029,22 +1045,23 @@ Protected Module ViewExtensionsXC
 		      
 		      detentArray = arrayWithCapacity(NSClassFromString("NSMutableArray"), 1)
 		      
-		      Dim mediumDetent As Ptr = mediumDetent_(init(alloc(NSClassFromString("UISheetPresentationControllerDetent"))))
+		      Dim mediumDetent As Ptr = mediumDetent_(NSClassFromString("UISheetPresentationControllerDetent"))
 		      
 		      addObject(detentArray, mediumDetent)
 		      
 		    Case UISheetPresentationControllerDetent.large
 		      detentArray = arrayWithCapacity(NSClassFromString("NSMutableArray"), 1)
 		      
-		      Dim largeDetent As Ptr = largeDetent_(init(alloc(NSClassFromString("UISheetPresentationControllerDetent"))))
+		      'Dim largeDetent As Ptr = largeDetent_(init(alloc(NSClassFromString("UISheetPresentationControllerDetent"))))
+		      Dim largeDetent As Ptr = largeDetent_(NSClassFromString("UISheetPresentationControllerDetent"))
 		      
 		      addObject(detentArray, largeDetent)
 		      
 		    Case UISheetPresentationControllerDetent.medium_large
 		      detentArray = arrayWithCapacity(NSClassFromString("NSMutableArray"), 1)
 		      
-		      Dim mediumDetent As Ptr = mediumDetent_(init(alloc(NSClassFromString("UISheetPresentationControllerDetent"))))
-		      Dim largeDetent As Ptr = largeDetent_(init(alloc(NSClassFromString("UISheetPresentationControllerDetent"))))
+		      Dim mediumDetent As Ptr = mediumDetent_(((NSClassFromString("UISheetPresentationControllerDetent"))))
+		      Dim largeDetent As Ptr = largeDetent_(((NSClassFromString("UISheetPresentationControllerDetent"))))
 		      
 		      addObject(detentArray, mediumDetent)
 		      addObject(detentArray, largeDetent)
