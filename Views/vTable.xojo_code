@@ -143,8 +143,16 @@ End
 		  
 		  Dim nd As Dictionary = rows(row)
 		  
+		  #if XojoVersion >= 2021.02
+		    cell = table.CreateCell("")
+		    
+		  #else
+		    // See feedback://showreport?report_id=64547
+		    cell = table.CreateCustomCell(GetTypeInfo(cellGeneric))
+		    
+		  #endif
 		  
-		  cell = table.CreateCustomCell(GetTypeInfo(cellGeneric))
+		  
 		  
 		  cell.Text = nd.Value("text")
 		  cell.DetailText = nd.Value("detail")

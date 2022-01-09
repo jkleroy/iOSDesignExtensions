@@ -3,12 +3,14 @@ Begin MobileScreen vLabels
    BackButtonCaption=   ""
    Compatibility   =   ""
    ControlCount    =   0
+   Device = 4
    HasNavigationBar=   True
    LargeTitleDisplayMode=   0
    Left            =   0
+   Orientation = 0
    TabBarVisible   =   True
    TabIcon         =   0
-   TintColor       =   "&h00000000"
+   TintColor       =   &c00000000
    Title           =   "Labels"
    Top             =   0
    Begin MobileLabel Label1
@@ -30,7 +32,7 @@ Begin MobileScreen vLabels
       TextColor       =   &c000000
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   73
       Visible         =   True
       Width           =   280
@@ -54,7 +56,7 @@ Begin MobileScreen vLabels
       TextColor       =   &c000000
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   111
       Visible         =   True
       Width           =   280
@@ -78,7 +80,7 @@ Begin MobileScreen vLabels
       TextColor       =   &c000000
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   149
       Visible         =   True
       Width           =   280
@@ -102,7 +104,7 @@ Begin MobileScreen vLabels
       TextColor       =   &c000000
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   187
       Visible         =   True
       Width           =   280
@@ -126,7 +128,7 @@ Begin MobileScreen vLabels
       TextColor       =   &c000000
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   225
       Visible         =   True
       Width           =   280
@@ -150,7 +152,7 @@ Begin MobileScreen vLabels
       TextColor       =   &c000000
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   263
       Visible         =   True
       Width           =   280
@@ -174,7 +176,7 @@ Begin MobileScreen vLabels
       TextColor       =   &c000000
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   301
       Visible         =   True
       Width           =   280
@@ -198,7 +200,7 @@ Begin MobileScreen vLabels
       TextColor       =   &c000000
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   339
       Visible         =   True
       Width           =   280
@@ -222,7 +224,7 @@ Begin MobileScreen vLabels
       TextColor       =   &c000000
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   377
       Visible         =   True
       Width           =   280
@@ -246,7 +248,7 @@ Begin MobileScreen vLabels
       TextColor       =   &c000000
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   415
       Visible         =   True
       Width           =   280
@@ -270,7 +272,7 @@ Begin MobileScreen vLabels
       TextColor       =   &c000000
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   453
       Visible         =   True
       Width           =   280
@@ -294,7 +296,7 @@ Begin MobileScreen vLabels
       TextColor       =   &c000000
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   491
       Visible         =   True
       Width           =   280
@@ -316,10 +318,34 @@ Begin MobileScreen vLabels
       Scope           =   2
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   529
       Visible         =   True
       Width           =   151
+   End
+   Begin MobileLabel lblTitleCustom
+      AccessibilityHint=   ""
+      AccessibilityLabel=   ""
+      Alignment       =   0
+      AutoLayout      =   lblTitleCustom, 1, Button1, 1, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   lblTitleCustom, 7, , 0, False, +1.00, 4, 1, 280, , True
+      AutoLayout      =   lblTitleCustom, 3, Button1, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
+      AutoLayout      =   lblTitleCustom, 8, , 0, False, +1.00, 4, 1, 30, , True
+      ControlCount    =   0
+      Enabled         =   True
+      Height          =   30
+      Left            =   20
+      LineBreakMode   =   0
+      LockedInPosition=   False
+      Scope           =   2
+      Text            =   "Custom Body font"
+      TextColor       =   &c000000
+      TextFont        =   ""
+      TextSize        =   0
+      TintColor       =   &c000000
+      Top             =   567
+      Visible         =   True
+      Width           =   280
    End
 End
 #tag EndMobileScreen
@@ -417,6 +443,17 @@ End
 	#tag Event
 		Sub Opening()
 		  me.AdjustsFontForContentSizeCategoryXC(ControlExtensionsXC.UIFontTextStyle.title1)
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events lblTitleCustom
+	#tag Event
+		Sub Opening()
+		  
+		  Dim customFont As new Font("Courier", 15)
+		  
+		  
+		  me.AdjustsFontForContentSizeCategoryXC(ControlExtensionsXC.UIFontTextStyle.body, customFont)
 		End Sub
 	#tag EndEvent
 #tag EndEvents

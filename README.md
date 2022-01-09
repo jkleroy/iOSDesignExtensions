@@ -136,7 +136,15 @@ A set of 100+ UI extensions for Xojo iOS framework.
 * Tabbar Button color
 * Tabbar color
 * Pop to root view
+* Preferred content size
 * Pushto and hide Tabbar
+
+### MobileSlider
+* Maximum track color
+* Minimum track color
+* Maximum value image
+* Minimum value image
+* Thumb color
 
 ### MobileToolbarButton
 * Tint color
@@ -152,6 +160,12 @@ A set of 100+ UI extensions for Xojo iOS framework.
 
 
 ## History
+
+### Version 2.1 - Released 2022-01-09
+* New MobileScreen.ShowSheetXC
+* New SliderExtensionsXC
+* New MobileScreen.SetPreferredContentSizeXC method
+* Updated MobileLabel.AdjustsFontForContentSizeCategoryXC to allow for custom fonts
 
 ### Version 2.0.5 - Released 2021-10-26
 * New MobileLabel.AdjustsFontForContentSizeCategoryXC
