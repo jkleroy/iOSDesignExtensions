@@ -762,7 +762,7 @@ Protected Module ViewExtensionsXC
 		  Declare Sub setTitleTextAttributes Lib "UIKit.framework" selector "setTitleTextAttributes:" _
 		  (obj_id As ptr, att As ptr)
 		  
-		  setTitleTextAttributes(navBar, nsDic)gith
+		  setTitleTextAttributes(navBar, nsDic)
 		  
 		  
 		  

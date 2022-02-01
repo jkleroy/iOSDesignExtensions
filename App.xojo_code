@@ -28,6 +28,10 @@ Inherits MobileApplication
 	#tag Note, Name = README
 		## History
 		
+		### Version 2.1.1 - Released 2022-02-01
+		* Fixed MobileScreen.SetNavBarTitleColorXC
+		* Fixed MobileScreen.PushToHideTabBarXC
+		
 		### Version 2.1 - Released 2022-01-09
 		* New MobileScreen.ShowSheetXC
 		* New SliderExtensionsXC
