@@ -747,23 +747,24 @@ Protected Module ViewExtensionsXC
 		  
 		  Declare Function NSClassFromString Lib "Foundation" (name As CFStringRef) As Ptr
 		  Declare Function dictionaryWithObject Lib "Foundation.framework" selector "dictionaryWithObject:forKey:" _
-		  (class_id As Ptr, anObject As CFStringRef, key As Ptr) As Ptr
+		  (class_id As Ptr, anObject As Ptr, key As CFStringRef) As Ptr
 		  
 		  
 		  
 		  Dim constStr As String = ExtensionsXC.StringConstantXC("UIKit", "NSForegroundColorAttributeName")
-		  
 		  Dim constRef As CFStringRef = constStr
 		  
 		  Dim nsDic As Ptr
-		  nsDic = DictionaryWithObject(NSClassFromString("NSDictionary"), constRef, New UIColor(value))
+		  nsDic = DictionaryWithObject(NSClassFromString("NSDictionary"), New UIColor(value), constStr)
 		  
 		  
 		  
 		  Declare Sub setTitleTextAttributes Lib "UIKit.framework" selector "setTitleTextAttributes:" _
 		  (obj_id As ptr, att As ptr)
 		  
-		  setTitleTextAttributes(navBar, nsDic)
+		  setTitleTextAttributes(navBar, nsDic)gith
+		  
+		  
 		  
 		  If ExtensionsXC.GetiOSVersionXC >= 11.0 Then
 		    

@@ -49,7 +49,7 @@ Protected Module TabBarExtensionsXC_API1
 		  Declare Sub setHidesBottomBarWhenPushed Lib "UIKit.framework" _
 		  Selector "setHidesBottomBarWhenPushed:" (id As Ptr, value As Boolean)
 		  
-		  setHidesBottomBarWhenPushed(childview.Handle, True)
+		  setHidesBottomBarWhenPushed(childview.ViewControllerHandle, True)
 		  
 		  parentView.PushTo(childView)
 		  

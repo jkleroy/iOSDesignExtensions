@@ -749,7 +749,7 @@ Protected Module ViewExtensionsXC_API1
 		  
 		  Declare Function NSClassFromString Lib "Foundation" (name As CFStringRef) As Ptr
 		  Declare Function dictionaryWithObject Lib "Foundation.framework" selector "dictionaryWithObject:forKey:" _
-		  (class_id As Ptr, anObject As CFStringRef, key As Ptr) As Ptr
+		  (class_id As Ptr, anObject As Ptr, key As CFStringRef) As Ptr
 		  
 		  
 		  
@@ -758,7 +758,7 @@ Protected Module ViewExtensionsXC_API1
 		  Dim constRef As CFStringRef = constStr
 		  
 		  Dim nsDic As Ptr
-		  nsDic = DictionaryWithObject(NSClassFromString("NSDictionary"), constRef, New UIColor(value))
+		  nsDic = DictionaryWithObject(NSClassFromString("NSDictionary"), New UIColor(value), constRef)
 		  
 		  
 		  
