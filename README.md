@@ -61,6 +61,8 @@ A set of 100+ UI extensions for Xojo iOS framework.
 * Paging
 * Disable scroll
 * Scrolls to top
+* Horizontal scrollbar visibility
+* Vertical scrollbar visibility
 
 ### MobileSegmentedButton
 * Adjust font size to fit width
@@ -78,6 +80,7 @@ A set of 100+ UI extensions for Xojo iOS framework.
 * Scrolls to top
 * Separator style
 * Unselect table row
+* Scrollbar visibility
 
 ### MobileTableCellData
 * Adjust font size to fit width

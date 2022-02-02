@@ -28,6 +28,12 @@ Inherits MobileApplication
 	#tag Note, Name = README
 		## History
 		
+		### Version 2.1.2 - Released 2022-02-02
+		* New iOSMobileTable.SetScrollbarVisibleXC
+		* New MobileScrollableArea.SetHorizontalScrollbarVisibleXC
+		* New MobileScrollableArea.SetVerticalScrollbarVisibleXC
+		
+		
 		### Version 2.1.1 - Released 2022-02-01
 		* Fixed MobileScreen.SetNavBarTitleColorXC
 		* Fixed MobileScreen.PushToHideTabBarXC

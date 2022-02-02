@@ -365,6 +365,15 @@ Protected Module TableExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub SetScrollbarVisibleXC(extends table as iOSMobileTable, value as Boolean)
+		  
+		  //Hide scrollbar
+		  Declare Sub setScrollIndicator lib "UIKit.framework" selector "setShowsVerticalScrollIndicator:" (id as ptr, value as Boolean)
+		  setScrollIndicator table.Handle, value
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub SetScrollEnabledXC(extends table as iOSMobileTable, value As Boolean)
 		  
 		  Declare Sub scrollEnabled Lib "UIKit.framework" selector "setScrollEnabled:" (obj_id As ptr, value As Boolean)

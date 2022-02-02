@@ -45,6 +45,15 @@ Protected Module ScrollViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub SetHorizontalScrollbarVisibleXC(extends scroll as MobileScrollableArea, value as Boolean)
+		  
+		  //Hide scrollbar
+		  Declare Sub setScrollIndicator lib "UIKit.framework" selector "setShowsHorizontalScrollIndicator:" (id as ptr, value as Boolean)
+		  setScrollIndicator scroll.Handle, value
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub SetIndicatorStyleXC(extends scroll as MobileScrollableArea, value as ScrollViewExtensionsXC.UIScrollViewIndicatorStyle)
 		  
 		  Declare Sub setIndicatorStyle_ Lib "UIKit.framework" selector "setIndicatorStyle:" (obj_id As ptr, value As ScrollViewExtensionsXC.UIScrollViewIndicatorStyle)
@@ -76,6 +85,15 @@ Protected Module ScrollViewExtensionsXC
 		  Declare Sub scrollsToTop_ Lib "UIKit.framework" selector "setScrollsToTop:" (obj_id As ptr, value As Boolean)
 		  
 		  scrollsToTop_(scroll.Handle, value)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub SetVerticalScrollbarVisibleXC(extends scroll as MobileScrollableArea, value as Boolean)
+		  
+		  //Hide scrollbar
+		  Declare Sub setScrollIndicator lib "UIKit.framework" selector "setShowsVerticalScrollIndicator:" (id as ptr, value as Boolean)
+		  setScrollIndicator scroll.Handle, value
 		End Sub
 	#tag EndMethod
 

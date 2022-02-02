@@ -3,12 +3,14 @@ Begin MobileScreen vTable Implements iOSMobileTableDataSource,iOSMobileTableData
    BackButtonCaption=   ""
    Compatibility   =   ""
    ControlCount    =   0
+   Device = 1
    HasNavigationBar=   True
    LargeTitleDisplayMode=   2
    Left            =   0
+   Orientation = 0
    TabBarVisible   =   True
    TabIcon         =   0
-   TintColor       =   0
+   TintColor       =   &c00000000
    Title           =   "Table"
    Top             =   0
    Begin iOSMobileTable Table1
@@ -31,7 +33,7 @@ Begin MobileScreen vTable Implements iOSMobileTableDataSource,iOSMobileTableData
       LockedInPosition=   True
       Scope           =   0
       SectionCount    =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   65
       Visible         =   True
       Width           =   320
@@ -280,7 +282,8 @@ End
 		  
 		  Self.AddRow(section, "Enable Bounce", "", MobileTableCellData.AccessoryTypes.Checkmark, "bounce")
 		  Self.AddRow(section, "Enable Scroll", "", MobileTableCellData.AccessoryTypes.Checkmark, "scroll")
-		  Self.AddRow(section, "Hide Separators", "", MobileTableCellData.AccessoryTypes.Checkmark, "separators")
+		  Self.AddRow(section, "Show Scrollbar", "", MobileTableCellData.AccessoryTypes.Checkmark, "showscrollbar")
+		  Self.AddRow(section, "Hide Separators", "", MobileTableCellData.AccessoryTypes.none, "separators")
 		  Self.AddRow(section, "Separator Color", "", MobileTableCellData.AccessoryTypes.none, "SeparatorColor")
 		  Self.AddRow(section, "Hide Remaining Separators", "", MobileTableCellData.AccessoryTypes.none, "remaining")
 		  
@@ -377,6 +380,11 @@ End
 		    Else
 		      me.SetSeparatorColorXC(&cDDDDDD)
 		    End If
+		    
+		  Case "showscrollbar"
+		    
+		    me.SetScrollbarVisibleXC(value)
+		    
 		    
 		    
 		  Case "flash"
