@@ -165,6 +165,18 @@ A set of 100+ UI extensions for Xojo iOS framework.
 
 ## History
 
+### Version 2.1.2 - Released 2022-02-02
+* New iOSMobileTable.SetScrollbarVisibleXC
+* New iOSMobileTable.SetSectionHeaderTopPaddingXC
+* New MobileScrollableArea.SetHorizontalScrollbarVisibleXC
+* New MobileScrollableArea.SetVerticalScrollbarVisibleXC
+
+
+### Version 2.1.1 - Released 2022-02-01
+* Fixed MobileScreen.SetNavBarTitleColorXC
+* Fixed MobileScreen.PushToHideTabBarXC
+
+
 ### Version 2.1 - Released 2022-01-09
 * New MobileScreen.ShowSheetXC
 * New SliderExtensionsXC
