@@ -107,7 +107,7 @@ Protected Module LayerExtensionsXC
 		  
 		  
 		  Declare Sub shadowOpacity_ Lib QuartzCoreLib selector "setShadowOpacity:" (id As ptr, col As single)
-		  shadowOpacity_(layer, opacity
+		  shadowOpacity_(layer, opacity)
 		End Sub
 	#tag EndMethod
 

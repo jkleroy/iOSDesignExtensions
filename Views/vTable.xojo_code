@@ -256,6 +256,8 @@ End
 	#tag Event
 		Sub Opening()
 		  
+		  me.SetSectionHeaderTopPaddingXC(10)
+		  
 		  Dim section As Integer
 		  
 		  section = Self.AddSection("Custom Action Button")

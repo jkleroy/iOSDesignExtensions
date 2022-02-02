@@ -81,6 +81,7 @@ A set of 100+ UI extensions for Xojo iOS framework.
 * Separator style
 * Unselect table row
 * Scrollbar visibility
+* Section Header Top Padding
 
 ### MobileTableCellData
 * Adjust font size to fit width

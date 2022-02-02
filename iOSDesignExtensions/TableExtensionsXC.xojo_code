@@ -392,6 +392,19 @@ Protected Module TableExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub SetSectionHeaderTopPaddingXC(extends table As iOSMobileTable, value As Double)
+		  
+		  if ExtensionsXC.GetiOSVersionXC >= 15.0 Then
+		    
+		    Declare sub sectionHeaderTopPadding lib "UIKit" Selector "setSectionHeaderTopPadding:" (obj as ptr, value as CGFloat)
+		    
+		    sectionHeaderTopPadding(table.Handle, value)
+		    
+		  end if
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub SetSelectedBackgroundColorXC(extends cell as MobileTableCellData, value as Color)
 		  
 		  
