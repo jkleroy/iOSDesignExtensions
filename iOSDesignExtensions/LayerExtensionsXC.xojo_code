@@ -74,7 +74,7 @@ Protected Module LayerExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetShadowXC(extends control As MobileUIControl, ShadowColor As Color, radius As Double, offset As Point)
+		Sub SetShadowXC(extends control As MobileUIControl, ShadowColor As Color, radius As Double, offset As Point, opacity As Double = 1.0)
 		  
 		  Declare Function layer_ Lib "UIKit.framework" selector "layer" (id As ptr) As Ptr
 		  Dim layer As ptr = layer_(control.Handle)
@@ -101,13 +101,13 @@ Protected Module LayerExtensionsXC
 		  Declare Sub shadowOffset_ Lib QuartzCoreLib selector "setShadowOffset:" (id As ptr, sz As ExtensionsXC.xcCGSize)
 		  shadowOffset_(layer, size)
 		  
-		  Declare function opac lib QuartzCoreLib selector "shadowOpacity" (id as ptr) as CGFloat
-		  dim v As Double = opac(layer)
-		  v = v
+		  'Declare function opac lib QuartzCoreLib selector "shadowOpacity" (id as ptr) as CGFloat
+		  'dim v As Double = opac(layer)
+		  'v = v
 		  
 		  
 		  Declare Sub shadowOpacity_ Lib QuartzCoreLib selector "setShadowOpacity:" (id As ptr, col As single)
-		  shadowOpacity_(layer, 1.0)
+		  shadowOpacity_(layer, opacity
 		End Sub
 	#tag EndMethod
 
