@@ -165,6 +165,13 @@ A set of 100+ UI extensions for Xojo iOS framework.
 
 ## History
 
+### Version 2.2 - Released 2022-07-14
+* New ViewExtensionsXC.TransitionWithViewDurationOptionsXC
+* New ViewExtensionsXC.AnimateWithDurationXC
+* New ViewExtensionsXC.LayoutIfNeededXC
+* New ControlExtensionsXC.SetUserInterfaceStyleXC
+* New ImageExtensionsXC.SaveToCameraRollXC
+
 ### Version 2.1.2 - Released 2022-02-02
 * New iOSMobileTable.SetScrollbarVisibleXC
 * New iOSMobileTable.SetSectionHeaderTopPaddingXC

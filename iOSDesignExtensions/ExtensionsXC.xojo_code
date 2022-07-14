@@ -144,6 +144,56 @@ Protected Module ExtensionsXC
 	#tag Note, Name = History
 		## History
 		
+		### Version 2.2 - Released 2022-07-14
+		* New ViewExtensionsXC.TransitionWithViewDurationOptionsXC
+		* New ViewExtensionsXC.AnimateWithDurationXC
+		* New ViewExtensionsXC.LayoutIfNeededXC
+		* New ControlExtensionsXC.SetUserInterfaceStyleXC
+		* New ImageExtensionsXC.SaveToCameraRollXC
+		
+		### Version 2.1.2 - Released 2022-02-02
+		* New iOSMobileTable.SetScrollbarVisibleXC
+		* New iOSMobileTable.SetSectionHeaderTopPaddingXC
+		* New MobileScrollableArea.SetHorizontalScrollbarVisibleXC
+		* New MobileScrollableArea.SetVerticalScrollbarVisibleXC
+		
+		
+		### Version 2.1.1 - Released 2022-02-01
+		* Fixed MobileScreen.SetNavBarTitleColorXC
+		* Fixed MobileScreen.PushToHideTabBarXC
+		
+		
+		### Version 2.1 - Released 2022-01-09
+		* New MobileScreen.ShowSheetXC
+		* New SliderExtensionsXC
+		* New MobileScreen.SetPreferredContentSizeXC method
+		* Updated MobileLabel.AdjustsFontForContentSizeCategoryXC to allow for custom fonts
+		
+		### Version 2.0.5 - Released 2021-10-26
+		* New MobileLabel.AdjustsFontForContentSizeCategoryXC
+		* New MobileButton.AdjustsFontForContentSizeCategoryXC
+		* Fixed MobileUIControl.SetAlphaValueXC
+		
+		
+		### Version 2.0.4 - Released 2021-09-28
+		* Fixed MobileScreen.SetNavBarTitleImageXC
+		* New example for MobileScreen.SetNavBarTitleImageXC
+		* Updated HTMLViewerExtensionsXC.ExecuteJavascriptXC to use a Variant
+		* Improved HTMLViewer example
+		
+		### Version 2.0.3 - Released 2021-09-26
+		** Fixed Me.SetBackgroundColorXC(aColorGroup)
+		** Fixed Me.SetBorderColorXC(aColorGroup)
+		** Fixed some deprecations
+		
+		### Version 2.0.2 - Released 2021-09-17
+		** New TableSearchExtensionsXC module
+		** Added iOSMobileTable.GetSearchFilterIndexXC
+		** Added iOSMobileTable.SetSearchActiveXC
+		** Added iOSMobileTable.SetSearchFieldTextColorXC (iOS13+)
+		** Added iOSMobileTable.SetSearchFiltersXC
+		
+		
 		### Version 2.0.1 - Released 2021-04-20
 		** Added NotificationContent.UseDefaultSoundXC
 		
@@ -236,7 +286,7 @@ Protected Module ExtensionsXC
 	#tag Constant, Name = kUseUIKit, Type = Boolean, Dynamic = False, Default = \"False", Scope = Protected
 	#tag EndConstant
 
-	#tag Constant, Name = kVersion, Type = Text, Dynamic = False, Default = \"2.1.1", Scope = Protected
+	#tag Constant, Name = kVersion, Type = Text, Dynamic = False, Default = \"2.2", Scope = Protected
 	#tag EndConstant
 
 

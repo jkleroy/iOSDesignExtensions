@@ -1,5 +1,5 @@
 Type=iOS
-RBProjectVersion=2021.031
+RBProjectVersion=2022.011
 MinIDEVersion=20140300
 OrigIDEVersion=20210100
 Class=App;App.xojo_code;&h0000000000D01FFF;&h0000000000000000;false
@@ -119,6 +119,7 @@ Module=AppExtensionsXC;iOSDesignExtensions/AppExtensionsXC.xojo_code;&h000000004
 Module=TableSearchExtensionsXC;iOSDesignExtensions/TableSearchExtensionsXC.xojo_code;&h000000005AE597FF;&h000000000D697FFF;false
 MobileScreen=vLabels;Views/vLabels.xojo_code;&h00000000043F3FFF;&h000000000E11DFFF;false
 Module=SliderExtensionsXC;iOSDesignExtensions/SliderExtensionsXC.xojo_code;&h00000000038E17FF;&h000000000D697FFF;false
+MobileScreen=vAnimate;Views/vAnimate.xojo_code;&h0000000067EBEFFF;&h000000000E11DFFF;false
 DefaultLayout=iPhoneLayout
 DefaultTabletLayout=iPadLayout
 MajorVersion=2

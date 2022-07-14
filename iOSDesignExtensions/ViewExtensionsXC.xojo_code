@@ -81,6 +81,29 @@ Protected Module ViewExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h1
+		Protected Sub AnimateWithDurationXC(duration as Double, animationBlock as iOSBlock, completion as iOSBlock = nil)
+		  https://developer.apple.com/documentation/uikit/uiview/1622515-animatewithduration?language=objc
+		  
+		  
+		  Dim classPtr As ptr
+		  Declare sub animateWithDuration_ lib UIKitLib selector "animateWithDuration:animations:completion:" _
+		  (id as ptr, duration as Double, animations as ptr, completion as ptr)
+		  declare function NSClassFromString lib "Foundation" (clsName as cfstringref) as ptr
+		  
+		  
+		  classPtr = NSClassFromString("UIView")
+		  
+		  if completion is nil then
+		    animateWithDuration_ classptr, duration, animationBlock.handle, nil
+		  else
+		    animateWithDuration_ classptr, duration, animationBlock.handle, completion.Handle
+		  end if
+		  
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 436C6F73657320612076696577207468617420776173206F70656E6564206173206D6F64616C2E
 		Sub DismissViewControllerXC(extends v as MobileScreen, animated as Boolean = True, callback as iOSBlock = nil)
 		  
@@ -196,6 +219,13 @@ Protected Module ViewExtensionsXC
 		  
 		  
 		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 436C6F73657320612076696577207468617420776173206F70656E6564206173206D6F64616C2E
+		Sub LayoutIfNeededXC(extends v as MobileScreen)
+		  Declare sub layoutIfNeeded Lib "UIKit" selector "layoutIfNeeded" (obj as ptr)
+		  layoutIfNeeded(v.Handle)
+		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 4F70656E7320616E2055524C20696E2074686520536166617269436F6E74726F6C6C6572
@@ -914,7 +944,7 @@ Protected Module ViewExtensionsXC
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0, Description = 53657473206C61726765207469746C657320746F206120566965772028694F5331312B29
+	#tag Method, Flags = &h0, Description = 536574732074686520636F6E74656E742073697A6520666F722061206D6F64616C20706F706F766572
 		Sub SetPreferredContentSizeXC(extends v As MobileScreen, sz As Size)
 		  
 		  Dim aSize As ExtensionsXC.xcCGSize
@@ -994,6 +1024,20 @@ Protected Module ViewExtensionsXC
 		  tintColor_ toolbar, New UIColor(barColor)
 		  
 		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 466F72636520612073637265656E20746F207573652061206C69676874206F72206461726B206C61796F75742E
+		Sub SetUserInterfaceStyleXC(extends screen as MobileScreen, value as ControlExtensionsXC.UIUserInterfaceStyle)
+		  
+		  if ExtensionsXC.GetiOSVersionXC >= 13.4 then
+		    
+		    Declare sub overrideUserInterfaceStyle lib "UIKit" selector "setOverrideUserInterfaceStyle:" (obj as ptr, value as ControlExtensionsXC.UIUserInterfaceStyle)
+		    
+		    overrideUserInterfaceStyle(screen.handle, value)
+		    
+		    
+		  end if
 		End Sub
 	#tag EndMethod
 
@@ -1089,6 +1133,43 @@ Protected Module ViewExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h1
+		Protected Sub TransitionWithViewDurationOptionsXC(ctrl as MobileUIControl, duration as Double, options as Integer, animationBlock as iOSBlock, completion as iOSBlock = nil)
+		  https://developer.apple.com/documentation/uikit/uiview/1622574-transitionwithview
+		  
+		  
+		  Dim classPtr As ptr
+		  Declare sub transition_ lib "UIKit" selector "transitionWithView:duration:options:animations:completion:" _
+		  (id as ptr, view as ptr, duration as Double, options as Integer, animations as ptr, completion as ptr)
+		  Declare sub animateWithDuration_ lib "UIKit" selector "animateWithDuration:animations:completion:" _
+		  (id as ptr, duration as Double, animations as ptr, completion as ptr)
+		  declare function NSClassFromString lib "Foundation" (clsName as cfstringref) as ptr
+		  
+		  #if False
+		    UIView transitionWithView:textFieldimageView
+		    duration:0.2f
+		    options:UIViewAnimationOptionTransitionCrossDissolve
+		    animations:^{
+		    imageView.image = newImage;
+		    } completion:nil];
+		  #endif
+		  
+		  
+		  classPtr = NSClassFromString("UIView")
+		  
+		  
+		  
+		  if completion is nil then
+		    transition_ classPtr, ctrl.Handle, duration, options, animationBlock.Handle, nil
+		    'animateWithDuration_ classptr, duration, animationBlock.handle, nil
+		  else
+		    transition_ classPtr, ctrl.Handle, duration, options, animationBlock.Handle, completion.Handle
+		  end if
+		  
+		  
+		End Sub
+	#tag EndMethod
+
 
 	#tag Enum, Name = LargeTitleDisplayMode, Type = Integer, Flags = &h1
 		automatic = 0
@@ -1140,6 +1221,15 @@ Protected Module ViewExtensionsXC
 	#tag Enum, Name = UIUserInterfaceLayoutDirection, Type = Integer, Flags = &h1
 		leftToRight
 		rightToLeft
+	#tag EndEnum
+
+	#tag Enum, Name = UIViewAnimationOptions, Flags = &h1, Binary = True
+		UIViewAnimationOptionRepeat = 8
+		  UIViewAnimationOptionTransitionCrossDissolve = 5242880
+		  UIViewAnimationOptionAutoreverse = 16
+		  UIViewAnimationOptionTransitionFlipFromTop = 6291456
+		  UIViewAnimationOptionTransitionFlipFromBottom = 7340032
+		UIViewAnimationOptionTransitionNone = 0
 	#tag EndEnum
 
 

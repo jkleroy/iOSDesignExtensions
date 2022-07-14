@@ -382,6 +382,20 @@ Protected Module ControlExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 466F726365206120636F6E74726F6C20746F207573652061206C69676874206F72206461726B206C61796F75742E
+		Sub SetUserInterfaceStyleXC(extends ctrl as MobileUIControl, value as ControlExtensionsXC.UIUserInterfaceStyle)
+		  
+		  if ExtensionsXC.GetiOSVersionXC >= 13.4 then
+		    
+		    Declare sub overrideUserInterfaceStyle lib "UIKit" selector "setOverrideUserInterfaceStyle:" (obj as ptr, value as UIUserInterfaceStyle)
+		    
+		    overrideUserInterfaceStyle(ctrl.handle, value)
+		    
+		    
+		  end if
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
 		Sub StretchToParentXC(extends c As MobileUIControl, parentView As MobileUIControl)
 		  
@@ -541,6 +555,12 @@ Protected Module ControlExtensionsXC
 		  title1
 		  title2
 		title3
+	#tag EndEnum
+
+	#tag Enum, Name = UIUserInterfaceStyle, Type = Integer, Flags = &h1
+		Unspecified
+		  Light
+		Dark
 	#tag EndEnum
 
 	#tag Enum, Name = UIVIewAnimationCurve, Type = Integer, Flags = &h1

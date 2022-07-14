@@ -278,6 +278,10 @@ End
 		  AddRow(section, "Modal View (Swipe disabled)", "", accessory, "modalfull") 
 		  AddRow(section, "Sheet (iOS 15+)", "", accessory, "sheet")
 		  
+		  
+		  section = AddSection("Animations")
+		  AddRow(section, "Animate", "", accessory, GetTypeInfo(vAnimate), Picture.SystemImage("livephoto", 0))
+		  
 		  section = AddSection("Application extensions")
 		  AddRow(section, "Open Settings", "", accessory, "opensettings")
 		  
@@ -341,6 +345,9 @@ End
 		      Dim v As new vModal
 		      v.showsheetXC(self, ViewExtensionsXC.UISheetPresentationControllerDetent.medium_large, True)
 		      
+		      
+		      
+		      'v.SetPreferredContentSizeXC(new size(self.ContentSize.Width, 100))
 		      
 		    Case "modal"
 		      
@@ -415,6 +422,8 @@ End
 		      
 		    End Select
 		    
+		    
+		    me.UnselectTableRowXC //Removes the selection from the row
 		    Return
 		  End If
 		  

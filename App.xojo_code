@@ -28,6 +28,13 @@ Inherits MobileApplication
 	#tag Note, Name = README
 		## History
 		
+		### Version 2.2 - Released 2022-07-14
+		* New ViewExtensionsXC.TransitionWithViewDurationOptionsXC
+		* New ViewExtensionsXC.AnimateWithDurationXC
+		* New ViewExtensionsXC.LayoutIfNeededXC
+		* New ControlExtensionsXC.SetUserInterfaceStyleXC
+		* New ImageExtensionsXC.SaveToCameraRollXC
+		
 		### Version 2.1.2 - Released 2022-02-02
 		* New iOSMobileTable.SetScrollbarVisibleXC
 		* New iOSMobileTable.SetSectionHeaderTopPaddingXC
@@ -38,6 +45,7 @@ Inherits MobileApplication
 		### Version 2.1.1 - Released 2022-02-01
 		* Fixed MobileScreen.SetNavBarTitleColorXC
 		* Fixed MobileScreen.PushToHideTabBarXC
+		
 		
 		### Version 2.1 - Released 2022-01-09
 		* New MobileScreen.ShowSheetXC
@@ -153,6 +161,7 @@ Inherits MobileApplication
 		Made with ❤️ in France
 		
 		Jeremie LEROY
+		
 		
 		
 	#tag EndNote

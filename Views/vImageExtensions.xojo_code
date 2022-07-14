@@ -3,12 +3,14 @@ Begin MobileScreen vImageExtensions
    BackButtonCaption=   ""
    Compatibility   =   ""
    ControlCount    =   0
+   Device = 1
    HasNavigationBar=   True
    LargeTitleDisplayMode=   2
    Left            =   0
+   Orientation = 0
    TabBarVisible   =   True
    TabIcon         =   0
-   TintColor       =   0
+   TintColor       =   &c00000000
    Title           =   "ImageExtensions"
    Top             =   0
    Begin MobileImageViewer imgDefault
@@ -26,7 +28,7 @@ Begin MobileScreen vImageExtensions
       Left            =   20
       LockedInPosition=   False
       Scope           =   2
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   73
       Visible         =   True
       Width           =   50
@@ -50,7 +52,7 @@ Begin MobileScreen vImageExtensions
       TextColor       =   &c000000
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   83
       Visible         =   True
       Width           =   222
@@ -70,7 +72,7 @@ Begin MobileScreen vImageExtensions
       Left            =   20
       LockedInPosition=   False
       Scope           =   2
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   131
       Visible         =   True
       Width           =   50
@@ -94,7 +96,7 @@ Begin MobileScreen vImageExtensions
       TextColor       =   &c000000
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   121
       Visible         =   True
       Width           =   222
@@ -114,7 +116,7 @@ Begin MobileScreen vImageExtensions
       Left            =   20
       LockedInPosition=   False
       Scope           =   2
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   189
       Visible         =   True
       Width           =   50
@@ -134,7 +136,7 @@ Begin MobileScreen vImageExtensions
       Left            =   20
       LockedInPosition=   False
       Scope           =   2
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   247
       Visible         =   True
       Width           =   50
@@ -158,7 +160,7 @@ Begin MobileScreen vImageExtensions
       TextColor       =   &c000000
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   199
       Visible         =   True
       Width           =   222
@@ -182,7 +184,7 @@ Begin MobileScreen vImageExtensions
       TextColor       =   &c000000
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   237
       Visible         =   True
       Width           =   222

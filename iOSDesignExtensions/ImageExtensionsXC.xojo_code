@@ -150,6 +150,21 @@ Protected Module ImageExtensionsXC
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Sub SaveToCameraRollXC(extends pic As Picture)
+		  
+		  'Jason King
+		  'Just saw this conversation - its entirely possible with declares. Just pop this short function into a module and call it like "img.SaveToCameraRoll"
+		  
+		  
+		  declare sub UIImageWriteToSavedPhotosAlbum lib "UIKit" (img as ptr, target as ptr, sel as ptr, info as ptr)
+		  UIImageWriteToSavedPhotosAlbum(pic.CopyOSHandle(picture.HandleTypes.iOSUIImage),nil,nil,nil)
+		  
+		  
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h1, Description = 52657475726E7320616E20696D6167652066726F6D2074686520694F5331332053462053796D626F6C206C696272617279
 		Protected Function SystemImageXC(name As String, fallback As Picture = nil) As Picture
 		  

@@ -3,12 +3,14 @@ Begin MobileScreen vTextArea
    BackButtonCaption=   ""
    Compatibility   =   ""
    ControlCount    =   0
+   Device = 1
    HasNavigationBar=   True
    LargeTitleDisplayMode=   2
    Left            =   0
+   Orientation = 0
    TabBarVisible   =   True
    TabIcon         =   0
-   TintColor       =   ""
+   TintColor       =   &c00000000
    Title           =   "TextArea Extensions"
    Top             =   0
    Begin MobileTextArea TextArea1
@@ -34,7 +36,7 @@ Begin MobileScreen vTextArea
       TextColor       =   &c00000000
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   73
       Visible         =   True
       Width           =   280
@@ -56,7 +58,7 @@ Begin MobileScreen vTextArea
       Scope           =   0
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   250
       Visible         =   True
       Width           =   100
@@ -80,7 +82,7 @@ Begin MobileScreen vTextArea
       TextColor       =   &c00000000
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   250
       Visible         =   True
       Width           =   100
@@ -102,7 +104,7 @@ Begin MobileScreen vTextArea
       Scope           =   0
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   288
       Visible         =   True
       Width           =   100
@@ -124,7 +126,7 @@ Begin MobileScreen vTextArea
       Scope           =   0
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   326
       Visible         =   True
       Width           =   173
@@ -146,7 +148,7 @@ Begin MobileScreen vTextArea
       Scope           =   0
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   364
       Visible         =   True
       Width           =   173
