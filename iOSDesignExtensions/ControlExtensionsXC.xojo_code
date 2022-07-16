@@ -322,6 +322,15 @@ Protected Module ControlExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub SetDatePickerMinuteIntervalXC(Extends datepicker As MobileDateTimePicker, interval As Integer)
+		  Declare Sub minuteInterval Lib "UIKit.framework" Selector "setMinuteInterval:" (obj As ptr, interval As Integer)
+		  
+		  minuteInterval(datepicker.Handle, interval)
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub SetDatePickerStyleXC(extends datepicker As MobileDateTimePicker, style As ControlExtensionsXC.UIDatePickerStyle)
 		  
 		  if ExtensionsXC.GetiOSVersionXC >= 13.4 then
