@@ -31,22 +31,23 @@ Protected Module ImageExtensionsXC
 
 	#tag Method, Flags = &h1, Description = 52657475726E7320616E20696D61676520746861742077696C6C20616C776179732072656E646572207573696E6720697473207472756520636F6C6F7273
 		Protected Function ImageOriginalXC(image As Picture) As Picture
+		  If image Is Nil Then Return Nil
 		  
-		  if image is nil then Return nil
-		  
-		  Dim bestImage As Picture = BestRepresentationXC(image)
+		  Var bestImage As Picture = BestRepresentationXC(image)
 		  
 		  //Creates an image that will draw using the current Fillcolor
 		  
 		  Const UIImageRenderingModeAlwaysOriginal = 1
 		  
-		  Declare Function imageWithRenderingMode Lib "UIKit.framework" selector "imageWithRenderingMode:" (id As ptr, RenderingMode As Integer) As ptr
+		  Declare Function imageWithRenderingMode Lib "UIKit.framework" Selector "imageWithRenderingMode:" (id As ptr, RenderingMode As Integer) As ptr
 		  
 		  'Dim imgHandle As Ptr = image.CopyOSHandle(Picture.HandleType.iOSUIImage)
-		  
-		  
 		  'Return Picture.FromHandle(imageWithRenderingMode(imgHandle, UIImageRenderingModeAlwaysOriginal))
-		  Return Picture.FromHandle(imageWithRenderingMode(bestImage.Handle, UIImageRenderingModeAlwaysOriginal))
+		  
+		  'Return Picture.FromHandle(imageWithRenderingMode(bestImage.Handle, UIImageRenderingModeAlwaysOriginal))
+		  
+		  Var bestImageHandle As Ptr = bestImage.CopyOSHandle(Picture.HandleType.iOSUIImage)
+		  Return Picture.FromHandle(imageWithRenderingMode(bestImageHandle, UIImageRenderingModeAlwaysOriginal))
 		End Function
 	#tag EndMethod
 
