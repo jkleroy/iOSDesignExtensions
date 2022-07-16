@@ -113,8 +113,8 @@ Begin MobileScreen vAnimate
          Left            =   85
          LineBreakMode   =   0
          LockedInPosition=   False
-         PanelIndex      =   -1
-         Parent          =   "Rectangle1"
+         PanelIndex      =   0
+         Parent          =   "rectToast"
          Scope           =   2
          Text            =   "Animated toast"
          TextColor       =   &c000000
@@ -156,7 +156,7 @@ End
 		Private Sub Hidetoast()
 		  
 		  
-		  ViewExtensionsXC.AnimateWithDurationXC(1.0, new iosblock(AddressOf hidetoast_animated), new iosblock(AddressOf HideToast_end))
+		  ViewExtensionsXC.AnimateWithDurationXC(0.5, new iosblock(AddressOf hidetoast_animated), new iosblock(AddressOf HideToast_end))
 		  
 		End Sub
 	#tag EndMethod
@@ -165,9 +165,7 @@ End
 		Private Sub Hidetoast_animated()
 		  
 		  
-		  
-		  
-		  self.Constraint("toast_top").Offset = 20
+		  rectToast.SetAlphaValueXC(0.0)
 		  
 		  self.LayoutIfNeededXC
 		  
@@ -177,6 +175,24 @@ End
 	#tag Method, Flags = &h21
 		Private Sub HideToast_end()
 		  rectToast.Visible = False
+		  
+		  
+		  
+		  self.Constraint("toast_top").Offset = 20
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub Showtoast()
+		  //Make sure it will slide from the bottom
+		  self.Constraint("toast_top").Offset = 20
+		  
+		  //Make sure it is visible
+		  rectToast.Visible = True
+		  rectToast.SetAlphaValueXC(1.0)
+		  
+		  //Now animate the constraint
+		  ViewExtensionsXC.AnimateWithDurationXC(0.5, new iosblock(AddressOf Showtoast_animated))
 		End Sub
 	#tag EndMethod
 
@@ -289,8 +305,7 @@ End
 	#tag Event
 		Sub Pressed()
 		  
-		  
-		  ViewExtensionsXC.AnimateWithDurationXC(0.5, new iosblock(AddressOf Showtoast_animated))
+		  ShowToast
 		  
 		  
 		  //Hide the toast in 3 seconds
