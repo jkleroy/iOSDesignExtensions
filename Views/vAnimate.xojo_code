@@ -77,10 +77,121 @@ Begin MobileScreen vAnimate
       Visible         =   True
       Width           =   104
    End
+   Begin MobileRectangle rectToast
+      AccessibilityHint=   ""
+      AccessibilityLabel=   ""
+      AutoLayout      =   rectToast, 8, , 0, False, +1.00, 4, 1, 43, , True
+      AutoLayout      =   rectToast, 1, <Parent>, 1, False, +1.00, 4, 1, *kStdGapCtlToViewH, , True
+      AutoLayout      =   rectToast, 2, <Parent>, 2, False, +1.00, 4, 1, -*kStdGapCtlToViewH, , True
+      AutoLayout      =   rectToast, 3, <Parent>, 4, False, +1.00, 4, 1, 20, toast_top, True
+      BorderColor     =   &c000000
+      BorderThickness =   0.0
+      ControlCount    =   0
+      CornerSize      =   8.0
+      Enabled         =   True
+      FillColor       =   &c000000
+      Height          =   43
+      Left            =   20
+      LockedInPosition=   False
+      Scope           =   2
+      TintColor       =   &c000000
+      Top             =   588
+      Visible         =   False
+      Width           =   280
+      Begin MobileLabel Label1
+         AccessibilityHint=   ""
+         AccessibilityLabel=   ""
+         Alignment       =   1
+         AutoLayout      =   Label1, 9, rectToast, 9, False, +1.00, 4, 1, 0, , True
+         AutoLayout      =   Label1, 8, , 0, False, +1.00, 4, 1, 30, , True
+         AutoLayout      =   Label1, 10, rectToast, 10, False, +1.00, 4, 1, 0, , True
+         AutoLayout      =   Label1, 7, , 0, False, +1.00, 4, 1, 150, , True
+         ControlCount    =   0
+         Enabled         =   True
+         Height          =   30
+         InitialParent   =   "rectToast"
+         Left            =   85
+         LineBreakMode   =   0
+         LockedInPosition=   False
+         PanelIndex      =   -1
+         Parent          =   "Rectangle1"
+         Scope           =   2
+         Text            =   "Animated toast"
+         TextColor       =   &c000000
+         TextFont        =   ""
+         TextSize        =   0
+         TintColor       =   &c000000
+         Top             =   594
+         Visible         =   True
+         Width           =   150
+      End
+   End
+   Begin MobileButton Button3
+      AccessibilityHint=   ""
+      AccessibilityLabel=   ""
+      AutoLayout      =   Button3, 9, <Parent>, 9, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   Button3, 7, , 0, False, +1.00, 4, 1, 104, , True
+      AutoLayout      =   Button3, 3, <Parent>, 3, False, +1.00, 4, 1, 309, , True
+      AutoLayout      =   Button3, 8, , 0, False, +1.00, 4, 1, 30, , True
+      Caption         =   "Animate toast"
+      CaptionColor    =   &c007AFF00
+      ControlCount    =   0
+      Enabled         =   True
+      Height          =   30
+      Left            =   108
+      LockedInPosition=   False
+      Scope           =   2
+      TextFont        =   ""
+      TextSize        =   0
+      TintColor       =   &c000000
+      Top             =   309
+      Visible         =   True
+      Width           =   104
+   End
 End
 #tag EndMobileScreen
 
 #tag WindowCode
+	#tag Method, Flags = &h21
+		Private Sub Hidetoast()
+		  
+		  
+		  ViewExtensionsXC.AnimateWithDurationXC(1.0, new iosblock(AddressOf hidetoast_animated), new iosblock(AddressOf HideToast_end))
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub Hidetoast_animated()
+		  
+		  
+		  
+		  
+		  self.Constraint("toast_top").Offset = 20
+		  
+		  self.LayoutIfNeededXC
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub HideToast_end()
+		  rectToast.Visible = False
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub Showtoast_animated()
+		  
+		  rectToast.Visible = True
+		  
+		  self.Constraint("toast_top").Offset = -60
+		  
+		  self.LayoutIfNeededXC
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h21
 		Private Sub UpdateButton()
 		  if buttonValue then
@@ -157,6 +268,33 @@ End
 		  ViewExtensionsXC.AnimateWithDurationXC(1.0, new iosblock(AddressOf UpdateImageHeight))
 		  
 		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events rectToast
+	#tag Event
+		Sub Opening()
+		  me.FillColor = &c0
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Label1
+	#tag Event
+		Sub Opening()
+		  me.TextColor = &cFFFFFF
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Button3
+	#tag Event
+		Sub Pressed()
+		  
+		  
+		  ViewExtensionsXC.AnimateWithDurationXC(0.5, new iosblock(AddressOf Showtoast_animated))
+		  
+		  
+		  //Hide the toast in 3 seconds
+		  timer.CallLater 3000, AddressOf Hidetoast
 		End Sub
 	#tag EndEvent
 #tag EndEvents
