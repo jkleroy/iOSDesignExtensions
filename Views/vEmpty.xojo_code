@@ -3,18 +3,51 @@ Begin MobileScreen vEmpty
    BackButtonCaption=   ""
    Compatibility   =   ""
    ControlCount    =   0
+   Device = 1
    HasNavigationBar=   True
    LargeTitleDisplayMode=   2
    Left            =   0
+   Orientation = 0
    TabBarVisible   =   True
    TabIcon         =   0
-   TintColor       =   ""
+   TintColor       =   &c00000000
    Title           =   "Empty View"
    Top             =   0
+   Begin MobileLabel Label1
+      AccessibilityHint=   ""
+      AccessibilityLabel=   ""
+      Alignment       =   0
+      AutoLayout      =   Label1, 1, <Parent>, 1, False, +1.00, 4, 1, *kStdGapCtlToViewH, , True
+      AutoLayout      =   Label1, 2, <Parent>, 2, False, +1.00, 4, 1, -*kStdGapCtlToViewH, , True
+      AutoLayout      =   Label1, 3, TopLayoutGuide, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
+      AutoLayout      =   Label1, 8, , 0, False, +1.00, 4, 1, 86, , True
+      ControlCount    =   0
+      Enabled         =   True
+      Height          =   86
+      Left            =   20
+      LineBreakMode   =   0
+      LockedInPosition=   False
+      Scope           =   2
+      Text            =   "Notice how the icon changed when the tab was selected?"
+      TextColor       =   &c000000
+      TextFont        =   ""
+      TextSize        =   0
+      TintColor       =   &c000000
+      Top             =   73
+      Visible         =   True
+      Width           =   280
+   End
 End
 #tag EndMobileScreen
 
 #tag WindowCode
+	#tag Event
+		Sub Opening()
+		  me.SetTabBarSelectedImageXC(1, Picture.SystemImage("envelope.open", 0))
+		End Sub
+	#tag EndEvent
+
+
 #tag EndWindowCode
 
 #tag ViewBehavior

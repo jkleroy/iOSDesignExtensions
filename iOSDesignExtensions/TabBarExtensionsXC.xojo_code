@@ -146,6 +146,35 @@ Protected Module TabBarExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 4368616E6765207468652073656C656374656420696D616765206F66206120746162626172206974656D2E
+		Sub SetTabBarSelectedImageXC(extends v As MobileScreen, ItemIndex As Integer, Image As Picture)
+		  
+		  Declare Function tabbar_ Lib "UIKit.framework" selector "tabBar"(o As Ptr) As Ptr
+		  Declare Function items_ Lib "UIKit.framework" selector "items" (o As ptr) As ptr
+		  Declare Function objectAtIndex Lib "Foundation.framework" selector "objectAtIndex:" (theArray As Ptr, idx As Integer) As Ptr
+		  
+		  Dim tb As iOSTabBar = v.ParentTabBar
+		  If tb Is Nil Then Return
+		  Dim h As ptr = tb.ViewControllerHandle
+		  
+		  Dim tabbar As Ptr = tabbar_(h)
+		  
+		  Dim items As ptr = items_(tabbar)
+		  Dim item0 As ptr = objectAtIndex(items, ItemIndex)
+		  
+		  
+		  Declare Sub setSelectedImage Lib "UIKit.framework" selector "setSelectedImage:" (obj_id As ptr, value As ptr)
+		  
+		  if image is nil then
+		    setSelectedImage(item0, nil)
+		  else
+		    setSelectedImage(item0, Image.Handle)
+		    
+		    
+		  end if
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h1, Description = 536574732074686520616374697665207061676520696E20612054616242617220766965772E
 		Protected Sub SetTabPageXC(idx as integer, doReset as Boolean = False)
 		  'This method has been posted in the forum by Antonio Rinaldi.

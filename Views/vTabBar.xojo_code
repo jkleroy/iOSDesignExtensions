@@ -3,12 +3,14 @@ Begin MobileScreen vTabBar
    BackButtonCaption=   ""
    Compatibility   =   ""
    ControlCount    =   0
+   Device = 1
    HasNavigationBar=   True
    LargeTitleDisplayMode=   2
    Left            =   0
+   Orientation = 0
    TabBarVisible   =   True
    TabIcon         =   0
-   TintColor       =   0
+   TintColor       =   &c00000000
    Title           =   "TabBar"
    Top             =   0
    Begin MobileButton Button1
@@ -28,7 +30,7 @@ Begin MobileScreen vTabBar
       Scope           =   0
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   92
       Visible         =   True
       Width           =   60
@@ -50,7 +52,7 @@ Begin MobileScreen vTabBar
       Scope           =   2
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   130
       Visible         =   True
       Width           =   100
@@ -72,7 +74,7 @@ Begin MobileScreen vTabBar
       Scope           =   2
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   168
       Visible         =   True
       Width           =   100
@@ -94,7 +96,7 @@ Begin MobileScreen vTabBar
       Scope           =   2
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   206
       Visible         =   True
       Width           =   100
@@ -116,7 +118,7 @@ Begin MobileScreen vTabBar
       Scope           =   2
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   244
       Visible         =   True
       Width           =   100
@@ -138,7 +140,7 @@ Begin MobileScreen vTabBar
       Scope           =   2
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   282
       Visible         =   True
       Width           =   100
