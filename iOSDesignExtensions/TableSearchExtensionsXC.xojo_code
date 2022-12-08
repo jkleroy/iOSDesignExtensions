@@ -88,6 +88,27 @@ Protected Module TableSearchExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Sub SetSearchPlaceholderXC(extends table As iOSMobileTable, value As String)
+		  
+		  If ExtensionsXC.GetiOSVersionXC >= 13.0 then
+		    
+		    // Get the searchBar object
+		    Declare Function searchBar Lib "UIKit" selector "searchBar" (obj As ptr) As ptr
+		    
+		    
+		    Var searchPtr As ptr = table.SearchControllerHandle
+		    Var searchBarObj As ptr = searchBar(searchPtr)
+		    
+		    
+		    Declare sub setPlaceholder lib "UIKit" selector "setPlaceholder:" (obj as ptr, value as CFStringRef)
+		    
+		    setPlaceholder(searchBarObj, value)
+		    
+		  End If
+		End Sub
+	#tag EndMethod
+
 
 	#tag ViewBehavior
 		#tag ViewProperty

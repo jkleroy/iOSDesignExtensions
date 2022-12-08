@@ -3,12 +3,14 @@ Begin MobileScreen vButtons
    BackButtonCaption=   ""
    Compatibility   =   ""
    ControlCount    =   0
+   Device = 1
    HasNavigationBar=   True
    LargeTitleDisplayMode=   0
    Left            =   0
+   Orientation = 0
    TabBarVisible   =   True
    TabIcon         =   0
-   TintColor       =   "&h00000000"
+   TintColor       =   &c00000000
    Title           =   "Buttons"
    Top             =   0
    Begin MobileButton btBackgroundColor
@@ -28,7 +30,7 @@ Begin MobileScreen vButtons
       Scope           =   0
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   95
       Visible         =   True
       Width           =   100
@@ -50,7 +52,7 @@ Begin MobileScreen vButtons
       Scope           =   0
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   155
       Visible         =   True
       Width           =   100
@@ -72,7 +74,7 @@ Begin MobileScreen vButtons
       Scope           =   0
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   215
       Visible         =   True
       Width           =   100
@@ -94,7 +96,7 @@ Begin MobileScreen vButtons
       Scope           =   0
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   275
       Visible         =   True
       Width           =   100
@@ -116,7 +118,7 @@ Begin MobileScreen vButtons
       Scope           =   0
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   355
       Visible         =   True
       Width           =   100
@@ -138,7 +140,7 @@ Begin MobileScreen vButtons
       Scope           =   0
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   355
       Visible         =   True
       Width           =   100
@@ -148,7 +150,7 @@ Begin MobileScreen vButtons
       AccessibilityLabel=   ""
       AutoLayout      =   Button7, 1, Button5, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Button7, 7, , 0, False, +1.00, 4, 1, 100, , True
-      AutoLayout      =   Button7, 3, <Parent>, 3, False, +1.00, 4, 1, 414, , True
+      AutoLayout      =   Button7, 3, Button6, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
       AutoLayout      =   Button7, 8, , 0, False, +1.00, 4, 1, 30, , True
       Caption         =   "Border 1px"
       CaptionColor    =   &c000000
@@ -160,8 +162,8 @@ Begin MobileScreen vButtons
       Scope           =   0
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
-      Top             =   414
+      TintColor       =   &c000000
+      Top             =   393
       Visible         =   True
       Width           =   100
    End
@@ -170,8 +172,8 @@ Begin MobileScreen vButtons
       AccessibilityLabel=   ""
       AutoLayout      =   Button8, 1, Button6, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Button8, 7, , 0, False, +1.00, 4, 1, 100, , True
-      AutoLayout      =   Button8, 10, Button7, 10, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Button8, 8, , 0, False, +1.00, 4, 1, 30, , True
+      AutoLayout      =   Button8, 11, Button7, 11, False, +1.00, 4, 1, 0, , True
       Caption         =   "Border 0.5px"
       CaptionColor    =   &c000000
       ControlCount    =   0
@@ -182,8 +184,30 @@ Begin MobileScreen vButtons
       Scope           =   0
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
-      Top             =   414
+      TintColor       =   &c000000
+      Top             =   393
+      Visible         =   True
+      Width           =   100
+   End
+   Begin MobileButton btLeft
+      AccessibilityHint=   ""
+      AccessibilityLabel=   ""
+      AutoLayout      =   btLeft, 1, Button4, 1, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   btLeft, 7, , 0, False, +1.00, 4, 1, 100, , True
+      AutoLayout      =   btLeft, 3, Button8, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
+      AutoLayout      =   btLeft, 8, , 0, False, +1.00, 4, 1, 30, , True
+      Caption         =   "Left align"
+      CaptionColor    =   &c000000
+      ControlCount    =   0
+      Enabled         =   True
+      Height          =   30
+      Left            =   110
+      LockedInPosition=   False
+      Scope           =   0
+      TextFont        =   ""
+      TextSize        =   0
+      TintColor       =   &c000000
+      Top             =   431
       Visible         =   True
       Width           =   100
    End
@@ -284,6 +308,19 @@ End
 		  Me.SetBorderWidthXC(1.0/ExtensionsXC.MainScreenScaleXC)
 		  Me.SetBorderColorXC(&cFF0000AA)
 		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events btLeft
+	#tag Event
+		Sub Opening()
+		  //Set a border so it is visible
+		  Me.SetBorderWidthXC(1.0)
+		  
+		  me.setContentHorizontalAlignmentXC(ControlExtensionsXC.UIControlContentHorizontalAlignment.Left) //or use .Leading if your app supports Right-to-left languages
+		  
+		  //Set a 10pt padding to the left
+		  me.SetButtonInsetsXC(ExtensionsXC.UIEdgeInsetMake(0, 10, 0, 0)) //Add 10pt padding to the left
 		End Sub
 	#tag EndEvent
 #tag EndEvents

@@ -537,6 +537,15 @@ Protected Module ControlExtensionsXC
 		gray
 	#tag EndEnum
 
+	#tag Enum, Name = UIControlContentHorizontalAlignment, Flags = &h1
+		Center = 0
+		  Left
+		  Right
+		  Fill
+		  Leading
+		Trailing
+	#tag EndEnum
+
 	#tag Enum, Name = UIControlState, Type = Integer, Flags = &h1
 		normal
 		  highlighted

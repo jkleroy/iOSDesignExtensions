@@ -146,6 +146,16 @@ Protected Module ButtonExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub SetContentHorizontalAlignmentXC(extends bt As MobileButton, alignment As ControlExtensionsXC.UIControlContentHorizontalAlignment)
+		  
+		  
+		  declare sub setContentHorizontalAlignment lib "UIKit" Selector "setContentHorizontalAlignment:" (obj as ptr, value as ControlExtensionsXC.UIControlContentHorizontalAlignment)
+		  
+		  setContentHorizontalAlignment(bt.Handle, alignment)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub SetImageInsetsXC(extends bt As MobileButton, value As ExtensionsXC.xcUIEdgeInsets)
 		  
 		  
