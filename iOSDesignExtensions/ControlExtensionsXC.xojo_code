@@ -1,12 +1,21 @@
 #tag Module
 Protected Module ControlExtensionsXC
-	#tag Method, Flags = &h0, Description = 41646A757374732074686520666F6E742073697A65206163636F7264696E6720746F20617661696C61626C65207769647468
-		Sub AdjustsFontForContentSizeCategoryXC(extends label As MobileLabel, textStyle As ControlExtensionsXC.UIFontTextStyle, customFont As Font = nil, maxPointSize As Double = 0.0)
+	#tag Method, Flags = &h0, Description = 41646A757374732074686520666F6E742073697A65206163636F7264696E6720746F2073797374656D2073697A652E
+		Sub AdjustsFontForContentSizeCategoryXC(extends ctrl As MobileTextControl, textStyle As ControlExtensionsXC.UIFontTextStyle, customFont As Font = nil, maxPointSize As Double = 0.0)
+		  ControlExtensionsXC.AdjustsFontForContentSizeCategoryXC_internal(ctrl.Handle, textStyle, customFont, maxPointSize)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h1, Description = 41646A757374732074686520666F6E742073697A65206163636F7264696E6720746F20617661696C61626C65207769647468
+		Attributes( hidden = True ) Protected Sub AdjustsFontForContentSizeCategoryXC_internal(label As Ptr, textStyle As ControlExtensionsXC.UIFontTextStyle, customFont As Font = nil, maxPointSize As Double = 0.0)
 		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
 		  Declare Function alloc Lib "Foundation.framework" selector "alloc" (clsRef As ptr) As ptr
 		  Declare Function initFont Lib "UIKit.framework" selector "fontWithName:size:" (obj_id As ptr, name As CFStringRef, size As CGFloat) As ptr
 		  Declare Function preferredFontForTextStyle Lib "UIKit.framework" selector "preferredFontForTextStyle:" (obj_id As ptr, mode As CFStringRef) As ptr
 		  
+		  Declare function metricsForTextStyle lib "UIKit.framework" selector "metricsForTextStyle:" (clsRef as ptr, mode As CFStringRef) as ptr
+		  Declare function scaledFontForFontmaximumPointSize lib "UIKit.framework" selector "scaledFontForFont:maximumPointSize:" (obj as ptr, font as ptr, pointSize As CGFloat) as ptr
+		  Declare function scaledFontForFont lib "UIKit.framework" selector "scaledFontForFont:" (obj as ptr, font as ptr) as ptr
 		  
 		  Dim constName As String
 		  Select case textStyle
@@ -42,10 +51,8 @@ Protected Module ControlExtensionsXC
 		  if customFont <> nil then
 		    
 		    
-		    Declare function metricsForTextStyle lib "UIKit.framework" selector "metricsForTextStyle:" (clsRef as ptr, mode As CFStringRef) as ptr
-		    Declare function scaledFontForFontmaximumPointSize lib "UIKit.framework" selector "scaledFontForFont:maximumPointSize:" (obj as ptr, font as ptr, pointSize As CGFloat) as ptr
-		    Declare function scaledFontForFont lib "UIKit.framework" selector "scaledFontForFont:" (obj as ptr, font as ptr) as ptr
-		    Declare Function initFont Lib "UIKit.framework" selector "fontWithName:size:" (obj_id As ptr, name As CFStringRef, size As CGFloat) As ptr
+		    
+		    'Declare Function initFont Lib "UIKit.framework" selector "fontWithName:size:" (obj_id As ptr, name As CFStringRef, size As CGFloat) As ptr
 		    
 		    
 		    Dim fontMetricsPtr As Ptr = metricsForTextStyle((NSClassFromString("UIFontMetrics")), textStylePtr.CFStringRef(0))
@@ -72,15 +79,21 @@ Protected Module ControlExtensionsXC
 		    
 		    fontPtr = preferredFontForTextStyle((NSClassFromString("UIFont")), textStylePtr.CFStringRef(0))
 		    
+		    if maxPointSize > 0.0 then
+		      Dim fontMetricsPtr As Ptr = metricsForTextStyle((NSClassFromString("UIFontMetrics")), textStylePtr.CFStringRef(0))
+		      
+		      fontPtr = scaledFontForFontmaximumPointSize(fontMetricsPtr, fontPtr, maxPointSize)
+		    end if
+		    
 		    
 		  end if
 		  
 		  Declare sub setFont lib "UIKit.framework" selector "setFont:" (obj_ref as ptr, fontRef as ptr)
 		  Declare Sub setAdjustsFontForContentSizeCategory Lib "UIKit.framework" Selector "setAdjustsFontForContentSizeCategory:" (obj_ref as ptr, value as Boolean)
 		  
-		  setFont(label.Handle, fontPtr)
+		  setFont(label, fontPtr)
 		  
-		  setAdjustsFontForContentSizeCategory label.Handle, True
+		  setAdjustsFontForContentSizeCategory label, True
 		End Sub
 	#tag EndMethod
 

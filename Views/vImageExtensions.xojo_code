@@ -189,6 +189,94 @@ Begin MobileScreen vImageExtensions
       Visible         =   True
       Width           =   222
    End
+   Begin MobileButton Button1
+      AccessibilityHint=   ""
+      AccessibilityLabel=   ""
+      AutoLayout      =   Button1, 1, imgRTL, 1, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   Button1, 2, Label4, 1, False, +1.00, 4, 1, -*kStdControlGapH, , True
+      AutoLayout      =   Button1, 3, , 0, False, +1.00, 4, 1, 345, , True
+      AutoLayout      =   Button1, 8, , 0, False, +1.00, 4, 1, 30, , True
+      Caption         =   "X"
+      CaptionColor    =   &c007AFF00
+      ControlCount    =   0
+      Enabled         =   True
+      Height          =   30
+      Left            =   20
+      LockedInPosition=   False
+      Scope           =   2
+      TextFont        =   ""
+      TextSize        =   0
+      TintColor       =   &c000000
+      Top             =   345
+      Visible         =   True
+      Width           =   50
+   End
+   Begin MobileButton Button2
+      AccessibilityHint=   ""
+      AccessibilityLabel=   ""
+      AutoLayout      =   Button2, 1, Button1, 2, False, +1.00, 4, 1, *kStdControlGapH, , True
+      AutoLayout      =   Button2, 7, , 0, False, +1.00, 4, 1, 50, , True
+      AutoLayout      =   Button2, 11, Button1, 11, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   Button2, 8, , 0, False, +1.00, 4, 1, 30, , True
+      Caption         =   "X"
+      CaptionColor    =   &c007AFF00
+      ControlCount    =   0
+      Enabled         =   True
+      Height          =   30
+      Left            =   78
+      LockedInPosition=   False
+      Scope           =   2
+      TextFont        =   ""
+      TextSize        =   0
+      TintColor       =   &c000000
+      Top             =   345
+      Visible         =   True
+      Width           =   50
+   End
+   Begin MobileButton Button3
+      AccessibilityHint=   ""
+      AccessibilityLabel=   ""
+      AutoLayout      =   Button3, 1, Button2, 2, False, +1.00, 4, 1, *kStdControlGapH, , True
+      AutoLayout      =   Button3, 7, , 0, False, +1.00, 4, 1, 50, , True
+      AutoLayout      =   Button3, 11, Button1, 11, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   Button3, 8, , 0, False, +1.00, 4, 1, 30, , True
+      Caption         =   "X"
+      CaptionColor    =   &c007AFF00
+      ControlCount    =   0
+      Enabled         =   True
+      Height          =   30
+      Left            =   136
+      LockedInPosition=   False
+      Scope           =   2
+      TextFont        =   ""
+      TextSize        =   0
+      TintColor       =   &c000000
+      Top             =   345
+      Visible         =   True
+      Width           =   50
+   End
+   Begin MobileButton Button4
+      AccessibilityHint=   ""
+      AccessibilityLabel=   ""
+      AutoLayout      =   Button4, 1, Button3, 2, False, +1.00, 4, 1, *kStdControlGapH, , True
+      AutoLayout      =   Button4, 7, , 0, False, +1.00, 4, 1, 50, , True
+      AutoLayout      =   Button4, 11, Button1, 11, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   Button4, 8, , 0, False, +1.00, 4, 1, 30, , True
+      Caption         =   "X"
+      CaptionColor    =   &c007AFF00
+      ControlCount    =   0
+      Enabled         =   True
+      Height          =   30
+      Left            =   194
+      LockedInPosition=   False
+      Scope           =   2
+      TextFont        =   ""
+      TextSize        =   0
+      TintColor       =   &c000000
+      Top             =   345
+      Visible         =   True
+      Width           =   50
+   End
 End
 #tag EndMobileScreen
 
@@ -231,6 +319,62 @@ End
 		  me.Image = ImageExtensionsXC.ImageForRTLXC(ic8_netflix)
 		  
 		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Button1
+	#tag Event
+		Sub Opening()
+		  //The image will use the control's tint color
+		  
+		  Dim img As Picture = ic8_lock
+		  
+		  me.SetImageXC(img)
+		  me.Caption = ""
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Button2
+	#tag Event
+		Sub Opening()
+		  //The image will use the control's tint color
+		  
+		  Dim img As Picture = ic8_lock
+		  
+		  me.TintColor = &cFF0000
+		  me.SetImageXC(img)
+		  me.Caption = ""
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Button3
+	#tag Event
+		Sub Opening()
+		  //The image will use its default color
+		  
+		  Dim img As Picture = ic8_lock
+		  
+		  img = ImageExtensionsXC.ImageOriginalXC(img)
+		  
+		  me.TintColor = &cFF0000
+		  me.SetImageXC(img)
+		  me.Caption = ""
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Button4
+	#tag Event
+		Sub Opening()
+		  //The image will use its defined color
+		  
+		  Dim img As Picture = ic8_lock
+		  
+		  img = ImageExtensionsXC.ImageWithColorXC(img, &c00FF00)
+		  img = ImageExtensionsXC.ImageOriginalXC(img)
+		  
+		  me.TintColor = &cFF0000 //although the button's tint color is red
+		  me.SetImageXC(img)
+		  me.Caption = ""
 		End Sub
 	#tag EndEvent
 #tag EndEvents

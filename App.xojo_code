@@ -28,6 +28,9 @@ Inherits MobileApplication
 	#tag Note, Name = README
 		## History
 		
+		### Version 2.3 - Released 2022-12-14
+		* Updated for Xojo 2022r4
+		
 		### Version 2.2 - Released 2022-07-14
 		* New ViewExtensionsXC.TransitionWithViewDurationOptionsXC
 		* New ViewExtensionsXC.AnimateWithDurationXC

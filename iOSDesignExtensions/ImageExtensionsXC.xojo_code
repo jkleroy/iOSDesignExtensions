@@ -31,23 +31,30 @@ Protected Module ImageExtensionsXC
 
 	#tag Method, Flags = &h1, Description = 52657475726E7320616E20696D61676520746861742077696C6C20616C776179732072656E646572207573696E6720697473207472756520636F6C6F7273
 		Protected Function ImageOriginalXC(image As Picture) As Picture
-		  If image Is Nil Then Return Nil
 		  
-		  Var bestImage As Picture = BestRepresentationXC(image)
+		  if image is nil then Return nil
+		  
+		  Dim bestImage As Picture = BestRepresentationXC(image)
 		  
 		  //Creates an image that will draw using the current Fillcolor
 		  
 		  Const UIImageRenderingModeAlwaysOriginal = 1
 		  
-		  Declare Function imageWithRenderingMode Lib "UIKit.framework" Selector "imageWithRenderingMode:" (id As ptr, RenderingMode As Integer) As ptr
+		  Declare Function imageWithRenderingMode Lib "UIKit.framework" selector "imageWithRenderingMode:" (id As ptr, RenderingMode As Integer) As ptr
 		  
 		  'Dim imgHandle As Ptr = image.CopyOSHandle(Picture.HandleType.iOSUIImage)
-		  'Return Picture.FromHandle(imageWithRenderingMode(imgHandle, UIImageRenderingModeAlwaysOriginal))
 		  
-		  'Return Picture.FromHandle(imageWithRenderingMode(bestImage.Handle, UIImageRenderingModeAlwaysOriginal))
-		  
-		  Var bestImageHandle As Ptr = bestImage.CopyOSHandle(Picture.HandleType.iOSUIImage)
-		  Return Picture.FromHandle(imageWithRenderingMode(bestImageHandle, UIImageRenderingModeAlwaysOriginal))
+		  If bestImage.Handle = nil and image.Type = Picture.Types.MutableBitmap then
+		    
+		    Return Picture.FromHandle(imageWithRenderingMode(image.CopyOSHandle(Picture.HandleType.iOSUIImage), UIImageRenderingModeAlwaysOriginal))
+		    
+		  Elseif bestImage.Handle = nil and image.Type = Picture.types.Image then
+		    Return Picture.FromHandle(imageWithRenderingMode(bestimage.CopyOSHandle(Picture.HandleType.iOSUIImage), UIImageRenderingModeAlwaysOriginal))
+		  Else
+		    
+		    'Return Picture.FromHandle(imageWithRenderingMode(imgHandle, UIImageRenderingModeAlwaysOriginal))
+		    Return Picture.FromHandle(imageWithRenderingMode(bestImage.Handle, UIImageRenderingModeAlwaysOriginal))
+		  End If
 		End Function
 	#tag EndMethod
 
@@ -86,30 +93,55 @@ Protected Module ImageExtensionsXC
 
 	#tag Method, Flags = &h1
 		Protected Function ImageWithColorXC(image as Picture, value as Color) As Picture
-		  
-		  
-		  
-		  
 		  If image Is Nil Then Return Nil
 		  
 		  Dim bestImage As Picture = BestRepresentationXC(image)
 		  
-		  Dim scale As Double = bestImage.VerticalResolution/72
 		  
-		  Dim b As New Picture(bestImage.Width, bestImage.Height)
-		  b.VerticalResolution = bestImage.VerticalResolution
-		  b.HorizontalResolution = bestImage.HorizontalResolution
-		  
-		  Dim g As Graphics = b.Graphics
-		  g.Scale(scale, scale)
-		  Dim tmp As Picture = imageWithMaskXC(bestImage)
-		  
-		  g.DrawingColor = value
-		  
-		  
-		  g.DrawPicture(tmp, 0, 0)
-		  
-		  Return b
+		  if ExtensionsXC.GetiOSVersionXC >= 13 then
+		    //Thanks to Yvonnick Maçon https://tracker.xojo.com/xojoinc/xojo/-/issues/71220#note_545958
+		    'https://developer.apple.com/documentation/uikit/uiimage/3327300-imagewithtintcolor?language=objc
+		    
+		    declare function imageWithTintColor_ lib "UIKit" selector "imageWithTintColor:" ( img as ptr, tint as ptr ) as ptr
+		    
+		    
+		    dim newimage as ptr = imageWithTintColor_( bestImage.Handle, UIColorFromColor( value ) )
+		    
+		    dim pp as Picture = Picture.FromHandle( newimage )
+		    
+		    Return pp
+		    
+		    
+		    
+		    
+		  Else
+		    
+		    Const UIImageRenderingModeAlwaysOriginal = 1
+		    Declare Function imageWithRenderingMode Lib "UIKit.framework" selector "imageWithRenderingMode:" (id As ptr, RenderingMode As Integer) As ptr
+		    
+		    
+		    
+		    Dim scale As Double = bestImage.VerticalResolution/72
+		    
+		    Dim b As New Picture(bestImage.Width, bestImage.Height)
+		    b.VerticalResolution = bestImage.VerticalResolution
+		    b.HorizontalResolution = bestImage.HorizontalResolution
+		    
+		    Dim g As Graphics = b.Graphics
+		    g.Scale(scale, scale)
+		    Dim tmp As Picture = imageWithMaskXC(bestImage)
+		    
+		    g.DrawingColor = value
+		    
+		    
+		    g.DrawPicture(tmp, 0, 0)
+		    
+		    
+		    Return Picture.FromHandle(imageWithRenderingMode(b.CopyOSHandle(Picture.HandleTypes.iOSUIImage), UIImageRenderingModeAlwaysOriginal))
+		    
+		    Return b
+		    
+		  end if
 		  
 		  
 		End Function
@@ -190,6 +222,55 @@ Protected Module ImageExtensionsXC
 		    Return fallback
 		  end if
 		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 4170706C6965732054656D706C6174652072656E646572696E67206D6F646520746F207573652074686520636F6E74726F6C27732054696E74436F6C6F72
+		Function ToTemplateXC(extends image As Picture) As Picture
+		  
+		  if image is nil then Return nil
+		  
+		  Dim bestImage As Picture = BestRepresentationXC(image)
+		  
+		  //Creates an image that will draw using the current Fillcolor
+		  
+		  const UIImageRenderingModeAlwaysTemplate = 2
+		  
+		  Declare Function imageWithRenderingMode lib "UIKit.framework" selector "imageWithRenderingMode:" (id as ptr, RenderingMode as Integer) as ptr
+		  
+		  
+		  'Dim imgHandle As Ptr = image.CopyOSHandle(Picture.HandleType.iOSUIImage)
+		  
+		  #if DebugBuild
+		    if bestImage.Handle = nil then
+		      Break
+		    end if
+		  #endif
+		  
+		  'Return Picture.FromHandle(imageWithRenderingMode(imgHandle, UIImageRenderingModeAlwaysTemplate))
+		  Return Picture.FromHandle(imageWithRenderingMode(bestImage.Handle, UIImageRenderingModeAlwaysTemplate))
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function UIColorFromColor(value as color) As ptr
+		  Soft Declare Function colorWithRGBA Lib "UIKit" Selector "colorWithRed:green:blue:alpha:" (UIColorClassRef As Ptr, red As CGFloat, green As CGFloat, blue As CGFloat, alpha As CGFloat) As Ptr
+		  
+		  Soft Declare Function NSClassFromString Lib "Foundation" (classname As CFStringRef) As Ptr
+		  
+		  
+		  static UIColorClassPtr As Ptr =  NSClassFromString("UIColor")
+		  
+		  Dim c as color  = value
+		  
+		  Dim red As CGFloat = c.red / 255
+		  Dim green As CGFloat = c.Green / 255
+		  Dim blue As CGFloat = c.Blue / 255
+		  Dim alpha As CGFloat = 1.0 - c.Alpha / 255
+		  
+		  Dim colorPtr As ptr = colorWithRGBA(UIColorClassPtr, red, green, blue, alpha)
+		  
+		  Return colorPtr
 		End Function
 	#tag EndMethod
 

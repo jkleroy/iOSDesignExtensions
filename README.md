@@ -1,4 +1,4 @@
-[![XOJO 2021r3](https://img.shields.io/badge/XOJO-2021r3-71AF3A.svg)](https://www.xojo.com/)
+[![XOJO 2022r4](https://img.shields.io/badge/XOJO-2022r4-71AF3A.svg)](https://www.xojo.com/)
 [![Platforms iOS](https://img.shields.io/badge/Platforms-iOS-lightgray.svg?style=flat)](http://www.apple.com/ios/)
 [![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
@@ -164,6 +164,10 @@ A set of 100+ UI extensions for Xojo iOS framework.
 
 
 ## History
+
+### Version 2.3 - Released 2022-12-14
+* Updated for Xojo 2022r4
+* Added some Accessibility extensions
 
 ### Version 2.2 - Released 2022-07-14
 * New ViewExtensionsXC.TransitionWithViewDurationOptionsXC

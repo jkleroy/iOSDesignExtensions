@@ -1,58 +1,14 @@
 #tag Module
 Protected Module ButtonExtensionsXC
 	#tag Method, Flags = &h0, Description = 41646A757374732074686520666F6E742073697A65206163636F7264696E6720746F20617661696C61626C65207769647468
-		Sub AdjustsFontForContentSizeCategoryXC(extends button As MobileButton, textStyle As ControlExtensionsXC.UIFontTextStyle)
+		Sub AdjustsFontForContentSizeCategoryXC(extends button As MobileButton, textStyle As ControlExtensionsXC.UIFontTextStyle, customFont As Font = nil, maxPointSize As Double = 0.0)
 		  Dim label As ptr
 		  
 		  Declare Function getTextLabel Lib "UIKit.framework" selector "titleLabel" (obj_ref As ptr) As ptr
 		  label = getTextLabel(button.Handle)
 		  
 		  
-		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
-		  Declare Function alloc Lib "Foundation.framework" selector "alloc" (clsRef As ptr) As ptr
-		  Declare Function initFont Lib "UIKit.framework" selector "fontWithName:size:" (obj_id As ptr, name As CFStringRef, size As CGFloat) As ptr
-		  Declare Function preferredFontForTextStyle Lib "UIKit.framework" selector "preferredFontForTextStyle:" (obj_id As ptr, mode As CFStringRef) As ptr
-		  
-		  
-		  Dim constName As String
-		  Select case textStyle
-		  Case ControlExtensionsXC.UIFontTextStyle.body
-		    constName = "UIFontTextStyleBody"
-		  Case ControlExtensionsXC.UIFontTextStyle.callout
-		    constName = "UIFontTextStyleCallout"
-		  Case ControlExtensionsXC.UIFontTextStyle.caption1
-		    constName = "UIFontTextStyleCaption1"
-		  Case ControlExtensionsXC.UIFontTextStyle.caption2
-		    constName = "UIFontTextStyleCaption2"
-		  Case ControlExtensionsXC.UIFontTextStyle.footnote
-		    constName = "UIFontTextStyleFootnote"
-		  Case ControlExtensionsXC.UIFontTextStyle.headline
-		    constName = "UIFontTextStyleHeadline"
-		  Case ControlExtensionsXC.UIFontTextStyle.subHeadline
-		    constName = "UIFontTextStyleSubheadline"
-		  Case ControlExtensionsXC.UIFontTextStyle.largeTitle
-		    constName = "UIFontTextStyleLargeTitle"
-		  Case ControlExtensionsXC.UIFontTextStyle.title1
-		    constName = "UIFontTextStyleTitle1"
-		  Case ControlExtensionsXC.UIFontTextStyle.title2
-		    constName = "UIFontTextStyleTitle2"
-		  case ControlExtensionsXC.UIFontTextStyle.title3
-		    constName = "UIFontTextStyleTitle3"
-		  End Select
-		  
-		  
-		  Dim textStylePtr As Ptr = ExtensionsXC.LoadConstantXC("UIKit", constName)
-		  
-		  
-		  Dim fontPtr As ptr
-		  fontPtr = preferredFontForTextStyle((NSClassFromString("UIFont")), textStylePtr.CFStringRef(0))
-		  
-		  Declare sub setFont lib "UIKit.framework" selector "setFont:" (obj_ref as ptr, fontRef as ptr)
-		  Declare Sub setAdjustsFontForContentSizeCategory Lib "UIKit.framework" Selector "setAdjustsFontForContentSizeCategory:" (obj_ref as ptr, value as Boolean)
-		  
-		  setFont(label, fontPtr)
-		  
-		  setAdjustsFontForContentSizeCategory label, True
+		  ControlExtensionsXC.AdjustsFontForContentSizeCategoryXC_internal(label, textStyle, customFont, maxPointSize)
 		End Sub
 	#tag EndMethod
 
