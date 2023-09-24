@@ -959,7 +959,7 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetPrefersHomeIndicatorAutoHidden(extends v as MobileScreen, hidden as boolean)
+		Sub SetPrefersHomeIndicatorAutoHiddenXC(extends v as MobileScreen, hidden as boolean)
 		  #If TargetIOS
 		    
 		    If UBound(ΩHomeIndicatorHiddenScreens) = -1 Then
