@@ -961,22 +961,9 @@ Protected Module ViewExtensionsXC
 	#tag Method, Flags = &h0
 		Sub SetPrefersHomeIndicatorAutoHiddenXC(extends v as MobileScreen, hidden as boolean)
 		  #If TargetIOS
-		    
+		    // if we've never done this before, try to add the method again
 		    If UBound(ΩHomeIndicatorHiddenScreens) = -1 Then
-		      // add the property to the viewcontroller class
-		      Declare Function NSSelectorFromString Lib "Foundation" ( aSelectorName As CFStringRef ) As Ptr
-		      Declare Function class_addMethod Lib "Foundation"(cls As Ptr, name As Ptr, imp As Ptr, types As CString) As Boolean
-		      
-		      Declare Function getSuperclass Lib "Foundation" Selector "superclass" (obj As ptr) As Ptr
-		      Declare Function getClass Lib "Foundation" Selector "class" (obj As ptr) As Ptr
-		      
-		      Dim SEL As ptr = NSSelectorFromString("prefersHomeIndicatorAutoHidden")
-		      Dim cls As ptr = getClass(v.ViewControllerHandle)
-		      
-		      Dim types As CString = "B:@"
-		      Dim callback As ptr = AddressOf ΩHomeIndicatorPropertyCallback
-		      
-		      Dim tf As Boolean = class_addMethod(cls, SEL, callback, types)
+		      Call ΩAddClassMethod(v.ViewControllerHandle, "prefersHomeIndicatorAutoHidden", AddressOf ΩHomeIndicatorPropertyCallback, "B:@")
 		    End If
 		    
 		    // See if the
@@ -1216,6 +1203,23 @@ Protected Module ViewExtensionsXC
 		  
 		  
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function ΩAddClassMethod(handle as Ptr, selectorName as string, callback as ptr, signature as string) As Boolean
+		  // add the property to the viewcontroller class
+		  Declare Function NSSelectorFromString Lib "Foundation" ( aSelectorName As CFStringRef ) As Ptr
+		  Declare Function class_addMethod Lib "Foundation"(cls As Ptr, name As Ptr, imp As Ptr, types As CString) As Boolean
+		  
+		  Declare Function getClass Lib "Foundation" Selector "class" (obj As ptr) As Ptr
+		  
+		  Dim SEL As ptr = NSSelectorFromString(selectorName)
+		  Dim cls As ptr = getClass(handle)
+		  
+		  Dim types As CString = signature
+		  
+		  Dim tf As Boolean = class_addMethod(cls, SEL, callback, types)
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
