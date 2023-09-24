@@ -988,7 +988,6 @@ Protected Module ViewExtensionsXC
 		      ΩHomeIndicatorHiddenScreens.RemoveAt(idx)
 		    End If
 		    
-		    
 		  #EndIf
 		End Sub
 	#tag EndMethod
@@ -1207,18 +1206,20 @@ Protected Module ViewExtensionsXC
 
 	#tag Method, Flags = &h21
 		Private Function ΩAddClassMethod(handle as Ptr, selectorName as string, callback as ptr, signature as string) As Boolean
-		  // add the property to the viewcontroller class
-		  Declare Function NSSelectorFromString Lib "Foundation" ( aSelectorName As CFStringRef ) As Ptr
-		  Declare Function class_addMethod Lib "Foundation"(cls As Ptr, name As Ptr, imp As Ptr, types As CString) As Boolean
-		  
-		  Declare Function getClass Lib "Foundation" Selector "class" (obj As ptr) As Ptr
-		  
-		  Dim SEL As ptr = NSSelectorFromString(selectorName)
-		  Dim cls As ptr = getClass(handle)
-		  
-		  Dim types As CString = signature
-		  
-		  Dim tf As Boolean = class_addMethod(cls, SEL, callback, types)
+		  #If TargetIOS
+		    // add the property to the viewcontroller class
+		    Declare Function NSSelectorFromString Lib "Foundation" ( aSelectorName As CFStringRef ) As Ptr
+		    Declare Function class_addMethod Lib "Foundation"(cls As Ptr, name As Ptr, imp As Ptr, types As CString) As Boolean
+		    
+		    Declare Function getClass Lib "Foundation" Selector "class" (obj As ptr) As Ptr
+		    
+		    Dim SEL As ptr = NSSelectorFromString(selectorName)
+		    Dim cls As ptr = getClass(handle)
+		    
+		    Dim types As CString = signature
+		    
+		    Return class_addMethod(cls, SEL, callback, types)
+		  #EndIf
 		End Function
 	#tag EndMethod
 
