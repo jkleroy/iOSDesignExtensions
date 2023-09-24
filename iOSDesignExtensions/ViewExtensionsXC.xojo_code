@@ -958,6 +958,54 @@ Protected Module ViewExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Sub SetPrefersHomeIndicatorAutoHidden(extends v as MobileScreen, hidden as boolean)
+		  #If TargetIOS
+		    
+		    If UBound(ΩHomeIndicatorHiddenScreens) = -1 Then
+		      // add the property to the viewcontroller class
+		      Declare Function NSSelectorFromString Lib "Foundation" ( aSelectorName As CFStringRef ) As Ptr
+		      Declare Function class_addMethod Lib "Foundation"(cls As Ptr, name As Ptr, imp As Ptr, types As CString) As Boolean
+		      
+		      Declare Function getSuperclass Lib "Foundation" Selector "superclass" (obj As ptr) As Ptr
+		      Declare Function getClass Lib "Foundation" Selector "class" (obj As ptr) As Ptr
+		      
+		      Dim SEL As ptr = NSSelectorFromString("prefersHomeIndicatorAutoHidden")
+		      Dim cls As ptr = getClass(v.ViewControllerHandle)
+		      
+		      Dim types As CString = "B:@"
+		      Dim callback As ptr = AddressOf ΩHomeIndicatorPropertyCallback
+		      
+		      Dim tf As Boolean = class_addMethod(cls, SEL, callback, types)
+		    End If
+		    
+		    // See if the
+		    Dim idx As Integer = -1
+		    For i As Integer = 0 To UBound(ΩHomeIndicatorHiddenScreens)
+		      If ΩHomeIndicatorHiddenScreens(i) <> Nil Then
+		        Dim scrn As MobileScreen = MobileScreen(ΩHomeIndicatorHiddenScreens(i).Value)
+		        If scrn <> Nil Then
+		          idx = i
+		          Exit For i
+		        End If
+		      End If
+		    Next
+		    
+		    If hidden And idx > -1 Then
+		      Return
+		    ElseIf Not hidden And idx = -1 Then
+		      Return
+		    ElseIf hidden Then
+		      ΩHomeIndicatorHiddenScreens.add New WeakRef(v)
+		    Else
+		      ΩHomeIndicatorHiddenScreens.RemoveAt(idx)
+		    End If
+		    
+		    
+		  #EndIf
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 53657473207468652053746174757320626172207465787420636F6C6F722E
 		Attributes( Deprecated = "Use App.SetStatusBarStyleXC instead" )  Sub SetStatusBarStyleXC(extends v As MobileScreen, style As AppExtensionsXC.UIStatusBarStyle)
 		  #Pragma Unused v
@@ -1169,6 +1217,34 @@ Protected Module ViewExtensionsXC
 		  
 		End Sub
 	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function ΩHomeIndicatorPropertyCallback(viewcontroller as ptr) As Boolean
+		  #If TargetIOS
+		    For i As Integer = 0 To UBound(ΩHomeIndicatorHiddenScreens)
+		      If ΩHomeIndicatorHiddenScreens(i) <> Nil Then
+		        Dim scr As MobileScreen = MobileScreen(ΩHomeIndicatorHiddenScreens(i).Value)
+		        If scr <> Nil Then
+		          If scr.ViewControllerHandle = viewcontroller Then
+		            Return True
+		          End If
+		        End If
+		      Else
+		        // remove ones that have gone away
+		        ΩHomeIndicatorHiddenScreens.RemoveAt(i)
+		        i = i - 1
+		      End If
+		    Next
+		    
+		    Return False
+		  #EndIf
+		End Function
+	#tag EndMethod
+
+
+	#tag Property, Flags = &h21
+		Private ΩHomeIndicatorHiddenScreens() As WeakRef
+	#tag EndProperty
 
 
 	#tag Enum, Name = LargeTitleDisplayMode, Type = Integer, Flags = &h1
