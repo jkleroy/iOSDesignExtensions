@@ -29,6 +29,7 @@ Inherits MobileApplication
 		## History
 		
 		### Version 2.4 - Released 2024-01-09
+		* New AppExtensionsXC.SetBrightnessXC
 		* Fixed a few methods especially SetNavBarTitleColorXC and SetNavBarTintColorXC
 		
 		### Version 2.3 - Released 2022-12-14
