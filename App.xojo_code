@@ -28,6 +28,9 @@ Inherits MobileApplication
 	#tag Note, Name = README
 		## History
 		
+		### Version 2.4 - Released 2024-01-09
+		* Fixed a few methods especially SetNavBarTitleColorXC and SetNavBarTintColorXC
+		
 		### Version 2.3 - Released 2022-12-14
 		* Updated for Xojo 2022r4
 		

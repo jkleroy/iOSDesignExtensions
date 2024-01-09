@@ -742,9 +742,12 @@ Protected Module ViewExtensionsXC
 		    
 		    
 		    Declare sub setStandardAppearance lib "UIKit.framework" selector "setStandardAppearance:" (obj as ptr, value as ptr)
-		    Declare sub setScrollEdgeAppearance lib "UIKit.framework" selector "setScrollEdgeAppearance:" (obj as ptr, value as ptr)
 		    setStandardAppearance(navBar, navBarAppearance)
-		    setScrollEdgeAppearance(navBar, navBarAppearance)
+		    
+		    if ExtensionsXC.GetiOSVersionXC >= 15.0 then
+		      Declare sub setScrollEdgeAppearance lib "UIKit.framework" selector "setScrollEdgeAppearance:" (obj as ptr, value as ptr)
+		      setScrollEdgeAppearance(navBar, navBarAppearance)
+		    end if
 		    
 		  end if
 		End Sub
@@ -796,13 +799,43 @@ Protected Module ViewExtensionsXC
 		  
 		  
 		  
-		  If ExtensionsXC.GetiOSVersionXC >= 11.0 Then
+		  
+		  
+		  if ExtensionsXC.GetiOSVersionXC >= 13 then
 		    
+		    declare function init lib "Foundation.framework" selector "init" (obj_id as ptr) as ptr
+		    Declare Function alloc Lib "Foundation.framework" selector "alloc" (clsRef As ptr) As ptr
+		    
+		    Declare Sub setTitleTextAttributes Lib "UIKit.framework" selector "setTitleTextAttributes:" _
+		    (obj_id As ptr, att As ptr)
 		    Declare Sub setLargeTitleTextAttributes Lib "UIKit.framework" selector "setLargeTitleTextAttributes:" _
 		    (obj_id As ptr, att As ptr)
 		    
-		    'setLargeTitleTextAttributes(navBar, nsDic)
-		  End If
+		    Declare Function getStandardAppearance lib "UIKit.framework" selector "standardAppearance" (obj as ptr) as ptr
+		    Declare sub setStandardAppearance lib "UIKit.framework" selector "setStandardAppearance:" (obj as ptr, value as ptr)
+		    
+		    Dim navBarAppearance as ptr
+		    
+		    navBarAppearance = getStandardAppearance(navBar)
+		    
+		    if navBarAppearance = nil then
+		      navBarAppearance = init(alloc(NSClassFromString("UINavigationBarAppearance")))
+		    end if
+		    
+		    
+		    setTitleTextAttributes(navBarAppearance, nsDic)
+		    
+		    setLargeTitleTextAttributes(navBarAppearance, nsDic)
+		    
+		    
+		    setStandardAppearance(navBar, navBarAppearance)
+		    
+		    if ExtensionsXC.GetiOSVersionXC >= 15.0 then
+		      Declare sub setScrollEdgeAppearance lib "UIKit.framework" selector "setScrollEdgeAppearance:" (obj as ptr, value as ptr)
+		      setScrollEdgeAppearance(navBar, navBarAppearance)
+		    end if
+		    
+		  end if
 		End Sub
 	#tag EndMethod
 
@@ -936,9 +969,13 @@ Protected Module ViewExtensionsXC
 		    configureWithTransparentBackground(navBarAppearance)
 		    
 		    Declare sub setStandardAppearance lib "UIKit.framework" selector "setStandardAppearance:" (obj as ptr, value as ptr)
-		    Declare sub setScrollEdgeAppearance lib "UIKit.framework" selector "setScrollEdgeAppearance:" (obj as ptr, value as ptr)
 		    setStandardAppearance(navBar, navBarAppearance)
-		    setScrollEdgeAppearance(navBar, navBarAppearance)
+		    
+		    
+		    if ExtensionsXC.GetiOSVersionXC >= 15.0 then
+		      Declare sub setScrollEdgeAppearance lib "UIKit.framework" selector "setScrollEdgeAppearance:" (obj as ptr, value as ptr)
+		      setScrollEdgeAppearance(navBar, navBarAppearance)
+		    end if
 		    
 		  end if
 		End Sub

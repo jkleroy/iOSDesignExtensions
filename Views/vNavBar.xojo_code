@@ -3,9 +3,11 @@ Begin MobileScreen vNavBar
    BackButtonCaption=   ""
    Compatibility   =   ""
    ControlCount    =   0
+   Device = 1
    HasNavigationBar=   True
    LargeTitleDisplayMode=   2
    Left            =   0
+   Orientation = 0
    TabBarVisible   =   True
    TabIcon         =   0
    TintColor       =   0
@@ -28,7 +30,7 @@ Begin MobileScreen vNavBar
       Scope           =   2
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   175
       Visible         =   True
       Width           =   200
@@ -50,10 +52,54 @@ Begin MobileScreen vNavBar
       Scope           =   2
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   240
       Visible         =   True
       Width           =   200
+   End
+   Begin MobileButton Button3
+      AccessibilityHint=   ""
+      AccessibilityLabel=   ""
+      AutoLayout      =   Button3, 1, <Parent>, 1, False, +1.00, 4, 1, *kStdGapCtlToViewH, , True
+      AutoLayout      =   Button3, 2, <Parent>, 2, False, +1.00, 4, 1, -*kStdGapCtlToViewH, , True
+      AutoLayout      =   Button3, 3, <Parent>, 3, False, +1.00, 4, 1, 302, , True
+      AutoLayout      =   Button3, 8, , 0, False, +1.00, 4, 1, 30, , True
+      Caption         =   "Change Title Color"
+      CaptionColor    =   &c007AFF00
+      ControlCount    =   0
+      Enabled         =   True
+      Height          =   30
+      Left            =   20
+      LockedInPosition=   False
+      Scope           =   2
+      TextFont        =   ""
+      TextSize        =   0
+      TintColor       =   &c000000
+      Top             =   302
+      Visible         =   True
+      Width           =   280
+   End
+   Begin MobileButton Button4
+      AccessibilityHint=   ""
+      AccessibilityLabel=   ""
+      AutoLayout      =   Button4, 1, Button3, 1, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   Button4, 2, Button3, 2, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   Button4, 3, Button3, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
+      AutoLayout      =   Button4, 8, , 0, False, +1.00, 4, 1, 30, , True
+      Caption         =   "Change BackButton Color"
+      CaptionColor    =   &c007AFF00
+      ControlCount    =   0
+      Enabled         =   True
+      Height          =   30
+      Left            =   20
+      LockedInPosition=   False
+      Scope           =   2
+      TextFont        =   ""
+      TextSize        =   0
+      TintColor       =   &c000000
+      Top             =   340
+      Visible         =   True
+      Width           =   280
    End
 End
 #tag EndMobileScreen
@@ -96,6 +142,22 @@ End
 		  
 		  
 		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Button3
+	#tag Event
+		Sub Pressed()
+		  
+		  self.SetNavBarTitleColorXC(&cFF0000)
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Button4
+	#tag Event
+		Sub Pressed()
+		  
+		  self.SetNavBarTintColorXC(&cFF0000)
 		End Sub
 	#tag EndEvent
 #tag EndEvents

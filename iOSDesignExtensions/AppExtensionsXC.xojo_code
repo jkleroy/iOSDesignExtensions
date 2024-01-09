@@ -24,6 +24,22 @@ Protected Module AppExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 43616C6C20746869732066756E6374696F6E20696620796F7520757365206120636F6D62696E6174696F6E206F66204C617267655469746C657320616E64204C617267655469746C65446973706C61794D6F64652E6E65766572
+		Sub SetBrightnessXC(extends app as MobileApplication, value as Double)
+		  #Pragma unused app
+		  
+		  
+		  Declare Function NSClassFromString Lib "Foundation" (aClassName As CFStringRef) As Ptr
+		  Declare Function mainScreen Lib "UIKit" selector "mainScreen" (classRef As Ptr) As ptr
+		  Declare sub setBrightness Lib "UIKit" selector "setBrightness:" (obj As Ptr, value As CGFloat)
+		  
+		  Dim screenRef As ptr = mainScreen(NSClassFromString("UIScreen"))
+		  
+		  setBrightness(screenRef, value)
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 53657473207468652053746174757320626172207465787420636F6C6F722E
 		Sub SetStatusBarStyleXC(extends app As MobileApplication, style As AppExtensionsXC.UIStatusBarStyle)
 		  #Pragma Unused app

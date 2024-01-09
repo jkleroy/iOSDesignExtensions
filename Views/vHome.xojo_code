@@ -37,6 +37,7 @@ Begin MobileScreen vHome Implements iOSMobileTableDataSource
       Top             =   65
       Visible         =   True
       Width           =   320
+      _OpeningCompleted=   False
    End
 End
 #tag EndMobileScreen
@@ -60,7 +61,7 @@ End
 
 	#tag Event
 		Sub Opening()
-		  me.BackButtonCaption = " "
+		  'me.BackButtonCaption = " "
 		  
 		End Sub
 	#tag EndEvent
