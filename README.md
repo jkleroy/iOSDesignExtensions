@@ -155,6 +155,8 @@ A set of 100+ UI extensions for Xojo iOS framework.
 
 ### iOSSplitView
 * Display mode
+* Display Fraction
+* Display Width
 
 
 ### Misc
