@@ -496,7 +496,7 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetDisplayModeXC(Extends scr As iOSSplitView, mode As ViewExtensionsXC.UISplitViewControllerDisplayMode)
+		Attributes( Deprecated = "Use SplitViewExtensionsXC.SetDisplayModeXC instead" )  Sub SetDisplayModeXC(Extends scr As iOSSplitView, mode As UISplitViewControllerDisplayMode)
 		  //Changes the SplitView in portrait mode
 		  
 		  Declare Sub setPreferredDisplayMode Lib "UIKit" _
@@ -1248,7 +1248,7 @@ Protected Module ViewExtensionsXC
 		medium_large
 	#tag EndEnum
 
-	#tag Enum, Name = UISplitViewControllerDisplayMode, Type = Integer, Flags = &h1
+	#tag Enum, Name = UISplitViewControllerDisplayMode, Flags = &h1, Attributes = \"Deprecated \x3D "SplitViewExtensionsXC.UISplitViewControllerDisplayMode""
 		Automatic = 0
 		  secondaryOnly
 		  oneBesideSecondary

@@ -3,12 +3,14 @@ Begin MobileScreen vSelect
    BackButtonCaption=   ""
    Compatibility   =   ""
    ControlCount    =   0
+   Device = 1
    HasNavigationBar=   True
    LargeTitleDisplayMode=   2
    Left            =   0
+   Orientation = 0
    TabBarVisible   =   True
    TabIcon         =   0
-   TintColor       =   ""
+   TintColor       =   &c000000
    Title           =   ""
    Top             =   0
    Begin MobileLabel Label1
@@ -26,11 +28,14 @@ Begin MobileScreen vSelect
       LineBreakMode   =   0
       LockedInPosition=   False
       Scope           =   2
+      SelectedText    =   ""
+      SelectionLength =   0
+      SelectionStart  =   0
       Text            =   "Select an example from the list on the left"
       TextColor       =   &c00000000
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   269
       Visible         =   True
       Width           =   300
@@ -59,12 +64,12 @@ End
 		  Select case button.Tag
 		    
 		  Case "fullscreen"
-		    if app.currentSplitMode = ViewExtensionsXC.UISplitViewControllerDisplayMode.secondaryOnly then
+		    if app.currentSplitMode = SplitViewExtensionsXC.UISplitViewControllerDisplayMode.secondaryOnly then
 		      Self.ParentSplitView.setDisplayModeXC(ViewExtensionsXC.UISplitViewControllerDisplayMode.Automatic)
-		      app.currentSplitMode = ViewExtensionsXC.UISplitViewControllerDisplayMode.Automatic
+		      app.currentSplitMode = SplitViewExtensionsXC.UISplitViewControllerDisplayMode.Automatic
 		    Else
 		      Self.ParentSplitView.setDisplayModeXC(ViewExtensionsXC.UISplitViewControllerDisplayMode.secondaryOnly)
-		      app.currentSplitMode = ViewExtensionsXC.UISplitViewControllerDisplayMode.secondaryOnly
+		      app.currentSplitMode = SplitViewExtensionsXC.UISplitViewControllerDisplayMode.secondaryOnly
 		    end if
 		    
 		  Case "menu"

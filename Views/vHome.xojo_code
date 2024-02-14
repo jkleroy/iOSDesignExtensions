@@ -49,11 +49,11 @@ End
 		  
 		  Self.SetLargeTitlesXC(False, ViewExtensionsXC.LargeTitleDisplayMode.automatic)
 		  
-		  If Self.ParentSplitView <> Nil and app.currentSplitMode <> ViewExtensionsXC.UISplitViewControllerDisplayMode.secondaryOnly and _
-		    app.currentSplitMode <> ViewExtensionsXC.UISplitViewControllerDisplayMode.oneOverSecondary then
+		  If Self.ParentSplitView <> Nil and app.currentSplitMode <> SplitViewExtensionsXC.UISplitViewControllerDisplayMode.secondaryOnly and _
+		    app.currentSplitMode <> SplitViewExtensionsXC.UISplitViewControllerDisplayMode.oneOverSecondary then
 		    
-		    Self.ParentSplitView.setDisplayModeXC(ViewExtensionsXC.UISplitViewControllerDisplayMode.oneBesideSecondary)
-		    app.currentSplitMode = ViewExtensionsXC.UISplitViewControllerDisplayMode.oneBesideSecondary
+		    Self.ParentSplitView.setDisplayModeXC(SplitViewExtensionsXC.UISplitViewControllerDisplayMode.oneBesideSecondary)
+		    app.currentSplitMode = SplitViewExtensionsXC.UISplitViewControllerDisplayMode.oneBesideSecondary
 		    
 		  End If
 		End Sub

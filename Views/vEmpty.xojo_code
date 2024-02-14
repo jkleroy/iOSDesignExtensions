@@ -28,6 +28,9 @@ Begin MobileScreen vEmpty
       LineBreakMode   =   0
       LockedInPosition=   False
       Scope           =   2
+      SelectedText    =   ""
+      SelectionLength =   0
+      SelectionStart  =   0
       Text            =   "Notice how the icon changed when the tab was selected?"
       TextColor       =   &c000000
       TextFont        =   ""
@@ -36,6 +39,28 @@ Begin MobileScreen vEmpty
       Top             =   73
       Visible         =   True
       Width           =   280
+   End
+   Begin MobileButton Button1
+      AccessibilityHint=   ""
+      AccessibilityLabel=   ""
+      AutoLayout      =   Button1, 1, Label1, 1, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   Button1, 7, , 0, False, +1.00, 4, 1, 174, , True
+      AutoLayout      =   Button1, 8, , 0, False, +1.00, 4, 1, 30, , True
+      AutoLayout      =   Button1, 10, <Parent>, 10, False, +1.00, 4, 1, 0, , True
+      Caption         =   "Change split fraction"
+      CaptionColor    =   &c007AFF00
+      ControlCount    =   0
+      Enabled         =   True
+      Height          =   30
+      Left            =   20
+      LockedInPosition=   False
+      Scope           =   0
+      TextFont        =   ""
+      TextSize        =   0
+      TintColor       =   &c000000
+      Top             =   269
+      Visible         =   True
+      Width           =   174
    End
 End
 #tag EndMobileScreen
@@ -50,6 +75,17 @@ End
 
 #tag EndWindowCode
 
+#tag Events Button1
+	#tag Event
+		Sub Pressed()
+		  self.ParentSplitView.SetPreferredPrimaryColumnWidthFractionXC(0.5)
+		  
+		  self.ParentSplitView.SetMinimumPrimaryColumnWidthXC(200)
+		  
+		  self.ParentSplitView.SetMaximumPrimaryColumnWidthXC(500)
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag ViewBehavior
 	#tag ViewProperty
 		Name="BackButtonCaption"

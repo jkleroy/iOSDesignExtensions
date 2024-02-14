@@ -28,6 +28,10 @@ Inherits MobileApplication
 	#tag Note, Name = README
 		## History
 		
+		### Version 2.4.2 - Released 2024-02-14
+		* New SplitViewExtensionsXC module for iOSSplitView
+		* Fixed a few methods 
+		
 		### Version 2.4 - Released 2024-01-09
 		* New AppExtensionsXC.SetBrightnessXC
 		* Fixed a few methods especially SetNavBarTitleColorXC and SetNavBarTintColorXC
@@ -175,7 +179,7 @@ Inherits MobileApplication
 
 
 	#tag Property, Flags = &h0
-		currentSplitMode As ViewExtensionsXC.UISplitViewControllerDisplayMode
+		currentSplitMode As SplitViewExtensionsXC.UISplitViewControllerDisplayMode
 	#tag EndProperty
 
 

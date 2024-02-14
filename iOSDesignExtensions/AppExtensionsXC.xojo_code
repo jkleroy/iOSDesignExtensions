@@ -18,9 +18,18 @@ Protected Module AppExtensionsXC
 		  Dim sharedApp As Ptr = sharedApplication(NSClassFromString("UIApplication"))
 		  
 		  
-		  Declare Sub openURL Lib "UIKit" Selector "openURL:options:completionHandler:" (id As Ptr, nsurl As Ptr, options As ptr, completion As ptr)
-		  openURL(sharedApp, nsURL, nil, nil)
-		  
+		  If ExtensionsXC.GetiOSVersionXC >= 10.0 Then
+		    
+		    Declare Sub openURL Lib "UIKit" Selector "openURL:options:completionHandler:" (id As Ptr, nsurl As Ptr, options As ptr, completion As ptr)
+		    openURL(sharedApp, nsURL, nil, nil)
+		    
+		  Else
+		    
+		    Declare Function openURL Lib "UIKit" Selector "openURL:" (id As Ptr, nsurl As Ptr) As Boolean
+		    call openURL(sharedApp, nsURL)
+		    
+		    
+		  End If
 		End Sub
 	#tag EndMethod
 
