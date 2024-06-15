@@ -20,6 +20,31 @@ Protected Module ExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
+		Protected Function GetiOSVersionAsStringXC() As String
+		  
+		  Static sSystemVersion As String
+		  
+		  //Get sSystemVersion only once
+		  If sSystemVersion.IsEmpty then
+		    
+		    Declare Function currentDevice_ Lib "UIKit.framework" selector "currentDevice" (clsRef As ptr) As ptr
+		    Declare Function systemversion_ Lib "UIKit.framework" selector "systemVersion" (obj_id As ptr) As CFStringRef
+		    Declare Function NSClassFromString Lib "Foundation" (name As CFStringRef) As Ptr
+		    Dim device As Ptr = currentDevice_(NSClassFromString("UIDevice"))
+		    Dim systemVersion As String = systemversion_(device)
+		    
+		    
+		    sSystemVersion = systemVersion
+		    
+		    
+		  End If
+		  
+		  
+		  Return sSystemVersion
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
 		Protected Function GetiOSVersionXC() As Double
 		  
 		  Static sSystemVersion As Double
@@ -41,6 +66,27 @@ Protected Module ExtensionsXC
 		  End If
 		  
 		  Return sSystemVersion
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
+		Protected Function IsTestflightXC() As Boolean
+		  
+		  Declare Function mainBundle Lib "Foundation" selector "mainBundle" (clsRef As ptr) As ptr
+		  Declare Function NSClassFromString Lib "Foundation" (name As CFStringRef) As Ptr
+		  Declare Function appStoreReceiptURL lib "Foundation" selector "appStoreReceiptURL" (obj as ptr) as ptr
+		  Declare function path lib "Foundation" selector "path" (obj as ptr) as CFStringRef
+		  
+		  Dim theURL As Ptr = appStoreReceiptURL(mainBundle(NSClassFromString("NSBundle")))
+		  
+		  if theURL <> nil then
+		    Dim receiptURLString as Text = path(theURL)
+		    
+		    if receiptURLString.IndexOf("sandboxReceipt") > -1 then 
+		      Return True
+		    end if
+		  end if
+		  
 		End Function
 	#tag EndMethod
 
@@ -101,6 +147,26 @@ Protected Module ExtensionsXC
 		  Dim scale As Double = scale(mainScreen(NSClassFromString("UIScreen")))
 		  
 		  Return scale
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h1, Description = 52657475726E73207468652073697A65206F66207468652063757272656E74204D61696E53637265656E
+		Protected Function MainScreenSizeXC() As Size
+		  //declare function NSClassFromString lib "Foundation.Framework" (aClassName as CFStringRef) as Ptr
+		  Declare Function NSClassFromString Lib "Foundation" (aClassName As CFStringRef) As Ptr
+		  
+		  
+		  
+		  //Improve size of picture
+		  Declare Function mainScreen Lib UIKitLib selector "mainScreen" (clsRef As ptr) As ptr
+		  Declare Function nativebounds Lib UIKitLib selector "nativeBounds" (obj_id As Ptr) As xcCGRect
+		  Dim sz As xcCGSize = nativeBounds(mainScreen(NSClassFromString("UIScreen"))).rsize
+		  
+		  
+		  Dim s As new Size(sz.width, sz.height)
+		  
+		  
+		  Return s
 		End Function
 	#tag EndMethod
 

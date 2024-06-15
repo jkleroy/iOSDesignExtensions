@@ -714,9 +714,12 @@ Protected Module ViewExtensionsXC_API1
 		    
 		    
 		    Declare sub setStandardAppearance lib "UIKit" selector "setStandardAppearance:" (obj as ptr, value as ptr)
-		    Declare sub setScrollEdgeAppearance lib "UIKit" selector "setScrollEdgeAppearance:" (obj as ptr, value as ptr)
 		    setStandardAppearance(navBar, navBarAppearance)
-		    setScrollEdgeAppearance(navBar, navBarAppearance)
+		    
+		    if ExtensionsXC.GetiOSVersionXC >= 15.0 then
+		      Declare sub setScrollEdgeAppearance lib "UIKit.framework" selector "setScrollEdgeAppearance:" (obj as ptr, value as ptr)
+		      setScrollEdgeAppearance(navBar, navBarAppearance)
+		    end if
 		    
 		  end if
 		End Sub
@@ -899,9 +902,12 @@ Protected Module ViewExtensionsXC_API1
 		    configureWithTransparentBackground(navBarAppearance)
 		    
 		    Declare sub setStandardAppearance lib "UIKit" selector "setStandardAppearance:" (obj as ptr, value as ptr)
-		    Declare sub setScrollEdgeAppearance lib "UIKit" selector "setScrollEdgeAppearance:" (obj as ptr, value as ptr)
 		    setStandardAppearance(navBar, navBarAppearance)
-		    setScrollEdgeAppearance(navBar, navBarAppearance)
+		    
+		    if ExtensionsXC.GetiOSVersionXC >= 15.0 then
+		      Declare sub setScrollEdgeAppearance lib "UIKit.framework" selector "setScrollEdgeAppearance:" (obj as ptr, value as ptr)
+		      setScrollEdgeAppearance(navBar, navBarAppearance)
+		    end if
 		    
 		  end if
 		End Sub

@@ -724,7 +724,7 @@ Protected Class Assert
 		  
 		  Dim lastByteIndex As Integer = mb.Size - 1
 		  For byteIndex As Integer = 0 To lastByteIndex
-		    r.Append mb.Data.Byte(byteIndex).ToHex
+		    r.Append mb.Data.Byte(byteIndex).ToHex.Totext
 		  Next
 		  
 		  Return Text.Join(r, " " )

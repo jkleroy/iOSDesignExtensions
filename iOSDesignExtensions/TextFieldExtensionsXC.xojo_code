@@ -172,10 +172,10 @@ Protected Module TextFieldExtensionsXC
 		    
 		    
 		    
-		    Declare Function alloc Lib FoundationLib selector "alloc" (clsRef As ptr) As ptr
-		    Declare Function NSClassFromString Lib FoundationLib (clsName As CFStringRef) As ptr
-		    Declare Function initWithStringattributes Lib FoundationLib  selector "initWithString:attributes:" (id As ptr, astring As CFStringRef, attDict As ptr) As ptr
-		    Declare Sub attributedPlaceholder_ Lib FoundationLib selector "setAttributedPlaceholder:" (id As ptr, attribString As ptr) 
+		    Declare Function alloc Lib "Foundation" selector "alloc" (clsRef As ptr) As ptr
+		    Declare Function NSClassFromString Lib "Foundation" (clsName As CFStringRef) As ptr
+		    Declare Function initWithStringattributes Lib "Foundation"  selector "initWithString:attributes:" (id As ptr, astring As CFStringRef, attDict As ptr) As ptr
+		    Declare Sub attributedPlaceholder_ Lib "Foundation" selector "setAttributedPlaceholder:" (id As ptr, attribString As ptr) 
 		    
 		    Dim uic As New UIColor(aColor)
 		    
