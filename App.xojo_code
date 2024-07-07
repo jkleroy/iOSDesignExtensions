@@ -28,6 +28,10 @@ Inherits MobileApplication
 	#tag Note, Name = README
 		## History
 		
+		### Version 2.5 - Released 2024-07-08
+		* New TableExtensions.SelectRowXC metho
+		* New AppExtensionsXC.idleTimerDisabled property
+		
 		### Version 2.4.2 - Released 2024-02-14
 		* New SplitViewExtensionsXC module for iOSSplitView
 		* Fixed a few methods 
@@ -297,7 +301,7 @@ Inherits MobileApplication
 			Visible=false
 			Group="Behavior"
 			InitialValue=""
-			Type="ViewExtensionsXC.UISplitViewControllerDisplayMode"
+			Type="SplitViewExtensionsXC.UISplitViewControllerDisplayMode"
 			EditorType="Enum"
 			#tag EnumValues
 				"0 - Automatic"

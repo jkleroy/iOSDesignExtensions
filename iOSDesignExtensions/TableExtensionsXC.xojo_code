@@ -95,6 +95,23 @@ Protected Module TableExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub SelectRowXC(extends table as iOSMobileTable, section as integer, row as integer, animated as Boolean = True, scrollPosition as iOSMobileTable.ScrollPositions = iOSMobileTable.ScrollPositions.None)
+		  //new v2.3
+		  
+		  declare sub selectRowAtIndexPath lib "UIKit" selector "selectRowAtIndexPath:animated:scrollPosition:" (id as Ptr, row as Ptr, animated as boolean, scrollPosition as integer)
+		  
+		  
+		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
+		  Declare Function init Lib "UIKit" selector "indexPathForRow:inSection:" (id As ptr, row As Integer, section As Integer) as ptr
+		  
+		  Dim idxPath As ptr = init(NSClassFromString("NSIndexPath"), row, section)
+		  
+		  
+		  selectRowAtIndexPath(table.Handle, idxPath, animated, Integer(scrollPosition))
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub SetAllowsSelectionXC(extends table As iOSMobileTable, value As Boolean)
 		  
 		  Declare Sub setallowsSelection Lib "UIKit.framework" Selector "setAllowsSelection:" (id as ptr, value as Boolean)

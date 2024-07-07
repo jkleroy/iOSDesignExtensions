@@ -63,6 +63,21 @@ Protected Module AppExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 53657473207468652053746174757320626172207465787420636F6C6F722E
+		Sub SetStatusBarStyleXC1(extends app As MobileApplication, style As AppExtensionsXC.UIStatusBarStyle)
+		  #Pragma Unused app
+		  
+		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
+		  Declare Function sharedApplication Lib "UIKit" Selector "sharedApplication" (obj As Ptr) As Ptr
+		  Declare sub setStatusBarStyle lib "UIKit" selector "setStatusBarStyle:" (obj as ptr, style as UIStatusBarStyle)
+		  
+		  Dim sharedApp As Ptr = sharedApplication(NSClassFromString("UIApplication"))
+		  setStatusBarStyle(sharedApp, style)
+		  
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 43616C6C20746869732066756E6374696F6E20696620796F7520757365206120636F6D62696E6174696F6E206F66204C617267655469746C657320616E64204C617267655469746C65446973706C61794D6F64652E6E65766572
 		Sub SetWindowColorXC(extends app as MobileApplication, value as color)
 		  #Pragma unused app
@@ -96,6 +111,41 @@ Protected Module AppExtensionsXC
 		  
 		End Sub
 	#tag EndMethod
+
+	#tag Method, Flags = &h1
+		Protected Function SharedApplication() As Ptr
+		  
+		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
+		  declare function sharedApplication lib "UIKit" selector "sharedApplication" (clsRef as ptr) as ptr
+		  Return sharedApplication(NSClassFromString("UIApplication"))
+		End Function
+	#tag EndMethod
+
+
+	#tag ComputedProperty, Flags = &h1, Description = 4B65657073207468652073637265656E20616C77617973206F6E2E
+		#tag Getter
+			Get
+			  
+			  
+			  Declare Function isIdleTimerDisabled Lib "UIKit" selector "isIdleTimerDisabled" _
+			  (app_id As ptr) As Boolean
+			  
+			  return isIdleTimerDisabled(SharedApplication)
+			  
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  
+			  Declare Sub setIdleTimerDisabled Lib "UIKit" selector "setIdleTimerDisabled:" _
+			  (app_id As ptr, value As Boolean)
+			  
+			  setIdleTimerDisabled(SharedApplication, value)
+			  
+			End Set
+		#tag EndSetter
+		Protected IdleTimerDisabled As Boolean
+	#tag EndComputedProperty
 
 
 	#tag Enum, Name = UIStatusBarStyle, Flags = &h1

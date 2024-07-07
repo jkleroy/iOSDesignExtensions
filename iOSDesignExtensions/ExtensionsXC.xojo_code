@@ -210,6 +210,21 @@ Protected Module ExtensionsXC
 	#tag Note, Name = History
 		## History
 		
+		### Version 2.5 - Released 2024-07-08
+		* New TableExtensions.SelectRowXC metho
+		* New AppExtensionsXC.idleTimerDisabled property
+		
+		### Version 2.4.2 - Released 2024-02-14
+		* New SplitViewExtensionsXC module for iOSSplitView
+		* Fixed a few methods 
+		
+		### Version 2.4 - Released 2024-01-09
+		* New AppExtensionsXC.SetBrightnessXC
+		* Fixed a few methods especially SetNavBarTitleColorXC and SetNavBarTintColorXC
+		
+		### Version 2.3 - Released 2022-12-14
+		* Updated for Xojo 2022r4
+		
 		### Version 2.2 - Released 2022-07-14
 		* New ViewExtensionsXC.TransitionWithViewDurationOptionsXC
 		* New ViewExtensionsXC.AnimateWithDurationXC
@@ -352,7 +367,7 @@ Protected Module ExtensionsXC
 	#tag Constant, Name = kUseUIKit, Type = Boolean, Dynamic = False, Default = \"False", Scope = Protected
 	#tag EndConstant
 
-	#tag Constant, Name = kVersion, Type = Text, Dynamic = False, Default = \"2.2", Scope = Protected
+	#tag Constant, Name = kVersion, Type = Text, Dynamic = False, Default = \"2.5", Scope = Protected
 	#tag EndConstant
 
 
