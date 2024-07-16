@@ -116,6 +116,7 @@ A set of 100+ UI extensions for Xojo iOS framework.
 * Text indentation
 
 ### MobileTextArea
+* Add Done button to clear focus
 * Auto-correction
 * Scroll position (get and set)
 * Scrolls to top
