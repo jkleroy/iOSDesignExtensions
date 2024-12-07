@@ -374,6 +374,18 @@ Protected Module ControlExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 4F766572726964657320
+		Sub SetOverrideUserInterfaceStyleXC(extends control As MobileUIControl, style As ControlExtensionsXC.UIUserInterfaceStyle)
+		  
+		  if ExtensionsXC.GetiOSVersionXC >= 13.0 then
+		    declare sub overrideUserInterfaceStyle lib "UIKit.framework" selector "setOverrideUserInterfaceStyle:" (obj as ptr, style As ControlExtensionsXC.UIUserInterfaceStyle)
+		    
+		    overrideUserInterfaceStyle(control.Handle, style)
+		    
+		  end if
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 5365747320746865207465787420636F6C6F72206F66206120446174655069636B6572
 		Sub SetTextColorXC(extends picker as MobileDateTimePicker, value as Color)
 		  
@@ -592,6 +604,12 @@ Protected Module ControlExtensionsXC
 		Unspecified
 		  Light
 		Dark
+	#tag EndEnum
+
+	#tag Enum, Name = UIUserInterfaceStyle1, Flags = &h1
+		unspecified = 0
+		  light = 1
+		dark = 2
 	#tag EndEnum
 
 	#tag Enum, Name = UIVIewAnimationCurve, Type = Integer, Flags = &h1

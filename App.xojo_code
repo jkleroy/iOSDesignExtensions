@@ -28,6 +28,13 @@ Inherits MobileApplication
 	#tag Note, Name = README
 		## History
 		
+		### Version 2.5.2 - Released 2024-12-07
+		* New ViewExtensionsXC.SetOverrideUserInterfaceStyleXC method
+		* New ControlExtensionsXC.SetOverrideUserInterfaceStyleXC method
+		
+		### Version 2.5.1 - Released 2024-07-16
+		* New TextFieldExtensionsXC.AddDoneToolbarButtonXC
+		
 		### Version 2.5 - Released 2024-07-08
 		* New TableExtensions.SelectRowXC metho
 		* New AppExtensionsXC.idleTimerDisabled property
@@ -165,7 +172,7 @@ Inherits MobileApplication
 		
 		* Version 1.0 - Released 2018-04-26
 		
-		Copy-paste the iOSExtensions folder into your project.
+		Copy-paste the iOSDesignExtensions folder into your project.
 		
 		Most controls will then have additional methods, all ending with "XC"
 		

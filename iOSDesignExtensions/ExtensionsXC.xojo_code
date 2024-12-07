@@ -210,12 +210,15 @@ Protected Module ExtensionsXC
 	#tag Note, Name = History
 		## History
 		
+		### Version 2.5.2 - Released 2024-12-07
+		* New ViewExtensionsXC.SetOverrideUserInterfaceStyleXC method
+		* New ControlExtensionsXC.SetOverrideUserInterfaceStyleXC method
+		
 		### Version 2.5.1 - Released 2024-07-16
 		* New TextFieldExtensionsXC.AddDoneToolbarButtonXC
 		
-		
 		### Version 2.5 - Released 2024-07-08
-		* New TableExtensions.SelectRowXC method
+		* New TableExtensions.SelectRowXC metho
 		* New AppExtensionsXC.idleTimerDisabled property
 		
 		### Version 2.4.2 - Released 2024-02-14
@@ -351,7 +354,7 @@ Protected Module ExtensionsXC
 		
 		* Version 1.0 - Released 2018-04-26
 		
-		Copy-paste the iOSExtensions folder into your project.
+		Copy-paste the iOSDesignExtensions folder into your project.
 		
 		Most controls will then have additional methods, all ending with "XC"
 		
@@ -365,13 +368,14 @@ Protected Module ExtensionsXC
 		
 		
 		
+		
 	#tag EndNote
 
 
 	#tag Constant, Name = kUseUIKit, Type = Boolean, Dynamic = False, Default = \"False", Scope = Protected
 	#tag EndConstant
 
-	#tag Constant, Name = kVersion, Type = Text, Dynamic = False, Default = \"2.5.1", Scope = Protected
+	#tag Constant, Name = kVersion, Type = Text, Dynamic = False, Default = \"2.5.2", Scope = Protected
 	#tag EndConstant
 
 

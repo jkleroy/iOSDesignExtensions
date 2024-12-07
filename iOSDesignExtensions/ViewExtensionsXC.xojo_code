@@ -840,6 +840,32 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 5365747320616E20696D61676520696E7374656164206F66204E6176626172207469746C65
+		Sub SetNavBarTitleControlXC(extends v As MobileScreen, ctrl As MobileUIControl)
+		  
+		  declare function navigationController lib "UIKit.framework" selector "navigationController" (viewController as ptr) as ptr
+		  declare function navigationBar lib "UIKit.framework" selector "navigationBar" (obj_ref as ptr) as ptr
+		  declare function topItem lib "UIKit.framework" selector "topItem" (id as ptr) as ptr
+		  Declare Sub setTitleView Lib "UIKit.framework" selector "setTitleView:" (id As ptr, UIImage As Ptr)
+		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
+		  declare Function alloc lib "Foundation" selector "alloc"(classPtr as Ptr) as Ptr
+		  Declare function initWithImage lib "UIKit.framework" selector "initWithImage:" (objRef as Ptr, imgRef as Ptr) as Ptr
+		  
+		  //Reference to Navigation Controller
+		  dim navigationControllerRef as ptr = navigationController(v.ViewControllerHandle)
+		  
+		  //Ref to NavigationBar
+		  dim navBar as ptr = navigationBar(navigationControllerRef)
+		  
+		  //Ref to Title item
+		  dim navItem as ptr = topItem(navBar)
+		  
+		  
+		  //Set Title item to use the control
+		  setTitleView(navItem, ctrl.Handle)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 5365747320616E20696D61676520696E7374656164206F66204E6176626172207469746C65
 		Sub SetNavBarTitleImageXC(extends v As MobileScreen, image As Picture)
 		  
 		  declare function navigationController lib "UIKit.framework" selector "navigationController" (viewController as ptr) as ptr
@@ -976,6 +1002,18 @@ Protected Module ViewExtensionsXC
 		      Declare sub setScrollEdgeAppearance lib "UIKit.framework" selector "setScrollEdgeAppearance:" (obj as ptr, value as ptr)
 		      setScrollEdgeAppearance(navBar, navBarAppearance)
 		    end if
+		    
+		  end if
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 4F766572726964657320
+		Sub SetOverrideUserInterfaceStyleXC(extends v As MobileScreen, style As ControlExtensionsXC.UIUserInterfaceStyle)
+		  
+		  if ExtensionsXC.GetiOSVersionXC >= 13.0 then
+		    declare sub overrideUserInterfaceStyle lib "UIKit.framework" selector "setOverrideUserInterfaceStyle:" (obj as ptr, style As ControlExtensionsXC.UIUserInterfaceStyle)
+		    
+		    overrideUserInterfaceStyle(v.Handle, style)
 		    
 		  end if
 		End Sub
