@@ -8,6 +8,7 @@ Begin MobileScreen vHome Implements iOSMobileTableDataSource
    LargeTitleDisplayMode=   1
    Left            =   0
    Orientation = 0
+   ScaleFactor     =   0.0
    TabBarVisible   =   True
    TabIcon         =   0
    TintColor       =   &c00000000
@@ -37,6 +38,7 @@ Begin MobileScreen vHome Implements iOSMobileTableDataSource
       Top             =   65
       Visible         =   True
       Width           =   320
+      _ClosingFired   =   False
       _OpeningCompleted=   False
    End
 End
@@ -227,30 +229,31 @@ End
 		  
 		  section = AddSection("Button Extensions")
 		  
-		  img = ic8_button
+		  img = Picture.SystemImage("button.horizontal", 0)
 		  AddRow(section, "Buttons", "", accessory, GetTypeInfo(vButtons), ImageExtensionsXC.ImageWithColorXC(img, &c0F7FFE00))
 		  
 		  section = AddSection("Label Extensions")
-		  'img = ic8_button
+		  img = Picture.SystemImage("textformat", 0)
 		  AddRow(section, "Labels", "", accessory, GetTypeInfo(vLabels), ImageExtensionsXC.ImageWithColorXC(img, &c0F7FFE00))
 		  
 		  
 		  
 		  section = AddSection("HTMLViewer Extensions")
-		  img = ic8_html
+		  img = Picture.SystemImage("chevron.left.forwardslash.chevron.right", 0)
 		  AddRow(section, "HTMLViewer Examples", "", accessory, GetTypeInfo(vHTMLViewer), ImageExtensionsXC.ImageWithColorXC(img, &cE34E25))
 		  
 		  section = AddSection("TabBar Extensions")
-		  AddRow(section, "TabBar Examples", "", accessory, "tabbar")
+		  img = Picture.SystemImage("circle.grid.2x1", 0)
+		  AddRow(section, "TabBar Examples", "", accessory, "tabbar", img)
 		  
 		  
 		  section = AddSection("Image Extensions")
-		  img = ic8_picture
+		  img = Picture.SystemImage("photo", 0)
 		  AddRow(section, "Image Examples", "", accessory, GetTypeInfo(vImageExtensions), ImageExtensionsXC.ImageWithColorXC(img, Color.Blue))
 		  
 		  
 		  section = AddSection("Scroll Extensions")
-		  img = ic8_updown
+		  img = Picture.SystemImage("arrow.up.arrow.down", 0)
 		  AddRow(section, "Scroll Examples", "", accessory, GetTypeInfo(vScrollView), ImageExtensionsXC.ImageWithColorXC(img, &cFC800800))
 		  
 		  
@@ -459,6 +462,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="ScaleFactor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Double"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="BackButtonCaption"
 		Visible=true

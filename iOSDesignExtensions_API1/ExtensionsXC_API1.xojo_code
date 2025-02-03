@@ -196,6 +196,8 @@ Protected Module ExtensionsXC_API1
 	#tag Note, Name = History
 		## History
 		
+		### API1 extensions won't be updated anymore
+		
 		### Version 1.8 - Released 2020-11-06
 		* Ready for future versions of Xojo
 		

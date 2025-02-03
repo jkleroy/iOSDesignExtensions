@@ -210,12 +210,15 @@ Protected Module ExtensionsXC
 	#tag Note, Name = History
 		## History
 		
+		### Version 2.5.3 - Released 2025-02-03
+		* New TextFieldExtensionsXC.AddDoneToolbarButtonXC (for TextField)
+		
 		### Version 2.5.2 - Released 2024-12-07
 		* New ViewExtensionsXC.SetOverrideUserInterfaceStyleXC method
 		* New ControlExtensionsXC.SetOverrideUserInterfaceStyleXC method
 		
 		### Version 2.5.1 - Released 2024-07-16
-		* New TextFieldExtensionsXC.AddDoneToolbarButtonXC
+		* New TextFieldExtensionsXC.AddDoneToolbarButtonXC (for TextArea)
 		
 		### Version 2.5 - Released 2024-07-08
 		* New TableExtensions.SelectRowXC metho

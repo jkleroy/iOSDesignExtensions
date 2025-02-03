@@ -3,6 +3,20 @@ Protected Module TextFieldExtensionsXC
 	#tag Method, Flags = &h0, Description = 4164647320612022446F6E652220627574746F6E2061626F766520746865206B6579626F617264207768656E207468652054657874417265612068617320666F6375732E
 		Sub AddDoneToolbarButtonXC(extends area As MobileTextArea, Translucent As Boolean = True)
 		  
+		  AddDoneToolbarButtonXC_internal(area, Translucent)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 4164647320612022446F6E652220627574746F6E2061626F766520746865206B6579626F617264207768656E2074686520546578744669656C642068617320666F6375732E
+		Sub AddDoneToolbarButtonXC(extends field As MobileTextField, Translucent As Boolean = True)
+		  
+		  AddDoneToolbarButtonXC_internal(field, Translucent)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21, Description = 4164647320612022446F6E652220627574746F6E2061626F766520746865206B6579626F617264207768656E207468652054657874417265612068617320666F6375732E
+		Private Sub AddDoneToolbarButtonXC_internal(txt As MobileTextControl, Translucent As Boolean)
+		  
 		  
 		  
 		  Declare Function NSClassFromString Lib "Foundation" (name As CFStringRef) As Ptr
@@ -61,7 +75,7 @@ Protected Module TextFieldExtensionsXC
 		  setItems(toolbar_ptr, nsArray_ptr, false)
 		  
 		  //Attaching the toolbar to the textfield
-		  setInputAccessoryView(area.Handle, toolbar_ptr)
+		  setInputAccessoryView(txt.Handle, toolbar_ptr)
 		  
 		  
 		  
@@ -138,7 +152,7 @@ Protected Module TextFieldExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetAutocapitalizationTypeXC(extends field As MobileTextField, value As TextFieldExtensionsXC.UITextAutocapitalizationType)
+		Attributes( Deprecated = "MobileTextField.AutoCapitalizationTypes Enumeration" )  Sub SetAutocapitalizationTypeXC(extends field As MobileTextField, value As TextFieldExtensionsXC.UITextAutocapitalizationType)
 		  
 		  Declare Sub setAutocapitalizationType_ Lib "UIKit.framework" selector "setAutocapitalizationType:" (obj_id As ptr, value As UITextAutoCapitalizationType)
 		  

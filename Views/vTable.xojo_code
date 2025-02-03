@@ -8,6 +8,7 @@ Begin MobileScreen vTable Implements iOSMobileTableDataSource,iOSMobileTableData
    LargeTitleDisplayMode=   2
    Left            =   0
    Orientation = 0
+   ScaleFactor     =   0.0
    TabBarVisible   =   True
    TabIcon         =   0
    TintColor       =   &c00000000
@@ -37,6 +38,8 @@ Begin MobileScreen vTable Implements iOSMobileTableDataSource,iOSMobileTableData
       Top             =   65
       Visible         =   True
       Width           =   320
+      _ClosingFired   =   False
+      _OpeningCompleted=   False
    End
 End
 #tag EndMobileScreen
@@ -274,7 +277,7 @@ End
 		  Self.AddRow(section, "Cell text color", "", MobileTableCellData.AccessoryTypes.None, "textcolor")
 		  Self.AddRow(section, "Cell detail color", "Detail text", MobileTableCellData.AccessoryTypes.None, "detailcolor")
 		  Self.AddRow(section, "Cell selected color", "", MobileTableCellData.AccessoryTypes.None, "selectedcolor")
-		  Self.AddRow(section, "This is wrapped text that will appear on two lines", "", MobileTableCellData.AccessoryTypes.None, "wrap")
+		  Self.AddRow(section, "This is wrapped text that will appear on two lines. Making this sentence longer", "", MobileTableCellData.AccessoryTypes.None, "wrap")
 		  Self.AddRow(section, "No selection", "", MobileTableCellData.AccessoryTypes.None, "noselect")
 		  
 		  
@@ -417,6 +420,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="ScaleFactor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Double"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="BackButtonCaption"
 		Visible=true

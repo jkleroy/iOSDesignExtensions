@@ -8,6 +8,7 @@ Begin MobileScreen vEmpty
    LargeTitleDisplayMode=   2
    Left            =   0
    Orientation = 0
+   ScaleFactor     =   0.0
    TabBarVisible   =   True
    TabIcon         =   0
    TintColor       =   &c00000000
@@ -27,6 +28,7 @@ Begin MobileScreen vEmpty
       Left            =   20
       LineBreakMode   =   0
       LockedInPosition=   False
+      MaximumCharactersAllowed=   0
       Scope           =   2
       SelectedText    =   ""
       SelectionLength =   0
@@ -39,6 +41,7 @@ Begin MobileScreen vEmpty
       Top             =   73
       Visible         =   True
       Width           =   280
+      _ClosingFired   =   False
    End
    Begin MobileButton Button1
       AccessibilityHint=   ""
@@ -61,6 +64,7 @@ Begin MobileScreen vEmpty
       Top             =   269
       Visible         =   True
       Width           =   174
+      _ClosingFired   =   False
    End
 End
 #tag EndMobileScreen
@@ -78,15 +82,32 @@ End
 #tag Events Button1
 	#tag Event
 		Sub Pressed()
-		  self.ParentSplitView.SetPreferredPrimaryColumnWidthFractionXC(0.5)
 		  
-		  self.ParentSplitView.SetMinimumPrimaryColumnWidthXC(200)
-		  
-		  self.ParentSplitView.SetMaximumPrimaryColumnWidthXC(500)
+		  if self.ParentSplitView <> nil then
+		    
+		    self.ParentSplitView.SetPreferredPrimaryColumnWidthFractionXC(0.5)
+		    
+		    self.ParentSplitView.SetMinimumPrimaryColumnWidthXC(200)
+		    
+		    self.ParentSplitView.SetMaximumPrimaryColumnWidthXC(500)
+		    
+		    
+		  Else
+		    
+		    MessageBox("Only available on iPad")
+		  end if
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="ScaleFactor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Double"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="BackButtonCaption"
 		Visible=true

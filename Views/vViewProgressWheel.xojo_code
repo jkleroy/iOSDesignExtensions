@@ -3,21 +3,24 @@ Begin MobileScreen vViewProgressWheel
    BackButtonCaption=   ""
    Compatibility   =   ""
    ControlCount    =   0
+   Device = 1
    HasNavigationBar=   True
    LargeTitleDisplayMode=   2
    Left            =   0
+   Orientation = 0
+   ScaleFactor     =   0.0
    TabBarVisible   =   True
    TabIcon         =   0
-   TintColor       =   ""
+   TintColor       =   &c000000
    Title           =   "Big ProgressWheel"
    Top             =   0
    Begin MobileButton Button1
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
-      AutoLayout      =   Button1, 1, <Parent>, 1, False, +1.00, 4, 1, *kStdGapCtlToViewH, , True
-      AutoLayout      =   Button1, 7, , 0, False, +1.00, 4, 1, 100, , True
-      AutoLayout      =   Button1, 3, <Parent>, 3, False, +1.00, 4, 1, 90, , True
       AutoLayout      =   Button1, 8, , 0, False, +1.00, 4, 1, 30, , True
+      AutoLayout      =   Button1, 1, <Parent>, 1, False, +1.00, 4, 1, *kStdGapCtlToViewH, , True
+      AutoLayout      =   Button1, 3, TopLayoutGuide, 3, False, +1.00, 4, 1, 90, , True
+      AutoLayout      =   Button1, 7, , 0, False, +1.00, 4, 1, 100, , True
       Caption         =   "Show"
       CaptionColor    =   &c000000
       ControlCount    =   0
@@ -28,10 +31,11 @@ Begin MobileScreen vViewProgressWheel
       Scope           =   0
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
-      Top             =   90
+      TintColor       =   &c000000
+      Top             =   155
       Visible         =   True
       Width           =   100
+      _ClosingFired   =   False
    End
    Begin MobileButton Button2
       AccessibilityHint=   ""
@@ -50,10 +54,11 @@ Begin MobileScreen vViewProgressWheel
       Scope           =   0
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
-      Top             =   90
+      TintColor       =   &c000000
+      Top             =   155
       Visible         =   True
       Width           =   100
+      _ClosingFired   =   False
    End
    Begin MobileLabel Label1
       AccessibilityHint=   ""
@@ -69,15 +74,20 @@ Begin MobileScreen vViewProgressWheel
       Left            =   20
       LineBreakMode   =   0
       LockedInPosition=   False
+      MaximumCharactersAllowed=   0
       Scope           =   0
+      SelectedText    =   ""
+      SelectionLength =   0
+      SelectionStart  =   0
       Text            =   "With only one line of code, a big progresswheel is added in the center of the View."
       TextColor       =   &c00000000
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
-      Top             =   128
+      TintColor       =   &c000000
+      Top             =   193
       Visible         =   True
       Width           =   280
+      _ClosingFired   =   False
    End
 End
 #tag EndMobileScreen
@@ -114,6 +124,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="ScaleFactor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Double"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="BackButtonCaption"
 		Visible=true

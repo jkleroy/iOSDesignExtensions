@@ -144,7 +144,7 @@ End
 		Sub Closing()
 		  if titlebutton <> nil then
 		    
-		    RemoveHandler bt.Pressed, AddressOf TitleButtonPressed
+		    RemoveHandler titlebutton.Pressed, AddressOf TitleButtonPressed
 		    
 		    titlebutton = nil //Just in case the closing event is called twice
 		  end if

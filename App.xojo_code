@@ -28,6 +28,9 @@ Inherits MobileApplication
 	#tag Note, Name = README
 		## History
 		
+		### Version 2.5.3 - Released 2025-02-03
+		* New TextFieldExtensionsXC.AddDoneToolbarButtonXC (for TextField)
+		
 		### Version 2.5.2 - Released 2024-12-07
 		* New ViewExtensionsXC.SetOverrideUserInterfaceStyleXC method
 		* New ControlExtensionsXC.SetOverrideUserInterfaceStyleXC method

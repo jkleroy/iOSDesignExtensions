@@ -8,6 +8,7 @@ Begin MobileScreen vButtons
    LargeTitleDisplayMode=   0
    Left            =   0
    Orientation = 0
+   ScaleFactor     =   0.0
    TabBarVisible   =   True
    TabIcon         =   0
    TintColor       =   &c00000000
@@ -34,6 +35,7 @@ Begin MobileScreen vButtons
       Top             =   95
       Visible         =   True
       Width           =   100
+      _ClosingFired   =   False
    End
    Begin MobileButton btCornerRadius
       AccessibilityHint=   ""
@@ -56,6 +58,7 @@ Begin MobileScreen vButtons
       Top             =   155
       Visible         =   True
       Width           =   100
+      _ClosingFired   =   False
    End
    Begin MobileButton btCaptionAndImage
       AccessibilityHint=   ""
@@ -78,6 +81,7 @@ Begin MobileScreen vButtons
       Top             =   215
       Visible         =   True
       Width           =   100
+      _ClosingFired   =   False
    End
    Begin MobileButton Button4
       AccessibilityHint=   ""
@@ -100,6 +104,7 @@ Begin MobileScreen vButtons
       Top             =   275
       Visible         =   True
       Width           =   100
+      _ClosingFired   =   False
    End
    Begin MobileButton Button5
       AccessibilityHint=   ""
@@ -122,6 +127,7 @@ Begin MobileScreen vButtons
       Top             =   355
       Visible         =   True
       Width           =   100
+      _ClosingFired   =   False
    End
    Begin MobileButton Button6
       AccessibilityHint=   ""
@@ -144,6 +150,7 @@ Begin MobileScreen vButtons
       Top             =   355
       Visible         =   True
       Width           =   100
+      _ClosingFired   =   False
    End
    Begin MobileButton Button7
       AccessibilityHint=   ""
@@ -166,6 +173,7 @@ Begin MobileScreen vButtons
       Top             =   393
       Visible         =   True
       Width           =   100
+      _ClosingFired   =   False
    End
    Begin MobileButton Button8
       AccessibilityHint=   ""
@@ -188,6 +196,7 @@ Begin MobileScreen vButtons
       Top             =   393
       Visible         =   True
       Width           =   100
+      _ClosingFired   =   False
    End
    Begin MobileButton btLeft
       AccessibilityHint=   ""
@@ -210,6 +219,7 @@ Begin MobileScreen vButtons
       Top             =   431
       Visible         =   True
       Width           =   100
+      _ClosingFired   =   False
    End
 End
 #tag EndMobileScreen
@@ -325,6 +335,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="ScaleFactor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Double"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="BackButtonCaption"
 		Visible=true
