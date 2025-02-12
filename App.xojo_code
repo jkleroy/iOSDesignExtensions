@@ -28,6 +28,13 @@ Inherits MobileApplication
 	#tag Note, Name = README
 		## History
 		
+		### Version 2.6 - Released 2025-02-12
+		* New TabbarExtensionsXC.SetTabBarTitleXC
+		* New MapViewerExtensionsXC
+		* New ControlExtensionsXC.SetBackgroundGradientXC
+		* New TabbarExtensionsXC.SetTabBarUnselectedColorXC
+		* New TableExtensionsXC.SetAllowsSelectionDuringEditingXC
+		
 		### Version 2.5.3 - Released 2025-02-03
 		* New TextFieldExtensionsXC.AddDoneToolbarButtonXC (for TextField)
 		

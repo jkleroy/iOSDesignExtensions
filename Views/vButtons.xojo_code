@@ -40,10 +40,10 @@ Begin MobileScreen vButtons
    Begin MobileButton btCornerRadius
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AutoLayout      =   btCornerRadius, 9, <Parent>, 9, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   btCornerRadius, 8, , 0, False, +1.00, 4, 1, 30, , True
-      AutoLayout      =   btCornerRadius, 1, btBackgroundColor, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   btCornerRadius, 3, btBackgroundColor, 4, False, +1.00, 4, 1, 30, , True
-      AutoLayout      =   btCornerRadius, 7, , 0, False, +1.00, 4, 1, 100, , True
+      AutoLayout      =   btCornerRadius, 7, , 0, False, +1.00, 4, 2, 100, , True
       Caption         =   "Corner radius"
       CaptionColor    =   &c000000
       ControlCount    =   0
@@ -63,8 +63,8 @@ Begin MobileScreen vButtons
    Begin MobileButton btCaptionAndImage
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AutoLayout      =   btCaptionAndImage, 9, <Parent>, 9, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   btCaptionAndImage, 8, , 0, False, +1.00, 4, 1, 30, , True
-      AutoLayout      =   btCaptionAndImage, 1, btCornerRadius, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   btCaptionAndImage, 3, btCornerRadius, 4, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   btCaptionAndImage, 7, , 0, False, +1.00, 4, 2, 100, , True
       Caption         =   "Image & Caption"
@@ -86,8 +86,8 @@ Begin MobileScreen vButtons
    Begin MobileButton Button4
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AutoLayout      =   Button4, 9, <Parent>, 9, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Button4, 8, , 0, False, +1.00, 4, 1, 50, , True
-      AutoLayout      =   Button4, 1, btCaptionAndImage, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Button4, 3, btCaptionAndImage, 4, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   Button4, 7, , 0, False, +1.00, 4, 1, 100, , True
       Caption         =   "First line\nSecond line"
@@ -201,10 +201,10 @@ Begin MobileScreen vButtons
    Begin MobileButton btLeft
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
-      AutoLayout      =   btLeft, 1, Button4, 1, False, +1.00, 4, 1, 0, , True
-      AutoLayout      =   btLeft, 7, , 0, False, +1.00, 4, 1, 100, , True
-      AutoLayout      =   btLeft, 3, Button8, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
+      AutoLayout      =   btLeft, 9, <Parent>, 9, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   btLeft, 8, , 0, False, +1.00, 4, 1, 30, , True
+      AutoLayout      =   btLeft, 3, Button8, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
+      AutoLayout      =   btLeft, 7, , 0, False, +1.00, 4, 1, 100, , True
       Caption         =   "Left align"
       CaptionColor    =   &c000000
       ControlCount    =   0
@@ -242,7 +242,7 @@ End
 	#tag Event
 		Sub Opening()
 		  
-		  Me.SetBackgroundColorXC(&c06BEBD)
+		  Me.SetBackgroundColorXC(&cA0A0A0)
 		  Me.SetCornerRadiusXC(8)
 		  Me.CaptionColor = &cFFFFFF
 		End Sub

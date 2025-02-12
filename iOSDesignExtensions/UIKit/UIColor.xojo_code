@@ -3,7 +3,7 @@ Class UIColor
 	#tag Method, Flags = &h0
 		Function CGColor() As Ptr
 		  
-		  Declare Function cgcolor Lib UIKitLib selector "cgColor" (obj_id As ptr) as ptr
+		  Declare Function CGColor Lib UIKitLib selector "cgColor" (obj_id As ptr) as ptr
 		  Return CGColor(self)
 		End Function
 	#tag EndMethod

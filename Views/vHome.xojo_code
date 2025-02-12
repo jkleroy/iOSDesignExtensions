@@ -258,7 +258,8 @@ End
 		  
 		  
 		  section = AddSection("Table Extensions")
-		  AddRow(section, "Table Examples", "", accessory, GetTypeInfo(vTable), ImageExtensionsXC.ImageWithColorXC(ic8_list, &c66CCFE00))
+		  AddRow(section, "Table Examples", "", accessory, GetTypeInfo(vTable), Picture.SystemImage("list.dash", 0, Picture.SystemImageWeights.Regular, &c66CCFE))
+		  
 		  
 		  
 		  section = AddSection("TextFields Extensions")
@@ -270,9 +271,9 @@ End
 		  
 		  section = AddSection("View Extensions")
 		  AddRow(section, "Big Progress Wheel", "", accessory, GetTypeInfo(vViewProgressWheel), ImageExtensionsXC.ImageWithColorXC(ic8_loading, &c80808000))
-		  AddRow(section, "Hide Navigator on Swipe", "", accessory, GetTypeInfo(vHideNavigator), ic8_hide)
-		  AddRow(section, "Large Titles", "", accessory, GetTypeInfo(vLargeTitles), ic8_bigfont)
-		  AddRow(section, "Navigation Bar Color / Image", "", accessory, GetTypeInfo(vNavbar), ImageExtensionsXC.ImageWithColorXC(ic_menu, &c073F8000))
+		  AddRow(section, "Hide Navigator on Swipe", "", accessory, GetTypeInfo(vHideNavigator), Picture.SystemImage("eye.slash", 0))
+		  AddRow(section, "Large Titles", "", accessory, GetTypeInfo(vLargeTitles), Picture.SystemImage("textformat.size.larger", 0, Picture.SystemImageWeights.Bold))
+		  AddRow(section, "Navigation Bar Color / Image", "", accessory, GetTypeInfo(vNavbar), Picture.SystemImage("line.3.horizontal", 0, Picture.SystemImageWeights.Regular, &c073F8000))
 		  AddRow(section, "ToolButtons", "", accessory, GetTypeInfo(vToolButton), ImageExtensionsXC.ImageWithColorXC(ic8_button, &c7F0FFE))
 		  AddRow(section, "View Color", "", accessory, GetTypeInfo(vBackground), ImageExtensionsXC.ImageOriginalXC(ic8_color))
 		  
@@ -287,7 +288,7 @@ End
 		  AddRow(section, "Animate", "", accessory, GetTypeInfo(vAnimate), Picture.SystemImage("livephoto", 0))
 		  
 		  section = AddSection("Application extensions")
-		  AddRow(section, "Open Settings", "", accessory, "opensettings")
+		  AddRow(section, "Open Settings", "", accessory, "opensettings", Picture.SystemImage("gear.circle", 0))
 		  
 		  //Deprecatedd
 		  'AddRow(section, "Modal View Flip", "", accessory, "modalflip", ic8_flip_vertical)

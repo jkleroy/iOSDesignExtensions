@@ -190,6 +190,12 @@ End
 		  Case "selectedColor"
 		    cell.SetSelectedTextColorXC(&cFF0000)
 		    
+		  Case "selectedbgcolor"
+		    cell.SetSelectedBackgroundColorXC(&cF0D000)
+		    
+		  Case "alignright"
+		    cell.SetTextAlignmentXC(ControlExtensionsXC.NSTextAlignment.right)
+		    
 		  End Select
 		  
 		  
@@ -276,13 +282,16 @@ End
 		  Self.AddRow(section, "Cell color", "", MobileTableCellData.AccessoryTypes.None, "cellcolor")
 		  Self.AddRow(section, "Cell text color", "", MobileTableCellData.AccessoryTypes.None, "textcolor")
 		  Self.AddRow(section, "Cell detail color", "Detail text", MobileTableCellData.AccessoryTypes.None, "detailcolor")
-		  Self.AddRow(section, "Cell selected color", "", MobileTableCellData.AccessoryTypes.None, "selectedcolor")
+		  Self.AddRow(section, "Cell selected color", "Click me", MobileTableCellData.AccessoryTypes.None, "selectedcolor")
+		  Self.AddRow(section, "Cell selected background color", "Click me", MobileTableCellData.AccessoryTypes.None, "selectedbgcolor")
 		  Self.AddRow(section, "This is wrapped text that will appear on two lines. Making this sentence longer", "", MobileTableCellData.AccessoryTypes.None, "wrap")
 		  Self.AddRow(section, "No selection", "", MobileTableCellData.AccessoryTypes.None, "noselect")
+		  'Self.AddRow(section, "Align Right", "", MobileTableCellData.AccessoryTypes.None, "alignright") //Doesn't work as expected
 		  
 		  
 		  section = Self.AddSection("Table Options")
 		  Self.AddRow(section, "Allow Selection", "", MobileTableCellData.AccessoryTypes.Checkmark, "selection")
+		  Self.AddRow(section, "Allow Selection During Editing", "", MobileTableCellData.AccessoryTypes.None, "selectionediting")
 		  
 		  
 		  Self.AddRow(section, "Enable Bounce", "", MobileTableCellData.AccessoryTypes.Checkmark, "bounce")
@@ -363,6 +372,10 @@ End
 		  Case "selection"
 		    Me.SetAllowsSelectionXC(value)
 		    
+		  Case "selectionediting"
+		    me.SetAllowsSelectionDuringEditingXC(value)
+		    
+		    
 		  Case "remaining"
 		    
 		    Me.SetHideRemainingSeparatorsXC
@@ -373,7 +386,7 @@ End
 		    
 		  Case "separators"
 		    
-		    If value Then
+		    If not value Then
 		      Me.SetSeparatorStyleXC(TableExtensionsXC.separatorStyle.singleLine)
 		    Else
 		      Me.SetSeparatorStyleXC(TableExtensionsXC.separatorStyle.none)

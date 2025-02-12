@@ -181,6 +181,28 @@ Protected Module ExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
+		Protected Function UIColorFromColor(value as color) As ptr
+		  Soft Declare Function colorWithRGBA Lib "UIKit" Selector "colorWithRed:green:blue:alpha:" (UIColorClassRef As Ptr, red As CGFloat, green As CGFloat, blue As CGFloat, alpha As CGFloat) As Ptr
+		  
+		  Soft Declare Function NSClassFromString Lib "Foundation" (classname As CFStringRef) As Ptr
+		  
+		  
+		  static UIColorClassPtr As Ptr =  NSClassFromString("UIColor")
+		  
+		  Dim c as color  = value
+		  
+		  Dim red As CGFloat = c.red / 255
+		  Dim green As CGFloat = c.Green / 255
+		  Dim blue As CGFloat = c.Blue / 255
+		  Dim alpha As CGFloat = 1.0 - c.Alpha / 255
+		  
+		  Dim colorPtr As ptr = colorWithRGBA(UIColorClassPtr, red, green, blue, alpha)
+		  
+		  Return colorPtr
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
 		Protected Function UIEdgeInsetMake(top As CGFloat, left As CGFloat, bottom As CGFloat, right As CGFloat) As xcUIEdgeInsets
 		  
 		  Dim insets As xcUIEdgeInsets
@@ -209,6 +231,13 @@ Protected Module ExtensionsXC
 
 	#tag Note, Name = History
 		## History
+		
+		### Version 2.6 - Released 2025-02-12
+		* New TabbarExtensionsXC.SetTabBarTitleXC
+		* New MapViewerExtensionsXC
+		* New ControlExtensionsXC.SetBackgroundGradientXC
+		* New TabbarExtensionsXC.SetTabBarUnselectedColorXC
+		* New TableExtensionsXC.SetAllowsSelectionDuringEditingXC
 		
 		### Version 2.5.3 - Released 2025-02-03
 		* New TextFieldExtensionsXC.AddDoneToolbarButtonXC (for TextField)
@@ -378,7 +407,7 @@ Protected Module ExtensionsXC
 	#tag Constant, Name = kUseUIKit, Type = Boolean, Dynamic = False, Default = \"False", Scope = Protected
 	#tag EndConstant
 
-	#tag Constant, Name = kVersion, Type = Text, Dynamic = False, Default = \"2.5.2", Scope = Protected
+	#tag Constant, Name = kVersion, Type = Text, Dynamic = False, Default = \"2.6.0", Scope = Protected
 	#tag EndConstant
 
 

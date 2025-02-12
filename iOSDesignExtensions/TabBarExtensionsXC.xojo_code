@@ -102,7 +102,7 @@ Protected Module TabBarExtensionsXC
 		  
 		  
 		  declare sub setTintColor lib "UIKit.framework" selector "setTintColor:" (id as ptr, UIColor as Ptr)
-		  setTintColor tabBar, new UIColor(buttonColor)
+		  setTintColor tabBar, UIColorFromColor(buttonColor)
 		  
 		  
 		End Sub
@@ -123,7 +123,7 @@ Protected Module TabBarExtensionsXC
 		  
 		  
 		  Declare Sub setBarTintColor Lib "UIKit.framework" selector "setBarTintColor:" (id As ptr, UIColor As Ptr)
-		  setBarTintColor tabBar, New UIColor(barColor)
+		  setBarTintColor tabBar, UIColorFromColor(barColor)
 		  
 		  if translucent then
 		    declare sub setTranslucent lib "UIKit.framework" selector "setTranslucent:" (id as ptr)
@@ -175,6 +175,41 @@ Protected Module TabBarExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 5365747320746865207469746C65207573656420696E2074686520546162426172
+		Sub SetTabBarTitleXC(extends v As MobileScreen, value As String)
+		  
+		  Declare function tabBarItem lib "UIKit" selector "tabBarItem" (obj as ptr) as ptr
+		  
+		  Declare sub setTitle lib "UIKit" selector "setTitle:" (obj as ptr, value as cfstringref)
+		  
+		  Dim item As Ptr = tabBarItem(v.ViewControllerHandle)
+		  
+		  setTitle(item, value) 
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 4368616E6765732074686520436F6C6F72206F66206120546162426172
+		Sub SetTabBarUnselectedColorXC(extends v as MobileScreen, unselectedColor as color)
+		  
+		  
+		  Declare Function tabbar_ lib "UIKit.framework" selector "tabBar"(o as Ptr) as Ptr
+		  
+		  
+		  dim tb as iOSTabBar = v.ParentTabBar
+		  if tb is nil then Return
+		  dim h as ptr = tb.ViewControllerHandle
+		  
+		  dim tabbar as Ptr = tabbar_(h)
+		  
+		  
+		  declare sub setUnselectedItemTintColor lib "UIKit.framework" selector "setUnselectedItemTintColor:" (id as ptr, UIColor as Ptr)
+		  setUnselectedItemTintColor tabBar, UIColorFromColor(unselectedColor)
+		  
+		  
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h1, Description = 536574732074686520616374697665207061676520696E20612054616242617220766965772E
 		Protected Sub SetTabPageXC(idx as integer, doReset as Boolean = False)
 		  'This method has been posted in the forum by Antonio Rinaldi.
@@ -211,6 +246,28 @@ Protected Module TabBarExtensionsXC
 		  end if
 		  'End Sub
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function UIColorFromColor(value as color) As ptr
+		  Soft Declare Function colorWithRGBA Lib "UIKit" Selector "colorWithRed:green:blue:alpha:" (UIColorClassRef As Ptr, red As CGFloat, green As CGFloat, blue As CGFloat, alpha As CGFloat) As Ptr
+		  
+		  Soft Declare Function NSClassFromString Lib "Foundation" (classname As CFStringRef) As Ptr
+		  
+		  
+		  static UIColorClassPtr As Ptr =  NSClassFromString("UIColor")
+		  
+		  Dim c as color  = value
+		  
+		  Dim red As CGFloat = c.red / 255
+		  Dim green As CGFloat = c.Green / 255
+		  Dim blue As CGFloat = c.Blue / 255
+		  Dim alpha As CGFloat = 1.0 - c.Alpha / 255
+		  
+		  Dim colorPtr As ptr = colorWithRGBA(UIColorClassPtr, red, green, blue, alpha)
+		  
+		  Return colorPtr
+		End Function
 	#tag EndMethod
 
 

@@ -94,6 +94,36 @@ Protected Module TableExtensionsXC
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 52657475726E73207468652073656374696F6E2C20726F7720617320616E20696E746567657220617272617920666F722074686520706173736564206C6F636174696F6E20706F696E74
+		Function SectionRowAtPointXC(extends t As iOSMobileTable, location As point) As Integer()
+		  #if ExtensionsXC.kUseUIKit
+		    
+		    Declare function indexPathForRowAtPoint lib UIKitLib selector "indexPathForRowAtPoint:" (obj as ptr, pt as ExtensionsXC.xcCGPoint) as ptr
+		    
+		    Dim pt As ExtensionsXC.xcCGPoint
+		    pt.x = location.X
+		    pt.y = location.Y
+		    
+		    Dim indexPath As new Foundation.NSIndexPath( indexPathForRowAtPoint(t.Handle, pt) )
+		    
+		    Dim sectionrow() As Integer
+		    if indexPath.isNil then
+		      return nil
+		    Else
+		      
+		      sectionrow.Append indexPath.section
+		      sectionrow.Append indexPath.row
+		      return sectionrow
+		    end if
+		    
+		  #else
+		    Break
+		    #Pragma Unused t
+		    #Pragma Unused location
+		  #endif
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
 		Sub SelectRowXC(extends table as iOSMobileTable, section as integer, row as integer, animated as Boolean = True, scrollPosition as iOSMobileTable.ScrollPositions = iOSMobileTable.ScrollPositions.None)
 		  //new v2.3
@@ -111,7 +141,18 @@ Protected Module TableExtensionsXC
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
+	#tag Method, Flags = &h0, Description = 44657465726D696E657320776865746865722075736572732063616E2073656C6563742063656C6C73207768696C6520746865207461626C65207669657720697320696E2065646974696E67206D6F64652E
+		Sub SetAllowsSelectionDuringEditingXC(extends table As iOSMobileTable, value As Boolean)
+		  
+		  Declare Sub setallowsSelectionDuringEditing Lib "UIKit" Selector "setAllowsSelectionDuringEditing:" (id As Ptr, value As Boolean)
+		  
+		  setallowsSelectionDuringEditing(table.Handle, value)
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 44657465726D696E657320776865746865722075736572732063616E2073656C656374206120726F77
 		Sub SetAllowsSelectionXC(extends table As iOSMobileTable, value As Boolean)
 		  
 		  Declare Sub setallowsSelection Lib "UIKit.framework" Selector "setAllowsSelection:" (id as ptr, value as Boolean)
