@@ -191,7 +191,7 @@ End
 		Protected Sub AnimateButton()
 		  
 		  //new v2.18
-		  //Animate the buy button
+		  //Animate the button
 		  Dim animate_options As Integer = Ctype(ViewExtensionsXC.UIViewAnimationOptions.Repeat, Integer) +_
 		  Ctype(ViewExtensionsXC.UIViewAnimationOptions.Autoreverse, Integer) + _
 		  Ctype(ViewExtensionsXC.UIViewAnimationOptions.AllowUserInteraction, Integer)
