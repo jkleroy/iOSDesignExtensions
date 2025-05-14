@@ -232,6 +232,10 @@ Protected Module ExtensionsXC
 	#tag Note, Name = History
 		## History
 		
+		### Version 2.6.2 - Released 2025-05-14
+		* Fixed ImageExtensionsXC.ImageWithMaskXC
+		* Fixed Picture.ToTemplateXC
+		
 		### Version 2.6.1 - Released 2025-05-14
 		* New animation method ViewExtensionsXC.AnimateWithDurationOptionsXC
 		* New Animation options in ViewExtensionsXC.UIViewAnimationOptions
@@ -412,7 +416,7 @@ Protected Module ExtensionsXC
 	#tag Constant, Name = kUseUIKit, Type = Boolean, Dynamic = False, Default = \"False", Scope = Protected
 	#tag EndConstant
 
-	#tag Constant, Name = kVersion, Type = Text, Dynamic = False, Default = \"2.6.1", Scope = Protected
+	#tag Constant, Name = kVersion, Type = Text, Dynamic = False, Default = \"2.6.2", Scope = Protected
 	#tag EndConstant
 
 

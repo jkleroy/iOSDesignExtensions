@@ -28,6 +28,10 @@ Inherits MobileApplication
 	#tag Note, Name = README
 		## History
 		
+		### Version 2.6.2 - Released 2025-05-14
+		* Fixed ImageExtensionsXC.ImageWithMaskXC
+		* Fixed Picture.ToTemplateXC
+		
 		### Version 2.6.1 - Released 2025-05-14
 		* New animation method ViewExtensionsXC.AnimateWithDurationOptionsXC
 		* New Animation options in ViewExtensionsXC.UIViewAnimationOptions

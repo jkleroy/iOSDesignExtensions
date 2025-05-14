@@ -161,11 +161,20 @@ Protected Module ImageExtensionsXC
 		  Declare Function imageWithRenderingMode lib "UIKit.framework" selector "imageWithRenderingMode:" (id as ptr, RenderingMode as Integer) as ptr
 		  
 		  
-		  'Dim imgHandle As Ptr = image.CopyOSHandle(Picture.HandleType.iOSUIImage)
 		  
 		  
-		  'Return Picture.FromHandle(imageWithRenderingMode(imgHandle, UIImageRenderingModeAlwaysTemplate))
-		  Return Picture.FromHandle(imageWithRenderingMode(bestImage.Handle, UIImageRenderingModeAlwaysTemplate))
+		  If bestImage.Handle = nil and image.Type = Picture.Types.MutableBitmap then
+		    
+		    Return Picture.FromHandle(imageWithRenderingMode(image.CopyOSHandle(Picture.HandleType.iOSUIImage), UIImageRenderingModeAlwaysTemplate))
+		    
+		  Elseif bestImage.Handle = nil and image.Type = Picture.types.Image then
+		    Return Picture.FromHandle(imageWithRenderingMode(bestimage.CopyOSHandle(Picture.HandleType.iOSUIImage), UIImageRenderingModeAlwaysTemplate))
+		    
+		  Else
+		    
+		    'Return Picture.FromHandle(imageWithRenderingMode(imgHandle, UIImageRenderingModeAlwaysOriginal))
+		    Return Picture.FromHandle(imageWithRenderingMode(bestImage.Handle, UIImageRenderingModeAlwaysTemplate))
+		  End If
 		End Function
 	#tag EndMethod
 
@@ -199,7 +208,7 @@ Protected Module ImageExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h1, Description = 52657475726E7320616E20696D6167652066726F6D2074686520694F5331332053462053796D626F6C206C696272617279
-		Protected Function SystemImageXC(name As String, fallback As Picture = nil) As Picture
+		Attributes( Deprecated = "Use Picture.SystemImage instead" ) Protected Function SystemImageXC(name As String, fallback As Picture = nil) As Picture
 		  
 		  
 		  if ExtensionsXC.GetiOSVersionXC >= 13.0 then
@@ -225,30 +234,17 @@ Protected Module ImageExtensionsXC
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Function ToOriginalXC(extends image As Picture) As Picture
+		  
+		  Return ImageOriginalXC(image)
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 4170706C6965732054656D706C6174652072656E646572696E67206D6F646520746F207573652074686520636F6E74726F6C27732054696E74436F6C6F72
 		Function ToTemplateXC(extends image As Picture) As Picture
 		  
-		  if image is nil then Return nil
-		  
-		  Dim bestImage As Picture = BestRepresentationXC(image)
-		  
-		  //Creates an image that will draw using the current Fillcolor
-		  
-		  const UIImageRenderingModeAlwaysTemplate = 2
-		  
-		  Declare Function imageWithRenderingMode lib "UIKit.framework" selector "imageWithRenderingMode:" (id as ptr, RenderingMode as Integer) as ptr
-		  
-		  
-		  'Dim imgHandle As Ptr = image.CopyOSHandle(Picture.HandleType.iOSUIImage)
-		  
-		  #if DebugBuild
-		    if bestImage.Handle = nil then
-		      Break
-		    end if
-		  #endif
-		  
-		  'Return Picture.FromHandle(imageWithRenderingMode(imgHandle, UIImageRenderingModeAlwaysTemplate))
-		  Return Picture.FromHandle(imageWithRenderingMode(bestImage.Handle, UIImageRenderingModeAlwaysTemplate))
+		  Return ImageWithMaskXC(image)
 		End Function
 	#tag EndMethod
 
