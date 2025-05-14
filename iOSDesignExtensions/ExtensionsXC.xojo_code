@@ -232,6 +232,11 @@ Protected Module ExtensionsXC
 	#tag Note, Name = History
 		## History
 		
+		### Version 2.6.1 - Released 2025-05-14
+		* New animation method ViewExtensionsXC.AnimateWithDurationOptionsXC
+		* New Animation options in ViewExtensionsXC.UIViewAnimationOptions
+		* See examples in "Animations"
+		
 		### Version 2.6 - Released 2025-02-12
 		* New TabbarExtensionsXC.SetTabBarTitleXC
 		* New MapViewerExtensionsXC
@@ -247,7 +252,7 @@ Protected Module ExtensionsXC
 		* New ControlExtensionsXC.SetOverrideUserInterfaceStyleXC method
 		
 		### Version 2.5.1 - Released 2024-07-16
-		* New TextFieldExtensionsXC.AddDoneToolbarButtonXC (for TextArea)
+		* New TextFieldExtensionsXC.AddDoneToolbarButtonXC
 		
 		### Version 2.5 - Released 2024-07-08
 		* New TableExtensions.SelectRowXC metho
@@ -407,7 +412,7 @@ Protected Module ExtensionsXC
 	#tag Constant, Name = kUseUIKit, Type = Boolean, Dynamic = False, Default = \"False", Scope = Protected
 	#tag EndConstant
 
-	#tag Constant, Name = kVersion, Type = Text, Dynamic = False, Default = \"2.6.0", Scope = Protected
+	#tag Constant, Name = kVersion, Type = Text, Dynamic = False, Default = \"2.6.1", Scope = Protected
 	#tag EndConstant
 
 

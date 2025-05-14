@@ -28,6 +28,11 @@ Inherits MobileApplication
 	#tag Note, Name = README
 		## History
 		
+		### Version 2.6.1 - Released 2025-05-14
+		* New animation method ViewExtensionsXC.AnimateWithDurationOptionsXC
+		* New Animation options in ViewExtensionsXC.UIViewAnimationOptions
+		* See examples in "Animations"
+		
 		### Version 2.6 - Released 2025-02-12
 		* New TabbarExtensionsXC.SetTabBarTitleXC
 		* New MapViewerExtensionsXC

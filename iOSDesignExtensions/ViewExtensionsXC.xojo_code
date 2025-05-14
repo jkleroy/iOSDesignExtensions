@@ -82,7 +82,53 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
+		Protected Sub AnimateWithDurationOptionsXC(duration as Double, delay as Double = 0.0, options as Integer, animationBlock as ObjCBlock, completion as ObjCBlock = nil)
+		  https://developer.apple.com/documentation/uikit/uiview/1622515-animatewithduration?language=objc
+		  
+		  
+		  Dim classPtr As ptr
+		  Declare sub animateWithDuration_ lib UIKitLib selector "animateWithDuration:delay:options:animations:completion:" _
+		  (id as ptr, duration as Double, delay as double, options as integer, animations as ptr, completion as ptr)
+		  declare function NSClassFromString lib "Foundation" (clsName as cfstringref) as ptr
+		  
+		  
+		  classPtr = NSClassFromString("UIView")
+		  
+		  if completion is nil then
+		    animateWithDuration_ classptr, duration, delay, options, animationBlock.handle, nil
+		  else
+		    animateWithDuration_ classptr, duration, delay, options, animationBlock.handle, completion.Handle
+		  end if
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
 		Protected Sub AnimateWithDurationXC(duration as Double, animationBlock as iOSBlock, completion as iOSBlock = nil)
+		  https://developer.apple.com/documentation/uikit/uiview/1622515-animatewithduration?language=objc
+		  
+		  
+		  Dim classPtr As ptr
+		  Declare sub animateWithDuration_ lib UIKitLib selector "animateWithDuration:animations:completion:" _
+		  (id as ptr, duration as Double, animations as ptr, completion as ptr)
+		  declare function NSClassFromString lib "Foundation" (clsName as cfstringref) as ptr
+		  
+		  
+		  classPtr = NSClassFromString("UIView")
+		  
+		  if completion is nil then
+		    animateWithDuration_ classptr, duration, animationBlock.handle, nil
+		  else
+		    animateWithDuration_ classptr, duration, animationBlock.handle, completion.Handle
+		  end if
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
+		Protected Sub AnimateWithDurationXC(duration as Double, animationBlock as OBJCBlock, completion as OBJCBlock = nil)
 		  https://developer.apple.com/documentation/uikit/uiview/1622515-animatewithduration?language=objc
 		  
 		  
@@ -1117,7 +1163,7 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub ShowSheetXC(extends v As MobileScreen, parentScreen As MobileScreen, height As UISheetPresentationControllerDetent = UISheetPresentationControllerDetent.large, showGrabber As Boolean = False, Animate As Boolean = True)
+		Sub ShowSheetXC(extends v As MobileScreen, parentScreen As MobileScreen, height As UISheetPresentationControllerDetent = UISheetPresentationControllerDetent.large, showGrabber As Boolean = False, Animate As Boolean = True, cornerRadius As Single = -1)
 		  //Source https://sarunw.com/posts/bottom-sheet-in-ios-15-with-uisheetpresentationcontroller/
 		  
 		  if ExtensionsXC.GetiOSVersionXC < 15.0 then
@@ -1198,6 +1244,12 @@ Protected Module ViewExtensionsXC
 		      setPrefersGrabberVisible(sheet, True)
 		    end if
 		    
+		    if cornerRadius > -1 then
+		      Declare sub preferredCornerRadius_ lib "UIKit" selector "setPreferredCornerRadius:" (obj as ptr, value as CGFloat)
+		      preferredCornerRadius_(sheet, cornerRadius)
+		    end if
+		    
+		    
 		  end if
 		  
 		  
@@ -1210,6 +1262,43 @@ Protected Module ViewExtensionsXC
 
 	#tag Method, Flags = &h1
 		Protected Sub TransitionWithViewDurationOptionsXC(ctrl as MobileUIControl, duration as Double, options as Integer, animationBlock as iOSBlock, completion as iOSBlock = nil)
+		  https://developer.apple.com/documentation/uikit/uiview/1622574-transitionwithview
+		  
+		  
+		  Dim classPtr As ptr
+		  Declare sub transition_ lib "UIKit" selector "transitionWithView:duration:options:animations:completion:" _
+		  (id as ptr, view as ptr, duration as Double, options as Integer, animations as ptr, completion as ptr)
+		  Declare sub animateWithDuration_ lib "UIKit" selector "animateWithDuration:animations:completion:" _
+		  (id as ptr, duration as Double, animations as ptr, completion as ptr)
+		  declare function NSClassFromString lib "Foundation" (clsName as cfstringref) as ptr
+		  
+		  #if False
+		    UIView transitionWithView:textFieldimageView
+		    duration:0.2f
+		    options:UIViewAnimationOptionTransitionCrossDissolve
+		    animations:^{
+		    imageView.image = newImage;
+		    } completion:nil];
+		  #endif
+		  
+		  
+		  classPtr = NSClassFromString("UIView")
+		  
+		  
+		  
+		  if completion is nil then
+		    transition_ classPtr, ctrl.Handle, duration, options, animationBlock.Handle, nil
+		    'animateWithDuration_ classptr, duration, animationBlock.handle, nil
+		  else
+		    transition_ classPtr, ctrl.Handle, duration, options, animationBlock.Handle, completion.Handle
+		  end if
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
+		Protected Sub TransitionWithViewDurationOptionsXC(ctrl as MobileUIControl, duration as Double, options as Integer, animationBlock as OBJCBlock, completion as OBJCBlock = nil)
 		  https://developer.apple.com/documentation/uikit/uiview/1622574-transitionwithview
 		  
 		  
@@ -1299,12 +1388,15 @@ Protected Module ViewExtensionsXC
 	#tag EndEnum
 
 	#tag Enum, Name = UIViewAnimationOptions, Flags = &h1, Binary = True
-		UIViewAnimationOptionRepeat = 8
+		Repeat = 8
 		  UIViewAnimationOptionTransitionCrossDissolve = 5242880
-		  UIViewAnimationOptionAutoreverse = 16
+		  Autoreverse = 16
 		  UIViewAnimationOptionTransitionFlipFromTop = 6291456
 		  UIViewAnimationOptionTransitionFlipFromBottom = 7340032
-		UIViewAnimationOptionTransitionNone = 0
+		  UIViewAnimationOptionTransitionNone = 0
+		  CurveEaseIn = 65536
+		  CurveEaseOut = 131072
+		AllowUserInteraction = 2
 	#tag EndEnum
 
 

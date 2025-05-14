@@ -75,6 +75,16 @@ Protected Module TableExtensionsXC
 		    Declare Function getRow Lib "Foundation.framework" selector "row" (obj_id As ptr) As Integer
 		    Declare Function getSection Lib "Foundation.framework" selector "section" (obj_id As ptr) As Integer
 		    
+		    declare function m_count lib "Foundation.framework" selector "count" ( obj as Ptr ) as UInt64
+		    
+		    
+		    dim cnt as integer = m_count( indexArray )
+		    
+		    if cnt = 0 then
+		      Return Array(-1, -1)
+		    End If
+		    
+		    
 		    
 		    Dim indexPath As Ptr = objectAtIndex(indexArray, 0)
 		    
