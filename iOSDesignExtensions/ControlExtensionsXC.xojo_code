@@ -615,12 +615,6 @@ Protected Module ControlExtensionsXC
 		Dark
 	#tag EndEnum
 
-	#tag Enum, Name = UIUserInterfaceStyle1, Flags = &h1
-		unspecified = 0
-		  light = 1
-		dark = 2
-	#tag EndEnum
-
 	#tag Enum, Name = UIVIewAnimationCurve, Type = Integer, Flags = &h1
 		EaseInEaseOut
 		  EaseIn

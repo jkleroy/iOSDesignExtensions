@@ -114,12 +114,12 @@ Inherits XojoUnitSuperClassTests
 	#tag Method, Flags = &h0, Description = 4372656174657320616E642072657475726E732061206E657720696D616765206F626A656374207769746820746865207370656369666965642063617020696E736574732E
 		Sub ResizableTiledImageXCTest()
 		  
-		  Dim pic As new iOSBitmap(100, 100, 2)
-		  Dim img As iOSImage = pic.Image
+		  Dim pic As new Picture(100, 100)
+		  Dim img As Picture = pic
 		  
 		  Dim insets As ExtensionsXC.xcUIEdgeInsets = ExtensionsXC.UIEdgeInsetMake(2, 2, 2, 2)
 		  
-		  Dim newImage As iOSImage = ResizableTiledImageXC(insets, img)
+		  Dim newImage As Picture = ImageExtensionsXC.ResizableTiledImageXC(insets, img)
 		  
 		  Assert.IsNotNil(newImage)
 		  

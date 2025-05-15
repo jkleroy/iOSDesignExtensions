@@ -65,12 +65,14 @@ End
 		Sub Opening()
 		  'me.BackButtonCaption = " "
 		  
+		  
+		  'self.SetPrefersHomeIndicatorAutoHiddenXC(True)
 		End Sub
 	#tag EndEvent
 
 
 	#tag Method, Flags = &h21
-		Private Sub AddRow(section As Integer, text As Text, detail As Text, Accessory As MobileTableCellData.AccessoryTypes, tag As Auto, image As Picture = nil)
+		Private Sub AddRow(section As Integer, text As String, detail As String, Accessory As MobileTableCellData.AccessoryTypes, tag As Variant, image As Picture = nil)
 		  
 		  'section As Integer, Text As Text, detail As Text, Accessory As MobileTableCellData.AccessoryTypes = MobileTableCellData.AccessoryTypes.Disclosure, tag As Auto, image As iOSImage = Nil
 		  
@@ -276,6 +278,7 @@ End
 		  AddRow(section, "Navigation Bar Color / Image", "", accessory, GetTypeInfo(vNavbar), Picture.SystemImage("line.3.horizontal", 0, Picture.SystemImageWeights.Regular, &c073F8000))
 		  AddRow(section, "ToolButtons", "", accessory, GetTypeInfo(vToolButton), ImageExtensionsXC.ImageWithColorXC(ic8_button, &c7F0FFE))
 		  AddRow(section, "View Color", "", accessory, GetTypeInfo(vBackground), ImageExtensionsXC.ImageOriginalXC(ic8_color))
+		  AddRow(section, "Screen Options", "", accessory, GetTypeInfo(vScreenOptions), Picture.SystemImage("gearshape.circle", 0))
 		  
 		  
 		  section = AddSection("Modal")
@@ -318,14 +321,16 @@ End
 		    
 		  End If
 		  
-		  If FindType(tag) = "Text" Then
+		  Dim fType As String = FindType(tag)
+		  
+		  If fType = "Text" or fType = "String" Then
 		    
-		    Dim txtValue As Text = tag
+		    Dim txtValue As String = tag
 		    Select Case txtValue
 		      
 		    Case "icons", "donate"
 		      
-		      Dim url As Text
+		      Dim url As String
 		      If txtValue = "icons" then
 		        url = "https://icons8.com"
 		      Else

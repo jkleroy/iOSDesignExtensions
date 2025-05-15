@@ -1079,7 +1079,7 @@ Protected Module ViewExtensionsXC
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
+	#tag Method, Flags = &h0, Description = 48696465732074686520686F6D6520696E64696361746F72207768656E2073657420746F2054727565
 		Sub SetPrefersHomeIndicatorAutoHiddenXC(extends v as MobileScreen, hidden as boolean)
 		  #If TargetIOS
 		    // if we've never done this before, try to add the method again
@@ -1108,6 +1108,45 @@ Protected Module ViewExtensionsXC
 		    Else
 		      ΩHomeIndicatorHiddenScreens.RemoveAt(idx)
 		    End If
+		    
+		  #EndIf
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 48696465732074686520686F6D6520696E64696361746F72207768656E2073657420746F2054727565
+		Sub SetPrefersStatusBarHiddenXC(extends v as MobileScreen, hidden as boolean)
+		  #If TargetIOS
+		    // if we've never done this before, try to add the method again
+		    If UBound(ΩHomeIndicatorHiddenScreens) = -1 Then
+		      Call ΩAddClassMethod(v.ViewControllerHandle, "prefersStatusBarHidden", AddressOf ΩStatusBarHiddenPropertyCallback, "B:@")
+		    End If
+		    
+		    // See if the screen is already in the array
+		    Dim idx As Integer = -1
+		    For i As Integer = 0 To UBound(ΩStatusBarHiddenScreens)
+		      If ΩStatusBarHiddenScreens(i) <> Nil Then
+		        Dim scrn As MobileScreen = MobileScreen(ΩStatusBarHiddenScreens(i).Value)
+		        If scrn <> Nil Then
+		          idx = i
+		          Exit For i
+		        End If
+		      End If
+		    Next
+		    
+		    If hidden And idx > -1 Then
+		      Return
+		    ElseIf Not hidden And idx = -1 Then
+		      Return
+		    ElseIf hidden Then
+		      ΩStatusBarHiddenScreens.add New WeakRef(v)
+		    Else
+		      ΩStatusBarHiddenScreens.RemoveAt(idx)
+		    End If
+		    
+		    
+		    Declare sub setNeedsStatusBarAppearanceUpdate lib "UIKit" selector "setNeedsStatusBarAppearanceUpdate" (obj as ptr)
+		    
+		    setNeedsStatusBarAppearanceUpdate(v.ViewControllerHandle)
 		    
 		  #EndIf
 		End Sub
@@ -1331,6 +1370,42 @@ Protected Module ViewExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h1
+		Protected Sub TransitionWithViewDurationOptionsXC(ctrl as MobileUIControl, duration as Double, options as Integer, animationBlock as OBJCBlock, completion as OBJCBlock = nil)
+		  https://developer.apple.com/documentation/uikit/uiview/1622574-transitionwithview
+		  
+		  
+		  Dim classPtr As ptr
+		  Declare sub transition_ lib "UIKit" selector "transitionWithView:duration:options:animations:completion:" _
+		  (id as ptr, view as ptr, duration as Double, options as Integer, animations as ptr, completion as ptr)
+		  Declare sub animateWithDuration_ lib "UIKit" selector "animateWithDuration:animations:completion:" _
+		  (id as ptr, duration as Double, animations as ptr, completion as ptr)
+		  declare function NSClassFromString lib "Foundation" (clsName as cfstringref) as ptr
+		  
+		  #if False
+		    UIView transitionWithView:textFieldimageView
+		    duration:0.2f
+		    options:UIViewAnimationOptionTransitionCrossDissolve
+		    animations:^{
+		    imageView.image = newImage;
+		    } completion:nil];
+		  #endif
+		  
+		  
+		  classPtr = NSClassFromString("UIView")
+		  
+		  
+		  
+		  if completion is nil then
+		    transition_ classPtr, ctrl.Handle, duration, options, animationBlock.Handle, nil
+		    'animateWithDuration_ classptr, duration, animationBlock.handle, nil
+		  else
+		    transition_ classPtr, ctrl.Handle, duration, options, animationBlock.Handle, completion.Handle
+		  end if
+		  
+		  
+		End Sub
+	#tag EndMethod
 
 	#tag Method, Flags = &h21
 		Private Function ΩAddClassMethod(handle as Ptr, selectorName as string, callback as ptr, signature as string) As Boolean
@@ -1374,49 +1449,37 @@ Protected Module ViewExtensionsXC
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h21
+		Private Function ΩStatusBarHiddenPropertyCallback(viewcontroller as ptr) As Boolean
+		  #If TargetIOS
+		    For i As Integer = 0 To UBound(ΩStatusBarHiddenScreens)
+		      If ΩStatusBarHiddenScreens(i) <> Nil Then
+		        Dim scr As MobileScreen = MobileScreen(ΩStatusBarHiddenScreens(i).Value)
+		        If scr <> Nil Then
+		          If scr.ViewControllerHandle = viewcontroller Then
+		            Return True
+		          End If
+		        End If
+		      Else
+		        // remove ones that have gone away
+		        ΩStatusBarHiddenScreens.RemoveAt(i)
+		        i = i - 1
+		      End If
+		    Next
+		    
+		    Return False
+		  #EndIf
+		End Function
+	#tag EndMethod
+
 
 	#tag Property, Flags = &h21
 		Private ΩHomeIndicatorHiddenScreens() As WeakRef
 	#tag EndProperty
 
-
-	#tag Method, Flags = &h1
-		Protected Sub TransitionWithViewDurationOptionsXC(ctrl as MobileUIControl, duration as Double, options as Integer, animationBlock as OBJCBlock, completion as OBJCBlock = nil)
-		  https://developer.apple.com/documentation/uikit/uiview/1622574-transitionwithview
-		  
-		  
-		  Dim classPtr As ptr
-		  Declare sub transition_ lib "UIKit" selector "transitionWithView:duration:options:animations:completion:" _
-		  (id as ptr, view as ptr, duration as Double, options as Integer, animations as ptr, completion as ptr)
-		  Declare sub animateWithDuration_ lib "UIKit" selector "animateWithDuration:animations:completion:" _
-		  (id as ptr, duration as Double, animations as ptr, completion as ptr)
-		  declare function NSClassFromString lib "Foundation" (clsName as cfstringref) as ptr
-		  
-		  #if False
-		    UIView transitionWithView:textFieldimageView
-		    duration:0.2f
-		    options:UIViewAnimationOptionTransitionCrossDissolve
-		    animations:^{
-		    imageView.image = newImage;
-		    } completion:nil];
-		  #endif
-		  
-		  
-		  classPtr = NSClassFromString("UIView")
-		  
-		  
-		  
-		  if completion is nil then
-		    transition_ classPtr, ctrl.Handle, duration, options, animationBlock.Handle, nil
-		    'animateWithDuration_ classptr, duration, animationBlock.handle, nil
-		  else
-		    transition_ classPtr, ctrl.Handle, duration, options, animationBlock.Handle, completion.Handle
-		  end if
-		  
-		  
-		End Sub
-	#tag EndMethod
-
+	#tag Property, Flags = &h21
+		Private ΩStatusBarHiddenScreens() As WeakRef
+	#tag EndProperty
 
 
 	#tag Enum, Name = LargeTitleDisplayMode, Type = Integer, Flags = &h1
