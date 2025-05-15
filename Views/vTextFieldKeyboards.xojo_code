@@ -3,9 +3,12 @@ Begin MobileScreen vTextFieldKeyboards
    BackButtonCaption=   ""
    Compatibility   =   ""
    ControlCount    =   0
+   Device = 1
    HasNavigationBar=   True
    LargeTitleDisplayMode=   2
    Left            =   0
+   Orientation = 0
+   ScaleFactor     =   0.0
    TabBarVisible   =   True
    TabIcon         =   0
    TintColor       =   0
@@ -30,18 +33,23 @@ Begin MobileScreen vTextFieldKeyboards
       InputType       =   0
       Left            =   60
       LockedInPosition=   False
+      MaximumCharactersAllowed=   0
       Password        =   False
       ReadOnly        =   False
       ReturnCaption   =   0
       Scope           =   0
+      SelectedText    =   ""
+      SelectionLength =   0
+      SelectionStart  =   0
       Text            =   ""
       TextColor       =   &c00000000
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   95
       Visible         =   True
       Width           =   200
+      _ClosingFired   =   False
    End
    Begin MobileTextField TextField2
       AccessibilityHint=   ""
@@ -62,18 +70,23 @@ Begin MobileScreen vTextFieldKeyboards
       InputType       =   0
       Left            =   60
       LockedInPosition=   False
+      MaximumCharactersAllowed=   0
       Password        =   False
       ReadOnly        =   False
       ReturnCaption   =   0
       Scope           =   0
+      SelectedText    =   ""
+      SelectionLength =   0
+      SelectionStart  =   0
       Text            =   ""
       TextColor       =   &c00000000
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   217
       Visible         =   True
       Width           =   200
+      _ClosingFired   =   False
    End
    Begin MobileTextField TextField3
       AccessibilityHint=   ""
@@ -94,18 +107,23 @@ Begin MobileScreen vTextFieldKeyboards
       InputType       =   0
       Left            =   60
       LockedInPosition=   False
+      MaximumCharactersAllowed=   0
       Password        =   False
       ReadOnly        =   False
       ReturnCaption   =   0
       Scope           =   0
+      SelectedText    =   ""
+      SelectionLength =   0
+      SelectionStart  =   0
       Text            =   ""
       TextColor       =   &c00000000
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   278
       Visible         =   True
       Width           =   200
+      _ClosingFired   =   False
    End
    Begin MobileTextField TextField4
       AccessibilityHint=   ""
@@ -126,18 +144,23 @@ Begin MobileScreen vTextFieldKeyboards
       InputType       =   0
       Left            =   60
       LockedInPosition=   False
+      MaximumCharactersAllowed=   0
       Password        =   False
       ReadOnly        =   False
       ReturnCaption   =   0
       Scope           =   0
+      SelectedText    =   ""
+      SelectionLength =   0
+      SelectionStart  =   0
       Text            =   ""
       TextColor       =   &c00000000
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   339
       Visible         =   True
       Width           =   200
+      _ClosingFired   =   False
    End
    Begin MobileTextField TextField5
       AccessibilityHint=   ""
@@ -158,18 +181,23 @@ Begin MobileScreen vTextFieldKeyboards
       InputType       =   0
       Left            =   60
       LockedInPosition=   False
+      MaximumCharactersAllowed=   0
       Password        =   False
       ReadOnly        =   False
       ReturnCaption   =   0
       Scope           =   0
+      SelectedText    =   ""
+      SelectionLength =   0
+      SelectionStart  =   0
       Text            =   ""
       TextColor       =   &c00000000
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   400
       Visible         =   True
       Width           =   200
+      _ClosingFired   =   False
    End
    Begin MobileTextField TextField6
       AccessibilityHint=   ""
@@ -186,22 +214,27 @@ Begin MobileScreen vTextFieldKeyboards
       ControlCount    =   0
       Enabled         =   True
       Height          =   31
-      Hint            =   "Capitalize first letter"
-      InputType       =   0
+      Hint            =   "Numbers keyboard"
+      InputType       =   5
       Left            =   60
       LockedInPosition=   False
+      MaximumCharactersAllowed=   0
       Password        =   False
       ReadOnly        =   False
       ReturnCaption   =   0
       Scope           =   0
+      SelectedText    =   ""
+      SelectionLength =   0
+      SelectionStart  =   0
       Text            =   ""
       TextColor       =   &c00000000
       TextFont        =   ""
       TextSize        =   0
-      TintColor       =   ""
+      TintColor       =   &c000000
       Top             =   156
       Visible         =   True
       Width           =   200
+      _ClosingFired   =   False
    End
    Begin MobileToolbarButton btHide
       Caption         =   "Hide"
@@ -221,6 +254,12 @@ End
 #tag WindowCode
 	#tag Event
 		Sub ToolbarButtonPressed(button As MobileToolbarButton)
+		  if button is nil then
+		    //This is the "Done" toolbar button
+		    self.HideKeyboardXC
+		    Return
+		  end if
+		  
 		  if button.Caption = "Hide" then
 		    
 		    self.HideKeyboardXC
@@ -234,7 +273,9 @@ End
 #tag Events TextField1
 	#tag Event
 		Sub Opening()
-		  me.SetAutocapitalizationTypeXC(TextFieldExtensionsXC.UITextAutocapitalizationType.AllCharacters)
+		  'me.SetAutocapitalizationTypeXC(TextFieldExtensionsXC.UITextAutocapitalizationType.AllCharacters)
+		  
+		  me.AddDoneToolbarButtonXC()
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -270,11 +311,20 @@ End
 #tag Events TextField6
 	#tag Event
 		Sub Opening()
-		  me.SetAutocapitalizationTypeXC(TextFieldExtensionsXC.UITextAutocapitalizationType.Words)
+		  
+		  me.AddDoneToolbarButtonXC(False)
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="ScaleFactor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Double"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="BackButtonCaption"
 		Visible=true

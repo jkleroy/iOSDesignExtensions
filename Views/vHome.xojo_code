@@ -8,6 +8,7 @@ Begin MobileScreen vHome Implements iOSMobileTableDataSource
    LargeTitleDisplayMode=   1
    Left            =   0
    Orientation = 0
+   ScaleFactor     =   0.0
    TabBarVisible   =   True
    TabIcon         =   0
    TintColor       =   &c00000000
@@ -37,6 +38,7 @@ Begin MobileScreen vHome Implements iOSMobileTableDataSource
       Top             =   65
       Visible         =   True
       Width           =   320
+      _ClosingFired   =   False
       _OpeningCompleted=   False
    End
 End
@@ -227,35 +229,37 @@ End
 		  
 		  section = AddSection("Button Extensions")
 		  
-		  img = ic8_button
+		  img = Picture.SystemImage("button.horizontal", 0)
 		  AddRow(section, "Buttons", "", accessory, GetTypeInfo(vButtons), ImageExtensionsXC.ImageWithColorXC(img, &c0F7FFE00))
 		  
 		  section = AddSection("Label Extensions")
-		  'img = ic8_button
+		  img = Picture.SystemImage("textformat", 0)
 		  AddRow(section, "Labels", "", accessory, GetTypeInfo(vLabels), ImageExtensionsXC.ImageWithColorXC(img, &c0F7FFE00))
 		  
 		  
 		  
 		  section = AddSection("HTMLViewer Extensions")
-		  img = ic8_html
+		  img = Picture.SystemImage("chevron.left.forwardslash.chevron.right", 0)
 		  AddRow(section, "HTMLViewer Examples", "", accessory, GetTypeInfo(vHTMLViewer), ImageExtensionsXC.ImageWithColorXC(img, &cE34E25))
 		  
 		  section = AddSection("TabBar Extensions")
-		  AddRow(section, "TabBar Examples", "", accessory, "tabbar")
+		  img = Picture.SystemImage("circle.grid.2x1", 0)
+		  AddRow(section, "TabBar Examples", "", accessory, "tabbar", img)
 		  
 		  
 		  section = AddSection("Image Extensions")
-		  img = ic8_picture
+		  img = Picture.SystemImage("photo", 0)
 		  AddRow(section, "Image Examples", "", accessory, GetTypeInfo(vImageExtensions), ImageExtensionsXC.ImageWithColorXC(img, Color.Blue))
 		  
 		  
 		  section = AddSection("Scroll Extensions")
-		  img = ic8_updown
+		  img = Picture.SystemImage("arrow.up.arrow.down", 0)
 		  AddRow(section, "Scroll Examples", "", accessory, GetTypeInfo(vScrollView), ImageExtensionsXC.ImageWithColorXC(img, &cFC800800))
 		  
 		  
 		  section = AddSection("Table Extensions")
-		  AddRow(section, "Table Examples", "", accessory, GetTypeInfo(vTable), ImageExtensionsXC.ImageWithColorXC(ic8_list, &c66CCFE00))
+		  AddRow(section, "Table Examples", "", accessory, GetTypeInfo(vTable), Picture.SystemImage("list.dash", 0, Picture.SystemImageWeights.Regular, &c66CCFE))
+		  
 		  
 		  
 		  section = AddSection("TextFields Extensions")
@@ -267,9 +271,9 @@ End
 		  
 		  section = AddSection("View Extensions")
 		  AddRow(section, "Big Progress Wheel", "", accessory, GetTypeInfo(vViewProgressWheel), ImageExtensionsXC.ImageWithColorXC(ic8_loading, &c80808000))
-		  AddRow(section, "Hide Navigator on Swipe", "", accessory, GetTypeInfo(vHideNavigator), ic8_hide)
-		  AddRow(section, "Large Titles", "", accessory, GetTypeInfo(vLargeTitles), ic8_bigfont)
-		  AddRow(section, "Navigation Bar Color / Image", "", accessory, GetTypeInfo(vNavbar), ImageExtensionsXC.ImageWithColorXC(ic_menu, &c073F8000))
+		  AddRow(section, "Hide Navigator on Swipe", "", accessory, GetTypeInfo(vHideNavigator), Picture.SystemImage("eye.slash", 0))
+		  AddRow(section, "Large Titles", "", accessory, GetTypeInfo(vLargeTitles), Picture.SystemImage("textformat.size.larger", 0, Picture.SystemImageWeights.Bold))
+		  AddRow(section, "Navigation Bar Color / Image", "", accessory, GetTypeInfo(vNavbar), Picture.SystemImage("line.3.horizontal", 0, Picture.SystemImageWeights.Regular, &c073F8000))
 		  AddRow(section, "ToolButtons", "", accessory, GetTypeInfo(vToolButton), ImageExtensionsXC.ImageWithColorXC(ic8_button, &c7F0FFE))
 		  AddRow(section, "View Color", "", accessory, GetTypeInfo(vBackground), ImageExtensionsXC.ImageOriginalXC(ic8_color))
 		  
@@ -284,7 +288,7 @@ End
 		  AddRow(section, "Animate", "", accessory, GetTypeInfo(vAnimate), Picture.SystemImage("livephoto", 0))
 		  
 		  section = AddSection("Application extensions")
-		  AddRow(section, "Open Settings", "", accessory, "opensettings")
+		  AddRow(section, "Open Settings", "", accessory, "opensettings", Picture.SystemImage("gear.circle", 0))
 		  
 		  //Deprecatedd
 		  'AddRow(section, "Modal View Flip", "", accessory, "modalflip", ic8_flip_vertical)
@@ -459,6 +463,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="ScaleFactor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Double"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="BackButtonCaption"
 		Visible=true

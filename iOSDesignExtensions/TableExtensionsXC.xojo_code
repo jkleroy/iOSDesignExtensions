@@ -75,6 +75,16 @@ Protected Module TableExtensionsXC
 		    Declare Function getRow Lib "Foundation.framework" selector "row" (obj_id As ptr) As Integer
 		    Declare Function getSection Lib "Foundation.framework" selector "section" (obj_id As ptr) As Integer
 		    
+		    declare function m_count lib "Foundation.framework" selector "count" ( obj as Ptr ) as UInt64
+		    
+		    
+		    dim cnt as integer = m_count( indexArray )
+		    
+		    if cnt = 0 then
+		      Return Array(-1, -1)
+		    End If
+		    
+		    
 		    
 		    Dim indexPath As Ptr = objectAtIndex(indexArray, 0)
 		    
@@ -94,7 +104,65 @@ Protected Module TableExtensionsXC
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 52657475726E73207468652073656374696F6E2C20726F7720617320616E20696E746567657220617272617920666F722074686520706173736564206C6F636174696F6E20706F696E74
+		Function SectionRowAtPointXC(extends t As iOSMobileTable, location As point) As Integer()
+		  #if ExtensionsXC.kUseUIKit
+		    
+		    Declare function indexPathForRowAtPoint lib UIKitLib selector "indexPathForRowAtPoint:" (obj as ptr, pt as ExtensionsXC.xcCGPoint) as ptr
+		    
+		    Dim pt As ExtensionsXC.xcCGPoint
+		    pt.x = location.X
+		    pt.y = location.Y
+		    
+		    Dim indexPath As new Foundation.NSIndexPath( indexPathForRowAtPoint(t.Handle, pt) )
+		    
+		    Dim sectionrow() As Integer
+		    if indexPath.isNil then
+		      return nil
+		    Else
+		      
+		      sectionrow.Append indexPath.section
+		      sectionrow.Append indexPath.row
+		      return sectionrow
+		    end if
+		    
+		  #else
+		    Break
+		    #Pragma Unused t
+		    #Pragma Unused location
+		  #endif
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
+		Sub SelectRowXC(extends table as iOSMobileTable, section as integer, row as integer, animated as Boolean = True, scrollPosition as iOSMobileTable.ScrollPositions = iOSMobileTable.ScrollPositions.None)
+		  //new v2.3
+		  
+		  declare sub selectRowAtIndexPath lib "UIKit" selector "selectRowAtIndexPath:animated:scrollPosition:" (id as Ptr, row as Ptr, animated as boolean, scrollPosition as integer)
+		  
+		  
+		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
+		  Declare Function init Lib "UIKit" selector "indexPathForRow:inSection:" (id As ptr, row As Integer, section As Integer) as ptr
+		  
+		  Dim idxPath As ptr = init(NSClassFromString("NSIndexPath"), row, section)
+		  
+		  
+		  selectRowAtIndexPath(table.Handle, idxPath, animated, Integer(scrollPosition))
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 44657465726D696E657320776865746865722075736572732063616E2073656C6563742063656C6C73207768696C6520746865207461626C65207669657720697320696E2065646974696E67206D6F64652E
+		Sub SetAllowsSelectionDuringEditingXC(extends table As iOSMobileTable, value As Boolean)
+		  
+		  Declare Sub setallowsSelectionDuringEditing Lib "UIKit" Selector "setAllowsSelectionDuringEditing:" (id As Ptr, value As Boolean)
+		  
+		  setallowsSelectionDuringEditing(table.Handle, value)
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 44657465726D696E657320776865746865722075736572732063616E2073656C656374206120726F77
 		Sub SetAllowsSelectionXC(extends table As iOSMobileTable, value As Boolean)
 		  
 		  Declare Sub setallowsSelection Lib "UIKit.framework" Selector "setAllowsSelection:" (id as ptr, value as Boolean)

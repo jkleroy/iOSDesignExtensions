@@ -8,6 +8,7 @@ Begin MobileScreen vAnimate
    LargeTitleDisplayMode=   2
    Left            =   0
    Orientation = 0
+   ScaleFactor     =   0.0
    TabBarVisible   =   True
    TabIcon         =   0
    TintColor       =   &c00000000
@@ -18,7 +19,7 @@ Begin MobileScreen vAnimate
       AccessibilityLabel=   ""
       AutoLayout      =   Button1, 8, , 0, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   Button1, 1, <Parent>, 1, False, +1.00, 4, 1, *kStdGapCtlToViewH, , True
-      AutoLayout      =   Button1, 3, TopLayoutGuide, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
+      AutoLayout      =   Button1, 3, TopLayoutGuide, 4, False, +1.00, 4, 1, 50, , True
       AutoLayout      =   Button1, 7, , 0, False, +1.00, 4, 1, 30, , True
       Caption         =   "P"
       CaptionColor    =   &c007AFF00
@@ -31,9 +32,10 @@ Begin MobileScreen vAnimate
       TextFont        =   ""
       TextSize        =   0
       TintColor       =   &c000000
-      Top             =   73
+      Top             =   115
       Visible         =   True
       Width           =   30
+      _ClosingFired   =   False
    End
    Begin MobileImageViewer ImageViewer1
       AccessibilityHint=   ""
@@ -51,9 +53,11 @@ Begin MobileScreen vAnimate
       LockedInPosition=   False
       Scope           =   2
       TintColor       =   &c000000
-      Top             =   111
+      Top             =   153
+      URL             =   ""
       Visible         =   True
       Width           =   160
+      _ClosingFired   =   False
    End
    Begin MobileButton Button2
       AccessibilityHint=   ""
@@ -73,9 +77,10 @@ Begin MobileScreen vAnimate
       TextFont        =   ""
       TextSize        =   0
       TintColor       =   &c000000
-      Top             =   111
+      Top             =   153
       Visible         =   True
       Width           =   104
+      _ClosingFired   =   False
    End
    Begin MobileRectangle rectToast
       AccessibilityHint=   ""
@@ -98,6 +103,7 @@ Begin MobileScreen vAnimate
       Top             =   588
       Visible         =   False
       Width           =   280
+      _ClosingFired   =   False
       Begin MobileLabel Label1
          AccessibilityHint=   ""
          AccessibilityLabel=   ""
@@ -113,9 +119,13 @@ Begin MobileScreen vAnimate
          Left            =   85
          LineBreakMode   =   0
          LockedInPosition=   False
+         MaximumCharactersAllowed=   0
          PanelIndex      =   0
          Parent          =   "rectToast"
          Scope           =   2
+         SelectedText    =   ""
+         SelectionLength =   0
+         SelectionStart  =   0
          Text            =   "Animated toast"
          TextColor       =   &c000000
          TextFont        =   ""
@@ -124,15 +134,16 @@ Begin MobileScreen vAnimate
          Top             =   594
          Visible         =   True
          Width           =   150
+         _ClosingFired   =   False
       End
    End
    Begin MobileButton Button3
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
       AutoLayout      =   Button3, 9, <Parent>, 9, False, +1.00, 4, 1, 0, , True
-      AutoLayout      =   Button3, 7, , 0, False, +1.00, 4, 1, 104, , True
-      AutoLayout      =   Button3, 3, <Parent>, 3, False, +1.00, 4, 1, 309, , True
       AutoLayout      =   Button3, 8, , 0, False, +1.00, 4, 1, 30, , True
+      AutoLayout      =   Button3, 3, ImageViewer1, 4, False, +1.00, 4, 1, 50, , True
+      AutoLayout      =   Button3, 7, , 0, False, +1.00, 4, 1, 104, , True
       Caption         =   "Animate toast"
       CaptionColor    =   &c007AFF00
       ControlCount    =   0
@@ -144,14 +155,71 @@ Begin MobileScreen vAnimate
       TextFont        =   ""
       TextSize        =   0
       TintColor       =   &c000000
-      Top             =   309
+      Top             =   363
       Visible         =   True
       Width           =   104
+      _ClosingFired   =   False
+   End
+   Begin MobileButton Button4
+      AccessibilityHint=   ""
+      AccessibilityLabel=   ""
+      AutoLayout      =   Button4, 9, <Parent>, 9, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   Button4, 8, , 0, False, +1.00, 4, 1, 40, , True
+      AutoLayout      =   Button4, 3, Button3, 4, False, +1.00, 4, 1, 50, , True
+      AutoLayout      =   Button4, 7, , 0, False, +1.00, 4, 1, 180, , True
+      Caption         =   "Animated Button"
+      CaptionColor    =   &c007AFF00
+      ControlCount    =   0
+      Enabled         =   True
+      Height          =   40
+      Left            =   70
+      LockedInPosition=   False
+      Scope           =   2
+      TextFont        =   ""
+      TextSize        =   0
+      TintColor       =   &c000000
+      Top             =   443
+      Visible         =   True
+      Width           =   180
+      _ClosingFired   =   False
    End
 End
 #tag EndMobileScreen
 
 #tag WindowCode
+	#tag Method, Flags = &h1
+		Protected Sub AnimateButton()
+		  
+		  //new v2.18
+		  //Animate the button
+		  Dim animate_options As Integer = Ctype(ViewExtensionsXC.UIViewAnimationOptions.Repeat, Integer) +_
+		  Ctype(ViewExtensionsXC.UIViewAnimationOptions.Autoreverse, Integer) + _
+		  Ctype(ViewExtensionsXC.UIViewAnimationOptions.AllowUserInteraction, Integer)
+		  
+		  Dim animations as new ObjCBlock (AddressOf AnimateButtonAnimations)
+		  
+		  Dim delay As Double = 0.5
+		  
+		  ViewExtensionsXC.AnimateWithDurationOptionsXC(0.9, delay, animate_options, animations, nil)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
+		Protected Sub AnimateButtonAnimations()
+		  
+		  Declare sub transform lib "UIKit.framework" selector "setTransform:" (obj_id as ptr, matrix as ExtensionsXC.xcCGAffineTransform)
+		  Declare function CGAffineTransformMakeScale lib "CoreGraphics.framework" (sx as CGFloat, sy as CGFloat) as ExtensionsXC.xcCGAffineTransform
+		  
+		  Dim scale As ExtensionsXC.xcCGAffineTransform
+		  scale = CGAffineTransformMakeScale(1.1, 1.1)
+		  
+		  
+		  transform(Button4.Handle, scale) //The button to animate needs to be defined here
+		  
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h21
 		Private Sub Hidetoast()
 		  
@@ -259,7 +327,7 @@ End
 		  
 		  ViewExtensionsXC.TransitionWithViewDurationOptionsXC(me, duration, _
 		  options, _
-		  new iOSBlock(AddressOf UpdateButton))
+		  new ObjCBlock(AddressOf UpdateButton))
 		End Sub
 	#tag EndEvent
 	#tag Event
@@ -313,7 +381,26 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
+#tag Events Button4
+	#tag Event
+		Sub Opening()
+		  me.SetBackgroundColorXC(&cFFAE3B)
+		  me.CaptionColor = &cFFFFFF
+		  me.SetCornerRadiusXC(40/2)
+		  
+		  AnimateButton()
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="ScaleFactor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Double"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Index"
 		Visible=true

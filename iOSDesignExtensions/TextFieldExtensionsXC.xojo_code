@@ -1,5 +1,87 @@
 #tag Module
 Protected Module TextFieldExtensionsXC
+	#tag Method, Flags = &h0, Description = 4164647320612022446F6E652220627574746F6E2061626F766520746865206B6579626F617264207768656E207468652054657874417265612068617320666F6375732E
+		Sub AddDoneToolbarButtonXC(extends area As MobileTextArea, Translucent As Boolean = True)
+		  
+		  AddDoneToolbarButtonXC_internal(area, Translucent)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 4164647320612022446F6E652220627574746F6E2061626F766520746865206B6579626F617264207768656E2074686520546578744669656C642068617320666F6375732E
+		Sub AddDoneToolbarButtonXC(extends field As MobileTextField, Translucent As Boolean = True)
+		  
+		  AddDoneToolbarButtonXC_internal(field, Translucent)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21, Description = 4164647320612022446F6E652220627574746F6E2061626F766520746865206B6579626F617264207768656E207468652054657874417265612068617320666F6375732E
+		Private Sub AddDoneToolbarButtonXC_internal(txt As MobileTextControl, Translucent As Boolean)
+		  
+		  
+		  
+		  Declare Function NSClassFromString Lib "Foundation" (name As CFStringRef) As Ptr
+		  Declare Function alloc Lib "Foundation" selector "alloc" (clsRef As ptr) As ptr
+		  declare function init lib "Foundation" selector "init" (obj_id as ptr) as ptr
+		  Declare sub setInputAccessoryView lib "UIKit" selector "setInputAccessoryView:" (obj as ptr, value as ptr)
+		  Declare sub sizeToFit lib "UIKit" selector "sizeToFit" (obj as ptr)
+		  
+		  //Creating Toolbuttons
+		  Dim flexItem as MobileToolbarButton = new MobileToolbarButton(MobileToolbarButton.Types.FlexibleSpace)
+		  Dim doneItem As MobileToolbarButton = new MobileToolbarButton(MobileToolbarButton.types.Done)
+		  
+		  'doneItem.Tag = "close"
+		  
+		  
+		  
+		  
+		  Declare sub setTarget lib "UIKit" selector "setTarget:" (obj as ptr, value as ptr)
+		  Declare Function view lib "Foundation" selector "view" (classRef as Ptr) as Ptr
+		  'setTarget(doneItem.Handle, self.ViewControllerHandle)
+		  
+		  
+		  Declare sub setAction lib "UIKit" Selector "setAction:" (obj as ptr, sel as ptr)
+		  declare function NSSelectorFromString lib "Foundation" (aSelectorName as CFStringRef) as Ptr
+		  setAction(doneItem.Handle, NSSelectorFromString("barButtonPressed:"))
+		  
+		  
+		  //xojo makes it complex creating a new toolbar
+		  
+		  Dim toolbar_ptr As ptr = init(alloc(NSClassFromString("UIToolbar")))
+		  sizeToFit(toolbar_ptr)
+		  
+		  //Keeping a reference to the toolbar
+		  'self.toolbarPtr = toolbar
+		  
+		  declare sub translucent_ lib UIKitLib selector "setTranslucent:" (obj_id as ptr, translucent as Boolean)
+		  translucent_(toolbar_ptr, Translucent)
+		  
+		  
+		  
+		  
+		  Declare Function arrayWithCapacity Lib "Foundation" selector "arrayWithCapacity:" (cls As ptr, count as UInteger) As ptr
+		  Declare Sub addObject Lib "Foundation" selector "addObject:" (arr As ptr, obj As ptr)
+		  
+		  //Creating an array of toolbuttons
+		  Dim nsArray_ptr As ptr = arrayWithCapacity(NSClassFromString("NSMutableArray"), 2)
+		  
+		  
+		  addObject(nsArray_ptr, flexItem.Handle)
+		  addObject(nsArray_ptr, doneItem.Handle)
+		  
+		  
+		  
+		  //Adding the items to the toolbar
+		  Declare sub setItems lib "UIKit" selector "setItems:animated:" (obj as ptr, items as ptr, animated as Boolean)
+		  setItems(toolbar_ptr, nsArray_ptr, false)
+		  
+		  //Attaching the toolbar to the textfield
+		  setInputAccessoryView(txt.Handle, toolbar_ptr)
+		  
+		  
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h1
 		Protected Function CGRectMake(x As CGFloat, y As CGFloat, width As CGFloat, height As CGFloat) As ExtensionsXC.xcCGRect
 		  
@@ -70,7 +152,7 @@ Protected Module TextFieldExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub SetAutocapitalizationTypeXC(extends field As MobileTextField, value As TextFieldExtensionsXC.UITextAutocapitalizationType)
+		Attributes( Deprecated = "MobileTextField.AutoCapitalizationTypes Enumeration" )  Sub SetAutocapitalizationTypeXC(extends field As MobileTextField, value As TextFieldExtensionsXC.UITextAutocapitalizationType)
 		  
 		  Declare Sub setAutocapitalizationType_ Lib "UIKit.framework" selector "setAutocapitalizationType:" (obj_id As ptr, value As UITextAutoCapitalizationType)
 		  

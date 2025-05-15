@@ -8,6 +8,7 @@ Begin MobileScreen vButtons
    LargeTitleDisplayMode=   0
    Left            =   0
    Orientation = 0
+   ScaleFactor     =   0.0
    TabBarVisible   =   True
    TabIcon         =   0
    TintColor       =   &c00000000
@@ -34,14 +35,15 @@ Begin MobileScreen vButtons
       Top             =   95
       Visible         =   True
       Width           =   100
+      _ClosingFired   =   False
    End
    Begin MobileButton btCornerRadius
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AutoLayout      =   btCornerRadius, 9, <Parent>, 9, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   btCornerRadius, 8, , 0, False, +1.00, 4, 1, 30, , True
-      AutoLayout      =   btCornerRadius, 1, btBackgroundColor, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   btCornerRadius, 3, btBackgroundColor, 4, False, +1.00, 4, 1, 30, , True
-      AutoLayout      =   btCornerRadius, 7, , 0, False, +1.00, 4, 1, 100, , True
+      AutoLayout      =   btCornerRadius, 7, , 0, False, +1.00, 4, 2, 100, , True
       Caption         =   "Corner radius"
       CaptionColor    =   &c000000
       ControlCount    =   0
@@ -56,12 +58,13 @@ Begin MobileScreen vButtons
       Top             =   155
       Visible         =   True
       Width           =   100
+      _ClosingFired   =   False
    End
    Begin MobileButton btCaptionAndImage
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AutoLayout      =   btCaptionAndImage, 9, <Parent>, 9, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   btCaptionAndImage, 8, , 0, False, +1.00, 4, 1, 30, , True
-      AutoLayout      =   btCaptionAndImage, 1, btCornerRadius, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   btCaptionAndImage, 3, btCornerRadius, 4, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   btCaptionAndImage, 7, , 0, False, +1.00, 4, 2, 100, , True
       Caption         =   "Image & Caption"
@@ -78,12 +81,13 @@ Begin MobileScreen vButtons
       Top             =   215
       Visible         =   True
       Width           =   100
+      _ClosingFired   =   False
    End
    Begin MobileButton Button4
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AutoLayout      =   Button4, 9, <Parent>, 9, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Button4, 8, , 0, False, +1.00, 4, 1, 50, , True
-      AutoLayout      =   Button4, 1, btCaptionAndImage, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Button4, 3, btCaptionAndImage, 4, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   Button4, 7, , 0, False, +1.00, 4, 1, 100, , True
       Caption         =   "First line\nSecond line"
@@ -100,6 +104,7 @@ Begin MobileScreen vButtons
       Top             =   275
       Visible         =   True
       Width           =   100
+      _ClosingFired   =   False
    End
    Begin MobileButton Button5
       AccessibilityHint=   ""
@@ -122,6 +127,7 @@ Begin MobileScreen vButtons
       Top             =   355
       Visible         =   True
       Width           =   100
+      _ClosingFired   =   False
    End
    Begin MobileButton Button6
       AccessibilityHint=   ""
@@ -144,6 +150,7 @@ Begin MobileScreen vButtons
       Top             =   355
       Visible         =   True
       Width           =   100
+      _ClosingFired   =   False
    End
    Begin MobileButton Button7
       AccessibilityHint=   ""
@@ -166,6 +173,7 @@ Begin MobileScreen vButtons
       Top             =   393
       Visible         =   True
       Width           =   100
+      _ClosingFired   =   False
    End
    Begin MobileButton Button8
       AccessibilityHint=   ""
@@ -188,14 +196,15 @@ Begin MobileScreen vButtons
       Top             =   393
       Visible         =   True
       Width           =   100
+      _ClosingFired   =   False
    End
    Begin MobileButton btLeft
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
-      AutoLayout      =   btLeft, 1, Button4, 1, False, +1.00, 4, 1, 0, , True
-      AutoLayout      =   btLeft, 7, , 0, False, +1.00, 4, 1, 100, , True
-      AutoLayout      =   btLeft, 3, Button8, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
+      AutoLayout      =   btLeft, 9, <Parent>, 9, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   btLeft, 8, , 0, False, +1.00, 4, 1, 30, , True
+      AutoLayout      =   btLeft, 3, Button8, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
+      AutoLayout      =   btLeft, 7, , 0, False, +1.00, 4, 1, 100, , True
       Caption         =   "Left align"
       CaptionColor    =   &c000000
       ControlCount    =   0
@@ -210,6 +219,7 @@ Begin MobileScreen vButtons
       Top             =   431
       Visible         =   True
       Width           =   100
+      _ClosingFired   =   False
    End
 End
 #tag EndMobileScreen
@@ -232,7 +242,7 @@ End
 	#tag Event
 		Sub Opening()
 		  
-		  Me.SetBackgroundColorXC(&c06BEBD)
+		  Me.SetBackgroundColorXC(&cA0A0A0)
 		  Me.SetCornerRadiusXC(8)
 		  Me.CaptionColor = &cFFFFFF
 		End Sub
@@ -325,6 +335,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="ScaleFactor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Double"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="BackButtonCaption"
 		Visible=true

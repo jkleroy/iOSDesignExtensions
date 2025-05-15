@@ -28,6 +28,36 @@ Inherits MobileApplication
 	#tag Note, Name = README
 		## History
 		
+		### Version 2.6.2 - Released 2025-05-14
+		* Fixed ImageExtensionsXC.ImageWithMaskXC
+		* Fixed Picture.ToTemplateXC
+		
+		### Version 2.6.1 - Released 2025-05-14
+		* New animation method ViewExtensionsXC.AnimateWithDurationOptionsXC
+		* New Animation options in ViewExtensionsXC.UIViewAnimationOptions
+		* See examples in "Animations"
+		
+		### Version 2.6 - Released 2025-02-12
+		* New TabbarExtensionsXC.SetTabBarTitleXC
+		* New MapViewerExtensionsXC
+		* New ControlExtensionsXC.SetBackgroundGradientXC
+		* New TabbarExtensionsXC.SetTabBarUnselectedColorXC
+		* New TableExtensionsXC.SetAllowsSelectionDuringEditingXC
+		
+		### Version 2.5.3 - Released 2025-02-03
+		* New TextFieldExtensionsXC.AddDoneToolbarButtonXC (for TextField)
+		
+		### Version 2.5.2 - Released 2024-12-07
+		* New ViewExtensionsXC.SetOverrideUserInterfaceStyleXC method
+		* New ControlExtensionsXC.SetOverrideUserInterfaceStyleXC method
+		
+		### Version 2.5.1 - Released 2024-07-16
+		* New TextFieldExtensionsXC.AddDoneToolbarButtonXC
+		
+		### Version 2.5 - Released 2024-07-08
+		* New TableExtensions.SelectRowXC metho
+		* New AppExtensionsXC.idleTimerDisabled property
+		
 		### Version 2.4.2 - Released 2024-02-14
 		* New SplitViewExtensionsXC module for iOSSplitView
 		* Fixed a few methods 
@@ -161,7 +191,7 @@ Inherits MobileApplication
 		
 		* Version 1.0 - Released 2018-04-26
 		
-		Copy-paste the iOSExtensions folder into your project.
+		Copy-paste the iOSDesignExtensions folder into your project.
 		
 		Most controls will then have additional methods, all ending with "XC"
 		
@@ -297,7 +327,7 @@ Inherits MobileApplication
 			Visible=false
 			Group="Behavior"
 			InitialValue=""
-			Type="ViewExtensionsXC.UISplitViewControllerDisplayMode"
+			Type="SplitViewExtensionsXC.UISplitViewControllerDisplayMode"
 			EditorType="Enum"
 			#tag EnumValues
 				"0 - Automatic"

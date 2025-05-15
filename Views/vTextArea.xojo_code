@@ -30,8 +30,12 @@ Begin MobileScreen vTextArea
       Height          =   169
       Left            =   20
       LockedInPosition=   True
+      maximumCharactersAllowed=   0
       ReadOnly        =   False
       Scope           =   0
+      SelectedText    =   ""
+      SelectionLength =   0
+      SelectionStart  =   0
       Text            =   "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
       TextColor       =   &c00000000
       TextFont        =   ""
@@ -77,7 +81,11 @@ Begin MobileScreen vTextArea
       Left            =   164
       LineBreakMode   =   0
       LockedInPosition=   False
+      MaximumCharactersAllowed=   0
       Scope           =   0
+      SelectedText    =   ""
+      SelectionLength =   0
+      SelectionStart  =   0
       Text            =   "Unknown"
       TextColor       =   &c00000000
       TextFont        =   ""
@@ -91,9 +99,9 @@ Begin MobileScreen vTextArea
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
       AutoLayout      =   btScrollTop, 9, <Parent>, 9, False, +1.00, 4, 1, 0, , True
-      AutoLayout      =   btScrollTop, 7, , 0, False, +1.00, 4, 1, 100, , True
-      AutoLayout      =   btScrollTop, 3, <Parent>, 3, False, +1.00, 4, 1, 288, , True
       AutoLayout      =   btScrollTop, 8, , 0, False, +1.00, 4, 1, 30, , True
+      AutoLayout      =   btScrollTop, 3, btGetScrollPos, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
+      AutoLayout      =   btScrollTop, 7, , 0, False, +1.00, 4, 1, 100, , True
       Caption         =   "Scroll to Top"
       CaptionColor    =   &c000000
       ControlCount    =   0
@@ -113,9 +121,9 @@ Begin MobileScreen vTextArea
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
       AutoLayout      =   btSearchQui, 9, <Parent>, 9, False, +1.00, 4, 1, 0, , True
-      AutoLayout      =   btSearchQui, 7, , 0, False, +1.00, 4, 1, 173, , True
-      AutoLayout      =   btSearchQui, 3, <Parent>, 3, False, +1.00, 4, 1, 326, , True
       AutoLayout      =   btSearchQui, 8, , 0, False, +1.00, 4, 1, 30, , True
+      AutoLayout      =   btSearchQui, 3, btScrollTop, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
+      AutoLayout      =   btSearchQui, 7, , 0, False, +1.00, 4, 1, 173, , True
       Caption         =   "Search word ""qui"""
       CaptionColor    =   &c000000
       ControlCount    =   0
@@ -157,8 +165,26 @@ End
 #tag EndMobileScreen
 
 #tag WindowCode
+	#tag Event
+		Sub ToolbarButtonPressed(button As MobileToolbarButton)
+		  if button is nil then
+		    
+		    TextArea1.ClearFocus
+		    Return
+		  end if
+		End Sub
+	#tag EndEvent
+
+
 #tag EndWindowCode
 
+#tag Events TextArea1
+	#tag Event
+		Sub Opening()
+		  me.AddDoneToolbarButtonXC(True)
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag Events btGetScrollPos
 	#tag Event
 		Sub Pressed()

@@ -8,6 +8,7 @@ Begin MobileScreen vNavBar
    LargeTitleDisplayMode=   2
    Left            =   0
    Orientation = 0
+   ScaleFactor     =   0.0
    TabBarVisible   =   True
    TabIcon         =   0
    TintColor       =   0
@@ -18,7 +19,7 @@ Begin MobileScreen vNavBar
       AccessibilityLabel=   ""
       AutoLayout      =   Button1, 9, <Parent>, 9, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Button1, 8, , 0, False, +1.00, 4, 1, 30, , True
-      AutoLayout      =   Button1, 3, <Parent>, 3, False, +1.00, 4, 1, 175, , True
+      AutoLayout      =   Button1, 3, TopLayoutGuide, 4, False, +1.00, 4, 1, 80, , True
       AutoLayout      =   Button1, 7, , 0, False, +1.00, 4, 1, 200, , True
       Caption         =   "Use Picture (SF Symbol)"
       CaptionColor    =   &c007AFF00
@@ -31,17 +32,18 @@ Begin MobileScreen vNavBar
       TextFont        =   ""
       TextSize        =   0
       TintColor       =   &c000000
-      Top             =   175
+      Top             =   145
       Visible         =   True
       Width           =   200
+      _ClosingFired   =   False
    End
    Begin MobileButton Button2
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
-      AutoLayout      =   Button2, 1, Button1, 1, False, +1.00, 4, 1, 0, , True
-      AutoLayout      =   Button2, 7, , 0, False, +1.00, 4, 1, 200, , True
-      AutoLayout      =   Button2, 3, <Parent>, 3, False, +1.00, 4, 1, 240, , True
+      AutoLayout      =   Button2, 9, <Parent>, 9, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Button2, 8, , 0, False, +1.00, 4, 1, 30, , True
+      AutoLayout      =   Button2, 3, Button1, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
+      AutoLayout      =   Button2, 7, , 0, False, +1.00, 4, 1, 200, , True
       Caption         =   "Use Picture (from resources)"
       CaptionColor    =   &c007AFF00
       ControlCount    =   0
@@ -53,9 +55,10 @@ Begin MobileScreen vNavBar
       TextFont        =   ""
       TextSize        =   0
       TintColor       =   &c000000
-      Top             =   240
+      Top             =   183
       Visible         =   True
       Width           =   200
+      _ClosingFired   =   False
    End
    Begin MobileButton Button3
       AccessibilityHint=   ""
@@ -78,6 +81,7 @@ Begin MobileScreen vNavBar
       Top             =   302
       Visible         =   True
       Width           =   280
+      _ClosingFired   =   False
    End
    Begin MobileButton Button4
       AccessibilityHint=   ""
@@ -100,6 +104,30 @@ Begin MobileScreen vNavBar
       Top             =   340
       Visible         =   True
       Width           =   280
+      _ClosingFired   =   False
+   End
+   Begin MobileButton Button5
+      AccessibilityHint=   ""
+      AccessibilityLabel=   ""
+      AutoLayout      =   Button5, 1, <Parent>, 1, False, +1.00, 4, 1, 60, , True
+      AutoLayout      =   Button5, 7, , 0, False, +1.00, 4, 1, 200, , True
+      AutoLayout      =   Button5, 3, <Parent>, 3, False, +1.00, 4, 1, 243, , True
+      AutoLayout      =   Button5, 8, , 0, False, +1.00, 4, 1, 30, , True
+      Caption         =   "Use Button"
+      CaptionColor    =   &c007AFF00
+      ControlCount    =   0
+      Enabled         =   True
+      Height          =   30
+      Left            =   60
+      LockedInPosition=   False
+      Scope           =   2
+      TextFont        =   ""
+      TextSize        =   0
+      TintColor       =   &c000000
+      Top             =   243
+      Visible         =   True
+      Width           =   200
+      _ClosingFired   =   False
    End
 End
 #tag EndMobileScreen
@@ -111,6 +139,29 @@ End
 		  Self.SetNavBarColorXC(&c073F8000, &cFFFFFF, &cFFFFFF, False, True)
 		End Sub
 	#tag EndEvent
+
+	#tag Event
+		Sub Closing()
+		  if titlebutton <> nil then
+		    
+		    RemoveHandler titlebutton.Pressed, AddressOf TitleButtonPressed
+		    
+		    titlebutton = nil //Just in case the closing event is called twice
+		  end if
+		End Sub
+	#tag EndEvent
+
+
+	#tag Method, Flags = &h21
+		Private Sub TitleButtonPressed(Button as MobileButton)
+		  Break
+		End Sub
+	#tag EndMethod
+
+
+	#tag Property, Flags = &h0
+		titlebutton As MobileButton
+	#tag EndProperty
 
 
 #tag EndWindowCode
@@ -161,7 +212,35 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
+#tag Events Button5
+	#tag Event
+		Sub Pressed()
+		  
+		  Dim bt As new MobileButton
+		  bt.Caption = ""
+		  bt.SetImageXC(Picture.SystemImage("gear", 0))
+		  AddHandler bt.Pressed, AddressOf TitleButtonPressed
+		  
+		  self.titlebutton = bt
+		  
+		  
+		  self.SetNavBarTitleControlXC(bt)
+		  
+		  
+		  
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="ScaleFactor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Double"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="BackButtonCaption"
 		Visible=true

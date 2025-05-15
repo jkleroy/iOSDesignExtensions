@@ -10,6 +10,123 @@ Protected Module LayerExtensionsXC
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 5365747320746865206C696E656172206772616469656E7420636F6C6F7273206F6620612056696577
+		Function SetBackgroundGradientXC(extends ctrl As MobileUIControl, linearBrush As LinearGradientBrush) As Ptr
+		  
+		  
+		  
+		  
+		  Dim layer as ptr = ctrl.GetLayerXC
+		  
+		  Declare Function init Lib "Foundation.framework" selector "init" (obj_id As ptr) As ptr
+		  Declare Function alloc Lib "Foundation.framework" selector "alloc" (clsRef As ptr) As ptr
+		  Declare Function NSClassFromString Lib "Foundation.framework" (clsName As CFStringRef) As ptr
+		  
+		  
+		  Dim gradient As ptr = init(alloc(NSClassFromString ("CAGradientLayer")))
+		  
+		  
+		  
+		  
+		  ' gradient.frame = view.bounds;
+		  Dim frame As ExtensionsXC.xcCGRect
+		  
+		  Dim viewFrame As Rect = ctrl.GetFrameXC
+		  
+		  frame.origin.x = 0
+		  frame.origin.y = 0
+		  frame.rsize.width = viewFrame.Width
+		  frame.rsize.height = viewFrame.Height
+		  
+		  #if False
+		    linearBrush = New LinearGradientBrush
+		    linearBrush.StartPoint = New Point(0, 0)
+		    linearBrush.EndPoint = New Point(sz.Width, sz.Height)
+		    linearBrush.GradientStops.Add(New Pair(0, &c6078EA))
+		    linearBrush.GradientStops.Add(New Pair(1.0, &cFD575C))
+		  #endif
+		  
+		  Declare Sub setFrame Lib UIKitLib selector "setFrame:" (obj_id As ptr, frame As ExtensionsXC.xcCGRect)
+		  setFrame(gradient, frame)
+		  
+		  
+		  ' gradient.colors = @[(id)[UIColor whiteColor].CGColor, (id)[UIColor blackColor].CGColor];
+		  
+		  
+		  Declare Function arrayWithCapacity Lib "Foundation" selector "arrayWithCapacity:" (cls As ptr, count as UInteger) As ptr
+		  Declare Sub addObject Lib "Foundation" selector "addObject:" (arr As ptr, obj As ptr)
+		  
+		  Dim colorArray As ptr
+		  
+		  
+		  
+		  colorArray = arrayWithCapacity(NSClassFromString("NSMutableArray"), 2)
+		  
+		  
+		  
+		  
+		  Dim c1, c2 As UIKit.UIColor
+		  
+		  Dim col1 As color = linearBrush.GradientStops(0).Right
+		  Dim col2 As color = linearBrush.GradientStops(linearBrush.GradientStops.LastIndex).Right
+		  
+		  c1 = New UIKit.UIColor(col1)
+		  c2 = New UIKit.UIColor(col2)
+		  
+		  
+		  addObject colorArray, c1.CGColor
+		  addObject colorArray, c2.CGColor
+		  
+		  
+		  
+		  Declare Sub setColors Lib QuartzCoreLib selector "setColors:" (obj_id As ptr, colors As ptr)
+		  setColors(gradient, colorArray)
+		  
+		  
+		  Dim startPt As ExtensionsXC.xcCGPoint
+		  StartPt.x = linearBrush.StartPoint.X
+		  StartPt.y = linearBrush.StartPoint.Y
+		  
+		  Dim endPt As ExtensionsXC.xcCGPoint
+		  endPt.x = linearBrush.EndPoint.X
+		  endPt.y = linearBrush.EndPoint.Y
+		  
+		  Declare sub startPoint lib QuartzCoreLib selector "setStartPoint:" (obj as ptr, value as ExtensionsXC.xcCGPoint)
+		  startPoint(gradient, startpt)
+		  
+		  Declare sub endPoint lib QuartzCoreLib selector "setEndPoint:" (obj as ptr, value as ExtensionsXC.xcCGPoint)
+		  endPoint(gradient, endpt)
+		  
+		  
+		  
+		  
+		  
+		  'Declare Sub clipsToBounds Lib "UIKit.framework" selector "setMasksToBounds:" (id As ptr, value As Boolean)
+		  'clipsToBounds(gradient, True)
+		  '
+		  'Declare Sub setCornerRadius Lib "QuartzCore.framework" selector "setCornerRadius:" (id As ptr, value As CGFloat)
+		  '
+		  'setCornerRadius gradient, 16
+		  
+		  
+		  
+		  ' [view.layer insertSublayer:gradient atIndex:0];
+		  Declare Sub insertSublayer Lib QuartzCoreLib selector "insertSublayer:atIndex:" (id As ptr, aLayer As ptr, Index As UInt32)
+		  Declare Sub replaceSubLayer Lib QuartzCoreLib selector "replaceSublayer:with:" (id As ptr, aLayer As ptr, aLayer2 as ptr)
+		  
+		  
+		  
+		  'if gradientSet = False then
+		  insertSublayer layer, gradient, 0
+		  'Else
+		  'replaceSubLayer(layer, lastLayer, gradient)
+		  'End If
+		  
+		  Return gradient
+		  
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 41646A757374732074686520666F6E742073697A65206163636F7264696E6720746F20617661696C61626C65207769647468
 		Sub SetBorderColorXC(extends c As MobileUIControl, value As Color)
 		  

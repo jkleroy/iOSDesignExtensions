@@ -82,7 +82,53 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
+		Protected Sub AnimateWithDurationOptionsXC(duration as Double, delay as Double = 0.0, options as Integer, animationBlock as ObjCBlock, completion as ObjCBlock = nil)
+		  https://developer.apple.com/documentation/uikit/uiview/1622515-animatewithduration?language=objc
+		  
+		  
+		  Dim classPtr As ptr
+		  Declare sub animateWithDuration_ lib UIKitLib selector "animateWithDuration:delay:options:animations:completion:" _
+		  (id as ptr, duration as Double, delay as double, options as integer, animations as ptr, completion as ptr)
+		  declare function NSClassFromString lib "Foundation" (clsName as cfstringref) as ptr
+		  
+		  
+		  classPtr = NSClassFromString("UIView")
+		  
+		  if completion is nil then
+		    animateWithDuration_ classptr, duration, delay, options, animationBlock.handle, nil
+		  else
+		    animateWithDuration_ classptr, duration, delay, options, animationBlock.handle, completion.Handle
+		  end if
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
 		Protected Sub AnimateWithDurationXC(duration as Double, animationBlock as iOSBlock, completion as iOSBlock = nil)
+		  https://developer.apple.com/documentation/uikit/uiview/1622515-animatewithduration?language=objc
+		  
+		  
+		  Dim classPtr As ptr
+		  Declare sub animateWithDuration_ lib UIKitLib selector "animateWithDuration:animations:completion:" _
+		  (id as ptr, duration as Double, animations as ptr, completion as ptr)
+		  declare function NSClassFromString lib "Foundation" (clsName as cfstringref) as ptr
+		  
+		  
+		  classPtr = NSClassFromString("UIView")
+		  
+		  if completion is nil then
+		    animateWithDuration_ classptr, duration, animationBlock.handle, nil
+		  else
+		    animateWithDuration_ classptr, duration, animationBlock.handle, completion.Handle
+		  end if
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
+		Protected Sub AnimateWithDurationXC(duration as Double, animationBlock as OBJCBlock, completion as OBJCBlock = nil)
 		  https://developer.apple.com/documentation/uikit/uiview/1622515-animatewithduration?language=objc
 		  
 		  
@@ -840,6 +886,32 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 5365747320616E20696D61676520696E7374656164206F66204E6176626172207469746C65
+		Sub SetNavBarTitleControlXC(extends v As MobileScreen, ctrl As MobileUIControl)
+		  
+		  declare function navigationController lib "UIKit.framework" selector "navigationController" (viewController as ptr) as ptr
+		  declare function navigationBar lib "UIKit.framework" selector "navigationBar" (obj_ref as ptr) as ptr
+		  declare function topItem lib "UIKit.framework" selector "topItem" (id as ptr) as ptr
+		  Declare Sub setTitleView Lib "UIKit.framework" selector "setTitleView:" (id As ptr, UIImage As Ptr)
+		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
+		  declare Function alloc lib "Foundation" selector "alloc"(classPtr as Ptr) as Ptr
+		  Declare function initWithImage lib "UIKit.framework" selector "initWithImage:" (objRef as Ptr, imgRef as Ptr) as Ptr
+		  
+		  //Reference to Navigation Controller
+		  dim navigationControllerRef as ptr = navigationController(v.ViewControllerHandle)
+		  
+		  //Ref to NavigationBar
+		  dim navBar as ptr = navigationBar(navigationControllerRef)
+		  
+		  //Ref to Title item
+		  dim navItem as ptr = topItem(navBar)
+		  
+		  
+		  //Set Title item to use the control
+		  setTitleView(navItem, ctrl.Handle)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 5365747320616E20696D61676520696E7374656164206F66204E6176626172207469746C65
 		Sub SetNavBarTitleImageXC(extends v As MobileScreen, image As Picture)
 		  
 		  declare function navigationController lib "UIKit.framework" selector "navigationController" (viewController as ptr) as ptr
@@ -981,6 +1053,18 @@ Protected Module ViewExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 4F766572726964657320
+		Sub SetOverrideUserInterfaceStyleXC(extends v As MobileScreen, style As ControlExtensionsXC.UIUserInterfaceStyle)
+		  
+		  if ExtensionsXC.GetiOSVersionXC >= 13.0 then
+		    declare sub overrideUserInterfaceStyle lib "UIKit.framework" selector "setOverrideUserInterfaceStyle:" (obj as ptr, style As ControlExtensionsXC.UIUserInterfaceStyle)
+		    
+		    overrideUserInterfaceStyle(v.Handle, style)
+		    
+		  end if
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 536574732074686520636F6E74656E742073697A6520666F722061206D6F64616C20706F706F766572
 		Sub SetPreferredContentSizeXC(extends v As MobileScreen, sz As Size)
 		  
@@ -1113,7 +1197,7 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub ShowSheetXC(extends v As MobileScreen, parentScreen As MobileScreen, height As UISheetPresentationControllerDetent = UISheetPresentationControllerDetent.large, showGrabber As Boolean = False, Animate As Boolean = True)
+		Sub ShowSheetXC(extends v As MobileScreen, parentScreen As MobileScreen, height As UISheetPresentationControllerDetent = UISheetPresentationControllerDetent.large, showGrabber As Boolean = False, Animate As Boolean = True, cornerRadius As Single = -1)
 		  //Source https://sarunw.com/posts/bottom-sheet-in-ios-15-with-uisheetpresentationcontroller/
 		  
 		  if ExtensionsXC.GetiOSVersionXC < 15.0 then
@@ -1194,6 +1278,12 @@ Protected Module ViewExtensionsXC
 		      setPrefersGrabberVisible(sheet, True)
 		    end if
 		    
+		    if cornerRadius > -1 then
+		      Declare sub preferredCornerRadius_ lib "UIKit" selector "setPreferredCornerRadius:" (obj as ptr, value as CGFloat)
+		      preferredCornerRadius_(sheet, cornerRadius)
+		    end if
+		    
+		    
 		  end if
 		  
 		  
@@ -1241,6 +1331,7 @@ Protected Module ViewExtensionsXC
 		End Sub
 	#tag EndMethod
 
+
 	#tag Method, Flags = &h21
 		Private Function ΩAddClassMethod(handle as Ptr, selectorName as string, callback as ptr, signature as string) As Boolean
 		  #If TargetIOS
@@ -1287,6 +1378,45 @@ Protected Module ViewExtensionsXC
 	#tag Property, Flags = &h21
 		Private ΩHomeIndicatorHiddenScreens() As WeakRef
 	#tag EndProperty
+
+
+	#tag Method, Flags = &h1
+		Protected Sub TransitionWithViewDurationOptionsXC(ctrl as MobileUIControl, duration as Double, options as Integer, animationBlock as OBJCBlock, completion as OBJCBlock = nil)
+		  https://developer.apple.com/documentation/uikit/uiview/1622574-transitionwithview
+		  
+		  
+		  Dim classPtr As ptr
+		  Declare sub transition_ lib "UIKit" selector "transitionWithView:duration:options:animations:completion:" _
+		  (id as ptr, view as ptr, duration as Double, options as Integer, animations as ptr, completion as ptr)
+		  Declare sub animateWithDuration_ lib "UIKit" selector "animateWithDuration:animations:completion:" _
+		  (id as ptr, duration as Double, animations as ptr, completion as ptr)
+		  declare function NSClassFromString lib "Foundation" (clsName as cfstringref) as ptr
+		  
+		  #if False
+		    UIView transitionWithView:textFieldimageView
+		    duration:0.2f
+		    options:UIViewAnimationOptionTransitionCrossDissolve
+		    animations:^{
+		    imageView.image = newImage;
+		    } completion:nil];
+		  #endif
+		  
+		  
+		  classPtr = NSClassFromString("UIView")
+		  
+		  
+		  
+		  if completion is nil then
+		    transition_ classPtr, ctrl.Handle, duration, options, animationBlock.Handle, nil
+		    'animateWithDuration_ classptr, duration, animationBlock.handle, nil
+		  else
+		    transition_ classPtr, ctrl.Handle, duration, options, animationBlock.Handle, completion.Handle
+		  end if
+		  
+		  
+		End Sub
+	#tag EndMethod
+
 
 
 	#tag Enum, Name = LargeTitleDisplayMode, Type = Integer, Flags = &h1
@@ -1342,12 +1472,15 @@ Protected Module ViewExtensionsXC
 	#tag EndEnum
 
 	#tag Enum, Name = UIViewAnimationOptions, Flags = &h1, Binary = True
-		UIViewAnimationOptionRepeat = 8
+		Repeat = 8
 		  UIViewAnimationOptionTransitionCrossDissolve = 5242880
-		  UIViewAnimationOptionAutoreverse = 16
+		  Autoreverse = 16
 		  UIViewAnimationOptionTransitionFlipFromTop = 6291456
 		  UIViewAnimationOptionTransitionFlipFromBottom = 7340032
-		UIViewAnimationOptionTransitionNone = 0
+		  UIViewAnimationOptionTransitionNone = 0
+		  CurveEaseIn = 65536
+		  CurveEaseOut = 131072
+		AllowUserInteraction = 2
 	#tag EndEnum
 
 
