@@ -250,7 +250,7 @@ Protected Module TabBarExtensionsXC
 		  dim tabbar as Ptr = tabbar_(h)
 		  
 		  
-		  
+		  Dim appearance As ViewextensionsXC.Appearances = ViewExtensionsXC.Appearances.all
 		  
 		  if ExtensionsXC.GetiOSVersionXC >= 13 then
 		    
