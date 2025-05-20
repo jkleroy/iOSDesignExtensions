@@ -28,6 +28,10 @@ Inherits MobileApplication
 	#tag Note, Name = README
 		## History
 		
+		### Version 2.6.2 - Released 2025-05-20
+		* Fixed TabbarExtensionsXC.SetTabBarColorXC to change the background color of the TabBar
+		* New TabbarExtensionsXC.TabSetTabBarShadowColorXC
+		
 		### Version 2.6.2 - Released 2025-05-14
 		* Fixed ImageExtensionsXC.ImageWithMaskXC
 		* Fixed Picture.ToTemplateXC

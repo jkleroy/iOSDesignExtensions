@@ -8,6 +8,7 @@ Begin MobileScreen vTabBar
    LargeTitleDisplayMode=   2
    Left            =   0
    Orientation = 0
+   ScaleFactor     =   0.0
    TabBarVisible   =   True
    TabIcon         =   0
    TintColor       =   &c00000000
@@ -34,6 +35,7 @@ Begin MobileScreen vTabBar
       Top             =   92
       Visible         =   True
       Width           =   60
+      _ClosingFired   =   False
    End
    Begin MobileButton Button2
       AccessibilityHint=   ""
@@ -56,6 +58,7 @@ Begin MobileScreen vTabBar
       Top             =   130
       Visible         =   True
       Width           =   100
+      _ClosingFired   =   False
    End
    Begin MobileButton Button3
       AccessibilityHint=   ""
@@ -78,6 +81,7 @@ Begin MobileScreen vTabBar
       Top             =   168
       Visible         =   True
       Width           =   100
+      _ClosingFired   =   False
    End
    Begin MobileButton Button4
       AccessibilityHint=   ""
@@ -100,6 +104,7 @@ Begin MobileScreen vTabBar
       Top             =   206
       Visible         =   True
       Width           =   100
+      _ClosingFired   =   False
    End
    Begin MobileButton Button5
       AccessibilityHint=   ""
@@ -122,6 +127,7 @@ Begin MobileScreen vTabBar
       Top             =   244
       Visible         =   True
       Width           =   100
+      _ClosingFired   =   False
    End
    Begin MobileButton Button6
       AccessibilityHint=   ""
@@ -144,6 +150,56 @@ Begin MobileScreen vTabBar
       Top             =   282
       Visible         =   True
       Width           =   100
+      _ClosingFired   =   False
+   End
+   Begin MobileSwitch Switch1
+      AccessibilityHint=   ""
+      AccessibilityLabel=   ""
+      AutoLayout      =   Switch1, 1, Button6, 1, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   Switch1, 7, , 0, True, +1.00, 4, 1, 51, , True
+      AutoLayout      =   Switch1, 3, Button6, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
+      AutoLayout      =   Switch1, 8, , 0, True, +1.00, 4, 1, 31, , True
+      ControlCount    =   0
+      Enabled         =   True
+      Height          =   31
+      Left            =   20
+      LockedInPosition=   False
+      Scope           =   0
+      TintColor       =   &c000000
+      Top             =   320
+      Value           =   False
+      Visible         =   True
+      Width           =   51
+      _ClosingFired   =   False
+   End
+   Begin MobileLabel Label1
+      AccessibilityHint=   ""
+      AccessibilityLabel=   ""
+      Alignment       =   0
+      AutoLayout      =   Label1, 1, Switch1, 2, False, +1.00, 4, 1, *kStdControlGapH, , True
+      AutoLayout      =   Label1, 7, , 0, False, +1.00, 4, 1, 100, , True
+      AutoLayout      =   Label1, 3, Switch1, 3, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   Label1, 8, , 0, False, +1.00, 4, 1, 30, , True
+      ControlCount    =   0
+      Enabled         =   True
+      Height          =   30
+      Left            =   79
+      LineBreakMode   =   0
+      LockedInPosition=   False
+      MaximumCharactersAllowed=   0
+      Scope           =   0
+      SelectedText    =   ""
+      SelectionLength =   0
+      SelectionStart  =   0
+      Text            =   "TabBar shadow"
+      TextColor       =   &c000000
+      TextFont        =   ""
+      TextSize        =   0
+      TintColor       =   &c000000
+      Top             =   320
+      Visible         =   True
+      Width           =   100
+      _ClosingFired   =   False
    End
 End
 #tag EndMobileScreen
@@ -153,7 +209,7 @@ End
 		Sub Activated()
 		  Self.SetTabBarButtonColorXC(&cFC7B5900)
 		  
-		  Self.SetTabBarColorXC(&c191F28)
+		  Self.SetTabBarColorXC(&cEFFF8F)
 		End Sub
 	#tag EndEvent
 
@@ -229,13 +285,13 @@ End
 	#tag Event
 		Sub Pressed()
 		  
-		  Static backColor As Color = &c191F28
+		  Static backColor As Color = &cEFFF8F
 		  
-		  if backColor = &c191F28 then
-		    backColor = &cA12529
+		  if backColor = &cEFFF8F then
+		    backColor = color.Clear
 		    
 		  else
-		    backColor = &c191F28
+		    backColor = &cEFFF8F
 		  end if
 		  
 		  Self.SetTabBarColorXC(backColor)
@@ -249,7 +305,7 @@ End
 		  Static buttonColor As Color = &cFC7B59
 		  
 		  if buttonColor = &cFC7B59 then
-		    buttonColor = &cFC0000
+		    buttonColor = &cFC00FF
 		    
 		  else
 		    buttonColor = &cFC7B59
@@ -267,7 +323,33 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
+#tag Events Switch1
+	#tag Event
+		Sub ValueChanged()
+		  
+		  if me.Value then
+		    
+		    self.SetTabBarShadowColorXC(color.Blue)
+		    
+		  else
+		    
+		    self.SetTabBarShadowColorXC(color.Clear)
+		    
+		    
+		  end if
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="ScaleFactor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Double"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="BackButtonCaption"
 		Visible=true

@@ -122,14 +122,74 @@ Protected Module TabBarExtensionsXC
 		  dim tabbar as Ptr = tabbar_(h)
 		  
 		  
-		  Declare Sub setBarTintColor Lib "UIKit.framework" selector "setBarTintColor:" (id As ptr, UIColor As Ptr)
-		  setBarTintColor tabBar, UIColorFromColor(barColor)
+		  'Declare Sub setBarTintColor Lib "UIKit.framework" selector "setBarTintColor:" (id As ptr, UIColor As Ptr)
+		  'setBarTintColor tabBar, UIColorFromColor(barColor)
 		  
 		  if translucent then
 		    declare sub setTranslucent lib "UIKit.framework" selector "setTranslucent:" (id as ptr)
 		    setTranslucent tabbar
 		  end
 		  
+		  
+		  
+		  if ExtensionsXC.GetiOSVersionXC >= 13 then
+		    
+		    declare function init lib "Foundation.framework" selector "init" (obj_id as ptr) as ptr
+		    Declare Function alloc Lib "Foundation.framework" selector "alloc" (clsRef As ptr) As ptr
+		    Declare Function NSClassFromString Lib "Foundation.framework" (clsName As CFStringRef) As ptr
+		    
+		    
+		    Declare Function getStandardAppearance lib "UIKit.framework" selector "standardAppearance" (obj as ptr) as ptr
+		    Declare sub setStandardAppearance lib "UIKit.framework" selector "setStandardAppearance:" (obj as ptr, value as ptr)
+		    
+		    Declare Function getScrollEdgeAppearance lib "UIKit.framework" selector "scrollEdgeAppearance" (obj as ptr) as ptr
+		    Declare sub setScrollEdgeAppearance lib "UIKit.framework" selector "setScrollEdgeAppearance:" (obj as ptr, value as ptr)
+		    
+		    Dim standardAppearance as ptr = getStandardAppearance(tabbar)
+		    
+		    
+		    
+		    Declare sub setBackgroundColor lib "UIKit.framework" selector "setBackgroundColor:" (obj as ptr, UIColor as ptr)
+		    
+		    If barColor.Alpha = 255 then
+		      setBackgroundColor standardAppearance, UIColor.ClearColor
+		    Else
+		      setBackgroundColor standardAppearance, new UIColor(barColor)
+		    End If
+		    
+		    //Now re-define the appearances
+		    setStandardAppearance(tabbar, standardAppearance)
+		    
+		    
+		    if ExtensionsXC.GetiOSVersionXC >= 15.0 then
+		      
+		      Declare Function getScrollEdgeAppearance lib "UIKit.framework" selector "scrollEdgeAppearance" (obj as ptr) as ptr
+		      Declare sub setScrollEdgeAppearance lib "UIKit.framework" selector "setScrollEdgeAppearance:" (obj as ptr, value as ptr)
+		      
+		      Dim scrollEdgeAppearance as ptr = getScrollEdgeAppearance(tabbar)
+		      
+		      if scrollEdgeAppearance = nil then
+		        scrollEdgeAppearance = init(alloc(NSClassFromString("UITabBarAppearance")))
+		        
+		        declare sub configureWithTransparentBackground lib "UIKit.framework" selector "configureWithTransparentBackground" (obj as ptr)
+		        configureWithTransparentBackground(scrollEdgeAppearance)
+		        
+		      end if
+		      
+		      If barColor.Alpha = 255 then
+		        setBackgroundColor scrollEdgeAppearance, UIColor.ClearColor
+		      Else
+		        setBackgroundColor scrollEdgeAppearance, new UIColor(barColor)
+		      End If
+		      
+		      setScrollEdgeAppearance(tabbar, scrollEdgeAppearance)
+		    end if
+		    
+		    
+		    
+		    
+		    
+		  end if
 		End Sub
 	#tag EndMethod
 
@@ -172,6 +232,104 @@ Protected Module TabBarExtensionsXC
 		    
 		    
 		  end if
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 536574732074686520636F6C6F72206F662074686520736861646F77206C696E652E2055736520636F6C6F722E436C65617220746F206D616B6520697420696E76697369626C65
+		Sub SetTabBarShadowColorXC(extends v as MobileScreen, value as Color)
+		  
+		  
+		  
+		  Declare Function tabbar_ Lib "UIKit.framework" selector "tabBar"(o As Ptr) As Ptr
+		  
+		  
+		  dim tb as iOSTabBar=v.ParentTabBar
+		  if tb is nil then Return
+		  dim h as ptr = tb.ViewControllerHandle
+		  
+		  dim tabbar as Ptr = tabbar_(h)
+		  
+		  
+		  
+		  
+		  if ExtensionsXC.GetiOSVersionXC >= 13 then
+		    
+		    declare function init lib "Foundation.framework" selector "init" (obj_id as ptr) as ptr
+		    Declare Function alloc Lib "Foundation.framework" selector "alloc" (clsRef As ptr) As ptr
+		    Declare Function NSClassFromString Lib "Foundation.framework" (clsName As CFStringRef) As ptr
+		    Declare sub setShadowImage lib "UIKit.framework" selector "setShadowImage:" (id as ptr, image as ptr)
+		    
+		    
+		    Declare function getStandardAppearance lib "UIKit.framework" selector "standardAppearance" (obj as ptr) as ptr
+		    
+		    Dim tabBarAppearance as ptr = getStandardAppearance(tabbar)
+		    
+		    if tabBarAppearance = nil then
+		      Break
+		      'navBarAppearance = init(alloc(NSClassFromString("UINavigationBarAppearance")))
+		      
+		    end if
+		    
+		    Declare Sub setBackgroundImage Lib "UIKit.Framework" selector "setBackgroundImage:" (id As ptr, image As ptr)
+		    'setBackgroundImage(tabBarAppearance, init(alloc(NSClassFromString("UIImage"))))
+		    
+		    'setShadowImage(tabBarAppearance, init(alloc(NSClassFromString("UIImage"))))
+		    
+		    
+		    Declare Sub setShadowColor Lib "Foundation" selector "setShadowColor:" (obj as ptr, value as Ptr)
+		    
+		    if value.Alpha = 255 then
+		      setShadowColor(tabBarAppearance, UIColor.ClearColor)
+		      
+		    Else
+		      setShadowColor(tabBarAppearance, new UIColor(value))
+		    end if
+		    
+		    
+		    Declare sub setStandardAppearance lib "UIKit.framework" selector "setStandardAppearance:" (obj as ptr, value as ptr)
+		    
+		    if appearance = ViewExtensionsXC.Appearances.all or appearance = ViewExtensionsXC.Appearances.standard then
+		      setStandardAppearance(tabbar, tabBarAppearance)
+		    end if
+		    
+		    
+		    
+		    if ExtensionsXC.GetiOSVersionXC >= 15.0 then
+		      
+		      Declare Function getScrollEdgeAppearance lib "UIKit.framework" selector "scrollEdgeAppearance" (obj as ptr) as ptr
+		      Declare sub setScrollEdgeAppearance lib "UIKit.framework" selector "setScrollEdgeAppearance:" (obj as ptr, value as ptr)
+		      
+		      Dim scrollEdgeAppearance as ptr = getScrollEdgeAppearance(tabbar)
+		      
+		      if scrollEdgeAppearance = nil then
+		        scrollEdgeAppearance = init(alloc(NSClassFromString("UITabBarAppearance")))
+		        
+		        declare sub configureWithTransparentBackground lib "UIKit.framework" selector "configureWithTransparentBackground" (obj as ptr)
+		        configureWithTransparentBackground(scrollEdgeAppearance)
+		        
+		      end if
+		      
+		      
+		      
+		      if value.Alpha = 255 then
+		        setShadowColor(scrollEdgeAppearance, UIColor.ClearColor)
+		        
+		      Else
+		        setShadowColor(scrollEdgeAppearance, new UIColor(value))
+		      end if
+		      
+		      setScrollEdgeAppearance(tabbar, scrollEdgeAppearance)
+		    end if
+		    
+		    
+		  end if
+		  
+		  
+		  Declare sub layoutIfNeeded Lib "UIKit" selector "layoutIfNeeded" (obj as ptr)
+		  layoutIfNeeded(tabbar)
+		  
+		  
+		  
 		End Sub
 	#tag EndMethod
 

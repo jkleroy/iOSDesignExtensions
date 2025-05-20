@@ -232,6 +232,10 @@ Protected Module ExtensionsXC
 	#tag Note, Name = History
 		## History
 		
+		### Version 2.6.2 - Released 2025-05-20
+		* Fixed TabbarExtensionsXC.SetTabBarColorXC to change the background color of the TabBar
+		* New TabbarExtensionsXC.TabSetTabBarShadowColorXC
+		
 		### Version 2.6.2 - Released 2025-05-14
 		* Fixed ImageExtensionsXC.ImageWithMaskXC
 		* Fixed Picture.ToTemplateXC
@@ -416,7 +420,7 @@ Protected Module ExtensionsXC
 	#tag Constant, Name = kUseUIKit, Type = Boolean, Dynamic = False, Default = \"False", Scope = Protected
 	#tag EndConstant
 
-	#tag Constant, Name = kVersion, Type = Text, Dynamic = False, Default = \"2.6.2", Scope = Protected
+	#tag Constant, Name = kVersion, Type = Text, Dynamic = False, Default = \"2.6.3", Scope = Protected
 	#tag EndConstant
 
 

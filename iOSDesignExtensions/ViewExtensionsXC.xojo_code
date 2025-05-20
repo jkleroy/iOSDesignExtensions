@@ -190,16 +190,9 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub HideNavBarShadowXC(extends v As MobileScreen)
+		Sub HideNavBarShadowXC(extends v as MobileScreen, appearance as ViewExtensionsXC.Appearances = ViewExtensionsXC.Appearances.all)
 		  
 		  
-		  
-		  '[self.navigationController.navigationBar setBackgroundImage:[UIImage new]
-		  '                     forBarMetrics:UIBarMetricsDefault];
-		  'self.navigationController.navigationBar.shadowImage = [UIImage new];
-		  'self.navigationController.navigationBar.translucent = YES;
-		  'self.navigationController.view.backgroundColor = [UIColor clearColor];
-		  'self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
 		  
 		  
 		  Declare Function init Lib "Foundation.framework" selector "init" (obj_id As ptr) As ptr
@@ -218,12 +211,86 @@ Protected Module ViewExtensionsXC
 		  dim navBar as ptr = navigationBar(navigationControllerRef)
 		  'Dim view As ptr = view(navigationControllerRef)
 		  
-		  
-		  Declare Sub setBackgroundImage Lib "UIKit.Framework" selector "setBackgroundImage:forBarMetrics:" (id As ptr, image As ptr, metrics As Integer)
-		  setBackgroundImage(navBar, init(alloc(NSClassFromString("UIImage"))) , 0)
-		  
 		  Declare sub setShadowImage lib "UIKit.framework" selector "setShadowImage:" (id as ptr, image as ptr)
-		  setShadowImage(navBar, init(alloc(NSClassFromString("UIImage"))))
+		  
+		  // @property (nonatomic, copy, readwrite) UIColor * shadowColor;
+		  
+		  
+		  if ExtensionsXC.GetiOSVersionXC < 13 then
+		    Declare Sub setBackgroundImageForBarMetrics Lib "UIKit.Framework" selector "setBackgroundImage:forBarMetrics:" (id As ptr, image As ptr, metrics As Integer)
+		    setBackgroundImageForBarMetrics(navBar, init(alloc(NSClassFromString("UIImage"))) , 0)
+		    
+		    
+		    setShadowImage(navBar, init(alloc(NSClassFromString("UIImage"))))
+		    
+		    
+		    
+		  Elseif ExtensionsXC.GetiOSVersionXC >= 13 then
+		    
+		    declare function init lib "Foundation.framework" selector "init" (obj_id as ptr) as ptr
+		    Declare Function alloc Lib "Foundation.framework" selector "alloc" (clsRef As ptr) As ptr
+		    
+		    
+		    Declare function getStandardAppearance lib "UIKit.framework" selector "standardAppearance" (obj as ptr) as ptr
+		    
+		    Dim navBarAppearance as ptr = getStandardAppearance(navBar)
+		    
+		    if navBarAppearance = nil then
+		      navBarAppearance = init(alloc(NSClassFromString("UINavigationBarAppearance")))
+		      
+		    end if
+		    
+		    Declare Sub setBackgroundImage Lib "UIKit.Framework" selector "setBackgroundImage:" (id As ptr, image As ptr)
+		    setBackgroundImage(navBarAppearance, init(alloc(NSClassFromString("UIImage"))))
+		    
+		    setShadowImage(navBarAppearance, init(alloc(NSClassFromString("UIImage"))))
+		    
+		    
+		    Declare Sub setShadowColor Lib "Foundation" selector "setShadowColor:" (obj as ptr, value as Ptr)
+		    
+		    setShadowColor(navBarAppearance, UIColor.ClearColor)
+		    
+		    
+		    Declare sub setStandardAppearance lib "UIKit.framework" selector "setStandardAppearance:" (obj as ptr, value as ptr)
+		    
+		    if appearance = ViewExtensionsXC.Appearances.all or appearance = ViewExtensionsXC.Appearances.standard then
+		      setStandardAppearance(navBar, navBarAppearance)
+		    end if
+		    
+		    
+		    
+		    Declare sub setCompactAppearance lib "UIKit.framework" selector "setCompactAppearance:" (obj as ptr, value as ptr)
+		    
+		    if appearance = ViewExtensionsXC.Appearances.all or appearance = ViewExtensionsXC.Appearances.compact then
+		      setCompactAppearance(navBar, navBarAppearance)
+		    end if
+		    
+		    
+		    Declare sub setScrollEdgeAppearance lib "UIKit.framework" selector "setScrollEdgeAppearance:" (obj as ptr, value as ptr)
+		    
+		    if appearance = ViewExtensionsXC.Appearances.all or appearance = ViewExtensionsXC.Appearances.scrollEdge then
+		      setScrollEdgeAppearance(navBar, navBarAppearance)
+		    End if
+		    
+		    
+		    'Declare function decl_copy lib "UIKit" selector "copy" (obj as ptr) as ptr
+		    
+		    if ExtensionsXC.GetiOSVersionXC >= 15.0 then
+		      
+		      Declare sub setCompactScrollEdgeAppearance lib "UIKit.framework" selector "setCompactScrollEdgeAppearance:" (obj as ptr, value as ptr)
+		      
+		      if appearance = ViewExtensionsXC.Appearances.all or appearance = ViewExtensionsXC.Appearances.compactScrollEdge then
+		        setCompactScrollEdgeAppearance(navBar, navBarAppearance)
+		      end if
+		      
+		    end if
+		    
+		  end if
+		  
+		  
+		  Declare sub layoutIfNeeded Lib "UIKit" selector "layoutIfNeeded" (obj as ptr)
+		  layoutIfNeeded(navBar)
+		  
 		  
 		  
 		End Sub
@@ -1481,6 +1548,14 @@ Protected Module ViewExtensionsXC
 		Private ΩStatusBarHiddenScreens() As WeakRef
 	#tag EndProperty
 
+
+	#tag Enum, Name = Appearances, Flags = &h1
+		all = 0
+		  standard = 1
+		  scrollEdge
+		  compact
+		compactScrollEdge
+	#tag EndEnum
 
 	#tag Enum, Name = LargeTitleDisplayMode, Type = Integer, Flags = &h1
 		automatic = 0
