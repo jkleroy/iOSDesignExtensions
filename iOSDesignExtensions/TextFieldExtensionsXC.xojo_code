@@ -375,16 +375,18 @@ Protected Module TextFieldExtensionsXC
 		  Declare Function layer_ Lib "UIKit.framework" selector "layer" (id As ptr) As Ptr
 		  Dim layer As ptr = layer_(field.Handle)
 		  
-		  Dim uic As UIKit.UIColor
-		  
-		  if c.Alpha = 255 then
-		    uic = UIKit.UIColor.ClearColor
+		  Dim uic as ptr
+		  if value.Alpha = 255 then
+		    uic = ExtensionsXC.UIColor_Clear()
 		  else
-		    uic = new UIKit.UIColor(c)
+		    uic = ExtensionsXC.UIColorFromColor(value)
+		    
 		  end if
 		  
 		  declare sub setBorderColor lib "UIKit.framework" selector "setBorderColor:" (obj_id as ptr, col as ptr)
-		  setBorderColor(layer, uic.CGColor)
+		  Declare Function CGColor Lib UIKitLib selector "cgColor" (obj_id As ptr) as ptr
+		  
+		  setBorderColor(layer, cgcolor(uic))
 		End Sub
 	#tag EndMethod
 

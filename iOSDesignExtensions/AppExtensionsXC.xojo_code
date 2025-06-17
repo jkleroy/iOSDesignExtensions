@@ -82,13 +82,13 @@ Protected Module AppExtensionsXC
 		Sub SetWindowColorXC(extends app as MobileApplication, value as color)
 		  #Pragma unused app
 		  
-		  Dim uic As UIKit.UIColor
-		  
-		  If value.Alpha = 255 Then
-		    uic = UIKit.UIColor.ClearColor
-		  Else
-		    uic = New UIKit.UIColor(value)
-		  End If
+		  Dim uic as ptr
+		  if value.Alpha = 255 then
+		    uic = ExtensionsXC.UIColor_Clear()
+		  else
+		    uic = ExtensionsXC.UIColorFromColor(value)
+		    
+		  end if
 		  
 		  Declare Function NSClassFromString Lib "UIKit.framework" (clsName As CFStringRef) As ptr
 		  Declare Function sharedApplication Lib "UIKit.framework" selector "sharedApplication" (clsRef As ptr) As ptr

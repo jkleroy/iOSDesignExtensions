@@ -360,12 +360,14 @@ Protected Module ViewExtensionsXC
 		  Dim svc As ptr = initWithURL_(alloc(NSClassFromString("SFSafariViewController")), nUrl)
 		  
 		  
+		  Dim uic as ptr
+		  
 		  if BarTintColor.Alpha <> 255 then
 		    Declare sub preferredBarTintColor_ lib "UIKit.framework" selector "setPreferredBarTintColor:" (obj as ptr, value as ptr)
 		    
 		    
-		    Dim uic As UIKit.UIColor
-		    uic = new UIKit.UIColor(BarTintColor)
+		    
+		    uic = ExtensionsXC.UIColorFromColor(BarTintColor)
 		    
 		    
 		    preferredBarTintColor_(svc, uic)
@@ -374,8 +376,8 @@ Protected Module ViewExtensionsXC
 		  if ControlTintColor.Alpha <> 255 then
 		    Declare sub preferredControlTintColor_ lib "UIKit.framework" selector "setPreferredControlTintColor:" (obj as ptr, value as ptr)
 		    
-		    Dim uic As UIKit.UIColor
-		    uic = new UIKit.UIColor(ControlTintColor)
+		    
+		    uic = ExtensionsXC.UIColorFromColor(ControlTintColor)
 		    
 		    
 		    preferredControlTintColor_(svc, uic)
@@ -516,15 +518,15 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 536574732074686520636F6C6F72206F6620612056696577
-		Sub SetBackgroundColorXC(extends v As MobileScreen, c As Color)
+		Sub SetBackgroundColorXC(extends v As MobileScreen, value As Color)
 		  
 		  
-		  Dim uic As UIKit.UIColor
+		  Dim uic as ptr
 		  
-		  if c.Alpha = 255 then
-		    uic = UIKit.UIColor.ClearColor
+		  if value.Alpha = 255 then
+		    uic = ExtensionsXC.UIColor_Clear()
 		  else
-		    uic = new UIKit.UIColor(c)
+		    uic = ExtensionsXC.UIColorFromColor(value)
 		  end if
 		  
 		  
@@ -1282,7 +1284,7 @@ Protected Module ViewExtensionsXC
 		  
 		  Declare Sub tintColor_ Lib "UIKit.framework" selector "setTintColor:" (obj_id As ptr, tintColor As ptr)
 		  
-		  tintColor_ toolbar, New UIColor(barColor)
+		  tintColor_ toolbar, ExtensionsXC.UIColorFromColor(barColor)
 		  
 		  
 		End Sub

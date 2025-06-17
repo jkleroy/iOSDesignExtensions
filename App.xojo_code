@@ -21,6 +21,25 @@ Inherits MobileApplication
 		  'Dim p2 As new Picture(10, 10)
 		  '
 		  'Dim img2 As iOSImage = p2
+		  
+		  
+		  #if False
+		    Dim img As Picture
+		    
+		    dim config as ptr = ImageExtensionsXC.GetUIImageSymbolConfigurationXC(&cFF0000)
+		    
+		    img = ImageExtensionsXC.SystemImageWithConfigurationXC("flag.checkered.2.crossed", config)
+		    
+		    Break
+		    
+		  #endif
+		  
+		  
+		  Dim cst as ptr = ExtensionsXC.LoadConstantXC("UIKit", "UIButtonConfigurationCornerStyleCapsule")
+		  
+		  Declare function description_ lib UIKitLib Selector "description" (obj as ptr) as CFStringRef
+		  System.DebugLog description_(cst)
+		  
 		End Sub
 	#tag EndEvent
 

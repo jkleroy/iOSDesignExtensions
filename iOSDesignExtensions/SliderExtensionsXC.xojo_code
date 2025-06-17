@@ -5,12 +5,13 @@ Protected Module SliderExtensionsXC
 		  
 		  
 		  
-		  Dim uic As UIKit.UIColor
-		  If value.Alpha = 255 Then
-		    uic = UIKit.UIColor.ClearColor
-		  Else
-		    uic = New UIColor(value)
-		  End If
+		  Dim uic as ptr
+		  if value.Alpha = 255 then
+		    uic = ExtensionsXC.UIColor_Clear()
+		  else
+		    uic = ExtensionsXC.UIColorFromColor(value)
+		    
+		  end if
 		  
 		  declare sub maximumTrackTintColor_ lib "UIKit.framework" selector "setMaximumTrackTintColor:" (id as ptr, UIColor as Ptr)
 		  maximumTrackTintColor_(slider.Handle, uic)
@@ -31,12 +32,13 @@ Protected Module SliderExtensionsXC
 		  
 		  
 		  
-		  Dim uic As UIKit.UIColor
-		  If value.Alpha = 255 Then
-		    uic = UIKit.UIColor.ClearColor
-		  Else
-		    uic = New UIColor(value)
-		  End If
+		  Dim uic as ptr
+		  if value.Alpha = 255 then
+		    uic = ExtensionsXC.UIColor_Clear()
+		  else
+		    uic = ExtensionsXC.UIColorFromColor(value)
+		    
+		  end if
 		  
 		  declare sub minimumTrackTintColor_ lib "UIKit.framework" selector "setMinimumTrackTintColor:" (id as ptr, UIColor as Ptr)
 		  minimumTrackTintColor_(slider.Handle, uic)
@@ -57,12 +59,13 @@ Protected Module SliderExtensionsXC
 		  
 		  
 		  
-		  Dim uic As UIKit.UIColor
-		  If value.Alpha = 255 Then
-		    uic = UIKit.UIColor.ClearColor
-		  Else
-		    uic = New UIColor(value)
-		  End If
+		  Dim uic as ptr
+		  if value.Alpha = 255 then
+		    uic = ExtensionsXC.UIColor_Clear()
+		  else
+		    uic = ExtensionsXC.UIColorFromColor(value)
+		    
+		  end if
 		  
 		  declare sub thumbTintColor_ lib "UIKit.framework" selector "setThumbTintColor:" (id as ptr, UIColor as Ptr)
 		  thumbTintColor_(slider.Handle, uic)

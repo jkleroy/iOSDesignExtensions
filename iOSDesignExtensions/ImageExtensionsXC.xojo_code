@@ -13,6 +13,30 @@ Protected Module ImageExtensionsXC
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h1
+		Protected Function GetUIImageSymbolConfigurationXC(value As color) As Ptr
+		  
+		  if ExtensionsXC.GetiOSVersionXC >= 15.0 then
+		    
+		    // + (instancetype) tintedButtonConfiguration;
+		    
+		    Declare Function NSClassFromString Lib "Foundation.framework" (clsName As CFStringRef) As ptr
+		    
+		    Dim UIImageSymbolConfiguration_class as ptr = NSClassFromString("UIImageSymbolConfiguration")
+		    
+		    var config as ptr
+		    
+		    // + (instancetype) configurationWithHierarchicalColor:(UIColor *) hierarchicalColor;
+		    Declare Function configurationWithHierarchicalColor Lib "Foundation" Selector "configurationWithHierarchicalColor:" ( cls as ptr, color_value as ptr) As Ptr
+		    
+		    config = configurationWithHierarchicalColor(UIImageSymbolConfiguration_class,  ExtensionsXC.UIColorFromColor(value) )
+		    
+		    Return config
+		    
+		  end if
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h1, Description = 52657475726E7320616E20696D6167652074686174206973206175746F6D61746963616C6C7920666C697070656420666F722052544C206C616E677561676573
 		Protected Function ImageForRTLXC(image As Picture) As Picture
 		  
@@ -205,6 +229,29 @@ Protected Module ImageExtensionsXC
 		  
 		  
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h1, Description = 52657475726E7320616E20696D6167652066726F6D2074686520694F5331332053462053796D626F6C206C696272617279
+		Protected Function SystemImageWithConfigurationXC(name as String, configuration as ptr) As Picture
+		  
+		  
+		  if ExtensionsXC.GetiOSVersionXC >= 13.0 then
+		    
+		    Declare Function systemImageNamed lib "UIKit.framework" selector "systemImageNamed:withConfiguration:" (cls as ptr, name as CFStringRef, config as ptr) as ptr
+		    declare function NSClassFromString lib "Foundation.framework" (clsName as CFStringRef) as ptr
+		    
+		    Dim imgRef As ptr = systemImageNamed(NSClassFromString("UIImage"), name, configuration)
+		    
+		    if imgRef <> nil then
+		      
+		      Return Picture.FromHandle(imgRef)
+		      
+		    end if
+		    
+		    
+		  end if
+		  
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h1, Description = 52657475726E7320616E20696D6167652066726F6D2074686520694F5331332053462053796D626F6C206C696272617279

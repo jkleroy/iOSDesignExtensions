@@ -171,6 +171,19 @@ Protected Module ExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
+		Protected Function NSDirectionalEdgeInsetsMake(top As CGFloat, leading As CGFloat, bottom As CGFloat, trailing As CGFloat) As xcNSDirectionalEdgeInsets
+		  
+		  Dim insets As xcNSDirectionalEdgeInsets
+		  insets.Top = top
+		  insets.Leading = leading
+		  insets.Bottom = bottom
+		  insets.Trailing = trailing
+		  
+		  Return insets
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
 		Protected Function StringConstantXC(frameworkName as String, constName as String) As String
 		  Dim constPtr As Ptr = LoadConstantXC(frameworkName, constName)
 		  if constPtr <> nil then
@@ -182,9 +195,15 @@ Protected Module ExtensionsXC
 
 	#tag Method, Flags = &h1
 		Protected Function UIColorFromColor(value as color) As ptr
-		  Soft Declare Function colorWithRGBA Lib "UIKit" Selector "colorWithRed:green:blue:alpha:" (UIColorClassRef As Ptr, red As CGFloat, green As CGFloat, blue As CGFloat, alpha As CGFloat) As Ptr
+		  Declare Function colorWithRGBA Lib "UIKit" Selector "colorWithRed:green:blue:alpha:"_
+		  (UIColorClassRef As Ptr, red As CGFloat, green As CGFloat, blue As CGFloat, alpha As CGFloat) As Ptr
 		  
-		  Soft Declare Function NSClassFromString Lib "Foundation" (classname As CFStringRef) As Ptr
+		  
+		  'Declare Function colorWithDisplayP3 Lib "UIKit" Selector "colorWithDisplayP3Red:green:blue:alpha:" _
+		  '(UIColorClassRef As Ptr, red As CGFloat, green As CGFloat, blue As CGFloat, alpha As CGFloat) As Ptr
+		  
+		  
+		  Declare Function NSClassFromString Lib "Foundation" (classname As CFStringRef) As Ptr
 		  
 		  
 		  static UIColorClassPtr As Ptr =  NSClassFromString("UIColor")
@@ -194,11 +213,28 @@ Protected Module ExtensionsXC
 		  Dim red As CGFloat = c.red / 255
 		  Dim green As CGFloat = c.Green / 255
 		  Dim blue As CGFloat = c.Blue / 255
-		  Dim alpha As CGFloat = 1.0 - c.Alpha / 255
+		  Dim alpha As CGFloat = (255 - c.Alpha) / 255
 		  
 		  Dim colorPtr As ptr = colorWithRGBA(UIColorClassPtr, red, green, blue, alpha)
+		  'Dim colorPtr As ptr = colorWithDisplayP3((UIColorClassPtr), red, green, blue, alpha)
 		  
 		  Return colorPtr
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
+		Protected Function UIColor_Clear() As ptr
+		  
+		  
+		  Soft Declare Function NSClassFromString Lib "Foundation" (classname As CFStringRef) As Ptr
+		  declare function clearColor lib UIKitLib selector "clearColor" (id as Ptr) as Ptr
+		  
+		  
+		  static UIColorClassPtr As Ptr =  NSClassFromString("UIColor")
+		  
+		  
+		  
+		  return clearColor(UIColorClassPtr)
 		End Function
 	#tag EndMethod
 
@@ -446,6 +482,13 @@ Protected Module ExtensionsXC
 	#tag Structure, Name = xcCGSize, Flags = &h1
 		width As CGFloat
 		height As CGFloat
+	#tag EndStructure
+
+	#tag Structure, Name = xcNSDirectionalEdgeInsets, Flags = &h1
+		Top as CGFloat
+		  Leading As CGFloat
+		  Bottom As CGFloat
+		Trailing As CGFloat
 	#tag EndStructure
 
 	#tag Structure, Name = xcUIEdgeInsets, Flags = &h1

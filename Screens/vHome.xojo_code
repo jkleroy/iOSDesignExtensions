@@ -67,6 +67,9 @@ End
 		  
 		  
 		  'self.SetPrefersHomeIndicatorAutoHiddenXC(True)
+		  
+		  
+		  'app.TintColor = &cFF0000
 		End Sub
 	#tag EndEvent
 
@@ -234,6 +237,12 @@ End
 		  img = Picture.SystemImage("button.horizontal", 0)
 		  AddRow(section, "Buttons", "", accessory, GetTypeInfo(vButtons), ImageExtensionsXC.ImageWithColorXC(img, &c0F7FFE00))
 		  
+		  img = Picture.SystemImage("button.horizontal", 0)
+		  AddRow(section, "Button State (iOS15)", "", accessory, GetTypeInfo(vButtonState), ImageExtensionsXC.ImageWithColorXC(img, &c0F7FFE00))
+		  
+		  img = Picture.SystemImage("button.horizontal", 0)
+		  AddRow(section, "Button Configuration (iOS15)", "", accessory, GetTypeInfo(vButtonConfiguration), ImageExtensionsXC.ImageWithColorXC(img, &c0F7FFE00))
+		  
 		  section = AddSection("Label Extensions")
 		  img = Picture.SystemImage("textformat", 0)
 		  AddRow(section, "Labels", "", accessory, GetTypeInfo(vLabels), ImageExtensionsXC.ImageWithColorXC(img, &c0F7FFE00))
@@ -255,8 +264,13 @@ End
 		  
 		  
 		  section = AddSection("Scroll Extensions")
-		  img = Picture.SystemImage("arrow.up.arrow.down", 0)
-		  AddRow(section, "Scroll Examples", "", accessory, GetTypeInfo(vScrollView), ImageExtensionsXC.ImageWithColorXC(img, &cFC800800))
+		  'img = Picture.SystemImage("arrow.up.arrow.down", 0)
+		  
+		  dim config as ptr = ImageExtensionsXC.GetUIImageSymbolConfigurationXC(color.Blue)
+		  
+		  img = ImageExtensionsXC.SystemImageWithConfigurationXC("arrow.up.arrow.down", config)
+		  
+		  AddRow(section, "Scroll Examples", "", accessory, GetTypeInfo(vScrollView), img) 'ImageExtensionsXC.ImageWithColorXC(img, &cFC800800))
 		  
 		  
 		  section = AddSection("Table Extensions")

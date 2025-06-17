@@ -74,6 +74,9 @@ Protected Module LayerExtensionsXC
 		  c2 = New UIKit.UIColor(col2)
 		  
 		  
+		  #Pragma warning "Need to convert UIColor to CGColor"
+		  
+		  
 		  addObject colorArray, c1.CGColor
 		  addObject colorArray, c2.CGColor
 		  
@@ -132,15 +135,19 @@ Protected Module LayerExtensionsXC
 		  
 		  Dim layer as ptr = c.GetLayerXC
 		  
-		  Dim uic As uikit.uicolor 
-		  If value.Alpha = 255 Then
-		    uic = UIKit.UIColor.ClearColor
-		  Else
-		    uic = New UIColor(value)
-		  End If 
+		   
+		  Dim uic as ptr
+		  if value.Alpha = 255 then
+		    uic = ExtensionsXC.UIColor_Clear()
+		  else
+		    uic = ExtensionsXC.UIColorFromColor(value)
+		    
+		  end if
 		  
 		  declare sub setBorderColor lib "UIKit.framework" selector "setBorderColor:" (obj_id as ptr, col as ptr)
-		  setBorderColor(layer, uic.CGColor)
+		  Declare Function CGColor Lib "UIKit" selector "cgColor" (obj_id As ptr) as ptr
+		  
+		  setBorderColor(layer, CGColor(uic))
 		End Sub
 	#tag EndMethod
 
@@ -200,8 +207,20 @@ Protected Module LayerExtensionsXC
 		  masksToBounds_(layer, False)
 		  
 		  Declare Sub shadowColor_ Lib QuartzCoreLib selector "setShadowColor:" (id As ptr, col As ptr)
-		  Dim c As new UIColor(ShadowColor)
-		  shadowColor_(layer, c.CGColor)
+		  
+		  
+		  Dim uic as ptr
+		  if ShadowColor.Alpha = 255 then
+		    uic = ExtensionsXC.UIColor_Clear()
+		  else
+		    uic = ExtensionsXC.UIColorFromColor(ShadowColor)
+		    
+		  end if
+		  
+		  Declare Function cgcolor Lib "UIKit" selector "cgColor" (obj_id As ptr) as ptr
+		  
+		  
+		  shadowColor_(layer, CGColor(uic))
 		  
 		  
 		  

@@ -34,6 +34,20 @@ Protected Module ButtonExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Function IsSelectedXC(extends bt As MobileButton) As Boolean
+		  
+		  
+		  
+		  // @property (nonatomic, getter=isSelected) BOOL selected;
+		  Declare Function getSelected Lib "Foundation" selector "isSelected" (obj as ptr) As Boolean
+		  
+		  
+		  return getSelected(bt.Handle)
+		  
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 5365747320746865206261636B64726F7020696D616765206F662074686520627574746F6E2E
 		Sub SetBackdropXC(extends bt as MobileButton, backdrop as Picture)
 		  'This method was posted by Jim McKay in the https://forum.xojo.com/18184-button-and-view-colours-ios/last thread
@@ -96,6 +110,144 @@ Protected Module ButtonExtensionsXC
 		  bt.SetBackdropXC(resizedImg)
 		  
 		  bt.SetButtonInsetsXC(insets)
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 4120426F6F6C65616E2076616C7565207468617420696E6469636174657320776865746865722074686520627574746F6E20747261636B7320612073656C656374696F6E2C20656974686572207468726F7567682061206D656E75206F72206120746F67676C652E
+		Sub SetChangesSelectionAsPrimaryAction(extends bt As MobileButton, value As Boolean)
+		  //New in version 2.0
+		  
+		  // https://developer.apple.com/documentation/uikit/uibutton/changesselectionasprimaryaction?language=objc
+		  
+		  
+		  if ExtensionsXC.GetiOSVersionXC >= 15.0 then
+		    
+		    
+		    // @property (nonatomic, assign, readwrite) BOOL changesSelectionAsPrimaryAction;
+		    'Declare Function getChangesSelectionAsPrimaryAction Lib "Foundation" selector "changesSelectionAsPrimaryAction" (obj as ptr) As Ptr
+		    Declare Sub setChangesSelectionAsPrimaryAction Lib "Foundation" selector "setChangesSelectionAsPrimaryAction:" (obj as ptr, value as Boolean)
+		    
+		    setChangesSelectionAsPrimaryAction(bt.handle, value)
+		    
+		  end if
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub SetConfigurationXC(extends button as MobileButton, configuration as ButtonExtensionsXC.Configurations = Configurations.plain)
+		  
+		  
+		  if ExtensionsXC.GetiOSVersionXC >= 15.0 then
+		    
+		    // + (instancetype) tintedButtonConfiguration;
+		    
+		    Declare Function NSClassFromString Lib "Foundation.framework" (clsName As CFStringRef) As ptr
+		    
+		    Dim UIButtonConfiguration_class as ptr = NSClassFromString("UIButtonConfiguration")
+		    
+		    var config as ptr
+		    
+		    Select case configuration
+		      
+		    Case Configurations.plain
+		      
+		      
+		      // + (instancetype) plainButtonConfiguration;
+		      Declare Function plainButtonConfiguration Lib "Foundation" Selector "plainButtonConfiguration" ( cls as ptr ) As Ptr
+		      config = plainButtonConfiguration( UIButtonConfiguration_class )
+		      
+		      
+		    Case Configurations.gray
+		      
+		      // + (instancetype) grayButtonConfiguration;
+		      Declare Function grayButtonConfiguration Lib "Foundation" Selector "grayButtonConfiguration" ( cls as ptr ) As Ptr
+		      config = grayButtonConfiguration( UIButtonConfiguration_class )
+		      
+		      
+		    Case Configurations.tinted
+		      
+		      Declare Function tintedButtonConfiguration Lib "Foundation" Selector "tintedButtonConfiguration" ( cls as ptr ) As Ptr
+		      config = tintedButtonConfiguration( UIButtonConfiguration_class )
+		      
+		      
+		    Case Configurations.filled
+		      
+		      // + (instancetype) filledButtonConfiguration;
+		      Declare Function filledButtonConfiguration Lib "Foundation" Selector "filledButtonConfiguration" ( cls as ptr ) As Ptr
+		      config = filledButtonConfiguration( UIButtonConfiguration_class )
+		      
+		    Case Configurations.borderless
+		      
+		      // + (instancetype) borderlessButtonConfiguration;
+		      Declare Function borderlessButtonConfiguration Lib "Foundation" Selector "borderlessButtonConfiguration" ( cls as ptr ) As Ptr
+		      config = borderlessButtonConfiguration( UIButtonConfiguration_class )
+		      
+		    Case Configurations.bordered
+		      
+		      // + (instancetype) borderedButtonConfiguration;
+		      Declare Function borderedButtonConfiguration Lib "Foundation" Selector "borderedButtonConfiguration" ( cls as ptr ) As Ptr
+		      config = borderedButtonConfiguration( UIButtonConfiguration_class )
+		      
+		    Case Configurations.borderedTinted
+		      
+		      // + (instancetype) borderedTintedButtonConfiguration;
+		      Declare Function borderedTintedButtonConfiguration Lib "Foundation" Selector "borderedTintedButtonConfiguration" ( cls as ptr ) As Ptr
+		      config = borderedTintedButtonConfiguration( UIButtonConfiguration_class )
+		      
+		    Case Configurations.borderedProminent
+		      
+		      // + (instancetype) borderedProminentButtonConfiguration;
+		      Declare Function borderedProminentButtonConfiguration Lib "Foundation" Selector "borderedProminentButtonConfiguration" ( cls as ptr ) As Ptr
+		      config = borderedProminentButtonConfiguration( UIButtonConfiguration_class )
+		      
+		    Case Configurations.glass
+		      
+		      
+		      Declare Function respondsToSelector_ Lib "Foundation" Selector "respondsToSelector:" (obj As ptr, aSelector As Ptr) As Boolean
+		      Declare Function NSSelectorFromString Lib "Foundation" ( aSelectorName As CFStringRef ) As Ptr
+		      
+		      if respondsToSelector_(UIButtonConfiguration_class, NSSelectorFromString("glassButtonConfiguration")) then
+		        
+		        // + (instancetype) glassButtonConfiguration;
+		        Declare Function glassButtonConfiguration Lib "Foundation" Selector "glassButtonConfiguration" ( cls as ptr ) As Ptr
+		        
+		        config = glassButtonConfiguration( UIButtonConfiguration_class )
+		      end if
+		      
+		      
+		      
+		    Case Configurations.tintedGlass
+		      
+		      Declare Function respondsToSelector_ Lib "Foundation" Selector "respondsToSelector:" (obj As ptr, aSelector As Ptr) As Boolean
+		      Declare Function NSSelectorFromString Lib "Foundation" ( aSelectorName As CFStringRef ) As Ptr
+		      
+		      if respondsToSelector_(UIButtonConfiguration_class, NSSelectorFromString("tintedGlassButtonConfiguration")) then
+		        
+		        // + (instancetype) glassButtonConfiguration;
+		        Declare Function tintedGlassButtonConfiguration Lib "Foundation" Selector "tintedGlassButtonConfiguration" ( cls as ptr ) As Ptr
+		        
+		        config = tintedGlassButtonConfiguration( UIButtonConfiguration_class )
+		      end if
+		      
+		      
+		    End Select
+		    
+		    
+		    
+		    
+		    // @property (nonatomic, copy, readwrite) UIButtonConfiguration * configuration;
+		    Declare Sub setConfiguration Lib "Foundation" selector "setConfiguration:" (obj as ptr, value as Ptr)
+		    
+		    if config <> nil then
+		      setConfiguration(button.handle, config)
+		      
+		    end if
+		    
+		    
+		  end if
+		  
 		  
 		  
 		End Sub
@@ -183,6 +335,20 @@ Protected Module ButtonExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub SetSelectedXC(extends bt As MobileButton, value As Boolean)
+		  
+		  
+		  
+		  // @property (nonatomic, getter=isSelected) BOOL selected;
+		  Declare Function getSelected Lib "Foundation" selector "selected" (obj as ptr) As Boolean
+		  
+		  Declare Sub setSelected Lib "Foundation" selector "setSelected:" (obj as ptr, value as Boolean)
+		  setSelected(bt.Handle, value)
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub SetTextAlignmentXC(extends bt As MobileButton, alignment As ControlExtensionsXC.NSTextAlignment)
 		  Dim label As ptr
 		  Declare Function getTextLabel Lib "UIKit.framework" selector "titleLabel" (obj_ref As ptr) As ptr
@@ -205,40 +371,19 @@ Protected Module ButtonExtensionsXC
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0, CompatibilityFlags = (TargetConsole and (Target32Bit or Target64Bit)) or  (TargetWeb and (Target32Bit or Target64Bit)) or  (TargetDesktop and (Target32Bit or Target64Bit))
-		Sub x_SetBackgroundColorXC(Extends bt As MobileButton, value As color)
-		  
-		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
-		  Declare Function colorWithRGBA Lib "UIKit.framework" Selector "colorWithRed:green:blue:alpha:" ( UIColorClassRef As Ptr, red As CGFloat, green As CGFloat, blue As CGFloat, alpha As CGFloat) As Ptr
-		  Declare Function view Lib "UIKit.framework" Selector "view" (UIViewController As Ptr) As Ptr
-		  Declare Sub setBackgroundColor Lib "UIKit.framework" Selector "setBackgroundColor:" (UIView As Ptr, UIColor As Ptr)
-		  
-		  Dim UIColorClassPtr As Ptr =  NSClassFromString("UIColor")
-		  Dim colorPtr As ptr = colorWithRGBA(UIColorClassPtr, (value.red / 255.0), (value.Green / 255.0), (value.Blue / 255.0), (1.0-value.Alpha/255.0))
-		  Dim viewPtr As Ptr = bt.Handle
-		  SetBackgroundColor(viewPtr, colorPtr)
-		End Sub
-	#tag EndMethod
 
-	#tag Method, Flags = &h0, CompatibilityFlags = (TargetConsole and (Target32Bit or Target64Bit)) or  (TargetWeb and (Target32Bit or Target64Bit)) or  (TargetDesktop and (Target32Bit or Target64Bit))
-		Sub x_SetBorderColorXC(extends bt As MobileButton, value As Color)
-		  
-		  
-		  Declare Function layer_ Lib "UIKit.framework" selector "layer" (id As ptr) As Ptr
-		  Dim layer As ptr = layer_(bt.Handle)
-		  
-		  Dim uic As UIKit.UIColor
-		  If value.Alpha = 255 Then
-		    uic = UIKit.UIColor.ClearColor
-		  Else
-		    uic = New UIColor(value)
-		  End If 
-		  
-		  declare sub setBorderColor lib "UIKit.framework" selector "setBorderColor:" (obj_id as ptr, col as ptr)
-		  setBorderColor(layer, uic.CGColor)
-		End Sub
-	#tag EndMethod
-
+	#tag Enum, Name = Configurations, Type = Integer, Flags = &h0
+		plain
+		  gray
+		  tinted
+		  filled
+		  borderless
+		  bordered
+		  borderedTinted
+		  borderedProminent
+		  glass
+		tintedGlass
+	#tag EndEnum
 
 	#tag Enum, Name = UIButtonRole, Type = Integer, Flags = &h0
 		normal = 0

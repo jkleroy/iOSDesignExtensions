@@ -42,14 +42,13 @@ Protected Module TableSearchExtensionsXC
 		    Var textFieldObj As ptr = searchTextField(searchBarObj)
 		    
 		    
-		    //Now do something
-		    Dim uic As UIKit.UIColor
-		    
-		    If value.Alpha = 255 Then
-		      uic = UIKit.UIColor.ClearColor
-		    Else
-		      uic = New UIColor(value)
-		    End If
+		    Dim uic as ptr
+		    if value.Alpha = 255 then
+		      uic = ExtensionsXC.UIColor_Clear()
+		    else
+		      uic = ExtensionsXC.UIColorFromColor(value)
+		      
+		    end if
 		    
 		    
 		    Declare Sub setTextColor_ Lib "UIKit.framework" selector "setTextColor:" (obj_id As ptr, col As ptr)

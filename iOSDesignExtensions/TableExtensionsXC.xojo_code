@@ -174,13 +174,15 @@ Protected Module TableExtensionsXC
 	#tag Method, Flags = &h0
 		Sub SetBackgroundColorXC(extends action As iOSMobileTableRowAction, value as Color)
 		  
-		  Dim uic As UIKit.UIColor
 		  
-		  If value.Alpha = 255 Then
-		    uic = UIKit.UIColor.ClearColor
-		  Else
-		    uic = New UIColor(value)
-		  End If
+		  
+		  Dim uic as ptr
+		  if value.Alpha = 255 then
+		    uic = ExtensionsXC.UIColor_Clear()
+		  else
+		    uic = ExtensionsXC.UIColorFromColor(value)
+		    
+		  end if
 		  
 		  
 		  
@@ -192,13 +194,15 @@ Protected Module TableExtensionsXC
 	#tag Method, Flags = &h0
 		Sub SetBackgroundColorXC(extends cell as MobileTableCellData, value as Color)
 		  
-		  Dim uic As UIKit.UIColor
 		  
-		  If value.Alpha = 255 Then
-		    uic = UIKit.UIColor.ClearColor
-		  Else
-		    uic = New UIColor(value)
-		  End If
+		  
+		  Dim uic as ptr
+		  if value.Alpha = 255 then
+		    uic = ExtensionsXC.UIColor_Clear()
+		  else
+		    uic = ExtensionsXC.UIColorFromColor(value)
+		    
+		  end if
 		  
 		  
 		  Declare Sub setBackgroundColor_ Lib "UIKit.framework" selector "setBackgroundColor:" (obj_id As ptr, col As ptr)
@@ -209,13 +213,15 @@ Protected Module TableExtensionsXC
 	#tag Method, Flags = &h0
 		Sub SetBackgroundViewColorXC(extends cell as MobileTableCellData, value as Color)
 		  
-		  Dim uic As UIKit.UIColor
 		  
-		  If value.Alpha = 255 Then
-		    uic = UIKit.UIColor.ClearColor
-		  Else
-		    uic = New UIColor(value)
-		  End If
+		  
+		  Dim uic as ptr
+		  if value.Alpha = 255 then
+		    uic = ExtensionsXC.UIColor_Clear()
+		  else
+		    uic = ExtensionsXC.UIColorFromColor(value)
+		    
+		  end if
 		  
 		  Declare function backgroundView lib "UIkit.framework" selector "backgroundView" (obj as ptr) as ptr
 		  
@@ -238,12 +244,14 @@ Protected Module TableExtensionsXC
 		Sub SetDetailTextColorXC(extends cell As MobileTableCellData, value As Color)
 		  
 		  Dim label As Ptr
-		  Dim uic As UIKit.UIColor
 		  
-		  If value.Alpha = 255 Then
-		    uic = UIKit.UIColor.ClearColor
-		  Else
-		    uic = New UIColor(value)
+		  
+		  Dim uic as ptr
+		  if value.Alpha = 255 then
+		    uic = ExtensionsXC.UIColor_Clear()
+		  else
+		    uic = ExtensionsXC.UIColorFromColor(value)
+		    
 		  end if
 		  
 		  declare function getTextLabel lib "UIKit.framework" selector "detailTextLabel" (obj_ref as ptr) as ptr
@@ -489,12 +497,13 @@ Protected Module TableExtensionsXC
 		  Dim bgColorView As ptr = init(alloc(NSClassFromString("UIView")))
 		  
 		  
-		  Dim uic As UIColor
-		  If value.Alpha = 255 Then
-		    uic = UIColor.ClearColor
-		  Else
-		    uic = New UIColor(value)
-		  End If
+		  Dim uic as ptr
+		  if value.Alpha = 255 then
+		    uic = ExtensionsXC.UIColor_Clear()
+		  else
+		    uic = ExtensionsXC.UIColorFromColor(value)
+		    
+		  end if
 		  
 		  setBackgroundColor_(bgColorView, uic)
 		  
@@ -516,13 +525,13 @@ Protected Module TableExtensionsXC
 		  label = getTextLabel(cell.Handle)
 		  
 		  
-		  Dim uic As UIColor
-		  If value.Alpha = 255 Then
-		    uic = UIColor.ClearColor
-		  Else
-		    uic = New UIColor(value)
-		  End If
-		  
+		  Dim uic as ptr
+		  if value.Alpha = 255 then
+		    uic = ExtensionsXC.UIColor_Clear()
+		  else
+		    uic = ExtensionsXC.UIColorFromColor(value)
+		    
+		  end if
 		  
 		  
 		  Declare Sub setHighlightedTextColor_ Lib "UIKit.framework" selector "setHighlightedTextColor:" (obj_id As ptr, col As ptr)
@@ -543,12 +552,13 @@ Protected Module TableExtensionsXC
 		  label = getTextLabel(cell.Handle)
 		  
 		  
-		  Dim uic As UIColor
-		  If value.Alpha = 255 Then
-		    uic = UIColor.ClearColor
-		  Else
-		    uic = New UIColor(value)
-		  End If
+		  Dim uic as ptr
+		  if value.Alpha = 255 then
+		    uic = ExtensionsXC.UIColor_Clear()
+		  else
+		    uic = ExtensionsXC.UIColorFromColor(value)
+		    
+		  end if
 		  
 		  
 		  
@@ -572,13 +582,15 @@ Protected Module TableExtensionsXC
 	#tag Method, Flags = &h0, Description = 52656D6F76657320616C6C20726F772073656C656374696F6E73
 		Sub SetSeparatorColorXC(extends table As iOSMobileTable, value As Color)
 		  
-		  Dim uic As UIKit.UIColor
 		  
-		  If value.Alpha = 255 Then
-		    uic = UIKit.UIColor.ClearColor
-		  Else
-		    uic = New UIColor(value)
-		  End If
+		  
+		  Dim uic as ptr
+		  if value.Alpha = 255 then
+		    uic = ExtensionsXC.UIColor_Clear()
+		  else
+		    uic = ExtensionsXC.UIColorFromColor(value)
+		    
+		  end if
 		  
 		  Declare Sub setSeparatorColor Lib "UIKit.framework" selector "setSeparatorColor:" (id As ptr, UIColor As Ptr)
 		  setSeparatorColor table.Handle, uic
@@ -669,13 +681,13 @@ Protected Module TableExtensionsXC
 		  Dim label As Ptr
 		  
 		  
-		  Dim uic As UIKit.UIColor
-		  
-		  If value.Alpha = 255 Then
-		    uic = UIKit.UIColor.ClearColor
-		  Else
-		    uic = New UIColor(value)
-		  End If
+		  Dim uic as ptr
+		  if value.Alpha = 255 then
+		    uic = ExtensionsXC.UIColor_Clear()
+		  else
+		    uic = ExtensionsXC.UIColorFromColor(value)
+		    
+		  end if
 		  
 		  Declare Function getTextLabel Lib "UIKit.framework" selector "textLabel" (obj_ref As ptr) As ptr
 		  label = getTextLabel(cell.Handle)

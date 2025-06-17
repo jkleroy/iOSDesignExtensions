@@ -257,18 +257,23 @@ Protected Module ControlExtensionsXC
 		Sub SetBackgroundColorXC(extends ctrl As MobileUIControl, value As Color)
 		  
 		  
-		  Dim uic As UIKit.UIColor
 		  
-		  If value.Alpha = 255 Then
-		    uic = UIKit.UIColor.ClearColor
+		  
+		  Dim uic as ptr
+		  if value.Alpha = 255 then
+		    uic = ExtensionsXC.UIColor_Clear()
 		  else
-		    uic = New UIKit.UIColor(value)
+		    uic = ExtensionsXC.UIColorFromColor(value)
+		    
 		  end if
 		  
 		  
+		  'Declare function description_ lib UIKitLib Selector "description" (obj as ptr) as CFStringRef
+		  'System.DebugLog description_(uic)
+		  
 		  
 		  Declare Sub decl_SetBackgroundColor lib "UIKit.framework" selector "setBackgroundColor:" (aUIView As Ptr, aUIColor As Ptr)
-		  ' Here is the corresponding Xojo call
+		  
 		  decl_SetBackgroundColor(ctrl.handle, uic)
 		  
 		  
@@ -362,12 +367,13 @@ Protected Module ControlExtensionsXC
 		  'declare sub setTintColor lib "UIKit.framework" selector "setTintColor:" (id as ptr, UIColor as Ptr)
 		  'setTintColor s.Handle, new UIColor(c)
 		  
-		  Dim uic As UIKit.UIColor
-		  If value.Alpha = 255 Then
-		    uic = UIKit.UIColor.ClearColor
-		  Else
-		    uic = New UIColor(value)
-		  End If
+		  Dim uic as ptr
+		  if value.Alpha = 255 then
+		    uic = ExtensionsXC.UIColor_Clear()
+		  else
+		    uic = ExtensionsXC.UIColorFromColor(value)
+		    
+		  end if
 		  
 		  declare sub setOnTintColor lib "UIKit.framework" selector "setOnTintColor:" (id as ptr, UIColor as Ptr)
 		  setOnTintColor(switch.Handle, uic)
@@ -390,12 +396,14 @@ Protected Module ControlExtensionsXC
 		Sub SetTextColorXC(extends picker as MobileDateTimePicker, value as Color)
 		  
 		  
-		  Dim uic As UIKit.UIColor
 		  
-		  If value.Alpha = 255 Then
-		    uic = UIKit.UIColor.ClearColor
+		  
+		  Dim uic as ptr
+		  if value.Alpha = 255 then
+		    uic = ExtensionsXC.UIColor_Clear()
 		  else
-		    uic = New UIKit.UIColor(value)
+		    uic = ExtensionsXC.UIColorFromColor(value)
+		    
 		  end if
 		  
 		  
