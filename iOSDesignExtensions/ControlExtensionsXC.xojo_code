@@ -425,6 +425,17 @@ Protected Module ControlExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 44697361626C657320757365722D696E74657261637469766974792077697468206120636F6E74726F6C20746F20616C6C6F7720746F756368206576656E747320746F2070617373207468726F756768
+		Sub SetUserInteractionEnabledXC(extends ctrl As MobileUIControl, value As Boolean)
+		  
+		  
+		  declare sub setUserInteractionEnabled lib "UIKit.framework" selector "setUserInteractionEnabled:" (id as ptr, enabled as Boolean)
+		  setUserInteractionEnabled ctrl.Handle, value
+		  
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 466F726365206120636F6E74726F6C20746F207573652061206C69676874206F72206461726B206C61796F75742E
 		Sub SetUserInterfaceStyleXC(extends ctrl as MobileUIControl, value as ControlExtensionsXC.UIUserInterfaceStyle)
 		  
