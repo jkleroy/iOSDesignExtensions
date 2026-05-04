@@ -15,14 +15,14 @@ Protected Class NSObjectXC
 
 	#tag Method, Flags = &h0
 		Sub Constructor(ref as ptr)
-		  declare function retain lib UIKitLib selector "retain" (obj_id as ptr) as ptr
+		  declare function retain lib "UIKit" selector "retain" (obj_id as ptr) as ptr
 		  m_id = retain(ref)
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub Destructor()
-		  declare sub release lib UIKitLib selector "release" (obj_id as ptr)
+		  declare sub release lib "UIKit" selector "release" (obj_id as ptr)
 		  release(m_id)
 		  
 		  if needsExtraRelease then release(m_id)

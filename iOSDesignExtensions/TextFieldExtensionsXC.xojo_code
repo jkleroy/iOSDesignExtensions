@@ -52,7 +52,7 @@ Protected Module TextFieldExtensionsXC
 		  //Keeping a reference to the toolbar
 		  'self.toolbarPtr = toolbar
 		  
-		  declare sub translucent_ lib UIKitLib selector "setTranslucent:" (obj_id as ptr, translucent as Boolean)
+		  declare sub translucent_ lib "UIKit" selector "setTranslucent:" (obj_id as ptr, translucent as Boolean)
 		  translucent_(toolbar_ptr, Translucent)
 		  
 		  
@@ -217,16 +217,24 @@ Protected Module TextFieldExtensionsXC
 	#tag Method, Flags = &h0
 		Sub SetLeftViewIconXC(extends field As MobileTextField, image As Picture, addIndent As Double = 0.0)
 		  
+		  if image is nil then Return
+		  
 		  dim spacerView As new MobileImageViewer
 		  spacerView.Image = image
+		  spacerView.DisplayMode = MobileImageViewer.DisplayModes.Center
 		  
 		  Declare Function frame_ Lib "UIKit.framework" selector "frame" (obj_id As ptr) As ExtensionsXC.xcCGRect
 		  Declare sub setFrame_ lib "UIKit.framework" selector "setFrame:" (obj_id as ptr, frame as ExtensionsXC.xcCGRect)
 		  
 		  
+		  //Set the frame
+		  Dim frame As ExtensionsXC.xcCGRect = frame_(spacerView.handle)
+		  frame.rsize.width = image.Width + addIndent*2
+		  frame.rsize.height = image.Height
 		  
-		  'Dim rect As new Foundation.NSRect(0, 0, indent, 10)
-		  'spacerView = new UIKit.UIView(rect)
+		  setFrame_(spacerView.handle, frame)
+		  
+		  field.AddControl(spacerView)
 		  
 		  declare sub setLeftViewMode lib "UIKit.framework" selector "setLeftViewMode:" (id as ptr, value as UITextFieldViewMode)
 		  setLeftViewMode field.Handle, UITextFieldViewMode.always
@@ -235,11 +243,18 @@ Protected Module TextFieldExtensionsXC
 		  setLeftView field.Handle, spacerView.Handle
 		  
 		  
-		  Dim frame As ExtensionsXC.xcCGRect = frame_(spacerView.handle)
-		  frame.rsize.width = image.Width + addIndent
-		  frame.rsize.height = image.Height
 		  
-		  setFrame_(spacerView.handle, frame)
+		  Dim width As New iOSLayoutConstraint(spacerView, _
+		  iOSLayoutConstraint.AttributeTypes.Width, _
+		  iOSLayoutConstraint.RelationTypes.Equal, _
+		  nil, _
+		  iOSLayoutConstraint.AttributeTypes.None, _
+		  1, _
+		  image.Width/(image.HorizontalResolution/72)*2 + addIndent)
+		  spacerView.AddConstraint(width)
+		  
+		  
+		  
 		End Sub
 	#tag EndMethod
 
@@ -301,6 +316,54 @@ Protected Module TextFieldExtensionsXC
 		  
 		  Declare Sub setReturnKeyType_ Lib "UIKit.framework" selector "setReturnKeyType:" (obj_id As ptr, value As UIReturnKeyType)
 		  setReturnKeyType_(field.Handle, value)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub SetRightViewIconXC(extends field As MobileTextField, image As Picture, addIndent As Double = 0.0)
+		  
+		  'if image is nil then Return
+		  
+		  declare sub setRightViewMode lib "UIKit.framework" selector "setRightViewMode:" (id as ptr, value as UITextFieldViewMode)
+		  
+		  
+		  if image is nil then
+		    setRightViewMode field.Handle, UITextFieldViewMode.never
+		    Return
+		  end if
+		  
+		  dim spacerView As new MobileImageViewer
+		  spacerView.Image = image
+		  spacerView.DisplayMode = MobileImageViewer.DisplayModes.Center
+		  
+		  Declare Function frame_ Lib "UIKit.framework" selector "frame" (obj_id As ptr) As ExtensionsXC.xcCGRect
+		  Declare sub setFrame_ lib "UIKit.framework" selector "setFrame:" (obj_id as ptr, frame as ExtensionsXC.xcCGRect)
+		  
+		  
+		  //Set the frame
+		  Dim frame As ExtensionsXC.xcCGRect = frame_(spacerView.handle)
+		  frame.rsize.width = image.Width + addIndent*2
+		  frame.rsize.height = image.Height
+		  
+		  setFrame_(spacerView.handle, frame)
+		  
+		  field.AddControl(spacerView)
+		  
+		  setRightViewMode field.Handle, UITextFieldViewMode.always
+		  
+		  declare sub setRightView lib "UIKit.framework" selector "setRightView:" (id as ptr, view as ptr)
+		  setRightView field.Handle, spacerView.Handle
+		  
+		  
+		  
+		  Dim width As New iOSLayoutConstraint(spacerView, _
+		  iOSLayoutConstraint.AttributeTypes.Width, _
+		  iOSLayoutConstraint.RelationTypes.Equal, _
+		  nil, _
+		  iOSLayoutConstraint.AttributeTypes.None, _
+		  1, _
+		  image.Width/(image.HorizontalResolution/72)*2 + addIndent)
+		  spacerView.AddConstraint(width)
 		End Sub
 	#tag EndMethod
 
@@ -384,7 +447,7 @@ Protected Module TextFieldExtensionsXC
 		  end if
 		  
 		  declare sub setBorderColor lib "UIKit.framework" selector "setBorderColor:" (obj_id as ptr, col as ptr)
-		  Declare Function CGColor Lib UIKitLib selector "cgColor" (obj_id As ptr) as ptr
+		  Declare Function CGColor Lib "UIKit" selector "cgColor" (obj_id As ptr) as ptr
 		  
 		  setBorderColor(layer, cgcolor(uic))
 		End Sub

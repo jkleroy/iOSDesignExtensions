@@ -22,6 +22,19 @@ Inherits MobileApplication
 		  '
 		  'Dim img2 As iOSImage = p2
 		  
+		  Dim b As Boolean
+		  
+		  /////////////////
+		  // Reveal
+		  /////////////////
+		  #If DebugBuild And UseRevealServer 'and not TargetMobileDevice
+		    Soft Declare Function IBARevealLoggerGetLevelMask Lib "@executable_path/Frameworks/RevealServer.framework/RevealServer" () As Integer
+		    Dim res As Integer
+		    res = IBARevealLoggerGetLevelMask()
+		    res = res
+		    
+		  #EndIf
+		  
 		  
 		  #if False
 		    Dim img As Picture
@@ -32,14 +45,13 @@ Inherits MobileApplication
 		    
 		    Break
 		    
+		    
+		    
+		    
+		    Dim cst as ptr = ExtensionsXC.LoadConstantXC("QuartzCore", "kCACornerCurveContinuous")
+		    
+		    Dim name As String = cst.CFStringRef(0)
 		  #endif
-		  
-		  
-		  Dim cst as ptr = ExtensionsXC.LoadConstantXC("UIKit", "UIButtonConfigurationCornerStyleCapsule")
-		  
-		  Declare function description_ lib UIKitLib Selector "description" (obj as ptr) as CFStringRef
-		  System.DebugLog description_(cst)
-		  
 		End Sub
 	#tag EndEvent
 
@@ -237,6 +249,9 @@ Inherits MobileApplication
 
 
 	#tag Constant, Name = isBeta, Type = Boolean, Dynamic = False, Default = \"False", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = UseRevealServer, Type = Boolean, Dynamic = False, Default = \"True", Scope = Public
 	#tag EndConstant
 
 

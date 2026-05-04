@@ -158,8 +158,8 @@ Protected Module ExtensionsXC
 		  
 		  
 		  //Improve size of picture
-		  Declare Function mainScreen Lib UIKitLib selector "mainScreen" (clsRef As ptr) As ptr
-		  Declare Function nativebounds Lib UIKitLib selector "nativeBounds" (obj_id As Ptr) As xcCGRect
+		  Declare Function mainScreen Lib "UIKit" selector "mainScreen" (clsRef As ptr) As ptr
+		  Declare Function nativebounds Lib "UIKit" selector "nativeBounds" (obj_id As Ptr) As xcCGRect
 		  Dim sz As xcCGSize = nativeBounds(mainScreen(NSClassFromString("UIScreen"))).rsize
 		  
 		  
@@ -227,7 +227,7 @@ Protected Module ExtensionsXC
 		  
 		  
 		  Soft Declare Function NSClassFromString Lib "Foundation" (classname As CFStringRef) As Ptr
-		  declare function clearColor lib UIKitLib selector "clearColor" (id as Ptr) as Ptr
+		  declare function clearColor lib "UIKit" selector "clearColor" (id as Ptr) as Ptr
 		  
 		  
 		  static UIColorClassPtr As Ptr =  NSClassFromString("UIColor")

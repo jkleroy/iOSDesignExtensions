@@ -144,6 +144,8 @@ Protected Module ButtonExtensionsXC
 		    // + (instancetype) tintedButtonConfiguration;
 		    
 		    Declare Function NSClassFromString Lib "Foundation.framework" (clsName As CFStringRef) As ptr
+		    Declare Function respondsToSelector_ Lib "Foundation" Selector "respondsToSelector:" (obj As ptr, aSelector As Ptr) As Boolean
+		    Declare Function NSSelectorFromString Lib "Foundation" ( aSelectorName As CFStringRef ) As Ptr
 		    
 		    Dim UIButtonConfiguration_class as ptr = NSClassFromString("UIButtonConfiguration")
 		    
@@ -205,8 +207,7 @@ Protected Module ButtonExtensionsXC
 		    Case Configurations.glass
 		      
 		      
-		      Declare Function respondsToSelector_ Lib "Foundation" Selector "respondsToSelector:" (obj As ptr, aSelector As Ptr) As Boolean
-		      Declare Function NSSelectorFromString Lib "Foundation" ( aSelectorName As CFStringRef ) As Ptr
+		      
 		      
 		      if respondsToSelector_(UIButtonConfiguration_class, NSSelectorFromString("glassButtonConfiguration")) then
 		        
@@ -218,15 +219,37 @@ Protected Module ButtonExtensionsXC
 		      
 		      
 		      
-		    Case Configurations.tintedGlass
+		    Case Configurations.prominentGlass
 		      
-		      Declare Function respondsToSelector_ Lib "Foundation" Selector "respondsToSelector:" (obj As ptr, aSelector As Ptr) As Boolean
-		      Declare Function NSSelectorFromString Lib "Foundation" ( aSelectorName As CFStringRef ) As Ptr
 		      
-		      if respondsToSelector_(UIButtonConfiguration_class, NSSelectorFromString("tintedGlassButtonConfiguration")) then
+		      
+		      if respondsToSelector_(UIButtonConfiguration_class, NSSelectorFromString("prominentGlassButtonConfiguration")) then
 		        
 		        // + (instancetype) glassButtonConfiguration;
-		        Declare Function tintedGlassButtonConfiguration Lib "Foundation" Selector "tintedGlassButtonConfiguration" ( cls as ptr ) As Ptr
+		        Declare Function tintedGlassButtonConfiguration Lib "Foundation" Selector "prominentGlassButtonConfiguration" ( cls as ptr ) As Ptr
+		        
+		        config = tintedGlassButtonConfiguration( UIButtonConfiguration_class )
+		      end if
+		      
+		      
+		    Case Configurations.clearGlass
+		      
+		      
+		      if respondsToSelector_(UIButtonConfiguration_class, NSSelectorFromString("clearGlassButtonConfiguration")) then
+		        
+		        // + (instancetype) glassButtonConfiguration;
+		        Declare Function tintedGlassButtonConfiguration Lib "Foundation" Selector "clearGlassButtonConfiguration" ( cls as ptr ) As Ptr
+		        
+		        config = tintedGlassButtonConfiguration( UIButtonConfiguration_class )
+		      end if
+		      
+		    Case Configurations.prominentClearGlass
+		      
+		      
+		      if respondsToSelector_(UIButtonConfiguration_class, NSSelectorFromString("prominentClearGlassButtonConfiguration")) then
+		        
+		        // + (instancetype) glassButtonConfiguration;
+		        Declare Function tintedGlassButtonConfiguration Lib "Foundation" Selector "prominentClearGlassButtonConfiguration" ( cls as ptr ) As Ptr
 		        
 		        config = tintedGlassButtonConfiguration( UIButtonConfiguration_class )
 		      end if
@@ -382,7 +405,9 @@ Protected Module ButtonExtensionsXC
 		  borderedTinted
 		  borderedProminent
 		  glass
-		tintedGlass
+		  prominentGlass
+		  clearGlass
+		prominentClearGlass
 	#tag EndEnum
 
 	#tag Enum, Name = UIButtonRole, Type = Integer, Flags = &h0

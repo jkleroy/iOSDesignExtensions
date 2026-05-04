@@ -108,7 +108,7 @@ Protected Module TableExtensionsXC
 		Function SectionRowAtPointXC(extends t As iOSMobileTable, location As point) As Integer()
 		  #if ExtensionsXC.kUseUIKit
 		    
-		    Declare function indexPathForRowAtPoint lib UIKitLib selector "indexPathForRowAtPoint:" (obj as ptr, pt as ExtensionsXC.xcCGPoint) as ptr
+		    Declare function indexPathForRowAtPoint lib "UIKit" selector "indexPathForRowAtPoint:" (obj as ptr, pt as ExtensionsXC.xcCGPoint) as ptr
 		    
 		    Dim pt As ExtensionsXC.xcCGPoint
 		    pt.x = location.X

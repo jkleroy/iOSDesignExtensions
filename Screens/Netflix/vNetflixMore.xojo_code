@@ -1,12 +1,15 @@
 #tag MobileScreen
 Begin MobileScreen vNetflixMore
    BackButtonCaption=   ""
+   BackgroundColor =   
    Compatibility   =   ""
    ControlCount    =   0
    Device = 7
    HasNavigationBar=   True
    LargeTitleDisplayMode=   2
    Left            =   0
+   NavigationBarColor=   
+   NavigationBarTextColor=   
    Orientation = 0
    ScaleFactor     =   0.0
    TabBarVisible   =   True
@@ -14,6 +17,7 @@ Begin MobileScreen vNetflixMore
    TintColor       =   &c000000
    Title           =   ""
    Top             =   0
+   _mTabBarVisible =   False
    Begin iOSMobileTable Table1
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
@@ -23,6 +27,7 @@ Begin MobileScreen vNetflixMore
       AutoLayout      =   Table1, 2, <Parent>, 2, False, +1.00, 4, 1, -0, , True
       AutoLayout      =   Table1, 3, TopLayoutGuide, 3, False, +1.00, 4, 1, 87, , True
       AutoLayout      =   Table1, 4, BottomLayoutGuide, 4, False, +1.00, 4, 1, 0, , True
+      BackgroundColor =   
       ControlCount    =   0
       EditingEnabled  =   False
       EditingEnabled  =   False
@@ -33,7 +38,10 @@ Begin MobileScreen vNetflixMore
       Left            =   0
       LockedInPosition=   False
       Scope           =   2
+      SectionBackgroundColor=   
       SectionCount    =   0
+      SectionTextColor=   
+      SelectedRowColor=   
       TintColor       =   &c000000
       Top             =   152
       Visible         =   True
@@ -44,15 +52,21 @@ Begin MobileScreen vNetflixMore
    Begin MobileButton Button1
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       AutoLayout      =   Button1, 4, Table1, 3, False, +1.00, 4, 1, -*kStdControlGapV, , True
       AutoLayout      =   Button1, 9, <Parent>, 9, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Button1, 8, , 0, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   Button1, 7, , 0, False, +1.00, 4, 2, 100, , True
+      BackgroundColor =   
+      BorderColor     =   
+      BorderWidth     =   0
       Caption         =   "Manage Profiles"
       CaptionColor    =   &c000000
       ControlCount    =   0
+      CornerSize      =   0
       Enabled         =   True
       Height          =   30
+      Icon            =   0
       Left            =   137
       LockedInPosition=   False
       Scope           =   2
@@ -74,8 +88,7 @@ End
 		  Self.SetNavBarColorXC(NetflixSettings.NavColor, NetflixSettings.IconColor, NetflixSettings.IconColor, False, True)
 		  'Self.setNavBarTransparent
 		  
-		  //Remove large titles
-		  Self.SetLargeTitlesXC(False)
+		  
 		  
 		  //Hide the 1px gray shadow
 		  Self.HideNavBarShadowXC
@@ -192,6 +205,38 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="_mTabBarVisible"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="BackgroundColor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="NavigationBarColor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="NavigationBarTextColor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="ScaleFactor"
 		Visible=false

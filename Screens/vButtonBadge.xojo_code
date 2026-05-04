@@ -1,12 +1,12 @@
 #tag MobileScreen
-Begin MobileScreen vToolButton
+Begin MobileScreen vButtonBadge
    BackButtonCaption=   ""
    BackgroundColor =   
    Compatibility   =   ""
    ControlCount    =   0
    Device = 1
    HasNavigationBar=   True
-   LargeTitleDisplayMode=   2
+   LargeTitleDisplayMode=   1
    Left            =   0
    NavigationBarColor=   
    NavigationBarTextColor=   
@@ -15,7 +15,7 @@ Begin MobileScreen vToolButton
    TabBarVisible   =   True
    TabIcon         =   0
    TintColor       =   0
-   Title           =   "ToolButtons"
+   Title           =   "Button Badges"
    Top             =   0
    _mTabBarVisible =   False
    Begin MobileButton Button1
@@ -29,7 +29,7 @@ Begin MobileScreen vToolButton
       BackgroundColor =   
       BorderColor     =   
       BorderWidth     =   0
-      Caption         =   "Setup Toolbar buttons"
+      Caption         =   "Set Number Badge"
       CaptionColor    =   &c007AFF00
       ControlCount    =   0
       CornerSize      =   0
@@ -53,41 +53,12 @@ Begin MobileScreen vToolButton
       AdjustTextSizeToFit=   False
       AutoLayout      =   Button2, 1, Button1, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Button2, 7, , 0, False, +1.00, 4, 1, 224, , True
-      AutoLayout      =   Button2, 3, <Parent>, 3, False, +1.00, 4, 1, 332, , True
+      AutoLayout      =   Button2, 3, Button1, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
       AutoLayout      =   Button2, 8, , 0, False, +1.00, 4, 1, 30, , True
       BackgroundColor =   
       BorderColor     =   
       BorderWidth     =   0
-      Caption         =   "Remove Toolbar buttons"
-      CaptionColor    =   &cFF4A5C00
-      ControlCount    =   0
-      CornerSize      =   0
-      Enabled         =   True
-      Height          =   30
-      Icon            =   0
-      Left            =   20
-      LockedInPosition=   False
-      Scope           =   0
-      TextFont        =   ""
-      TextSize        =   0
-      TintColor       =   
-      Top             =   332
-      Visible         =   True
-      Width           =   224
-      _ClosingFired   =   False
-   End
-   Begin MobileButton Button3
-      AccessibilityHint=   ""
-      AccessibilityLabel=   ""
-      AdjustTextSizeToFit=   False
-      AutoLayout      =   Button3, 1, Button2, 1, False, +1.00, 4, 1, 0, , True
-      AutoLayout      =   Button3, 7, , 0, False, +1.00, 4, 1, 326, , True
-      AutoLayout      =   Button3, 3, Button1, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
-      AutoLayout      =   Button3, 8, , 0, False, +1.00, 4, 1, 30, , True
-      BackgroundColor =   
-      BorderColor     =   
-      BorderWidth     =   0
-      Caption         =   "Setup Toolbar buttons with space"
+      Caption         =   "Set Text Badge"
       CaptionColor    =   &c007AFF00
       ControlCount    =   0
       CornerSize      =   0
@@ -102,21 +73,21 @@ Begin MobileScreen vToolButton
       TintColor       =   
       Top             =   203
       Visible         =   True
-      Width           =   326
+      Width           =   224
       _ClosingFired   =   False
    End
-   Begin MobileButton Button4
+   Begin MobileButton Button3
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
       AdjustTextSizeToFit=   False
-      AutoLayout      =   Button4, 1, Button3, 1, False, +1.00, 4, 1, 0, , True
-      AutoLayout      =   Button4, 7, , 0, False, +1.00, 4, 1, 326, , True
-      AutoLayout      =   Button4, 3, Button3, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
-      AutoLayout      =   Button4, 8, , 0, False, +1.00, 4, 1, 30, , True
+      AutoLayout      =   Button3, 1, Button2, 1, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   Button3, 7, , 0, False, +1.00, 4, 1, 224, , True
+      AutoLayout      =   Button3, 3, Button2, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
+      AutoLayout      =   Button3, 8, , 0, False, +1.00, 4, 1, 30, , True
       BackgroundColor =   
       BorderColor     =   
       BorderWidth     =   0
-      Caption         =   "Setup Toolbar buttons with space and grouped"
+      Caption         =   "Set Indicator Badge"
       CaptionColor    =   &c007AFF00
       ControlCount    =   0
       CornerSize      =   0
@@ -131,7 +102,36 @@ Begin MobileScreen vToolButton
       TintColor       =   
       Top             =   241
       Visible         =   True
-      Width           =   326
+      Width           =   224
+      _ClosingFired   =   False
+   End
+   Begin MobileButton Button4
+      AccessibilityHint=   ""
+      AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
+      AutoLayout      =   Button4, 8, , 0, False, +1.00, 4, 1, 30, , True
+      AutoLayout      =   Button4, 1, Button3, 1, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   Button4, 3, Button3, 4, False, +1.00, 4, 1, 50, , True
+      AutoLayout      =   Button4, 7, , 0, False, +1.00, 4, 1, 224, , True
+      BackgroundColor =   
+      BorderColor     =   
+      BorderWidth     =   0
+      Caption         =   "Remove Badge"
+      CaptionColor    =   &cFF362200
+      ControlCount    =   0
+      CornerSize      =   0
+      Enabled         =   True
+      Height          =   30
+      Icon            =   0
+      Left            =   20
+      LockedInPosition=   False
+      Scope           =   0
+      TextFont        =   ""
+      TextSize        =   0
+      TintColor       =   
+      Top             =   321
+      Visible         =   True
+      Width           =   224
       _ClosingFired   =   False
    End
 End
@@ -140,65 +140,26 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
-		  
-		  Dim tb As MobileToolbarButton
-		  
-		  tb = new MobileToolbarButton(MobileToolbarButton.Types.Plain, "Red")
-		  tb.SetTintColorXC(&cFF0000)
-		  Self.RightNavigationToolbar.AddButton tb
-		  
-		  tb = new MobileToolbarButton(MobileToolbarButton.Types.Plain, "Blue")
-		  tb.SetTintColorXC(&c0000FF)
-		  Self.RightNavigationToolbar.AddButton tb
-		  
-		  tb = new MobileToolbarButton(MobileToolbarButton.Types.Pause)
-		  tb.SetTintColorXC(&c00FF00)
-		  self.LeftNavigationToolbar.AddButton tb
+		  SetupToolbuttons
 		End Sub
 	#tag EndEvent
 
 
 	#tag Method, Flags = &h0
-		Sub SetupToolbuttons(withSpace As Boolean = False, hideShared As Boolean = True)
+		Sub SetupToolbuttons()
 		  
-		  self.Toolbar.RemoveAllButtons
+		  self.RightNavigationToolbar.RemoveAllButtons
 		  
 		  // Builds the toolbar.
 		  
 		  
+		  self.RightNavigationToolbar.AddButton new MobileToolbarButton(MobileToolbarButton.Types.Plain, "", Picture.SystemImage("number", 0))
 		  
 		  
-		  self.Toolbar.AddButton new MobileToolbarButton(MobileToolbarButton.Types.Plain, "", Picture.SystemImage("location", 0))
-		  if withSpace then
-		    var flexibleSpace as MobileToolbarButton = new MobileToolbarButton(MobileToolbarButton.Types.FlexibleSpace)
-		    
-		    flexibleSpace.SetHidesSharedBackgroundXC(hideShared)
-		    
-		    self.Toolbar.AddButton flexibleSpace
-		    
-		  end if
+		  self.RightNavigationToolbar.AddButton new MobileToolbarButton(MobileToolbarButton.Types.Plain, "", Picture.SystemImage("location", 0))
 		  
-		  self.Toolbar.AddButton new MobileToolbarButton(MobileToolbarButton.Types.Plain, "", Picture.SystemImage("number", 0))
-		  if withSpace then
-		    var flexibleSpace as MobileToolbarButton = new MobileToolbarButton(MobileToolbarButton.Types.FlexibleSpace)
-		    
-		    flexibleSpace.SetHidesSharedBackgroundXC(hideShared)
-		    
-		    self.Toolbar.AddButton flexibleSpace
-		    
-		  end if
 		  
-		  self.Toolbar.AddButton new MobileToolbarButton(MobileToolbarButton.Types.Plain, "", Picture.SystemImage("camera", 0))
-		  if withSpace then
-		    var flexibleSpace as MobileToolbarButton = new MobileToolbarButton(MobileToolbarButton.Types.FlexibleSpace)
-		    
-		    flexibleSpace.SetHidesSharedBackgroundXC(hideShared)
-		    
-		    self.Toolbar.AddButton flexibleSpace
-		    
-		  end if
-		  
-		  self.Toolbar.AddButton new MobileToolbarButton(MobileToolbarButton.Types.Plain, "", Picture.SystemImage("trash", 0))
+		  self.RightNavigationToolbar.AddButton new MobileToolbarButton(MobileToolbarButton.Types.Plain, "", Picture.SystemImage("camera", 0))
 		  
 		  
 		End Sub
@@ -211,30 +172,32 @@ End
 	#tag Event
 		Sub Pressed()
 		  
-		  SetupToolbuttons(False)
+		  self.RightNavigationToolbar.ButtonAt(0).SetNumberedBadgeXC(5, color.Clear, color.Clear)
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Button2
 	#tag Event
 		Sub Pressed()
-		  self.Toolbar.RemoveAllButtons
+		  self.RightNavigationToolbar.ButtonAt(1).SetTextBadgeXC("New", &c00FFF700, &c0)
+		  
+		  
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Button3
 	#tag Event
 		Sub Pressed()
-		  
-		  SetupToolbuttons(True)
+		  self.RightNavigationToolbar.ButtonAt(2).SetIndicatorBadgeXC(color.Green)
 		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag Events Button4
 	#tag Event
 		Sub Pressed()
-		  
-		  SetupToolbuttons(True, False)
+		  self.RightNavigationToolbar.ButtonAt(0).RemoveBadgeXC
+		  self.RightNavigationToolbar.ButtonAt(1).RemoveBadgeXC
+		  self.RightNavigationToolbar.ButtonAt(2).RemoveBadgeXC
 		End Sub
 	#tag EndEvent
 #tag EndEvents

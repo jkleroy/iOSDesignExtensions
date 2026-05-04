@@ -5,12 +5,15 @@ Protected Module ViewExtensionsXC
 		  
 		  Progress = new MobileProgressWheel
 		  
+		  declare sub setColor lib "UIKit.framework" selector "setColor:" (obj_id as ptr, col as ptr)
+		  
 		  If DarkBackground Then
-		    Progress.SetActivityIndicatorViewStyleXC(ControlExtensionsXC.UIActivityIndicatorViewStyle.whiteLarge)
+		    Progress.SetActivityIndicatorViewStyleXC(ControlExtensionsXC.UIActivityIndicatorViewStyle.large)
+		    setColor(Progress.handle, UIColor.White)
 		  Else
-		    Progress.SetActivityIndicatorViewStyleXC(ControlExtensionsXC.UIActivityIndicatorViewStyle.whiteLarge)
+		    Progress.SetActivityIndicatorViewStyleXC(ControlExtensionsXC.UIActivityIndicatorViewStyle.large)
 		    
-		    declare sub setColor lib "UIKit.framework" selector "setColor:" (obj_id as ptr, col as ptr)
+		    
 		    setColor(Progress.handle, UIColor.Gray)
 		    
 		  end if
@@ -46,9 +49,14 @@ Protected Module ViewExtensionsXC
 		  
 		  Progress = New MobileProgressWheel
 		  
-		  Progress.SetActivityIndicatorViewStyleXC(ControlExtensionsXC.UIActivityIndicatorViewStyle.whiteLarge)
+		  Progress.SetActivityIndicatorViewStyleXC(ControlExtensionsXC.UIActivityIndicatorViewStyle.large)
 		  
-		  If Not DarkBackground Then
+		  if DarkBackground then
+		    
+		    Declare Sub setColor Lib "UIKit.framework" selector "setColor:" (obj_id As ptr, col As ptr)
+		    setColor(Progress.handle, UIColor.White)
+		    
+		  Else
 		    
 		    Declare Sub setColor Lib "UIKit.framework" selector "setColor:" (obj_id As ptr, col As ptr)
 		    setColor(Progress.handle, UIColor.Gray)
@@ -87,7 +95,7 @@ Protected Module ViewExtensionsXC
 		  
 		  
 		  Dim classPtr As ptr
-		  Declare sub animateWithDuration_ lib UIKitLib selector "animateWithDuration:delay:options:animations:completion:" _
+		  Declare sub animateWithDuration_ lib "UIKit" selector "animateWithDuration:delay:options:animations:completion:" _
 		  (id as ptr, duration as Double, delay as double, options as integer, animations as ptr, completion as ptr)
 		  declare function NSClassFromString lib "Foundation" (clsName as cfstringref) as ptr
 		  
@@ -110,7 +118,7 @@ Protected Module ViewExtensionsXC
 		  
 		  
 		  Dim classPtr As ptr
-		  Declare sub animateWithDuration_ lib UIKitLib selector "animateWithDuration:animations:completion:" _
+		  Declare sub animateWithDuration_ lib "UIKit" selector "animateWithDuration:animations:completion:" _
 		  (id as ptr, duration as Double, animations as ptr, completion as ptr)
 		  declare function NSClassFromString lib "Foundation" (clsName as cfstringref) as ptr
 		  
@@ -133,7 +141,7 @@ Protected Module ViewExtensionsXC
 		  
 		  
 		  Dim classPtr As ptr
-		  Declare sub animateWithDuration_ lib UIKitLib selector "animateWithDuration:animations:completion:" _
+		  Declare sub animateWithDuration_ lib "UIKit" selector "animateWithDuration:animations:completion:" _
 		  (id as ptr, duration as Double, animations as ptr, completion as ptr)
 		  declare function NSClassFromString lib "Foundation" (clsName as cfstringref) as ptr
 		  
@@ -504,6 +512,30 @@ Protected Module ViewExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 52656D6F76657320746865206E617669676174696F6E20626172207469746C652076696577
+		Sub RemoveNavBarTitleControlXC(Extends v As MobileScreen)
+		  Declare Function navigationController Lib "UIKit.framework" Selector "navigationController" (viewController As Ptr) As Ptr
+		  Declare Function navigationBar Lib "UIKit.framework" Selector "navigationBar" (obj_ref As Ptr) As Ptr
+		  Declare Function topItem Lib "UIKit.framework" Selector "topItem" (id As Ptr) As Ptr
+		  Declare Sub setTitleView Lib "UIKit.framework" Selector "setTitleView:" (id As Ptr, UIImage As Ptr)
+		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
+		  Declare Function alloc Lib "Foundation" Selector "alloc"(classPtr As Ptr) As Ptr
+		  Declare Function initWithImage Lib "UIKit.framework" Selector "initWithImage:" (objRef As Ptr, imgRef As Ptr) As Ptr
+		  
+		  //Reference to Navigation Controller
+		  Dim navigationControllerRef As Ptr = navigationController(v.ViewControllerHandle)
+		  
+		  //Ref to NavigationBar
+		  Dim navBar As Ptr = navigationBar(navigationControllerRef)
+		  
+		  //Ref to Title item
+		  Dim navItem As Ptr = topItem(navBar)
+		  
+		  //Set Title item to nothing
+		  setTitleView(navItem, nil)
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 456E61626C65732F44697361626C657320616E696D6174696F6E73206F6E206120766965772E
 		Sub SetAnimationsEnabledXC(extends v As MobileScreen, value As Boolean)
 		  #Pragma Unused v
@@ -667,115 +699,6 @@ Protected Module ViewExtensionsXC
 		  declare sub hidesBarsOnSwipe lib "UIKit.framework" selector "setHidesBarsOnSwipe:" (navcontroller as ptr, value as Boolean)
 		  
 		  hidesBarsOnSwipe(navigationControllerRef, hide)
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub SetHidesBackButtonXC(extends v As MobileScreen, value As Boolean)
-		  
-		  
-		  
-		  Declare Function navigationBar Lib "UIKit.framework" selector "navigationBar" (obj_ref As ptr) As ptr
-		  
-		  Declare Function navigationController Lib "UIKit.framework" selector "navigationController" (viewController As ptr) As ptr
-		  'Dim navigationControllerRef As ptr = navigationController(v.ViewControllerHandle)
-		  
-		  'Dim navBar As ptr = navigationBar(navigationControllerRef)
-		  
-		  Declare Function navigationItem Lib "UIKit.framework" selector "navigationItem" (obj_ref As ptr) As ptr
-		  Dim navItem As ptr = navigationItem(v.ViewControllerHandle)
-		  
-		  
-		  Declare Sub hidesBackButton Lib "UIKit.framework" selector "setHidesBackButton:" (obj_id As ptr, value As Boolean)
-		  hidesBackButton(navItem, value)
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub SetLargeTitleDisplayModeXC(extends v As MobileScreen, mode As ViewExtensionsXC.LargeTitleDisplayMode)
-		  
-		  
-		  Static sSystemVersion As Double
-		  
-		  //Get sSystemVersion only once
-		  If sSystemVersion = 0.0 Then
-		    
-		    Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
-		    Declare Function currentDevice_ Lib "UIKit.framework" selector "currentDevice" (clsRef As ptr) As ptr
-		    Declare Function systemversion_ Lib "UIKit.framework" selector "systemVersion" (obj_id As ptr) As CFStringRef
-		    Dim device As Ptr = currentDevice_(NSClassFromString("UIDevice"))
-		    Dim systemVersion As String = systemversion_(device)
-		    
-		    Try
-		      sSystemVersion = Double.FromString(systemVersion)
-		    Catch
-		    End Try
-		    
-		  End If
-		  
-		  //Use new API
-		  If sSystemVersion >= 11.0 Then
-		    
-		    'Declare Function navigationBar Lib "UIKit.framework" selector "navigationBar" (obj_ref As ptr) As ptr
-		    
-		    'Declare Function navigationController Lib "UIKit.framework" selector "navigationController" (viewController As ptr) As ptr
-		    'Dim navigationControllerRef As ptr = navigationController(v.ViewControllerHandle)
-		    
-		    'Dim navBar As ptr = navigationBar(navigationControllerRef)
-		    
-		    Declare Function navigationItem Lib "UIKit.framework" selector "navigationItem" (obj_ref As ptr) As ptr
-		    Dim navItem As ptr = navigationItem(v.ViewControllerHandle)
-		    
-		    
-		    Declare Sub largeTitleDisplayMode Lib "UIKit.framework" selector "setLargeTitleDisplayMode:" (obj_id As ptr, value As LargeTitleDisplayMode)
-		    largeTitleDisplayMode(navItem, mode)
-		    
-		  Else
-		    
-		    
-		    
-		    //Nothing
-		    'Break
-		  End If
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0, Description = 53657473206C61726765207469746C657320746F206120566965772028694F5331312B29
-		Sub SetLargeTitlesXC(extends v as MobileScreen, value as Boolean, displayMode as ViewExtensionsXC.LargeTitleDisplayMode = ViewExtensionsXC.LargeTitleDisplayMode.automatic)
-		  
-		  Dim sSystemVersion as Double = ExtensionsXC.GetiOSVersionXC
-		  
-		  //Use new API
-		  If sSystemVersion >= 11.0 Then
-		    
-		    Declare Function navigationBar Lib "UIKit.framework" selector "navigationBar" (obj_ref As ptr) As ptr
-		    
-		    Declare Function navigationController Lib "UIKit.framework" selector "navigationController" (viewController As ptr) As ptr
-		    Dim navigationControllerRef As ptr = navigationController(v.ViewControllerHandle)
-		    
-		    Dim navBar As ptr = navigationBar(navigationControllerRef)
-		    
-		    Declare Sub prefersLargeTitles Lib "UIKit.framework" selector "setPrefersLargeTitles:" (obj_id As ptr, value As Boolean)
-		    prefersLargeTitles(navBar, value)
-		    
-		    Declare Function navigationItem Lib "UIKit.framework" selector "navigationItem" (obj_ref As ptr) As ptr
-		    Dim navItem As ptr = navigationItem(v.ViewControllerHandle)
-		    
-		    Dim mode As LargeTitleDisplayMode
-		    mode = displayMode
-		    
-		    Declare Sub largeTitleDisplayMode Lib "UIKit.framework" selector "setLargeTitleDisplayMode:" (obj_id As ptr, value As LargeTitleDisplayMode)
-		    largeTitleDisplayMode(navItem, mode)
-		    
-		  Else
-		    #Pragma Unused v
-		    #Pragma Unused value
-		    #Pragma Unused displayMode
-		    
-		    
-		  End If
 		End Sub
 	#tag EndMethod
 
@@ -954,7 +877,7 @@ Protected Module ViewExtensionsXC
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0, Description = 5365747320616E20696D61676520696E7374656164206F66204E6176626172207469746C65
+	#tag Method, Flags = &h0, Description = 5365747320746865205469746C6556696577206F6620746865206E617669676174696F6E20626172
 		Sub SetNavBarTitleControlXC(extends v As MobileScreen, ctrl As MobileUIControl)
 		  
 		  declare function navigationController lib "UIKit.framework" selector "navigationController" (viewController as ptr) as ptr
@@ -976,7 +899,13 @@ Protected Module ViewExtensionsXC
 		  
 		  
 		  //Set Title item to use the control
-		  setTitleView(navItem, ctrl.Handle)
+		  if ctrl is nil then
+		    setTitleView(navItem, nil)
+		  Else
+		    setTitleView(navItem, ctrl.Handle)
+		  end if
+		  
+		  
 		End Sub
 	#tag EndMethod
 
@@ -1231,16 +1160,6 @@ Protected Module ViewExtensionsXC
 		  
 		  Dim sharedApp As Ptr = sharedApplication(NSClassFromString("UIApplication"))
 		  setStatusBarStyle(sharedApp, style)
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0, Description = 4368616E6765732074686520636F6C6F72206F66206120546F6F6C627574746F6E
-		Sub SetTintColorXC(extends tb As MobileToolbarButton, value As Color)
-		  
-		  Declare Sub setTintColor Lib "UIKit.framework" selector "setTintColor:" (id As ptr, UIColor As Ptr)
-		  setTintColor tb.handle, New UIColor(value)
-		  
 		  
 		End Sub
 	#tag EndMethod

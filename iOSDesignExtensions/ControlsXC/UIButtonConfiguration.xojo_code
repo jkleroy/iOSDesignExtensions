@@ -8,9 +8,17 @@ Inherits NSObjectXC
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h21
+		Private Sub Constructor()
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
 		Shared Function GetConfiguration(type as Types = Types.plain) As UIButtonConfiguration
 		  
+		  Declare Function respondsToSelector_ Lib "Foundation" Selector "respondsToSelector:" (obj As ptr, aSelector As Ptr) As Boolean
+		  Declare Function NSSelectorFromString Lib "Foundation" ( aSelectorName As CFStringRef ) As Ptr
 		  
 		  if ExtensionsXC.GetiOSVersionXC >= 15.0 then
 		    
@@ -78,8 +86,6 @@ Inherits NSObjectXC
 		    Case Types.glass
 		      
 		      
-		      Declare Function respondsToSelector_ Lib "Foundation" Selector "respondsToSelector:" (obj As ptr, aSelector As Ptr) As Boolean
-		      Declare Function NSSelectorFromString Lib "Foundation" ( aSelectorName As CFStringRef ) As Ptr
 		      
 		      if respondsToSelector_(UIButtonConfiguration_class, NSSelectorFromString("glassButtonConfiguration")) then
 		        
@@ -91,18 +97,41 @@ Inherits NSObjectXC
 		      
 		      
 		      
-		    Case Types.tintedGlass
+		    Case Types.prominentGlass
 		      
-		      Declare Function respondsToSelector_ Lib "Foundation" Selector "respondsToSelector:" (obj As ptr, aSelector As Ptr) As Boolean
-		      Declare Function NSSelectorFromString Lib "Foundation" ( aSelectorName As CFStringRef ) As Ptr
 		      
-		      if respondsToSelector_(UIButtonConfiguration_class, NSSelectorFromString("tintedGlassButtonConfiguration")) then
+		      
+		      if respondsToSelector_(UIButtonConfiguration_class, NSSelectorFromString("prominentGlassButtonConfiguration")) then
 		        
 		        // + (instancetype) glassButtonConfiguration;
-		        Declare Function tintedGlassButtonConfiguration Lib "Foundation" Selector "tintedGlassButtonConfiguration" ( cls as ptr ) As Ptr
+		        Declare Function tintedGlassButtonConfiguration Lib "Foundation" Selector "prominentGlassButtonConfiguration" ( cls as ptr ) As Ptr
 		        
 		        config = tintedGlassButtonConfiguration( UIButtonConfiguration_class )
 		      end if
+		      
+		      
+		    Case Types.clearGlass
+		      
+		      
+		      if respondsToSelector_(UIButtonConfiguration_class, NSSelectorFromString("clearGlassButtonConfiguration")) then
+		        
+		        // + (instancetype) glassButtonConfiguration;
+		        Declare Function tintedGlassButtonConfiguration Lib "Foundation" Selector "clearGlassButtonConfiguration" ( cls as ptr ) As Ptr
+		        
+		        config = tintedGlassButtonConfiguration( UIButtonConfiguration_class )
+		      end if
+		      
+		    Case Types.prominentClearGlass
+		      
+		      
+		      if respondsToSelector_(UIButtonConfiguration_class, NSSelectorFromString("prominentClearGlassButtonConfiguration")) then
+		        
+		        // + (instancetype) glassButtonConfiguration;
+		        Declare Function tintedGlassButtonConfiguration Lib "Foundation" Selector "prominentClearGlassButtonConfiguration" ( cls as ptr ) As Ptr
+		        
+		        config = tintedGlassButtonConfiguration( UIButtonConfiguration_class )
+		      end if
+		      
 		      
 		      
 		    End Select
@@ -202,7 +231,7 @@ Inherits NSObjectXC
 		baseForegroundColor As Color
 	#tag EndComputedProperty
 
-	#tag ComputedProperty, Flags = &h21, Description = 412073697A6520746861742072657175657374732061207072656665727265642073697A6520666F722074686520627574746F6E2E
+	#tag ComputedProperty, Flags = &h0, Description = 412073697A6520746861742072657175657374732061207072656665727265642073697A6520666F722074686520627574746F6E2E
 		#tag Note
 			Not working
 		#tag EndNote
@@ -224,7 +253,7 @@ Inherits NSObjectXC
 			  setButtonSize(self.id, value)
 			End Set
 		#tag EndSetter
-		Private buttonSize As Sizes
+		buttonSize As Sizes
 	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h0, Description = 5468652064697374616E63652066726F6D2074686520627574746F6EE280997320636F6E74656E74206172656120746F2069747320626F756E64732E
@@ -500,12 +529,12 @@ Inherits NSObjectXC
 
 
 	#tag Enum, Name = CornerStyles, Type = Integer, Flags = &h0
-		Dynamic
-		  Fixed
-		  Capsule
-		  Large
+		Fixed = -1
+		  Dynamic
+		  Small
 		  Medium
-		Small
+		  Large
+		Capsule
 	#tag EndEnum
 
 	#tag Enum, Name = NSDirectionalRectEdge, Type = Integer, Flags = &h0
@@ -514,7 +543,7 @@ Inherits NSObjectXC
 		  Leading = 2
 		  Bottom = 4
 		  Trailing = 8
-		All
+		All = 15
 	#tag EndEnum
 
 	#tag Enum, Name = NSLineBreakMode, Type = Integer, Flags = &h0
@@ -527,10 +556,10 @@ Inherits NSObjectXC
 	#tag EndEnum
 
 	#tag Enum, Name = Sizes, Type = Integer, Flags = &h0
-		Large = 0
-		  Medium = 1
-		  Small = 2
-		Mini = 4
+		Medium
+		  Small
+		  Mini
+		Large
 	#tag EndEnum
 
 	#tag Enum, Name = TitleAlignments, Type = Integer, Flags = &h0, Description = 53706563696669657320686F7720746F20616C69676E206120627574746F6EE2809973207469746C6520616E64207375627469746C652E
@@ -550,7 +579,9 @@ Inherits NSObjectXC
 		  borderedTinted
 		  borderedProminent
 		  glass
-		tintedGlass
+		  prominentGlass
+		  clearGlass
+		prominentClearGlass
 	#tag EndEnum
 
 
@@ -601,6 +632,118 @@ Inherits NSObjectXC
 			Group="Behavior"
 			InitialValue=""
 			Type="String"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="baseBackgroundColor"
+			Visible=false
+			Group="Behavior"
+			InitialValue="&c000000"
+			Type="Color"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="baseForegroundColor"
+			Visible=false
+			Group="Behavior"
+			InitialValue="&c000000"
+			Type="Color"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="buttonSize"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Sizes"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="cornerRadius"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="cornerStyle"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="CornerStyles"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="image"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Picture"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="imagePadding"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Double"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="imagePlacement"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="NSDirectionalRectEdge"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="showsActivityIndicator"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="subtitle"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="String"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="subtitleLineBreakMode"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="NSLineBreakMode"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="titleAlignment"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="TitleAlignments"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="titleLineBreakMode"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="NSLineBreakMode"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="titlePadding"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Double"
 			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior

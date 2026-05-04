@@ -1,6 +1,53 @@
 #tag Class
 Protected Class MobileButtonXC
 Inherits MobileButton
+	#tag Method, Flags = &h0
+		Function CreateAction(title As String, image As Picture = nil, identifier As String = "") As UIActionXC
+		  
+		  Dim handleMenuBlock as new ObjCBlock(WeakAddressOf HandleMenu)
+		  
+		  Dim action As UIActionXC = _
+		  new UIActionXC(title, _
+		  image, _
+		  handleMenuBlock, _
+		  identifier)
+		  
+		  Return action
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub HandleMenu(actionPtr As ptr)
+		  
+		  dim action As new UIActionXC(actionPtr)
+		  
+		  Dim identifier As String = action.identifier
+		  
+		  
+		  RaiseEvent SelectionChanged(action)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub SetMenu(title as String, actions() as UIActionXC)
+		  
+		  Dim menu as new UIMenuXC(title, actions)
+		  
+		  self.SetMenu(menu)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub SetMenu(menu as UIMenuXC)
+		  
+		  self.menu = menu
+		  
+		  Declare sub decl_setMenu lib "UIKit" selector "setMenu:" (obj as ptr, menu as ptr)
+		  
+		  decl_setMenu(self.Handle, menu)
+		End Sub
+	#tag EndMethod
+
 	#tag ExternalMethod, Flags = &h21
 		Private Declare Function titleLabel Lib "UIKit" Selector "titleLabel" (o as ptr) As Ptr
 	#tag EndExternalMethod
@@ -16,6 +63,11 @@ Inherits MobileButton
 		  setNeedsUpdateConfiguration(self.Handle)
 		End Sub
 	#tag EndMethod
+
+
+	#tag Hook, Flags = &h0
+		Event SelectionChanged(action as UIActionXC)
+	#tag EndHook
 
 
 	#tag ComputedProperty, Flags = &h0, Description = 546865206C61796572277320626F7264657220636F6C6F72
@@ -70,7 +122,7 @@ Inherits MobileButton
 		buttonTypeXC As Integer
 	#tag EndComputedProperty
 
-	#tag ComputedProperty, Flags = &h0, Description = 28694F53313429204120426F6F6C65616E2076616C756520746861742064657465726D696E657320776865746865722074686520636F6E74657874206D656E7520696E746572616374696F6E2069732074686520636F6E74726F6CE2809973207072696D61727920616374696F6E2E
+	#tag ComputedProperty, Flags = &h0, Description = 28694F53313529204120426F6F6C65616E2076616C756520746861742064657465726D696E657320776865746865722074686520636F6E74657874206D656E7520696E746572616374696F6E2069732074686520636F6E74726F6CE2809973207072696D61727920616374696F6E2E
 		#tag Getter
 			Get
 			  
@@ -108,7 +160,7 @@ Inherits MobileButton
 			  
 			End Set
 		#tag EndSetter
-		changesSelectionAsPrimaryActionXC As Boolean
+		changesSelectionAsPrimaryAction As Boolean
 	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h0, Description = 28694F533135292054686520636F6E66696775726174696F6E20666F722074686520627574746F6EE280997320617070656172616E63652E
@@ -158,19 +210,9 @@ Inherits MobileButton
 		highlightedXC As Boolean
 	#tag EndComputedProperty
 
-	#tag ComputedProperty, Flags = &h0
-		#tag Setter
-			Set
-			  Declare sub setMenu lib UIKitLib selector "setMenu:" (obj as ptr, menu as ptr)
-			  
-			  
-			  setMenu(self.Handle, value)
-			  
-			  #Pragma error "todo"
-			End Set
-		#tag EndSetter
-		menuXC As UIMenu
-	#tag EndComputedProperty
+	#tag Property, Flags = &h1
+		Protected menu As UIMenuXC
+	#tag EndProperty
 
 	#tag ComputedProperty, Flags = &h0, Description = 546865206D6178696D756D206E756D626572206F66206C696E657320666F722072656E646572696E6720746578742E0A
 		#tag Getter
@@ -249,7 +291,7 @@ Inherits MobileButton
 			  end if
 			End Set
 		#tag EndSetter
-		showsMenuAsPrimaryActionXC As Boolean
+		showsMenuAsPrimaryAction As Boolean
 	#tag EndComputedProperty
 
 	#tag ComputedProperty, Flags = &h0, Description = 28694F53313529205468652064656661756C74207465787420746F20646973706C617920696E2074686520636F6E74726F6CE280997320746F6F6C74697020696E204D61634F5320436174616C79737420617070732E
@@ -434,7 +476,7 @@ Inherits MobileButton
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="showsMenuAsPrimaryActionXC"
+			Name="showsMenuAsPrimaryAction"
 			Visible=false
 			Group="Behavior"
 			InitialValue=""
@@ -458,7 +500,7 @@ Inherits MobileButton
 			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="changesSelectionAsPrimaryActionXC"
+			Name="changesSelectionAsPrimaryAction"
 			Visible=false
 			Group="Behavior"
 			InitialValue=""

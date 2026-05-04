@@ -268,7 +268,7 @@ Protected Module ControlExtensionsXC
 		  end if
 		  
 		  
-		  'Declare function description_ lib UIKitLib Selector "description" (obj as ptr) as CFStringRef
+		  'Declare function description_ lib "UIKit" Selector "description" (obj as ptr) as CFStringRef
 		  'System.DebugLog description_(uic)
 		  
 		  
@@ -357,6 +357,17 @@ Protected Module ControlExtensionsXC
 		    preferredDatePickerStyle(datepicker.Handle, style)
 		    
 		  end if
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub SetDirectionalLayoutMarginsXC(extends ctrl as MobileUIControl, margins as ExtensionsXC.xcNSDirectionalEdgeInsets)
+		  
+		  // @property (nonatomic) NSDirectionalEdgeInsets directionalLayoutMargins;
+		  
+		  Declare Sub setDirectionalLayoutMargins Lib "Foundation" selector "setDirectionalLayoutMargins:" (obj as ptr, value as ExtensionsXC.xcNSDirectionalEdgeInsets)
+		  
+		  setDirectionalLayoutMargins(ctrl.Handle, margins)
 		End Sub
 	#tag EndMethod
 
@@ -576,7 +587,9 @@ Protected Module ControlExtensionsXC
 	#tag Enum, Name = UIActivityIndicatorViewStyle, Type = Integer, Flags = &h1
 		whiteLarge
 		  white
-		gray
+		  gray
+		  medium = 100
+		large = 101
 	#tag EndEnum
 
 	#tag Enum, Name = UIControlContentHorizontalAlignment, Flags = &h1

@@ -1,12 +1,15 @@
 #tag MobileScreen
 Begin MobileScreen vLargeTitles
    BackButtonCaption=   ""
+   BackgroundColor =   
    Compatibility   =   ""
    ControlCount    =   0
    Device = 7
    HasNavigationBar=   True
    LargeTitleDisplayMode=   2
    Left            =   0
+   NavigationBarColor=   
+   NavigationBarTextColor=   
    Orientation = 0
    ScaleFactor     =   0.0
    TabBarVisible   =   True
@@ -14,6 +17,7 @@ Begin MobileScreen vLargeTitles
    TintColor       =   &c000000
    Title           =   "Large Title"
    Top             =   0
+   _mTabBarVisible =   False
    Begin MobileHTMLViewer HTMLViewer1
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
@@ -41,7 +45,11 @@ End
 		Sub Activated()
 		  //Setting large titles MUST be done in Activate event.
 		  //Setting it in Open event has no effect
-		  Self.SetLargeTitlesXC(True)
+		  'Self.SetLargeTitlesXC(True)
+		  
+		  
+		  self.SetLargeSubtitleXC("")
+		  self.SetSubtitleXC("Subtitle")
 		End Sub
 	#tag EndEvent
 
@@ -56,6 +64,38 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="_mTabBarVisible"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="BackgroundColor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="NavigationBarColor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="NavigationBarTextColor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="ScaleFactor"
 		Visible=false
