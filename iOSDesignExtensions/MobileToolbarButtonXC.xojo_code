@@ -1,5 +1,37 @@
 #tag Module
 Protected Module MobileToolbarButtonXC
+	#tag Method, Flags = &h0, Description = 416E206974656D20796F752075736520746F20636F6E74726F6C2074686520706C6163656D656E74206F6620746865207365617263682062617220696E206120746F6F6C626172206F6E206950686F6E652E2043616E2072657475726E204E696C
+		Function GetSearchBarPlacementBarButtonItemXC(extends s as MobileScreen) As MobileToolbarButton
+		  
+		  if ExtensionsXC.GetiOSVersionXC >= 26.0 then
+		    
+		    Declare Function navigationItem Lib "UIKit" _
+		    Selector "navigationItem" (vc As Ptr) As Ptr
+		    Declare Function searchBarPlacementBarButtonItem Lib "UIKit" _
+		    Selector "searchBarPlacementBarButtonItem" (navItem As Ptr) As Ptr
+		    
+		    Dim navItem    As Ptr = navigationItem(s.ViewControllerHandle)
+		    
+		    if navItem = nil then Return nil
+		    
+		    Dim btnSearch  As Ptr = searchBarPlacementBarButtonItem(navItem)
+		    if btnSearch = nil then Return nil
+		    
+		    Dim searchButton As MobileToolbarButton = MobileToolbarButton.FromHandle(btnSearch)
+		    
+		    Return searchButton
+		    
+		  end if
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function GetSearchBarPlacementBarButtonItemXC(s as MobileScreen) As MobileToolbarButton
+		  
+		  Return s.GetSearchBarPlacementBarButtonItemXC
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 4372656174657320612062616467652077697468207468652073706563696669656420636F756E742E
 		Sub RemoveBadgeXC(extends tb as MobileToolbarButton)
 		  if ExtensionsXC.GetiOSVersionXC >= 26 then

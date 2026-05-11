@@ -1,5 +1,5 @@
 #tag MobileScreen
-Begin MobileScreen Screen2
+Begin MobileScreen vSearchBarExample
    BackButtonCaption=   ""
    BackgroundColor =   
    Compatibility   =   ""
@@ -15,73 +15,64 @@ Begin MobileScreen Screen2
    TabBarVisible   =   True
    TabIcon         =   0
    TintColor       =   
-   Title           =   "Navigation subtitle view"
+   Title           =   "Search bar placement"
    Top             =   0
    _mTabBarVisible =   False
+   Begin iOSMobileTable Table1
+      AccessibilityHint=   ""
+      AccessibilityLabel=   ""
+      AllowRefresh    =   False
+      AllowSearch     =   True
+      AutoLayout      =   Table1, 1, <Parent>, 1, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   Table1, 2, <Parent>, 2, False, +1.00, 4, 1, -0, , True
+      AutoLayout      =   Table1, 3, TopLayoutGuide, 3, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   Table1, 4, BottomLayoutGuide, 4, False, +1.00, 4, 1, 0, , True
+      BackgroundColor =   
+      ControlCount    =   0
+      EditingEnabled  =   False
+      Enabled         =   True
+      EstimatedRowHeight=   -1
+      Format          =   0
+      Height          =   503
+      Left            =   0
+      LockedInPosition=   False
+      Scope           =   0
+      SectionBackgroundColor=   
+      SectionCount    =   0
+      SectionTextColor=   
+      SelectedRowColor=   
+      TintColor       =   
+      Top             =   65
+      Visible         =   True
+      Width           =   320
+      _ClosingFired   =   False
+      _OpeningCompleted=   False
+   End
 End
 #tag EndMobileScreen
 
 #tag WindowCode
 	#tag Event
 		Sub Activated()
-		  SetupSubtitleSegmentedControl
-		End Sub
-	#tag EndEvent
-
-	#tag Event
-		Sub Opening()
-		  
+		  self.SetPreferredSearchBarPlacementXC(placement)
 		End Sub
 	#tag EndEvent
 
 
 	#tag Method, Flags = &h0
-		Sub SetupSubtitleSegmentedControl()
+		Sub Constructor(placement as TableSearchExtensionsXC.SearchBarPlacement)
+		  self.placement = placement
 		  
-		  // ── 1. Get the UINavigationItem from the view controller ──────────────
-		  Declare Function navigationItem Lib "UIKit" Selector "navigationItem" (vc As Ptr) As Ptr
-		  Dim navItem As Ptr = navigationItem(Self.ViewControllerHandle)
-		  If navItem = Nil Then Return
+		  // Calling the overridden superclass constructor.
+		  Super.Constructor
 		  
-		  
-		  Dim seg As new MobileSegmentedButton
-		  seg.AddSegment(new MobileSegment("First"))
-		  seg.AddSegment(new MobileSegment("Second"))
-		  seg.AddSegment(new MobileSegment("Third"))
-		  
-		  #if False
-		    
-		    // ── 2. Create a UISegmentedControl ────────────────────────────────────
-		    Declare Function NSClassFromString Lib "Foundation" (name As CFStringRef) As Ptr
-		    Declare Function alloc Lib "UIKit" Selector "alloc" (cls As Ptr) As Ptr
-		    Declare Function init Lib "UIKit" Selector "init" (obj As Ptr) As Ptr
-		    Dim segClass As Ptr = NSClassFromString("UISegmentedControl")
-		    Dim seg As Ptr = alloc(segClass)
-		    seg = init(seg)
-		    // ── 3. Add segments ───────────────────────────────────────────────────
-		    Declare Sub insertSegmentWithTitle Lib "UIKit" _
-		    Selector "insertSegmentWithTitle:atIndex:animated:" _
-		    (obj As Ptr, title As CFStringRef, index As Integer, animated As Boolean)
-		    insertSegmentWithTitle(seg, "First",  0, False)
-		    insertSegmentWithTitle(seg, "Second", 1, False)
-		    insertSegmentWithTitle(seg, "Third",  2, False)
-		    // ── 4. Select default segment ─────────────────────────────────────────
-		    Declare Sub setSelectedSegmentIndex Lib "UIKit" _
-		    Selector "setSelectedSegmentIndex:" (obj As Ptr, index As Integer)
-		    setSelectedSegmentIndex(seg, 0)
-		    
-		  #endif
-		  
-		  
-		  // ── 5. Size to fit its content ────────────────────────────────────────
-		  Declare Sub sizeToFit Lib "UIKit" Selector "sizeToFit" (obj As Ptr)
-		  sizeToFit(seg.Handle)
-		  // ── 6. Assign as the subtitleView (iOS 26) ────────────────────────────
-		  Declare Sub setSubtitleView Lib "UIKit" _
-		  Selector "setSubtitleView:" (navItem As Ptr, view As Ptr)
-		  setSubtitleView(navItem, seg.Handle)
 		End Sub
 	#tag EndMethod
+
+
+	#tag Property, Flags = &h0
+		placement As TableSearchExtensionsXC.SearchBarPlacement
+	#tag EndProperty
 
 
 #tag EndWindowCode
@@ -234,6 +225,14 @@ End
 		Group="Behavior"
 		InitialValue=""
 		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="placement"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
 		EditorType=""
 	#tag EndViewProperty
 #tag EndViewBehavior

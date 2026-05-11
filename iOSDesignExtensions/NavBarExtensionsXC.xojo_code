@@ -18,6 +18,21 @@ Protected Module NavBarExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 4120426F6F6C65616E2076616C7565207468617420696E64696361746573207768657468657220746865206170702068696465732074686520696E74656772617465642073656172636820626172207768656E207363726F6C6C696E6720616E7920756E6465726C79696E6720636F6E74656E742E0A44656661756C742069732054727565
+		Sub SetHidesSearchBarWhenScrollingXC(extends v As MobileScreen, value As Boolean)
+		  Declare Function navigationItem Lib "UIKit" _
+		  Selector "navigationItem" (vc As Ptr) As Ptr
+		  Dim navItem As Ptr = navigationItem(v.ViewControllerHandle)
+		  
+		  if navItem = nil then Return
+		  
+		  // Disable hiding (search bar always visible)
+		  Declare Sub setHidesSearchBarWhenScrolling Lib "UIKit" _
+		  Selector "setHidesSearchBarWhenScrolling:" (navItem As Ptr, hides As Boolean)
+		  setHidesSearchBarWhenScrolling(navItem, value)
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
 		Sub SetLargeSubtitleXC(extends v As MobileScreen, subtitle As String)
 		  

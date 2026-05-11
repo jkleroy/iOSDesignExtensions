@@ -22,10 +22,10 @@ Begin MobileScreen vToolButton
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
       AdjustTextSizeToFit=   False
-      AutoLayout      =   Button1, 8, , 0, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   Button1, 1, <Parent>, 1, False, +1.00, 4, 1, *kStdGapCtlToViewH, , True
+      AutoLayout      =   Button1, 2, <Parent>, 2, False, +1.00, 4, 1, -*kStdGapCtlToViewH, , True
       AutoLayout      =   Button1, 3, TopLayoutGuide, 4, False, +1.00, 4, 1, 100, , True
-      AutoLayout      =   Button1, 7, , 0, False, +1.00, 4, 1, 224, , True
+      AutoLayout      =   Button1, 8, , 0, False, +1.00, 4, 1, 30, , True
       BackgroundColor =   
       BorderColor     =   
       BorderWidth     =   0
@@ -44,7 +44,7 @@ Begin MobileScreen vToolButton
       TintColor       =   
       Top             =   165
       Visible         =   True
-      Width           =   224
+      Width           =   280
       _ClosingFired   =   False
    End
    Begin MobileButton Button2
@@ -53,7 +53,7 @@ Begin MobileScreen vToolButton
       AdjustTextSizeToFit=   False
       AutoLayout      =   Button2, 1, Button1, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Button2, 7, , 0, False, +1.00, 4, 1, 224, , True
-      AutoLayout      =   Button2, 3, <Parent>, 3, False, +1.00, 4, 1, 332, , True
+      AutoLayout      =   Button2, 3, <Parent>, 3, False, +1.00, 4, 1, 393, , True
       AutoLayout      =   Button2, 8, , 0, False, +1.00, 4, 1, 30, , True
       BackgroundColor =   
       BorderColor     =   
@@ -71,7 +71,7 @@ Begin MobileScreen vToolButton
       TextFont        =   ""
       TextSize        =   0
       TintColor       =   
-      Top             =   332
+      Top             =   393
       Visible         =   True
       Width           =   224
       _ClosingFired   =   False
@@ -80,8 +80,8 @@ Begin MobileScreen vToolButton
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
       AdjustTextSizeToFit=   False
-      AutoLayout      =   Button3, 1, Button2, 1, False, +1.00, 4, 1, 0, , True
-      AutoLayout      =   Button3, 7, , 0, False, +1.00, 4, 1, 326, , True
+      AutoLayout      =   Button3, 1, <Parent>, 1, False, +1.00, 4, 1, 20, , True
+      AutoLayout      =   Button3, 2, Button1, 2, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Button3, 3, Button1, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
       AutoLayout      =   Button3, 8, , 0, False, +1.00, 4, 1, 30, , True
       BackgroundColor =   
@@ -102,7 +102,7 @@ Begin MobileScreen vToolButton
       TintColor       =   
       Top             =   203
       Visible         =   True
-      Width           =   326
+      Width           =   280
       _ClosingFired   =   False
    End
    Begin MobileButton Button4
@@ -110,7 +110,7 @@ Begin MobileScreen vToolButton
       AccessibilityLabel=   ""
       AdjustTextSizeToFit=   False
       AutoLayout      =   Button4, 1, Button3, 1, False, +1.00, 4, 1, 0, , True
-      AutoLayout      =   Button4, 7, , 0, False, +1.00, 4, 1, 326, , True
+      AutoLayout      =   Button4, 2, Button3, 2, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Button4, 3, Button3, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
       AutoLayout      =   Button4, 8, , 0, False, +1.00, 4, 1, 30, , True
       BackgroundColor =   
@@ -131,8 +131,67 @@ Begin MobileScreen vToolButton
       TintColor       =   
       Top             =   241
       Visible         =   True
-      Width           =   326
+      Width           =   280
       _ClosingFired   =   False
+   End
+   Begin MobileButton Button5
+      AccessibilityHint=   ""
+      AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
+      AutoLayout      =   Button5, 1, Button4, 1, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   Button5, 7, , 0, False, +1.00, 4, 1, 280, , True
+      AutoLayout      =   Button5, 3, Button4, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
+      AutoLayout      =   Button5, 8, , 0, False, +1.00, 4, 1, 30, , True
+      BackgroundColor =   
+      BorderColor     =   
+      BorderWidth     =   0
+      Caption         =   "Search in toolbar"
+      CaptionColor    =   &c007AFF00
+      ControlCount    =   0
+      CornerSize      =   0
+      Enabled         =   True
+      Height          =   30
+      Icon            =   0
+      Left            =   20
+      LockedInPosition=   False
+      Scope           =   0
+      TextFont        =   ""
+      TextSize        =   0
+      TintColor       =   
+      Top             =   279
+      Visible         =   True
+      Width           =   280
+      _ClosingFired   =   False
+   End
+   Begin iOSMobileTable Table1
+      AccessibilityHint=   ""
+      AccessibilityLabel=   ""
+      AllowRefresh    =   False
+      AllowSearch     =   True
+      AutoLayout      =   Table1, 1, <Parent>, 1, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   Table1, 2, <Parent>, 2, False, +1.00, 4, 1, -0, , True
+      AutoLayout      =   Table1, 3, Button2, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
+      AutoLayout      =   Table1, 4, BottomLayoutGuide, 4, False, +1.00, 4, 1, 0, , True
+      BackgroundColor =   
+      ControlCount    =   0
+      EditingEnabled  =   False
+      Enabled         =   True
+      EstimatedRowHeight=   -1
+      Format          =   0
+      Height          =   137
+      Left            =   0
+      LockedInPosition=   False
+      Scope           =   0
+      SectionBackgroundColor=   
+      SectionCount    =   0
+      SectionTextColor=   
+      SelectedRowColor=   
+      TintColor       =   
+      Top             =   431
+      Visible         =   True
+      Width           =   320
+      _ClosingFired   =   False
+      _OpeningCompleted=   False
    End
 End
 #tag EndMobileScreen
@@ -147,13 +206,11 @@ End
 		  tb.SetTintColorXC(&cFF0000)
 		  Self.RightNavigationToolbar.AddButton tb
 		  
-		  tb = new MobileToolbarButton(MobileToolbarButton.Types.Plain, "Blue")
+		  tb = new MobileToolbarButton(MobileToolbarButton.Types.Pause)
 		  tb.SetTintColorXC(&c0000FF)
 		  Self.RightNavigationToolbar.AddButton tb
 		  
-		  tb = new MobileToolbarButton(MobileToolbarButton.Types.Pause)
-		  tb.SetTintColorXC(&c00FF00)
-		  self.LeftNavigationToolbar.AddButton tb
+		  
 		End Sub
 	#tag EndEvent
 
@@ -204,6 +261,43 @@ End
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Sub SetupToolbuttonsAndSearch()
+		  
+		  self.Toolbar.RemoveAllButtons
+		  
+		  // Builds the toolbar.
+		  
+		  
+		  
+		  
+		  self.Toolbar.AddButton new MobileToolbarButton(MobileToolbarButton.Types.Plain, "", Picture.SystemImage("location", 0))
+		  
+		  
+		  self.Toolbar.AddButton new MobileToolbarButton(MobileToolbarButton.Types.Plain, "", Picture.SystemImage("number", 0))
+		  
+		  
+		  self.Toolbar.AddButton new MobileToolbarButton(MobileToolbarButton.Types.Plain, "", Picture.SystemImage("camera", 0))
+		  
+		  
+		  self.Toolbar.AddButton new MobileToolbarButton(MobileToolbarButton.Types.Plain, "", Picture.SystemImage("trash", 0))
+		  
+		  
+		  
+		  
+		  //Getting the search button
+		  Dim searchButton As MobileToolbarButton = self.GetSearchBarPlacementBarButtonItemXC
+		  
+		  if searchButton <> nil then
+		    
+		    //Adding some space
+		    self.Toolbar.AddButton new MobileToolbarButton(MobileToolbarButton.Types.FlexibleSpace)
+		    
+		    self.Toolbar.AddButton searchButton
+		  end if
+		End Sub
+	#tag EndMethod
+
 
 #tag EndWindowCode
 
@@ -214,11 +308,21 @@ End
 		  SetupToolbuttons(False)
 		End Sub
 	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  me.SetTextAlignmentXC(ControlExtensionsXC.NSTextAlignment.left)
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events Button2
 	#tag Event
 		Sub Pressed()
 		  self.Toolbar.RemoveAllButtons
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  me.SetTextAlignmentXC(ControlExtensionsXC.NSTextAlignment.left)
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -229,12 +333,43 @@ End
 		  SetupToolbuttons(True)
 		End Sub
 	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  me.SetTextAlignmentXC(ControlExtensionsXC.NSTextAlignment.left)
+		End Sub
+	#tag EndEvent
 #tag EndEvents
 #tag Events Button4
 	#tag Event
 		Sub Pressed()
 		  
 		  SetupToolbuttons(True, False)
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  me.SetTextAlignmentXC(ControlExtensionsXC.NSTextAlignment.left)
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Button5
+	#tag Event
+		Sub Pressed()
+		  
+		  SetupToolbuttonsAndSearch()
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  me.SetTextAlignmentXC(ControlExtensionsXC.NSTextAlignment.left)
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Table1
+	#tag Event
+		Sub Opening()
+		  me.AddRow("Empty table to activate")
+		  me.AddRow("the search controller")
 		End Sub
 	#tag EndEvent
 #tag EndEvents

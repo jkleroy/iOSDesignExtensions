@@ -300,9 +300,9 @@ End
 		  AddRow(section, "Hide Navigator on Swipe", "", accessory, GetTypeInfo(vHideNavigator), Picture.SystemImage("eye.slash", 0))
 		  AddRow(section, "Navigation Bar prompt and subtitle", "", accessory, GetTypeInfo(vNavigation), Picture.SystemImage("textformat.size.larger", 0, Picture.SystemImageWeights.Bold))
 		  AddRow(section, "Navigation Bar Color / Image", "", accessory, GetTypeInfo(vNavbar), Picture.SystemImage("line.3.horizontal", 0, Picture.SystemImageWeights.Regular, &c073F8000))
-		  AddRow(section, "ToolButtons", "", accessory, GetTypeInfo(vToolButton), ImageExtensionsXC.ImageWithColorXC(ic8_button, &c7F0FFE))
-		  AddRow(section, "Button Badges", "", accessory, GetTypeInfo(vButtonBadge), Picture.SystemImage("bell.badge", 0, Picture.SystemImageWeights.Bold))
-		  
+		  AddRow(section, "ToolButtons", "Updated for iOS26", accessory, GetTypeInfo(vToolButton), ImageExtensionsXC.ImageWithColorXC(ic8_button, &c7F0FFE))
+		  AddRow(section, "Button Badges", "New iOS26", accessory, GetTypeInfo(vButtonBadge), Picture.SystemImage("bell.badge", 0, Picture.SystemImageWeights.Bold))
+		  AddRow(section, "Search bar", "New iOS26", accessory, GetTypeInfo(vSearchBar), Picture.SystemImage("magnifyingglass.circle", 0, Picture.SystemImageWeights.Bold))
 		  
 		  AddRow(section, "View Color", "", accessory, GetTypeInfo(vBackground), ImageExtensionsXC.ImageOriginalXC(ic8_color))
 		  AddRow(section, "Screen Options", "", accessory, GetTypeInfo(vScreenOptions), Picture.SystemImage("gearshape.circle", 0))
