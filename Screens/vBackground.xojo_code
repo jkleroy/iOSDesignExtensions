@@ -1,12 +1,15 @@
 #tag MobileScreen
 Begin MobileScreen vBackground
    BackButtonCaption=   ""
+   BackgroundColor =   
    Compatibility   =   ""
    ControlCount    =   0
    Device = 7
    HasNavigationBar=   True
    LargeTitleDisplayMode=   2
    Left            =   0
+   NavigationBarColor=   
+   NavigationBarTextColor=   
    Orientation = 0
    ScaleFactor     =   0.0
    TabBarVisible   =   True
@@ -14,6 +17,7 @@ Begin MobileScreen vBackground
    TintColor       =   0
    Title           =   "View Background"
    Top             =   0
+   _mTabBarVisible =   False
 End
 #tag EndMobileScreen
 
@@ -71,6 +75,38 @@ End
 #tag EndWindowCode
 
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="_mTabBarVisible"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="BackgroundColor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="NavigationBarColor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="NavigationBarTextColor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="ScaleFactor"
 		Visible=false

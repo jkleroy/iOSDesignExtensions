@@ -68,7 +68,7 @@ Begin MobileScreen vModal
       SelectedText    =   ""
       SelectionLength =   0
       SelectionStart  =   0
-      Text            =   "Calling self.Close on a modal view has no effect. You must use self.DismissViewControllerXC\n\nOn iPad this Screen has a size of 500x300 thanks to aScreen.SetPreferredContentSizeXC(New Size(500, 300))"
+      Text            =   "On iPad this Screen has a size of 500x300 thanks to aScreen.SetPreferredContentSizeXC(New Size(500, 300))"
       TextColor       =   &c00000000
       TextFont        =   ""
       TextSize        =   0
@@ -88,6 +88,9 @@ End
 		  Dim tb As new MobileToolbarButton(MobileToolbarButton.Types.Done)
 		  tb.Tag = "Done"
 		  self.RightNavigationToolbar.AddButton tb
+		  
+		  
+		  Label2.AdjustsFontForContentSizeCategoryXC(ControlExtensionsXC.UIFontTextStyle.headline)
 		End Sub
 	#tag EndEvent
 
@@ -95,12 +98,17 @@ End
 		Sub ToolbarButtonPressed(button As MobileToolbarButton)
 		  #Pragma Unused button
 		  
-		  'self.Close
 		  
-		  self.DismissViewControllerXC
 		  self.Close
 		End Sub
 	#tag EndEvent
+
+
+	#tag Method, Flags = &h0
+		Sub SetSecondLabel(value As String)
+		  Label2.Text = value
+		End Sub
+	#tag EndMethod
 
 
 #tag EndWindowCode

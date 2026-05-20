@@ -243,7 +243,7 @@ End
 		    Dim v As new vSearchBarExample(placement)
 		    v.ShowModal(self)
 		    
-		  Case "placement IntegratedCentered"
+		  Case "placement IntegratedButton"
 		    
 		    Dim placement as TableSearchExtensionsXC.SearchBarPlacement = _
 		    TableSearchExtensionsXC.SearchBarPlacement.IntegratedButton

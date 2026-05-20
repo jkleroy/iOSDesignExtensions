@@ -600,8 +600,8 @@ Begin MobileContainer ccButtonConfiguration
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
       AdjustTextSizeToFit=   False
+      AutoLayout      =   btnCornerMedium, 9, <Parent>, 9, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   btnCornerMedium, 8, , 0, False, +1.00, 4, 2, 30, , True
-      AutoLayout      =   btnCornerMedium, 1, btnCornerSmall, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   btnCornerMedium, 3, btnCornerSmall, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
       AutoLayout      =   btnCornerMedium, 7, , 0, False, +1.00, 4, 2, 30, , True
       BackgroundColor =   
@@ -638,8 +638,9 @@ Begin MobileContainer ccButtonConfiguration
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
       AdjustTextSizeToFit=   False
+      AutoLayout      =   btnCornerCapsule, 4, <Parent>, 4, False, +1.00, 4, 1, -*kStdGapCtlToViewV, , True
+      AutoLayout      =   btnCornerCapsule, 9, <Parent>, 9, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   btnCornerCapsule, 8, , 0, False, +1.00, 4, 2, 30, , True
-      AutoLayout      =   btnCornerCapsule, 1, btnCornerMedium, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   btnCornerCapsule, 3, btnCornerMedium, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
       AutoLayout      =   btnCornerCapsule, 7, , 0, False, +1.00, 4, 2, 30, , True
       BackgroundColor =   

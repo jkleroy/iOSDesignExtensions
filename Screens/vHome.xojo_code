@@ -309,9 +309,10 @@ End
 		  
 		  
 		  section = AddSection("Modal")
-		  AddRow(section, "Modal View", "", accessory, "modal") 
+		  AddRow(section, "Modal View", "Specific size on iPad", accessory, "modal") 
 		  AddRow(section, "Modal View (Swipe disabled)", "", accessory, "modalfull") 
 		  AddRow(section, "Sheet (iOS 15+)", "", accessory, "sheet")
+		  AddRow(section, "Smaller Sheet (iOS 16+)", "New", accessory, "smallsheet")
 		  
 		  
 		  section = AddSection("Animations")
@@ -382,35 +383,45 @@ End
 		      Dim v As new vModal
 		      v.showsheetXC(self, ViewExtensionsXC.UISheetPresentationControllerDetent.medium_large, True)
 		      
+		      v.SetSecondLabel("Notice the grabber at the top?" + EndOfLine + "The sheet can be resized when scrolling up.")
+		      
+		    Case "smallsheet"
+		      Dim v As new vModal
+		      v.ShowSheetWithHeightXC(self, 250)
 		      
 		      
-		      'v.SetPreferredContentSizeXC(new size(self.ContentSize.Width, 100))
+		      v.SetSecondLabel("This sheet's height is set to 250.")
 		      
 		    Case "modal"
 		      
 		      Dim v As New vModal
-		      Self.PushToShowModalXC(v, ViewExtensionsXC.UIModalPresentationStyle.formSheet)
+		      v.ShowModal(self, ModalPresentationStyles.FormSheet)
+		      'Self.PushToShowModalXC(v, ViewExtensionsXC.UIModalPresentationStyle.formSheet)
 		      
+		      v.SetSecondLabel("On iPad this Screen has a size of 500x300 thanks to aScreen.SetPreferredContentSizeXC(New Size(500, 300))")
 		      
 		      v.SetPreferredContentSizeXC(new Size(500, 300))
 		      
 		    Case "modalfull"
 		      
 		      Dim v As New vModal
-		      Self.PushToShowModalXC(v, ViewExtensionsXC.UIModalPresentationStyle.formSheet)
+		      v.ShowModal(self, ModalPresentationStyles.FormSheet)
+		      'Self.PushToShowModalXC(v, ViewExtensionsXC.UIModalPresentationStyle.formSheet)
 		      
 		      v.SetFullModalXC
 		      
-		    Case "modaldissolve"
+		      v.SetSecondLabel("Thanks to aScreen.SetFullModalXC, this modal screen can't be dismissed by swiping down.")
 		      
-		      Dim v As New vModal
-		      Self.PushToShowModalDissolveXC(v, ViewExtensionsXC.UIModalPresentationStyle.formSheet)
-		      
-		      
-		    Case "modalflip"
-		      
-		      Dim v As New vModal
-		      Self.PushToShowModalFlipXC(v, ViewExtensionsXC.UIModalPresentationStyle.formSheet)
+		      'Case "modaldissolve"
+		      '
+		      'Dim v As New vModal
+		      'Self.PushToShowModalDissolveXC(v, ViewExtensionsXC.UIModalPresentationStyle.formSheet)
+		      '
+		      '
+		      'Case "modalflip"
+		      '
+		      'Dim v As New vModal
+		      'Self.PushToShowModalFlipXC(v, ViewExtensionsXC.UIModalPresentationStyle.formSheet)
 		      
 		      
 		      'Case "modalcurl"

@@ -27,7 +27,7 @@ Inherits MobileApplication
 		  /////////////////
 		  // Reveal
 		  /////////////////
-		  #If DebugBuild And UseRevealServer 'and not TargetMobileDevice
+		  #If DebugBuild And UseRevealServer and not TargetMobileDevice
 		    Soft Declare Function IBARevealLoggerGetLevelMask Lib "@executable_path/Frameworks/RevealServer.framework/RevealServer" () As Integer
 		    Dim res As Integer
 		    res = IBARevealLoggerGetLevelMask()

@@ -158,6 +158,13 @@ Protected Module ViewExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h21
+		Private Function CustomDetentResolver() As CGFloat
+		  
+		  Return CustomDetentResolverHeight
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 436C6F73657320612076696577207468617420776173206F70656E6564206173206D6F64616C2E
 		Sub DismissViewControllerXC(extends v as MobileScreen, animated as Boolean = True, callback as iOSBlock = nil)
 		  
@@ -1223,99 +1230,111 @@ Protected Module ViewExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 53686F77732061732061206D6F64616C20466F726D5368656574206174207468652073706563696669656420686569676874
+		Sub ShowSheetWithHeightXC(extends v As MobileScreen, parentScreen As MobileScreen, height As Double, showGrabber As Boolean = False, cornerRadius As Single = -1)
+		  
+		  
+		  v.ShowModal(parentScreen, MobileScreen.ModalPresentationStyles.FormSheet)
+		  
+		  If ExtensionsXC.GetiOSVersionXC < 16.0 Then Return
+		  
+		  
+		  Declare Function sheetPresentationController Lib "UIKit" selector "sheetPresentationController" (obj As Ptr) As Ptr
+		  Declare Sub setDetents Lib "UIKit" selector "setDetents:" (obj As Ptr, detents As Ptr)
+		  Declare Sub setPrefersGrabberVisible Lib "UIKit" selector "setPrefersGrabberVisible:" (obj As Ptr, value As Boolean)
+		  Declare Sub setPrefersScrollingExpandsWhenScrolledToEdge Lib "UIKit" selector "setPrefersScrollingExpandsWhenScrolledToEdge:" (obj As Ptr, value As Boolean)
+		  Declare Function NSClassFromString Lib "Foundation" (name As CFStringRef) As Ptr
+		  Declare Function NSArrayWithObject Lib "Foundation" selector "arrayWithObject:" (cls As Ptr, obj As Ptr) As Ptr
+		  Declare Function customDetent Lib "UIKit" selector "customDetentWithIdentifier:resolver:" (cls As Ptr, identifier As CFStringRef, resolver As Ptr) As Ptr
+		  
+		  Dim sheet As Ptr = sheetPresentationController(v.ViewControllerHandle)
+		  If sheet = Nil Then Return
+		  
+		  // Build an Obj-C block that returns the desired height as CGFloat
+		  CustomDetentResolverHeight = height
+		  Dim resolverBlock As New ObjCBlock(AddressOf CustomDetentResolver)
+		  'resolverBlock.Parameter("height") = height
+		  
+		  Dim detentClass As Ptr = NSClassFromString("UISheetPresentationControllerDetent")
+		  Dim customDet As Ptr = customDetent(detentClass, "custom", resolverBlock.Handle)
+		  Dim detents As Ptr = NSArrayWithObject(NSClassFromString("NSArray"), customDet)
+		  
+		  setDetents(sheet, detents)
+		  setPrefersGrabberVisible(sheet, showGrabber)
+		  setPrefersScrollingExpandsWhenScrolledToEdge(sheet, False)
+		  
+		  If cornerRadius > -1 Then
+		    Declare Sub preferredCornerRadius_ Lib "UIKit" selector "setPreferredCornerRadius:" (obj As Ptr, value As CGFloat)
+		    preferredCornerRadius_(sheet, cornerRadius)
+		  End If
+		  
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
 		Sub ShowSheetXC(extends v As MobileScreen, parentScreen As MobileScreen, height As UISheetPresentationControllerDetent = UISheetPresentationControllerDetent.large, showGrabber As Boolean = False, Animate As Boolean = True, cornerRadius As Single = -1)
 		  //Source https://sarunw.com/posts/bottom-sheet-in-ios-15-with-uisheetpresentationcontroller/
 		  
-		  if ExtensionsXC.GetiOSVersionXC < 15.0 then
-		    Dim err As new UnsupportedOperationException
-		    err.Reason = CurrentMethodName + " requires iOS15+"
-		    Raise err
-		  end if
 		  
+		  //first show as a sheet
+		  v.ShowModal(parentScreen, MobileScreen.ModalPresentationStyles.FormSheet, animate)
 		  
+		  //Safe guard for iOS14
+		  if ExtensionsXC.GetiOSVersionXC < 15.0 then Return
 		  
-		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
-		  Declare Function alloc Lib "Foundation.framework" selector "alloc" (clsRef As ptr) As ptr
-		  Declare Function initWithRootViewController_ Lib "Foundation" selector "initWithRootViewController:" (obj_id As ptr, rootViewController As ptr) As ptr
-		  Declare Sub presentViewController Lib "UIKit.framework" _
-		  Selector "presentViewController:animated:completion:" _
-		  (parentView As Ptr, viewControllerToPresent As Ptr, animated As Boolean, completion As Ptr)
-		  Declare Sub modalPresentationStyle_ Lib "UIKit.framework" selector "setModalPresentationStyle:" (obj_id As ptr, modalPresentationStyle As UIModalPresentationStyle)
-		  
-		  Declare Function sheetPresentationController lib "UIKit" selector "sheetPresentationController" (obj as ptr) as ptr
-		  Declare sub setDetents lib "UIKit" selector "setDetents:" (obj as ptr, value as ptr)
-		  Declare Function init Lib "Foundation.framework" selector "init" (obj_id As ptr) As ptr
+		  Declare Function sheetPresentationController Lib "UIKit" selector "sheetPresentationController" (obj As Ptr) As Ptr
+		  Declare Sub setDetents Lib "UIKit" selector "setDetents:" (obj As Ptr, detents As Ptr)
+		  Declare Sub setPrefersGrabberVisible Lib "UIKit" selector "setPrefersGrabberVisible:" (obj As Ptr, value As Boolean)
+		  Declare Sub setPrefersScrollingExpandsWhenScrolledToEdge Lib "UIKit" selector "setPrefersScrollingExpandsWhenScrolledToEdge:" (obj As Ptr, value As Boolean)
 		  Declare function largeDetent_ lib "UIKit" selector "largeDetent" (obj as ptr) as ptr
 		  Declare function mediumDetent_ lib "UIKit" selector "mediumDetent" (obj as ptr) as ptr
-		  
-		  Dim navController As ptr = initWithRootViewController_( alloc(NSClassFromString("UINavigationController")), v.ViewControllerHandle ) 
-		  
-		  
-		  Dim style As ViewExtensionsXC.UIModalPresentationStyle
-		  style = UIModalPresentationStyle.pageSheet
+		  Declare Function NSClassFromString Lib "Foundation" (name As CFStringRef) As Ptr
+		  Declare Function NSArrayWithObject Lib "Foundation" selector "arrayWithObject:" (cls As Ptr, obj As Ptr) As Ptr
 		  
 		  
-		  modalPresentationStyle_(navController, style)
+		  //Then set the sheetPresentation Controller options
+		  Dim sheet As Ptr = sheetPresentationController(v.ViewControllerHandle)
 		  
-		  Dim sheet As Ptr = sheetPresentationController(navController)
-		  
-		  if sheet <> nil then
-		    
-		    Declare Function arrayWithCapacity Lib "Foundation" selector "arrayWithCapacity:" (cls As ptr, count as UInteger) As ptr
-		    Declare Sub addObject Lib "Foundation" selector "addObject:" (arr As ptr, obj As ptr)
-		    
-		    Dim detentArray As ptr
+		  If sheet <> Nil Then
+		    Dim detentClass As Ptr = NSClassFromString("UISheetPresentationControllerDetent")
+		    Dim medium As Ptr = mediumDetent_(detentClass)
+		    Dim large As ptr = largeDetent_(detentClass)
+		    Dim detents As Ptr
 		    
 		    Select case height
 		    Case UISheetPresentationControllerDetent.medium
-		      
-		      detentArray = arrayWithCapacity(NSClassFromString("NSMutableArray"), 1)
-		      
-		      Dim mediumDetent As Ptr = mediumDetent_(NSClassFromString("UISheetPresentationControllerDetent"))
-		      
-		      addObject(detentArray, mediumDetent)
+		      detents = NSArrayWithObject(NSClassFromString("NSArray"), medium)
 		      
 		    Case UISheetPresentationControllerDetent.large
-		      detentArray = arrayWithCapacity(NSClassFromString("NSMutableArray"), 1)
+		      detents = NSArrayWithObject(NSClassFromString("NSArray"), large)
 		      
-		      'Dim largeDetent As Ptr = largeDetent_(init(alloc(NSClassFromString("UISheetPresentationControllerDetent"))))
-		      Dim largeDetent As Ptr = largeDetent_(NSClassFromString("UISheetPresentationControllerDetent"))
+		    Case UISheetPresentationControllerDetent.medium_large, UISheetPresentationControllerDetent.both
 		      
-		      addObject(detentArray, largeDetent)
+		      Declare Function NSMutableArrayNew Lib "Foundation" selector "array" (cls As Ptr) As Ptr
+		      Declare Sub NSMutableArrayAddObject Lib "Foundation" selector "addObject:" (obj As Ptr, item As Ptr)
 		      
-		    Case UISheetPresentationControllerDetent.medium_large
-		      detentArray = arrayWithCapacity(NSClassFromString("NSMutableArray"), 1)
+		      Dim arr As Ptr = NSMutableArrayNew(NSClassFromString("NSMutableArray"))
+		      NSMutableArrayAddObject(arr, medium)
+		      NSMutableArrayAddObject(arr, large)
+		      detents = arr
 		      
-		      Dim mediumDetent As Ptr = mediumDetent_(((NSClassFromString("UISheetPresentationControllerDetent"))))
-		      Dim largeDetent As Ptr = largeDetent_(((NSClassFromString("UISheetPresentationControllerDetent"))))
-		      
-		      addObject(detentArray, mediumDetent)
-		      addObject(detentArray, largeDetent)
 		      
 		    End Select
 		    
+		    setDetents(sheet, detents)
+		    setPrefersGrabberVisible(sheet, showGrabber)
+		    setPrefersScrollingExpandsWhenScrolledToEdge(sheet, False)
 		    
-		    setDetents(sheet, detentArray)
-		    
-		    
-		    //Grabber
-		    if showGrabber then
-		      declare sub setPrefersGrabberVisible lib "UIKit" selector "setPrefersGrabberVisible:" (obj as ptr, value as Boolean)
-		      setPrefersGrabberVisible(sheet, True)
-		    end if
 		    
 		    if cornerRadius > -1 then
 		      Declare sub preferredCornerRadius_ lib "UIKit" selector "setPreferredCornerRadius:" (obj as ptr, value as CGFloat)
 		      preferredCornerRadius_(sheet, cornerRadius)
 		    end if
 		    
-		    
-		  end if
+		  End If
 		  
 		  
-		  
-		  presentViewController(parentScreen.ViewControllerHandle, navController, Animate, Nil)
 		  
 		  
 		End Sub
@@ -1462,6 +1481,10 @@ Protected Module ViewExtensionsXC
 
 
 	#tag Property, Flags = &h21
+		Private CustomDetentResolverHeight As Double
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
 		Private ΩHomeIndicatorHiddenScreens() As WeakRef
 	#tag EndProperty
 
@@ -1515,7 +1538,8 @@ Protected Module ViewExtensionsXC
 	#tag Enum, Name = UISheetPresentationControllerDetent, Type = Integer, Flags = &h1
 		medium
 		  large
-		medium_large
+		  medium_large
+		both
 	#tag EndEnum
 
 	#tag Enum, Name = UISplitViewControllerDisplayMode, Flags = &h1, Attributes = \"Deprecated \x3D "SplitViewExtensionsXC.UISplitViewControllerDisplayMode""

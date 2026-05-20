@@ -223,6 +223,44 @@ Protected Module ExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
+		Protected Function UIColorFromColorWithExposure(value as color, exposure as Double) As ptr
+		  //new iOS26
+		  // https://developer.apple.com/documentation/uikit/uicolor?language=objc#Working-with-high-dynamic-range-HDR-colors
+		  
+		  if ExtensionsXC.GetiOSVersionXC < 26 then
+		    Return UIColorFromColor(value)
+		    
+		  else
+		    Declare Function colorWithRGBAE Lib "UIKit" Selector "colorWithRed:green:blue:alpha:exposure:"_
+		    (UIColorClassRef As Ptr, red As CGFloat, green As CGFloat, blue As CGFloat, alpha As CGFloat, exp as CGFloat) As Ptr
+		    
+		    
+		    'Declare Function colorWithDisplayP3 Lib "UIKit" Selector "colorWithDisplayP3Red:green:blue:alpha:" _
+		    '(UIColorClassRef As Ptr, red As CGFloat, green As CGFloat, blue As CGFloat, alpha As CGFloat) As Ptr
+		    
+		    
+		    Declare Function NSClassFromString Lib "Foundation" (classname As CFStringRef) As Ptr
+		    
+		    
+		    static UIColorClassPtr As Ptr =  NSClassFromString("UIColor")
+		    
+		    Dim c as color  = value
+		    
+		    Dim red As CGFloat = c.red / 255
+		    Dim green As CGFloat = c.Green / 255
+		    Dim blue As CGFloat = c.Blue / 255
+		    Dim alpha As CGFloat = (255 - c.Alpha) / 255
+		    dim exp As CGFloat = exposure
+		    
+		    Dim colorPtr As ptr = colorWithRGBAE(UIColorClassPtr, red, green, blue, alpha, exp)
+		    'Dim colorPtr As ptr = colorWithDisplayP3((UIColorClassPtr), red, green, blue, alpha)
+		    
+		    Return colorPtr
+		  end if
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
 		Protected Function UIColor_Clear() As ptr
 		  
 		  
@@ -267,6 +305,8 @@ Protected Module ExtensionsXC
 
 	#tag Note, Name = History
 		## History
+		
+		* New UIColorFromColorWithExposure
 		
 		### Version 2.6.2 - Released 2025-05-20
 		* Fixed TabbarExtensionsXC.SetTabBarColorXC to change the background color of the TabBar

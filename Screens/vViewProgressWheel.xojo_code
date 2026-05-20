@@ -1,12 +1,15 @@
 #tag MobileScreen
 Begin MobileScreen vViewProgressWheel
    BackButtonCaption=   ""
+   BackgroundColor =   
    Compatibility   =   ""
    ControlCount    =   0
    Device = 1
    HasNavigationBar=   True
    LargeTitleDisplayMode=   2
    Left            =   0
+   NavigationBarColor=   
+   NavigationBarTextColor=   
    Orientation = 0
    ScaleFactor     =   0.0
    TabBarVisible   =   True
@@ -14,18 +17,25 @@ Begin MobileScreen vViewProgressWheel
    TintColor       =   &c000000
    Title           =   "Big ProgressWheel"
    Top             =   0
+   _mTabBarVisible =   False
    Begin MobileButton Button1
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       AutoLayout      =   Button1, 8, , 0, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   Button1, 1, <Parent>, 1, False, +1.00, 4, 1, *kStdGapCtlToViewH, , True
-      AutoLayout      =   Button1, 3, TopLayoutGuide, 3, False, +1.00, 4, 1, 90, , True
+      AutoLayout      =   Button1, 3, TopLayoutGuide, 4, False, +1.00, 4, 1, 90, , True
       AutoLayout      =   Button1, 7, , 0, False, +1.00, 4, 1, 100, , True
+      BackgroundColor =   
+      BorderColor     =   
+      BorderWidth     =   0
       Caption         =   "Show"
       CaptionColor    =   &c000000
       ControlCount    =   0
+      CornerSize      =   0
       Enabled         =   True
       Height          =   30
+      Icon            =   0
       Left            =   20
       LockedInPosition=   False
       Scope           =   0
@@ -40,15 +50,21 @@ Begin MobileScreen vViewProgressWheel
    Begin MobileButton Button2
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       AutoLayout      =   Button2, 2, <Parent>, 2, False, +1.00, 4, 1, -*kStdGapCtlToViewH, , True
       AutoLayout      =   Button2, 7, , 0, False, +1.00, 4, 1, 100, , True
       AutoLayout      =   Button2, 10, Button1, 10, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Button2, 8, , 0, False, +1.00, 4, 1, 30, , True
+      BackgroundColor =   
+      BorderColor     =   
+      BorderWidth     =   0
       Caption         =   "Hide"
       CaptionColor    =   &c000000
       ControlCount    =   0
+      CornerSize      =   0
       Enabled         =   True
       Height          =   30
+      Icon            =   0
       Left            =   200
       LockedInPosition=   False
       Scope           =   0
@@ -63,6 +79,7 @@ Begin MobileScreen vViewProgressWheel
    Begin MobileLabel Label1
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       Alignment       =   0
       AutoLayout      =   Label1, 8, , 0, False, +1.00, 4, 2, 30, , True
       AutoLayout      =   Label1, 1, Button1, 1, False, +1.00, 4, 1, 0, , True
@@ -124,6 +141,38 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="_mTabBarVisible"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="BackgroundColor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="NavigationBarColor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="NavigationBarTextColor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="ScaleFactor"
 		Visible=false

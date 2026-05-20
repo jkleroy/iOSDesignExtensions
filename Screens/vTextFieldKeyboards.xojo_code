@@ -1,12 +1,15 @@
 #tag MobileScreen
 Begin MobileScreen vTextFieldKeyboards
    BackButtonCaption=   ""
+   BackgroundColor =   
    Compatibility   =   ""
    ControlCount    =   0
    Device = 1
    HasNavigationBar=   True
    LargeTitleDisplayMode=   2
    Left            =   0
+   NavigationBarColor=   
+   NavigationBarTextColor=   
    Orientation = 0
    ScaleFactor     =   0.0
    TabBarVisible   =   True
@@ -14,9 +17,11 @@ Begin MobileScreen vTextFieldKeyboards
    TintColor       =   0
    Title           =   "TextField Keyboards"
    Top             =   0
+   _mTabBarVisible =   False
    Begin MobileTextField TextField1
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       Alignment       =   0
       AllowAutoCorrection=   False
       AllowSpellChecking=   False
@@ -29,7 +34,8 @@ Begin MobileScreen vTextFieldKeyboards
       ControlCount    =   0
       Enabled         =   True
       Height          =   31
-      Hint            =   "ALL TEXT IN CAPS"
+      Hint            =   "Shows a Done button"
+      HintColor       =   
       InputType       =   0
       Left            =   60
       LockedInPosition=   False
@@ -54,6 +60,7 @@ Begin MobileScreen vTextFieldKeyboards
    Begin MobileTextField TextField2
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       Alignment       =   0
       AllowAutoCorrection=   False
       AllowSpellChecking=   False
@@ -67,6 +74,7 @@ Begin MobileScreen vTextFieldKeyboards
       Enabled         =   True
       Height          =   31
       Hint            =   "No Autocorrect"
+      HintColor       =   
       InputType       =   0
       Left            =   60
       LockedInPosition=   False
@@ -91,6 +99,7 @@ Begin MobileScreen vTextFieldKeyboards
    Begin MobileTextField TextField3
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       Alignment       =   0
       AllowAutoCorrection=   False
       AllowSpellChecking=   False
@@ -104,6 +113,7 @@ Begin MobileScreen vTextFieldKeyboards
       Enabled         =   True
       Height          =   31
       Hint            =   "Dark Keyboard"
+      HintColor       =   
       InputType       =   0
       Left            =   60
       LockedInPosition=   False
@@ -128,6 +138,7 @@ Begin MobileScreen vTextFieldKeyboards
    Begin MobileTextField TextField4
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       Alignment       =   0
       AllowAutoCorrection=   False
       AllowSpellChecking=   False
@@ -141,6 +152,7 @@ Begin MobileScreen vTextFieldKeyboards
       Enabled         =   True
       Height          =   31
       Hint            =   "Numbers only"
+      HintColor       =   
       InputType       =   0
       Left            =   60
       LockedInPosition=   False
@@ -165,6 +177,7 @@ Begin MobileScreen vTextFieldKeyboards
    Begin MobileTextField TextField5
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       Alignment       =   0
       AllowAutoCorrection=   False
       AllowSpellChecking=   False
@@ -178,6 +191,7 @@ Begin MobileScreen vTextFieldKeyboards
       Enabled         =   True
       Height          =   31
       Hint            =   "Return key says ""Search"""
+      HintColor       =   
       InputType       =   0
       Left            =   60
       LockedInPosition=   False
@@ -202,6 +216,7 @@ Begin MobileScreen vTextFieldKeyboards
    Begin MobileTextField TextField6
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       Alignment       =   0
       AllowAutoCorrection=   False
       AllowSpellChecking=   False
@@ -215,6 +230,7 @@ Begin MobileScreen vTextFieldKeyboards
       Enabled         =   True
       Height          =   31
       Hint            =   "Numbers keyboard"
+      HintColor       =   
       InputType       =   5
       Left            =   60
       LockedInPosition=   False
@@ -317,6 +333,38 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="_mTabBarVisible"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="BackgroundColor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="NavigationBarColor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="NavigationBarTextColor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="ScaleFactor"
 		Visible=false

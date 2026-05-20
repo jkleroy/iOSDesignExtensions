@@ -44,14 +44,14 @@ Begin MobileScreen Screen1
    Begin ControlsXC.UIStackViewXC VerticalStackView
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
-      AutoLayout      =   VerticalStackView, 8, , 0, False, +1.00, 4, 1, 100, , False
+      AutoLayout      =   VerticalStackView, 8, , 0, False, +1.00, 4, 1, 100, , True
       AutoLayout      =   VerticalStackView, 1, <Parent>, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   VerticalStackView, 2, <Parent>, 2, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   VerticalStackView, 3, btAlignment, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
       ControlCount    =   0
       distribution    =   ""
       Enabled         =   True
-      Height          =   -205
+      Height          =   100
       LayoutMarginsRelativeArrangement=   False
       Left            =   0
       LockedInPosition=   False
@@ -94,7 +94,7 @@ Begin MobileScreen Screen1
       selectedXC      =   False
       showsMenuAsPrimaryAction=   False
       TextFont        =   ""
-      TextSize        =   "0"
+      TextSize        =   0
       TintColor       =   &c000000
       toolTipXC       =   ""
       Top             =   111
@@ -132,7 +132,7 @@ Begin MobileScreen Screen1
       selectedXC      =   False
       showsMenuAsPrimaryAction=   False
       TextFont        =   ""
-      TextSize        =   "0"
+      TextSize        =   0
       TintColor       =   &c000000
       toolTipXC       =   ""
       Top             =   154
@@ -157,7 +157,7 @@ Begin MobileScreen Screen1
       Scope           =   0
       spacing         =   0.0
       TintColor       =   &c000000
-      Top             =   0
+      Top             =   305
       vertical        =   False
       Visible         =   True
       Width           =   375
@@ -199,9 +199,9 @@ End
 		  
 		  'me.TintColor = &cFF0000
 		  
-		  me.currentPageIndicatorTintColor = &cFF0000
+		  me.currentPageIndicatorTintColor = &c0
 		  
-		  me.SetBackgroundColorXC(&c00FF00)
+		  me.SetBackgroundColorXC(color.AccentThemeColor)
 		End Sub
 	#tag EndEvent
 	#tag Event

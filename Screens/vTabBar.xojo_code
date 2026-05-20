@@ -1,12 +1,15 @@
 #tag MobileScreen
 Begin MobileScreen vTabBar
    BackButtonCaption=   ""
+   BackgroundColor =   
    Compatibility   =   ""
    ControlCount    =   0
    Device = 1
    HasNavigationBar=   True
    LargeTitleDisplayMode=   2
    Left            =   0
+   NavigationBarColor=   
+   NavigationBarTextColor=   
    Orientation = 0
    ScaleFactor     =   0.0
    TabBarVisible   =   True
@@ -14,25 +17,32 @@ Begin MobileScreen vTabBar
    TintColor       =   &c00000000
    Title           =   "TabBar"
    Top             =   0
+   _mTabBarVisible =   False
    Begin MobileButton Button1
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       AutoLayout      =   Button1, 8, , 0, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   Button1, 1, <Parent>, 1, False, +1.00, 4, 1, *kStdGapCtlToViewH, , True
-      AutoLayout      =   Button1, 3, <Parent>, 3, False, +1.00, 4, 1, 92, , True
+      AutoLayout      =   Button1, 3, TopLayoutGuide, 4, False, +1.00, 4, 1, 40, , True
       AutoLayout      =   Button1, 7, , 0, False, +1.00, 4, 2, 60, , True
+      BackgroundColor =   
+      BorderColor     =   
+      BorderWidth     =   0
       Caption         =   "Set Badge"
       CaptionColor    =   &c000000
       ControlCount    =   0
+      CornerSize      =   0
       Enabled         =   True
       Height          =   30
+      Icon            =   0
       Left            =   20
       LockedInPosition=   False
       Scope           =   0
       TextFont        =   ""
       TextSize        =   0
       TintColor       =   &c000000
-      Top             =   92
+      Top             =   105
       Visible         =   True
       Width           =   60
       _ClosingFired   =   False
@@ -40,22 +50,28 @@ Begin MobileScreen vTabBar
    Begin MobileButton Button2
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       AutoLayout      =   Button2, 8, , 0, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   Button2, 1, Button1, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Button2, 3, Button1, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
       AutoLayout      =   Button2, 7, , 0, False, +1.00, 4, 2, 100, , True
+      BackgroundColor =   
+      BorderColor     =   
+      BorderWidth     =   0
       Caption         =   "Open child view"
       CaptionColor    =   &c000000
       ControlCount    =   0
+      CornerSize      =   0
       Enabled         =   True
       Height          =   30
+      Icon            =   0
       Left            =   20
       LockedInPosition=   False
       Scope           =   2
       TextFont        =   ""
       TextSize        =   0
       TintColor       =   &c000000
-      Top             =   130
+      Top             =   143
       Visible         =   True
       Width           =   100
       _ClosingFired   =   False
@@ -63,22 +79,28 @@ Begin MobileScreen vTabBar
    Begin MobileButton Button3
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       AutoLayout      =   Button3, 8, , 0, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   Button3, 1, Button2, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Button3, 3, Button2, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
       AutoLayout      =   Button3, 7, , 0, False, +1.00, 4, 2, 100, , True
+      BackgroundColor =   
+      BorderColor     =   
+      BorderWidth     =   0
       Caption         =   "Open child view (hide tabbar)"
       CaptionColor    =   &c000000
       ControlCount    =   0
+      CornerSize      =   0
       Enabled         =   True
       Height          =   30
+      Icon            =   0
       Left            =   20
       LockedInPosition=   False
       Scope           =   2
       TextFont        =   ""
       TextSize        =   0
       TintColor       =   &c000000
-      Top             =   168
+      Top             =   181
       Visible         =   True
       Width           =   100
       _ClosingFired   =   False
@@ -86,22 +108,28 @@ Begin MobileScreen vTabBar
    Begin MobileButton Button4
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       AutoLayout      =   Button4, 8, , 0, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   Button4, 1, Button3, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Button4, 3, Button3, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
       AutoLayout      =   Button4, 7, , 0, False, +1.00, 4, 2, 100, , True
+      BackgroundColor =   
+      BorderColor     =   
+      BorderWidth     =   0
       Caption         =   "Change TabBar color"
       CaptionColor    =   &c000000
       ControlCount    =   0
+      CornerSize      =   0
       Enabled         =   True
       Height          =   30
+      Icon            =   0
       Left            =   20
       LockedInPosition=   False
       Scope           =   2
       TextFont        =   ""
       TextSize        =   0
       TintColor       =   &c000000
-      Top             =   206
+      Top             =   219
       Visible         =   True
       Width           =   100
       _ClosingFired   =   False
@@ -109,22 +137,28 @@ Begin MobileScreen vTabBar
    Begin MobileButton Button5
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       AutoLayout      =   Button5, 8, , 0, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   Button5, 1, Button4, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Button5, 3, Button4, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
       AutoLayout      =   Button5, 7, , 0, False, +1.00, 4, 2, 100, , True
+      BackgroundColor =   
+      BorderColor     =   
+      BorderWidth     =   0
       Caption         =   "Change Tab button color"
       CaptionColor    =   &c000000
       ControlCount    =   0
+      CornerSize      =   0
       Enabled         =   True
       Height          =   30
+      Icon            =   0
       Left            =   20
       LockedInPosition=   False
       Scope           =   2
       TextFont        =   ""
       TextSize        =   0
       TintColor       =   &c000000
-      Top             =   244
+      Top             =   257
       Visible         =   True
       Width           =   100
       _ClosingFired   =   False
@@ -132,22 +166,28 @@ Begin MobileScreen vTabBar
    Begin MobileButton Button6
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       AutoLayout      =   Button6, 8, , 0, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   Button6, 1, Button5, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Button6, 3, Button5, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
       AutoLayout      =   Button6, 7, , 0, False, +1.00, 4, 2, 100, , True
+      BackgroundColor =   
+      BorderColor     =   
+      BorderWidth     =   0
       Caption         =   "Change Tab page"
       CaptionColor    =   &c000000
       ControlCount    =   0
+      CornerSize      =   0
       Enabled         =   True
       Height          =   30
+      Icon            =   0
       Left            =   20
       LockedInPosition=   False
       Scope           =   2
       TextFont        =   ""
       TextSize        =   0
       TintColor       =   &c000000
-      Top             =   282
+      Top             =   295
       Visible         =   True
       Width           =   100
       _ClosingFired   =   False
@@ -165,8 +205,9 @@ Begin MobileScreen vTabBar
       Left            =   20
       LockedInPosition=   False
       Scope           =   0
+      ThumbColor      =   
       TintColor       =   &c000000
-      Top             =   320
+      Top             =   333
       Value           =   False
       Visible         =   True
       Width           =   51
@@ -175,6 +216,7 @@ Begin MobileScreen vTabBar
    Begin MobileLabel Label1
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       Alignment       =   0
       AutoLayout      =   Label1, 1, Switch1, 2, False, +1.00, 4, 1, *kStdControlGapH, , True
       AutoLayout      =   Label1, 7, , 0, False, +1.00, 4, 1, 100, , True
@@ -196,7 +238,7 @@ Begin MobileScreen vTabBar
       TextFont        =   ""
       TextSize        =   0
       TintColor       =   &c000000
-      Top             =   320
+      Top             =   333
       Visible         =   True
       Width           =   100
       _ClosingFired   =   False
@@ -305,7 +347,7 @@ End
 		  Static buttonColor As Color = &cFC7B59
 		  
 		  if buttonColor = &cFC7B59 then
-		    buttonColor = &cFC00FF
+		    buttonColor = &c0000FF
 		    
 		  else
 		    buttonColor = &cFC7B59
@@ -342,6 +384,38 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="_mTabBarVisible"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="BackgroundColor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="NavigationBarColor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="NavigationBarTextColor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="ScaleFactor"
 		Visible=false

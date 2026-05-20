@@ -1,12 +1,15 @@
 #tag MobileScreen
 Begin MobileScreen vScreenOptions
    BackButtonCaption=   ""
+   BackgroundColor =   
    Compatibility   =   ""
    ControlCount    =   0
    Device = 7
    HasNavigationBar=   True
    LargeTitleDisplayMode=   2
    Left            =   0
+   NavigationBarColor=   
+   NavigationBarTextColor=   
    Orientation = 0
    ScaleFactor     =   0.0
    TabBarVisible   =   True
@@ -14,6 +17,7 @@ Begin MobileScreen vScreenOptions
    TintColor       =   &c000000
    Title           =   "ViewExtensions"
    Top             =   0
+   _mTabBarVisible =   False
    Begin MobileSwitch SwitchHomeIndicator
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
@@ -27,6 +31,7 @@ Begin MobileScreen vScreenOptions
       Left            =   8
       LockedInPosition=   False
       Scope           =   2
+      ThumbColor      =   
       TintColor       =   &c000000
       Top             =   115
       Value           =   False
@@ -37,6 +42,7 @@ Begin MobileScreen vScreenOptions
    Begin MobileLabel Label2
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       Alignment       =   0
       AutoLayout      =   Label2, 1, SwitchHomeIndicator, 2, False, +1.00, 4, 1, *kStdControlGapH, , True
       AutoLayout      =   Label2, 7, , 0, False, +1.00, 4, 1, 288, , True
@@ -76,6 +82,7 @@ Begin MobileScreen vScreenOptions
       Left            =   8
       LockedInPosition=   False
       Scope           =   2
+      ThumbColor      =   
       TintColor       =   &c000000
       Top             =   154
       Value           =   False
@@ -86,6 +93,7 @@ Begin MobileScreen vScreenOptions
    Begin MobileLabel Label3
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       Alignment       =   0
       AutoLayout      =   Label3, 1, SwitchUserInterfaceStyle, 2, False, +1.00, 4, 1, *kStdControlGapH, , True
       AutoLayout      =   Label3, 7, , 0, False, +1.00, 4, 1, 288, , True
@@ -119,7 +127,6 @@ End
 	#tag Event
 		Sub AppearanceChanged(dark As Boolean)
 		  
-		  Break
 		End Sub
 	#tag EndEvent
 
@@ -161,6 +168,38 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="_mTabBarVisible"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="BackgroundColor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="NavigationBarColor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="NavigationBarTextColor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Index"
 		Visible=true

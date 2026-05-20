@@ -1,12 +1,15 @@
 #tag MobileScreen
 Begin MobileScreen vImageExtensions
    BackButtonCaption=   ""
+   BackgroundColor =   
    Compatibility   =   ""
    ControlCount    =   0
    Device = 1
    HasNavigationBar=   True
    LargeTitleDisplayMode=   2
    Left            =   0
+   NavigationBarColor=   
+   NavigationBarTextColor=   
    Orientation = 0
    ScaleFactor     =   0.0
    TabBarVisible   =   True
@@ -14,6 +17,7 @@ Begin MobileScreen vImageExtensions
    TintColor       =   &c00000000
    Title           =   "ImageExtensions"
    Top             =   0
+   _mTabBarVisible =   False
    Begin MobileImageViewer imgDefault
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
@@ -39,6 +43,7 @@ Begin MobileScreen vImageExtensions
    Begin MobileLabel Label1
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       Alignment       =   0
       AutoLayout      =   Label1, 8, , 0, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   Label1, 1, imgDefault, 2, False, +1.00, 4, 1, *kStdControlGapH, , True
@@ -90,6 +95,7 @@ Begin MobileScreen vImageExtensions
    Begin MobileLabel Label2
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       Alignment       =   0
       AutoLayout      =   Label2, 8, imgOriginal, 8, False, +1.00, 4, 1, 20, , True
       AutoLayout      =   Label2, 1, imgOriginal, 2, False, +1.00, 4, 1, *kStdControlGapH, , True
@@ -163,6 +169,7 @@ Begin MobileScreen vImageExtensions
    Begin MobileLabel Label3
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       Alignment       =   0
       AutoLayout      =   Label3, 8, , 0, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   Label3, 1, Label1, 1, False, +1.00, 4, 1, 0, , True
@@ -192,6 +199,7 @@ Begin MobileScreen vImageExtensions
    Begin MobileLabel Label4
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       Alignment       =   0
       AutoLayout      =   Label4, 8, imgRTL, 8, False, +1.00, 4, 1, 20, , True
       AutoLayout      =   Label4, 1, Label3, 1, False, +1.00, 4, 1, 0, , True
@@ -221,22 +229,28 @@ Begin MobileScreen vImageExtensions
    Begin MobileButton Button1
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
+      AutoLayout      =   Button1, 8, , 0, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   Button1, 1, imgRTL, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Button1, 2, Label4, 1, False, +1.00, 4, 1, -*kStdControlGapH, , True
-      AutoLayout      =   Button1, 3, <Parent>, 3, False, +1.00, 4, 1, 345, , True
-      AutoLayout      =   Button1, 8, , 0, False, +1.00, 4, 1, 30, , True
+      AutoLayout      =   Button1, 3, Label4, 4, False, +1.00, 4, 1, 40, , True
+      BackgroundColor =   
+      BorderColor     =   
+      BorderWidth     =   0
       Caption         =   "X"
       CaptionColor    =   &c007AFF00
       ControlCount    =   0
+      CornerSize      =   0
       Enabled         =   True
       Height          =   30
+      Icon            =   0
       Left            =   20
       LockedInPosition=   False
       Scope           =   2
       TextFont        =   ""
       TextSize        =   0
       TintColor       =   &c000000
-      Top             =   345
+      Top             =   347
       Visible         =   True
       Width           =   50
       _ClosingFired   =   False
@@ -244,22 +258,28 @@ Begin MobileScreen vImageExtensions
    Begin MobileButton Button2
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       AutoLayout      =   Button2, 1, Button1, 2, False, +1.00, 4, 1, *kStdControlGapH, , True
       AutoLayout      =   Button2, 7, , 0, False, +1.00, 4, 1, 50, , True
       AutoLayout      =   Button2, 11, Button1, 11, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Button2, 8, , 0, False, +1.00, 4, 1, 30, , True
+      BackgroundColor =   
+      BorderColor     =   
+      BorderWidth     =   0
       Caption         =   "X"
       CaptionColor    =   &c007AFF00
       ControlCount    =   0
+      CornerSize      =   0
       Enabled         =   True
       Height          =   30
+      Icon            =   0
       Left            =   78
       LockedInPosition=   False
       Scope           =   2
       TextFont        =   ""
       TextSize        =   0
       TintColor       =   &c000000
-      Top             =   345
+      Top             =   347
       Visible         =   True
       Width           =   50
       _ClosingFired   =   False
@@ -267,22 +287,28 @@ Begin MobileScreen vImageExtensions
    Begin MobileButton Button3
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       AutoLayout      =   Button3, 1, Button2, 2, False, +1.00, 4, 1, *kStdControlGapH, , True
       AutoLayout      =   Button3, 7, , 0, False, +1.00, 4, 1, 50, , True
       AutoLayout      =   Button3, 11, Button1, 11, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Button3, 8, , 0, False, +1.00, 4, 1, 30, , True
+      BackgroundColor =   
+      BorderColor     =   
+      BorderWidth     =   0
       Caption         =   "X"
       CaptionColor    =   &c007AFF00
       ControlCount    =   0
+      CornerSize      =   0
       Enabled         =   True
       Height          =   30
+      Icon            =   0
       Left            =   136
       LockedInPosition=   False
       Scope           =   2
       TextFont        =   ""
       TextSize        =   0
       TintColor       =   &c000000
-      Top             =   345
+      Top             =   347
       Visible         =   True
       Width           =   50
       _ClosingFired   =   False
@@ -290,22 +316,28 @@ Begin MobileScreen vImageExtensions
    Begin MobileButton Button4
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       AutoLayout      =   Button4, 1, Button3, 2, False, +1.00, 4, 1, *kStdControlGapH, , True
       AutoLayout      =   Button4, 7, , 0, False, +1.00, 4, 1, 50, , True
       AutoLayout      =   Button4, 11, Button1, 11, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Button4, 8, , 0, False, +1.00, 4, 1, 30, , True
+      BackgroundColor =   
+      BorderColor     =   
+      BorderWidth     =   0
       Caption         =   "X"
       CaptionColor    =   &c007AFF00
       ControlCount    =   0
+      CornerSize      =   0
       Enabled         =   True
       Height          =   30
+      Icon            =   0
       Left            =   194
       LockedInPosition=   False
       Scope           =   2
       TextFont        =   ""
       TextSize        =   0
       TintColor       =   &c000000
-      Top             =   345
+      Top             =   347
       Visible         =   True
       Width           =   50
       _ClosingFired   =   False
@@ -412,6 +444,38 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="_mTabBarVisible"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="BackgroundColor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="NavigationBarColor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="NavigationBarTextColor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="ScaleFactor"
 		Visible=false

@@ -18,6 +18,102 @@ Begin MobileScreen Screen2
    Title           =   "Navigation subtitle view"
    Top             =   0
    _mTabBarVisible =   False
+   Begin MobileButton Button1
+      AccessibilityHint=   ""
+      AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
+      AutoLayout      =   Button1, 8, , 0, False, +1.00, 4, 1, 30, , True
+      AutoLayout      =   Button1, 1, <Parent>, 1, False, +1.00, 4, 1, *kStdGapCtlToViewH, , True
+      AutoLayout      =   Button1, 3, TopLayoutGuide, 4, False, +1.00, 4, 1, 100, , True
+      AutoLayout      =   Button1, 7, , 0, False, +1.00, 4, 1, 250, , True
+      BackgroundColor =   
+      BorderColor     =   
+      BorderWidth     =   0
+      Caption         =   "Button"
+      CaptionColor    =   &cFFFFFF00
+      ControlCount    =   0
+      CornerSize      =   0
+      Enabled         =   True
+      Height          =   30
+      Icon            =   0
+      Left            =   20
+      LockedInPosition=   False
+      Scope           =   2
+      TextFont        =   ""
+      TextSize        =   0
+      TintColor       =   
+      Top             =   165
+      Visible         =   True
+      Width           =   250
+      _ClosingFired   =   False
+   End
+   Begin MobileButton Button2
+      AccessibilityHint=   ""
+      AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
+      AutoLayout      =   Button2, 8, , 0, False, +1.00, 4, 1, 30, , True
+      AutoLayout      =   Button2, 1, Button1, 1, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   Button2, 3, Button1, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
+      AutoLayout      =   Button2, 7, , 0, False, +1.00, 4, 1, 250, , True
+      BackgroundColor =   
+      BorderColor     =   
+      BorderWidth     =   0
+      Caption         =   "Button"
+      CaptionColor    =   &cFFFFFF00
+      ControlCount    =   0
+      CornerSize      =   0
+      Enabled         =   True
+      Height          =   30
+      Icon            =   0
+      Left            =   20
+      LockedInPosition=   False
+      Scope           =   2
+      TextFont        =   ""
+      TextSize        =   0
+      TintColor       =   
+      Top             =   203
+      Visible         =   True
+      Width           =   250
+      _ClosingFired   =   False
+   End
+   Begin MobileButton Button3
+      AccessibilityHint=   ""
+      AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
+      AutoLayout      =   Button3, 8, , 0, False, +1.00, 4, 1, 30, , True
+      AutoLayout      =   Button3, 1, <Parent>, 1, False, +1.00, 4, 1, 20, , True
+      AutoLayout      =   Button3, 3, Button2, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
+      AutoLayout      =   Button3, 7, , 0, False, +1.00, 4, 1, 250, , True
+      BackgroundColor =   
+      BorderColor     =   
+      BorderWidth     =   0
+      Caption         =   "Button"
+      CaptionColor    =   &cFFFFFF00
+      ControlCount    =   0
+      CornerSize      =   0
+      Enabled         =   True
+      Height          =   30
+      Icon            =   0
+      Left            =   20
+      LockedInPosition=   False
+      Scope           =   2
+      TextFont        =   ""
+      TextSize        =   0
+      TintColor       =   
+      Top             =   241
+      Visible         =   True
+      Width           =   250
+      _ClosingFired   =   False
+   End
+   Begin MobileColorPicker ColorPicker1
+      HasAlpha        =   False
+      Left            =   0
+      LockedInPosition=   False
+      PanelIndex      =   -1
+      Parent          =   ""
+      Scope           =   0
+      Top             =   0
+   End
 End
 #tag EndMobileScreen
 
@@ -30,13 +126,14 @@ End
 
 	#tag Event
 		Sub Opening()
-		  
+		  self.SetBackgroundColorXC(&c0)
 		End Sub
 	#tag EndEvent
 
 
 	#tag Method, Flags = &h0
 		Sub SetupSubtitleSegmentedControl()
+		  if ExtensionsXC.GetiOSVersionXC < 26.0 then Return
 		  
 		  // ── 1. Get the UINavigationItem from the view controller ──────────────
 		  Declare Function navigationItem Lib "UIKit" Selector "navigationItem" (vc As Ptr) As Ptr
@@ -86,6 +183,41 @@ End
 
 #tag EndWindowCode
 
+#tag Events Button1
+	#tag Event
+		Sub Opening()
+		  me.SetBackgroundColorXC(&cFF0000)
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Pressed()
+		  ColorPicker1.Show(&c0, "", self)
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Button2
+	#tag Event
+		Sub Opening()
+		  me.SetBackgroundColorWithExposureXC(&cFF0000, 0.5)
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Button3
+	#tag Event
+		Sub Opening()
+		  me.SetBackgroundColorWithExposureXC(&cFF0000, 3)
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events ColorPicker1
+	#tag Event
+		Sub ColorSelected(selectedColor As Color)
+		  Button1.SetBackgroundColorXC(selectedColor)
+		  Button2.SetBackgroundColorXC(selectedColor, 0.4)
+		  Button3.SetBackgroundColorXC(selectedColor, 3.0)
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag ViewBehavior
 	#tag ViewProperty
 		Name="Index"

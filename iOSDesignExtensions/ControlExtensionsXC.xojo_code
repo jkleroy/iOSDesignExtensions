@@ -254,7 +254,7 @@ Protected Module ControlExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 536574732074686520636F6C6F72206F6620612056696577
-		Sub SetBackgroundColorXC(extends ctrl As MobileUIControl, value As Color)
+		Sub SetBackgroundColorWithExposureXC(extends ctrl as MobileUIControl, value as Color, exposure as double)
 		  
 		  
 		  
@@ -262,6 +262,35 @@ Protected Module ControlExtensionsXC
 		  Dim uic as ptr
 		  if value.Alpha = 255 then
 		    uic = ExtensionsXC.UIColor_Clear()
+		  else
+		    uic = ExtensionsXC.UIColorFromColorWithExposure(value, exposure)
+		    
+		  end if
+		  
+		  
+		  'Declare function description_ lib "UIKit" Selector "description" (obj as ptr) as CFStringRef
+		  'System.DebugLog description_(uic)
+		  
+		  
+		  Declare Sub decl_SetBackgroundColor lib "UIKit.framework" selector "setBackgroundColor:" (aUIView As Ptr, aUIColor As Ptr)
+		  
+		  decl_SetBackgroundColor(ctrl.handle, uic)
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 536574732074686520636F6C6F72206F66206120636F6E74726F6C2E204578706F7375726520616C6C6F777320
+		Sub SetBackgroundColorXC(extends ctrl As MobileUIControl, value As Color, exposure As Double = 0.0)
+		  // Updated for iOS26 with exposure component to make colors brighter
+		  
+		  
+		  
+		  Dim uic as ptr
+		  if value.Alpha = 255 then
+		    uic = ExtensionsXC.UIColor_Clear()
+		  elseif exposure > 0.0 then
+		    uic = ExtensionsXC.UIColorFromColorWithExposure(value, exposure)
 		  else
 		    uic = ExtensionsXC.UIColorFromColor(value)
 		    
