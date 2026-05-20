@@ -306,6 +306,10 @@ Protected Module ExtensionsXC
 	#tag Note, Name = History
 		## History
 		
+		### Version 2.7 - Released 2026-05-20
+		* New iOS26 features
+		* Now supports Glass button configurations
+		* Now supports Button badges
 		* New UIColorFromColorWithExposure
 		
 		### Version 2.6.2 - Released 2025-05-20
@@ -496,7 +500,7 @@ Protected Module ExtensionsXC
 	#tag Constant, Name = kUseUIKit, Type = Boolean, Dynamic = False, Default = \"False", Scope = Protected
 	#tag EndConstant
 
-	#tag Constant, Name = kVersion, Type = Text, Dynamic = False, Default = \"2.6.3", Scope = Protected
+	#tag Constant, Name = kVersion, Type = Text, Dynamic = False, Default = \"2.7.0", Scope = Protected
 	#tag EndConstant
 
 

@@ -59,6 +59,12 @@ Inherits MobileApplication
 	#tag Note, Name = README
 		## History
 		
+		### Version 2.7 - Released 2026-05-20
+		* New iOS26 features
+		* Now supports Glass button configurations
+		* Now supports Button badges
+		* New UIColorFromColorWithExposure
+		
 		### Version 2.6.2 - Released 2025-05-20
 		* Fixed TabbarExtensionsXC.SetTabBarColorXC to change the background color of the TabBar
 		* New TabbarExtensionsXC.TabSetTabBarShadowColorXC
@@ -251,7 +257,7 @@ Inherits MobileApplication
 	#tag Constant, Name = isBeta, Type = Boolean, Dynamic = False, Default = \"False", Scope = Public
 	#tag EndConstant
 
-	#tag Constant, Name = UseRevealServer, Type = Boolean, Dynamic = False, Default = \"True", Scope = Public
+	#tag Constant, Name = UseRevealServer, Type = Boolean, Dynamic = False, Default = \"False", Scope = Public
 	#tag EndConstant
 
 
