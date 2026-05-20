@@ -5,12 +5,15 @@ Protected Module ViewExtensionsXC
 		  
 		  Progress = new MobileProgressWheel
 		  
+		  declare sub setColor lib "UIKit.framework" selector "setColor:" (obj_id as ptr, col as ptr)
+		  
 		  If DarkBackground Then
-		    Progress.SetActivityIndicatorViewStyleXC(ControlExtensionsXC.UIActivityIndicatorViewStyle.whiteLarge)
+		    Progress.SetActivityIndicatorViewStyleXC(ControlExtensionsXC.UIActivityIndicatorViewStyle.large)
+		    setColor(Progress.handle, UIColor.White)
 		  Else
-		    Progress.SetActivityIndicatorViewStyleXC(ControlExtensionsXC.UIActivityIndicatorViewStyle.whiteLarge)
+		    Progress.SetActivityIndicatorViewStyleXC(ControlExtensionsXC.UIActivityIndicatorViewStyle.large)
 		    
-		    declare sub setColor lib "UIKit.framework" selector "setColor:" (obj_id as ptr, col as ptr)
+		    
 		    setColor(Progress.handle, UIColor.Gray)
 		    
 		  end if
@@ -46,9 +49,14 @@ Protected Module ViewExtensionsXC
 		  
 		  Progress = New MobileProgressWheel
 		  
-		  Progress.SetActivityIndicatorViewStyleXC(ControlExtensionsXC.UIActivityIndicatorViewStyle.whiteLarge)
+		  Progress.SetActivityIndicatorViewStyleXC(ControlExtensionsXC.UIActivityIndicatorViewStyle.large)
 		  
-		  If Not DarkBackground Then
+		  if DarkBackground then
+		    
+		    Declare Sub setColor Lib "UIKit.framework" selector "setColor:" (obj_id As ptr, col As ptr)
+		    setColor(Progress.handle, UIColor.White)
+		    
+		  Else
 		    
 		    Declare Sub setColor Lib "UIKit.framework" selector "setColor:" (obj_id As ptr, col As ptr)
 		    setColor(Progress.handle, UIColor.Gray)
@@ -87,7 +95,7 @@ Protected Module ViewExtensionsXC
 		  
 		  
 		  Dim classPtr As ptr
-		  Declare sub animateWithDuration_ lib UIKitLib selector "animateWithDuration:delay:options:animations:completion:" _
+		  Declare sub animateWithDuration_ lib "UIKit" selector "animateWithDuration:delay:options:animations:completion:" _
 		  (id as ptr, duration as Double, delay as double, options as integer, animations as ptr, completion as ptr)
 		  declare function NSClassFromString lib "Foundation" (clsName as cfstringref) as ptr
 		  
@@ -110,7 +118,7 @@ Protected Module ViewExtensionsXC
 		  
 		  
 		  Dim classPtr As ptr
-		  Declare sub animateWithDuration_ lib UIKitLib selector "animateWithDuration:animations:completion:" _
+		  Declare sub animateWithDuration_ lib "UIKit" selector "animateWithDuration:animations:completion:" _
 		  (id as ptr, duration as Double, animations as ptr, completion as ptr)
 		  declare function NSClassFromString lib "Foundation" (clsName as cfstringref) as ptr
 		  
@@ -133,7 +141,7 @@ Protected Module ViewExtensionsXC
 		  
 		  
 		  Dim classPtr As ptr
-		  Declare sub animateWithDuration_ lib UIKitLib selector "animateWithDuration:animations:completion:" _
+		  Declare sub animateWithDuration_ lib "UIKit" selector "animateWithDuration:animations:completion:" _
 		  (id as ptr, duration as Double, animations as ptr, completion as ptr)
 		  declare function NSClassFromString lib "Foundation" (clsName as cfstringref) as ptr
 		  
@@ -148,6 +156,13 @@ Protected Module ViewExtensionsXC
 		  
 		  
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function CustomDetentResolver() As CGFloat
+		  
+		  Return CustomDetentResolverHeight
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 436C6F73657320612076696577207468617420776173206F70656E6564206173206D6F64616C2E
@@ -360,12 +375,14 @@ Protected Module ViewExtensionsXC
 		  Dim svc As ptr = initWithURL_(alloc(NSClassFromString("SFSafariViewController")), nUrl)
 		  
 		  
+		  Dim uic as ptr
+		  
 		  if BarTintColor.Alpha <> 255 then
 		    Declare sub preferredBarTintColor_ lib "UIKit.framework" selector "setPreferredBarTintColor:" (obj as ptr, value as ptr)
 		    
 		    
-		    Dim uic As UIKit.UIColor
-		    uic = new UIKit.UIColor(BarTintColor)
+		    
+		    uic = ExtensionsXC.UIColorFromColor(BarTintColor)
 		    
 		    
 		    preferredBarTintColor_(svc, uic)
@@ -374,8 +391,8 @@ Protected Module ViewExtensionsXC
 		  if ControlTintColor.Alpha <> 255 then
 		    Declare sub preferredControlTintColor_ lib "UIKit.framework" selector "setPreferredControlTintColor:" (obj as ptr, value as ptr)
 		    
-		    Dim uic As UIKit.UIColor
-		    uic = new UIKit.UIColor(ControlTintColor)
+		    
+		    uic = ExtensionsXC.UIColorFromColor(ControlTintColor)
 		    
 		    
 		    preferredControlTintColor_(svc, uic)
@@ -502,6 +519,30 @@ Protected Module ViewExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 52656D6F76657320746865206E617669676174696F6E20626172207469746C652076696577
+		Sub RemoveNavBarTitleControlXC(Extends v As MobileScreen)
+		  Declare Function navigationController Lib "UIKit.framework" Selector "navigationController" (viewController As Ptr) As Ptr
+		  Declare Function navigationBar Lib "UIKit.framework" Selector "navigationBar" (obj_ref As Ptr) As Ptr
+		  Declare Function topItem Lib "UIKit.framework" Selector "topItem" (id As Ptr) As Ptr
+		  Declare Sub setTitleView Lib "UIKit.framework" Selector "setTitleView:" (id As Ptr, UIImage As Ptr)
+		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
+		  Declare Function alloc Lib "Foundation" Selector "alloc"(classPtr As Ptr) As Ptr
+		  Declare Function initWithImage Lib "UIKit.framework" Selector "initWithImage:" (objRef As Ptr, imgRef As Ptr) As Ptr
+		  
+		  //Reference to Navigation Controller
+		  Dim navigationControllerRef As Ptr = navigationController(v.ViewControllerHandle)
+		  
+		  //Ref to NavigationBar
+		  Dim navBar As Ptr = navigationBar(navigationControllerRef)
+		  
+		  //Ref to Title item
+		  Dim navItem As Ptr = topItem(navBar)
+		  
+		  //Set Title item to nothing
+		  setTitleView(navItem, nil)
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 456E61626C65732F44697361626C657320616E696D6174696F6E73206F6E206120766965772E
 		Sub SetAnimationsEnabledXC(extends v As MobileScreen, value As Boolean)
 		  #Pragma Unused v
@@ -516,15 +557,15 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 536574732074686520636F6C6F72206F6620612056696577
-		Sub SetBackgroundColorXC(extends v As MobileScreen, c As Color)
+		Sub SetBackgroundColorXC(extends v As MobileScreen, value As Color)
 		  
 		  
-		  Dim uic As UIKit.UIColor
+		  Dim uic as ptr
 		  
-		  if c.Alpha = 255 then
-		    uic = UIKit.UIColor.ClearColor
+		  if value.Alpha = 255 then
+		    uic = ExtensionsXC.UIColor_Clear()
 		  else
-		    uic = new UIKit.UIColor(c)
+		    uic = ExtensionsXC.UIColorFromColor(value)
 		  end if
 		  
 		  
@@ -665,115 +706,6 @@ Protected Module ViewExtensionsXC
 		  declare sub hidesBarsOnSwipe lib "UIKit.framework" selector "setHidesBarsOnSwipe:" (navcontroller as ptr, value as Boolean)
 		  
 		  hidesBarsOnSwipe(navigationControllerRef, hide)
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub SetHidesBackButtonXC(extends v As MobileScreen, value As Boolean)
-		  
-		  
-		  
-		  Declare Function navigationBar Lib "UIKit.framework" selector "navigationBar" (obj_ref As ptr) As ptr
-		  
-		  Declare Function navigationController Lib "UIKit.framework" selector "navigationController" (viewController As ptr) As ptr
-		  'Dim navigationControllerRef As ptr = navigationController(v.ViewControllerHandle)
-		  
-		  'Dim navBar As ptr = navigationBar(navigationControllerRef)
-		  
-		  Declare Function navigationItem Lib "UIKit.framework" selector "navigationItem" (obj_ref As ptr) As ptr
-		  Dim navItem As ptr = navigationItem(v.ViewControllerHandle)
-		  
-		  
-		  Declare Sub hidesBackButton Lib "UIKit.framework" selector "setHidesBackButton:" (obj_id As ptr, value As Boolean)
-		  hidesBackButton(navItem, value)
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Sub SetLargeTitleDisplayModeXC(extends v As MobileScreen, mode As ViewExtensionsXC.LargeTitleDisplayMode)
-		  
-		  
-		  Static sSystemVersion As Double
-		  
-		  //Get sSystemVersion only once
-		  If sSystemVersion = 0.0 Then
-		    
-		    Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
-		    Declare Function currentDevice_ Lib "UIKit.framework" selector "currentDevice" (clsRef As ptr) As ptr
-		    Declare Function systemversion_ Lib "UIKit.framework" selector "systemVersion" (obj_id As ptr) As CFStringRef
-		    Dim device As Ptr = currentDevice_(NSClassFromString("UIDevice"))
-		    Dim systemVersion As String = systemversion_(device)
-		    
-		    Try
-		      sSystemVersion = Double.FromString(systemVersion)
-		    Catch
-		    End Try
-		    
-		  End If
-		  
-		  //Use new API
-		  If sSystemVersion >= 11.0 Then
-		    
-		    'Declare Function navigationBar Lib "UIKit.framework" selector "navigationBar" (obj_ref As ptr) As ptr
-		    
-		    'Declare Function navigationController Lib "UIKit.framework" selector "navigationController" (viewController As ptr) As ptr
-		    'Dim navigationControllerRef As ptr = navigationController(v.ViewControllerHandle)
-		    
-		    'Dim navBar As ptr = navigationBar(navigationControllerRef)
-		    
-		    Declare Function navigationItem Lib "UIKit.framework" selector "navigationItem" (obj_ref As ptr) As ptr
-		    Dim navItem As ptr = navigationItem(v.ViewControllerHandle)
-		    
-		    
-		    Declare Sub largeTitleDisplayMode Lib "UIKit.framework" selector "setLargeTitleDisplayMode:" (obj_id As ptr, value As LargeTitleDisplayMode)
-		    largeTitleDisplayMode(navItem, mode)
-		    
-		  Else
-		    
-		    
-		    
-		    //Nothing
-		    'Break
-		  End If
-		  
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h0, Description = 53657473206C61726765207469746C657320746F206120566965772028694F5331312B29
-		Sub SetLargeTitlesXC(extends v as MobileScreen, value as Boolean, displayMode as ViewExtensionsXC.LargeTitleDisplayMode = ViewExtensionsXC.LargeTitleDisplayMode.automatic)
-		  
-		  Dim sSystemVersion as Double = ExtensionsXC.GetiOSVersionXC
-		  
-		  //Use new API
-		  If sSystemVersion >= 11.0 Then
-		    
-		    Declare Function navigationBar Lib "UIKit.framework" selector "navigationBar" (obj_ref As ptr) As ptr
-		    
-		    Declare Function navigationController Lib "UIKit.framework" selector "navigationController" (viewController As ptr) As ptr
-		    Dim navigationControllerRef As ptr = navigationController(v.ViewControllerHandle)
-		    
-		    Dim navBar As ptr = navigationBar(navigationControllerRef)
-		    
-		    Declare Sub prefersLargeTitles Lib "UIKit.framework" selector "setPrefersLargeTitles:" (obj_id As ptr, value As Boolean)
-		    prefersLargeTitles(navBar, value)
-		    
-		    Declare Function navigationItem Lib "UIKit.framework" selector "navigationItem" (obj_ref As ptr) As ptr
-		    Dim navItem As ptr = navigationItem(v.ViewControllerHandle)
-		    
-		    Dim mode As LargeTitleDisplayMode
-		    mode = displayMode
-		    
-		    Declare Sub largeTitleDisplayMode Lib "UIKit.framework" selector "setLargeTitleDisplayMode:" (obj_id As ptr, value As LargeTitleDisplayMode)
-		    largeTitleDisplayMode(navItem, mode)
-		    
-		  Else
-		    #Pragma Unused v
-		    #Pragma Unused value
-		    #Pragma Unused displayMode
-		    
-		    
-		  End If
 		End Sub
 	#tag EndMethod
 
@@ -952,7 +884,7 @@ Protected Module ViewExtensionsXC
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0, Description = 5365747320616E20696D61676520696E7374656164206F66204E6176626172207469746C65
+	#tag Method, Flags = &h0, Description = 5365747320746865205469746C6556696577206F6620746865206E617669676174696F6E20626172
 		Sub SetNavBarTitleControlXC(extends v As MobileScreen, ctrl As MobileUIControl)
 		  
 		  declare function navigationController lib "UIKit.framework" selector "navigationController" (viewController as ptr) as ptr
@@ -974,7 +906,13 @@ Protected Module ViewExtensionsXC
 		  
 		  
 		  //Set Title item to use the control
-		  setTitleView(navItem, ctrl.Handle)
+		  if ctrl is nil then
+		    setTitleView(navItem, nil)
+		  Else
+		    setTitleView(navItem, ctrl.Handle)
+		  end if
+		  
+		  
 		End Sub
 	#tag EndMethod
 
@@ -1233,16 +1171,6 @@ Protected Module ViewExtensionsXC
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0, Description = 4368616E6765732074686520636F6C6F72206F66206120546F6F6C627574746F6E
-		Sub SetTintColorXC(extends tb As MobileToolbarButton, value As Color)
-		  
-		  Declare Sub setTintColor Lib "UIKit.framework" selector "setTintColor:" (id As ptr, UIColor As Ptr)
-		  setTintColor tb.handle, New UIColor(value)
-		  
-		  
-		End Sub
-	#tag EndMethod
-
 	#tag Method, Flags = &h0, Description = 4368616E67657320746865206261636B67726F756E6420636F6C6F72206F66206120546162426172
 		Sub SetToolBarBackgroundColorXC(extends v as MobileScreen, barColor as color, translucent as boolean = false)
 		  
@@ -1282,7 +1210,7 @@ Protected Module ViewExtensionsXC
 		  
 		  Declare Sub tintColor_ Lib "UIKit.framework" selector "setTintColor:" (obj_id As ptr, tintColor As ptr)
 		  
-		  tintColor_ toolbar, New UIColor(barColor)
+		  tintColor_ toolbar, ExtensionsXC.UIColorFromColor(barColor)
 		  
 		  
 		End Sub
@@ -1302,99 +1230,111 @@ Protected Module ViewExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 53686F77732061732061206D6F64616C20466F726D5368656574206174207468652073706563696669656420686569676874
+		Sub ShowSheetWithHeightXC(extends v As MobileScreen, parentScreen As MobileScreen, height As Double, showGrabber As Boolean = False, cornerRadius As Single = -1)
+		  
+		  
+		  v.ShowModal(parentScreen, MobileScreen.ModalPresentationStyles.FormSheet)
+		  
+		  If ExtensionsXC.GetiOSVersionXC < 16.0 Then Return
+		  
+		  
+		  Declare Function sheetPresentationController Lib "UIKit" selector "sheetPresentationController" (obj As Ptr) As Ptr
+		  Declare Sub setDetents Lib "UIKit" selector "setDetents:" (obj As Ptr, detents As Ptr)
+		  Declare Sub setPrefersGrabberVisible Lib "UIKit" selector "setPrefersGrabberVisible:" (obj As Ptr, value As Boolean)
+		  Declare Sub setPrefersScrollingExpandsWhenScrolledToEdge Lib "UIKit" selector "setPrefersScrollingExpandsWhenScrolledToEdge:" (obj As Ptr, value As Boolean)
+		  Declare Function NSClassFromString Lib "Foundation" (name As CFStringRef) As Ptr
+		  Declare Function NSArrayWithObject Lib "Foundation" selector "arrayWithObject:" (cls As Ptr, obj As Ptr) As Ptr
+		  Declare Function customDetent Lib "UIKit" selector "customDetentWithIdentifier:resolver:" (cls As Ptr, identifier As CFStringRef, resolver As Ptr) As Ptr
+		  
+		  Dim sheet As Ptr = sheetPresentationController(v.ViewControllerHandle)
+		  If sheet = Nil Then Return
+		  
+		  // Build an Obj-C block that returns the desired height as CGFloat
+		  CustomDetentResolverHeight = height
+		  Dim resolverBlock As New ObjCBlock(AddressOf CustomDetentResolver)
+		  'resolverBlock.Parameter("height") = height
+		  
+		  Dim detentClass As Ptr = NSClassFromString("UISheetPresentationControllerDetent")
+		  Dim customDet As Ptr = customDetent(detentClass, "custom", resolverBlock.Handle)
+		  Dim detents As Ptr = NSArrayWithObject(NSClassFromString("NSArray"), customDet)
+		  
+		  setDetents(sheet, detents)
+		  setPrefersGrabberVisible(sheet, showGrabber)
+		  setPrefersScrollingExpandsWhenScrolledToEdge(sheet, False)
+		  
+		  If cornerRadius > -1 Then
+		    Declare Sub preferredCornerRadius_ Lib "UIKit" selector "setPreferredCornerRadius:" (obj As Ptr, value As CGFloat)
+		    preferredCornerRadius_(sheet, cornerRadius)
+		  End If
+		  
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
 		Sub ShowSheetXC(extends v As MobileScreen, parentScreen As MobileScreen, height As UISheetPresentationControllerDetent = UISheetPresentationControllerDetent.large, showGrabber As Boolean = False, Animate As Boolean = True, cornerRadius As Single = -1)
 		  //Source https://sarunw.com/posts/bottom-sheet-in-ios-15-with-uisheetpresentationcontroller/
 		  
-		  if ExtensionsXC.GetiOSVersionXC < 15.0 then
-		    Dim err As new UnsupportedOperationException
-		    err.Reason = CurrentMethodName + " requires iOS15+"
-		    Raise err
-		  end if
 		  
+		  //first show as a sheet
+		  v.ShowModal(parentScreen, MobileScreen.ModalPresentationStyles.FormSheet, animate)
 		  
+		  //Safe guard for iOS14
+		  if ExtensionsXC.GetiOSVersionXC < 15.0 then Return
 		  
-		  Declare Function NSClassFromString Lib "Foundation" (className As CFStringRef) As Ptr
-		  Declare Function alloc Lib "Foundation.framework" selector "alloc" (clsRef As ptr) As ptr
-		  Declare Function initWithRootViewController_ Lib "Foundation" selector "initWithRootViewController:" (obj_id As ptr, rootViewController As ptr) As ptr
-		  Declare Sub presentViewController Lib "UIKit.framework" _
-		  Selector "presentViewController:animated:completion:" _
-		  (parentView As Ptr, viewControllerToPresent As Ptr, animated As Boolean, completion As Ptr)
-		  Declare Sub modalPresentationStyle_ Lib "UIKit.framework" selector "setModalPresentationStyle:" (obj_id As ptr, modalPresentationStyle As UIModalPresentationStyle)
-		  
-		  Declare Function sheetPresentationController lib "UIKit" selector "sheetPresentationController" (obj as ptr) as ptr
-		  Declare sub setDetents lib "UIKit" selector "setDetents:" (obj as ptr, value as ptr)
-		  Declare Function init Lib "Foundation.framework" selector "init" (obj_id As ptr) As ptr
+		  Declare Function sheetPresentationController Lib "UIKit" selector "sheetPresentationController" (obj As Ptr) As Ptr
+		  Declare Sub setDetents Lib "UIKit" selector "setDetents:" (obj As Ptr, detents As Ptr)
+		  Declare Sub setPrefersGrabberVisible Lib "UIKit" selector "setPrefersGrabberVisible:" (obj As Ptr, value As Boolean)
+		  Declare Sub setPrefersScrollingExpandsWhenScrolledToEdge Lib "UIKit" selector "setPrefersScrollingExpandsWhenScrolledToEdge:" (obj As Ptr, value As Boolean)
 		  Declare function largeDetent_ lib "UIKit" selector "largeDetent" (obj as ptr) as ptr
 		  Declare function mediumDetent_ lib "UIKit" selector "mediumDetent" (obj as ptr) as ptr
-		  
-		  Dim navController As ptr = initWithRootViewController_( alloc(NSClassFromString("UINavigationController")), v.ViewControllerHandle ) 
-		  
-		  
-		  Dim style As ViewExtensionsXC.UIModalPresentationStyle
-		  style = UIModalPresentationStyle.pageSheet
+		  Declare Function NSClassFromString Lib "Foundation" (name As CFStringRef) As Ptr
+		  Declare Function NSArrayWithObject Lib "Foundation" selector "arrayWithObject:" (cls As Ptr, obj As Ptr) As Ptr
 		  
 		  
-		  modalPresentationStyle_(navController, style)
+		  //Then set the sheetPresentation Controller options
+		  Dim sheet As Ptr = sheetPresentationController(v.ViewControllerHandle)
 		  
-		  Dim sheet As Ptr = sheetPresentationController(navController)
-		  
-		  if sheet <> nil then
-		    
-		    Declare Function arrayWithCapacity Lib "Foundation" selector "arrayWithCapacity:" (cls As ptr, count as UInteger) As ptr
-		    Declare Sub addObject Lib "Foundation" selector "addObject:" (arr As ptr, obj As ptr)
-		    
-		    Dim detentArray As ptr
+		  If sheet <> Nil Then
+		    Dim detentClass As Ptr = NSClassFromString("UISheetPresentationControllerDetent")
+		    Dim medium As Ptr = mediumDetent_(detentClass)
+		    Dim large As ptr = largeDetent_(detentClass)
+		    Dim detents As Ptr
 		    
 		    Select case height
 		    Case UISheetPresentationControllerDetent.medium
-		      
-		      detentArray = arrayWithCapacity(NSClassFromString("NSMutableArray"), 1)
-		      
-		      Dim mediumDetent As Ptr = mediumDetent_(NSClassFromString("UISheetPresentationControllerDetent"))
-		      
-		      addObject(detentArray, mediumDetent)
+		      detents = NSArrayWithObject(NSClassFromString("NSArray"), medium)
 		      
 		    Case UISheetPresentationControllerDetent.large
-		      detentArray = arrayWithCapacity(NSClassFromString("NSMutableArray"), 1)
+		      detents = NSArrayWithObject(NSClassFromString("NSArray"), large)
 		      
-		      'Dim largeDetent As Ptr = largeDetent_(init(alloc(NSClassFromString("UISheetPresentationControllerDetent"))))
-		      Dim largeDetent As Ptr = largeDetent_(NSClassFromString("UISheetPresentationControllerDetent"))
+		    Case UISheetPresentationControllerDetent.medium_large, UISheetPresentationControllerDetent.both
 		      
-		      addObject(detentArray, largeDetent)
+		      Declare Function NSMutableArrayNew Lib "Foundation" selector "array" (cls As Ptr) As Ptr
+		      Declare Sub NSMutableArrayAddObject Lib "Foundation" selector "addObject:" (obj As Ptr, item As Ptr)
 		      
-		    Case UISheetPresentationControllerDetent.medium_large
-		      detentArray = arrayWithCapacity(NSClassFromString("NSMutableArray"), 1)
+		      Dim arr As Ptr = NSMutableArrayNew(NSClassFromString("NSMutableArray"))
+		      NSMutableArrayAddObject(arr, medium)
+		      NSMutableArrayAddObject(arr, large)
+		      detents = arr
 		      
-		      Dim mediumDetent As Ptr = mediumDetent_(((NSClassFromString("UISheetPresentationControllerDetent"))))
-		      Dim largeDetent As Ptr = largeDetent_(((NSClassFromString("UISheetPresentationControllerDetent"))))
-		      
-		      addObject(detentArray, mediumDetent)
-		      addObject(detentArray, largeDetent)
 		      
 		    End Select
 		    
+		    setDetents(sheet, detents)
+		    setPrefersGrabberVisible(sheet, showGrabber)
+		    setPrefersScrollingExpandsWhenScrolledToEdge(sheet, False)
 		    
-		    setDetents(sheet, detentArray)
-		    
-		    
-		    //Grabber
-		    if showGrabber then
-		      declare sub setPrefersGrabberVisible lib "UIKit" selector "setPrefersGrabberVisible:" (obj as ptr, value as Boolean)
-		      setPrefersGrabberVisible(sheet, True)
-		    end if
 		    
 		    if cornerRadius > -1 then
 		      Declare sub preferredCornerRadius_ lib "UIKit" selector "setPreferredCornerRadius:" (obj as ptr, value as CGFloat)
 		      preferredCornerRadius_(sheet, cornerRadius)
 		    end if
 		    
-		    
-		  end if
+		  End If
 		  
 		  
-		  
-		  presentViewController(parentScreen.ViewControllerHandle, navController, Animate, Nil)
 		  
 		  
 		End Sub
@@ -1541,6 +1481,10 @@ Protected Module ViewExtensionsXC
 
 
 	#tag Property, Flags = &h21
+		Private CustomDetentResolverHeight As Double
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
 		Private ΩHomeIndicatorHiddenScreens() As WeakRef
 	#tag EndProperty
 
@@ -1594,7 +1538,8 @@ Protected Module ViewExtensionsXC
 	#tag Enum, Name = UISheetPresentationControllerDetent, Type = Integer, Flags = &h1
 		medium
 		  large
-		medium_large
+		  medium_large
+		both
 	#tag EndEnum
 
 	#tag Enum, Name = UISplitViewControllerDisplayMode, Flags = &h1, Attributes = \"Deprecated \x3D "SplitViewExtensionsXC.UISplitViewControllerDisplayMode""

@@ -21,6 +21,37 @@ Inherits MobileApplication
 		  'Dim p2 As new Picture(10, 10)
 		  '
 		  'Dim img2 As iOSImage = p2
+		  
+		  Dim b As Boolean
+		  
+		  /////////////////
+		  // Reveal
+		  /////////////////
+		  #If DebugBuild And UseRevealServer and not TargetMobileDevice
+		    Soft Declare Function IBARevealLoggerGetLevelMask Lib "@executable_path/Frameworks/RevealServer.framework/RevealServer" () As Integer
+		    Dim res As Integer
+		    res = IBARevealLoggerGetLevelMask()
+		    res = res
+		    
+		  #EndIf
+		  
+		  
+		  #if False
+		    Dim img As Picture
+		    
+		    dim config as ptr = ImageExtensionsXC.GetUIImageSymbolConfigurationXC(&cFF0000)
+		    
+		    img = ImageExtensionsXC.SystemImageWithConfigurationXC("flag.checkered.2.crossed", config)
+		    
+		    Break
+		    
+		    
+		    
+		    
+		    Dim cst as ptr = ExtensionsXC.LoadConstantXC("QuartzCore", "kCACornerCurveContinuous")
+		    
+		    Dim name As String = cst.CFStringRef(0)
+		  #endif
 		End Sub
 	#tag EndEvent
 
@@ -218,6 +249,9 @@ Inherits MobileApplication
 
 
 	#tag Constant, Name = isBeta, Type = Boolean, Dynamic = False, Default = \"False", Scope = Public
+	#tag EndConstant
+
+	#tag Constant, Name = UseRevealServer, Type = Boolean, Dynamic = False, Default = \"True", Scope = Public
 	#tag EndConstant
 
 

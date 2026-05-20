@@ -1,12 +1,15 @@
 #tag MobileScreen
 Begin MobileScreen vHome Implements iOSMobileTableDataSource
    BackButtonCaption=   ""
+   BackgroundColor =   
    Compatibility   =   ""
    ControlCount    =   0
    Device = 1
    HasNavigationBar=   True
    LargeTitleDisplayMode=   1
    Left            =   0
+   NavigationBarColor=   
+   NavigationBarTextColor=   
    Orientation = 0
    ScaleFactor     =   0.0
    TabBarVisible   =   True
@@ -14,6 +17,7 @@ Begin MobileScreen vHome Implements iOSMobileTableDataSource
    TintColor       =   &c00000000
    Title           =   "iOS Design Extensions"
    Top             =   0
+   _mTabBarVisible =   False
    Begin iOSMobileTable Table
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
@@ -23,6 +27,7 @@ Begin MobileScreen vHome Implements iOSMobileTableDataSource
       AutoLayout      =   Table, 2, <Parent>, 2, False, +1.00, 4, 1, -0, , True
       AutoLayout      =   Table, 3, TopLayoutGuide, 3, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Table, 4, BottomLayoutGuide, 4, False, +1.00, 4, 1, 0, , True
+      BackgroundColor =   
       ControlCount    =   0
       EditingEnabled  =   False
       EditingEnabled  =   False
@@ -33,7 +38,10 @@ Begin MobileScreen vHome Implements iOSMobileTableDataSource
       Left            =   0
       LockedInPosition=   True
       Scope           =   0
+      SectionBackgroundColor=   
       SectionCount    =   0
+      SectionTextColor=   
+      SelectedRowColor=   
       TintColor       =   &c000000
       Top             =   65
       Visible         =   True
@@ -49,7 +57,9 @@ End
 		Sub Activated()
 		  
 		  
-		  Self.SetLargeTitlesXC(False, ViewExtensionsXC.LargeTitleDisplayMode.automatic)
+		  'Self.SetLargeTitlesXC(False, ViewExtensionsXC.LargeTitleDisplayMode.automatic)
+		  
+		  self.SetSubtitleXC("200+ extension functions")
 		  
 		  If Self.ParentSplitView <> Nil and app.currentSplitMode <> SplitViewExtensionsXC.UISplitViewControllerDisplayMode.secondaryOnly and _
 		    app.currentSplitMode <> SplitViewExtensionsXC.UISplitViewControllerDisplayMode.oneOverSecondary then
@@ -67,6 +77,9 @@ End
 		  
 		  
 		  'self.SetPrefersHomeIndicatorAutoHiddenXC(True)
+		  
+		  
+		  'app.TintColor = &cFF0000
 		End Sub
 	#tag EndEvent
 
@@ -234,6 +247,12 @@ End
 		  img = Picture.SystemImage("button.horizontal", 0)
 		  AddRow(section, "Buttons", "", accessory, GetTypeInfo(vButtons), ImageExtensionsXC.ImageWithColorXC(img, &c0F7FFE00))
 		  
+		  img = Picture.SystemImage("button.horizontal", 0)
+		  AddRow(section, "Button State (iOS15)", "", accessory, GetTypeInfo(vButtonState), ImageExtensionsXC.ImageWithColorXC(img, &c0F7FFE00))
+		  
+		  img = Picture.SystemImage("button.horizontal", 0)
+		  AddRow(section, "Button Configuration (iOS15)", "", accessory, GetTypeInfo(vButtonConfiguration), ImageExtensionsXC.ImageWithColorXC(img, &c0F7FFE00))
+		  
 		  section = AddSection("Label Extensions")
 		  img = Picture.SystemImage("textformat", 0)
 		  AddRow(section, "Labels", "", accessory, GetTypeInfo(vLabels), ImageExtensionsXC.ImageWithColorXC(img, &c0F7FFE00))
@@ -255,8 +274,13 @@ End
 		  
 		  
 		  section = AddSection("Scroll Extensions")
-		  img = Picture.SystemImage("arrow.up.arrow.down", 0)
-		  AddRow(section, "Scroll Examples", "", accessory, GetTypeInfo(vScrollView), ImageExtensionsXC.ImageWithColorXC(img, &cFC800800))
+		  'img = Picture.SystemImage("arrow.up.arrow.down", 0)
+		  
+		  dim config as ptr = ImageExtensionsXC.GetUIImageSymbolConfigurationXC(color.Blue)
+		  
+		  img = ImageExtensionsXC.SystemImageWithConfigurationXC("arrow.up.arrow.down", config)
+		  
+		  AddRow(section, "Scroll Examples", "", accessory, GetTypeInfo(vScrollView), img) 'ImageExtensionsXC.ImageWithColorXC(img, &cFC800800))
 		  
 		  
 		  section = AddSection("Table Extensions")
@@ -274,17 +298,21 @@ End
 		  section = AddSection("View Extensions")
 		  AddRow(section, "Big Progress Wheel", "", accessory, GetTypeInfo(vViewProgressWheel), ImageExtensionsXC.ImageWithColorXC(ic8_loading, &c80808000))
 		  AddRow(section, "Hide Navigator on Swipe", "", accessory, GetTypeInfo(vHideNavigator), Picture.SystemImage("eye.slash", 0))
-		  AddRow(section, "Large Titles", "", accessory, GetTypeInfo(vLargeTitles), Picture.SystemImage("textformat.size.larger", 0, Picture.SystemImageWeights.Bold))
+		  AddRow(section, "Navigation Bar prompt and subtitle", "", accessory, GetTypeInfo(vNavigation), Picture.SystemImage("textformat.size.larger", 0, Picture.SystemImageWeights.Bold))
 		  AddRow(section, "Navigation Bar Color / Image", "", accessory, GetTypeInfo(vNavbar), Picture.SystemImage("line.3.horizontal", 0, Picture.SystemImageWeights.Regular, &c073F8000))
-		  AddRow(section, "ToolButtons", "", accessory, GetTypeInfo(vToolButton), ImageExtensionsXC.ImageWithColorXC(ic8_button, &c7F0FFE))
+		  AddRow(section, "ToolButtons", "Updated for iOS26", accessory, GetTypeInfo(vToolButton), ImageExtensionsXC.ImageWithColorXC(ic8_button, &c7F0FFE))
+		  AddRow(section, "Button Badges", "New iOS26", accessory, GetTypeInfo(vButtonBadge), Picture.SystemImage("bell.badge", 0, Picture.SystemImageWeights.Bold))
+		  AddRow(section, "Search bar", "New iOS26", accessory, GetTypeInfo(vSearchBar), Picture.SystemImage("magnifyingglass.circle", 0, Picture.SystemImageWeights.Bold))
+		  
 		  AddRow(section, "View Color", "", accessory, GetTypeInfo(vBackground), ImageExtensionsXC.ImageOriginalXC(ic8_color))
 		  AddRow(section, "Screen Options", "", accessory, GetTypeInfo(vScreenOptions), Picture.SystemImage("gearshape.circle", 0))
 		  
 		  
 		  section = AddSection("Modal")
-		  AddRow(section, "Modal View", "", accessory, "modal") 
+		  AddRow(section, "Modal View", "Specific size on iPad", accessory, "modal") 
 		  AddRow(section, "Modal View (Swipe disabled)", "", accessory, "modalfull") 
 		  AddRow(section, "Sheet (iOS 15+)", "", accessory, "sheet")
+		  AddRow(section, "Smaller Sheet (iOS 16+)", "New", accessory, "smallsheet")
 		  
 		  
 		  section = AddSection("Animations")
@@ -355,35 +383,45 @@ End
 		      Dim v As new vModal
 		      v.showsheetXC(self, ViewExtensionsXC.UISheetPresentationControllerDetent.medium_large, True)
 		      
+		      v.SetSecondLabel("Notice the grabber at the top?" + EndOfLine + "The sheet can be resized when scrolling up.")
+		      
+		    Case "smallsheet"
+		      Dim v As new vModal
+		      v.ShowSheetWithHeightXC(self, 250)
 		      
 		      
-		      'v.SetPreferredContentSizeXC(new size(self.ContentSize.Width, 100))
+		      v.SetSecondLabel("This sheet's height is set to 250.")
 		      
 		    Case "modal"
 		      
 		      Dim v As New vModal
-		      Self.PushToShowModalXC(v, ViewExtensionsXC.UIModalPresentationStyle.formSheet)
+		      v.ShowModal(self, ModalPresentationStyles.FormSheet)
+		      'Self.PushToShowModalXC(v, ViewExtensionsXC.UIModalPresentationStyle.formSheet)
 		      
+		      v.SetSecondLabel("On iPad this Screen has a size of 500x300 thanks to aScreen.SetPreferredContentSizeXC(New Size(500, 300))")
 		      
 		      v.SetPreferredContentSizeXC(new Size(500, 300))
 		      
 		    Case "modalfull"
 		      
 		      Dim v As New vModal
-		      Self.PushToShowModalXC(v, ViewExtensionsXC.UIModalPresentationStyle.formSheet)
+		      v.ShowModal(self, ModalPresentationStyles.FormSheet)
+		      'Self.PushToShowModalXC(v, ViewExtensionsXC.UIModalPresentationStyle.formSheet)
 		      
 		      v.SetFullModalXC
 		      
-		    Case "modaldissolve"
+		      v.SetSecondLabel("Thanks to aScreen.SetFullModalXC, this modal screen can't be dismissed by swiping down.")
 		      
-		      Dim v As New vModal
-		      Self.PushToShowModalDissolveXC(v, ViewExtensionsXC.UIModalPresentationStyle.formSheet)
-		      
-		      
-		    Case "modalflip"
-		      
-		      Dim v As New vModal
-		      Self.PushToShowModalFlipXC(v, ViewExtensionsXC.UIModalPresentationStyle.formSheet)
+		      'Case "modaldissolve"
+		      '
+		      'Dim v As New vModal
+		      'Self.PushToShowModalDissolveXC(v, ViewExtensionsXC.UIModalPresentationStyle.formSheet)
+		      '
+		      '
+		      'Case "modalflip"
+		      '
+		      'Dim v As New vModal
+		      'Self.PushToShowModalFlipXC(v, ViewExtensionsXC.UIModalPresentationStyle.formSheet)
 		      
 		      
 		      'Case "modalcurl"
@@ -468,6 +506,38 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="_mTabBarVisible"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="BackgroundColor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="NavigationBarColor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="NavigationBarTextColor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="ScaleFactor"
 		Visible=false

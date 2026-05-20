@@ -278,12 +278,18 @@ Protected Module TabBarExtensionsXC
 		    
 		    Declare Sub setShadowColor Lib "Foundation" selector "setShadowColor:" (obj as ptr, value as Ptr)
 		    
+		    
+		    Dim uic as ptr
 		    if value.Alpha = 255 then
-		      setShadowColor(tabBarAppearance, UIColor.ClearColor)
+		      uic = ExtensionsXC.UIColor_Clear()
+		    else
+		      uic = ExtensionsXC.UIColorFromColor(value)
 		      
-		    Else
-		      setShadowColor(tabBarAppearance, new UIColor(value))
 		    end if
+		    
+		    setShadowColor(tabBarAppearance, uic)
+		    
+		    
 		    
 		    
 		    Declare sub setStandardAppearance lib "UIKit.framework" selector "setStandardAppearance:" (obj as ptr, value as ptr)
@@ -309,14 +315,18 @@ Protected Module TabBarExtensionsXC
 		        
 		      end if
 		      
-		      
-		      
+		      Dim shadow_uic as ptr
 		      if value.Alpha = 255 then
-		        setShadowColor(scrollEdgeAppearance, UIColor.ClearColor)
+		        shadow_uic = ExtensionsXC.UIColor_Clear()
+		      else
+		        shadow_uic = ExtensionsXC.UIColorFromColor(value)
 		        
-		      Else
-		        setShadowColor(scrollEdgeAppearance, new UIColor(value))
 		      end if
+		      
+		      
+		      setShadowColor(scrollEdgeAppearance, shadow_uic)
+		      
+		      
 		      
 		      setScrollEdgeAppearance(tabbar, scrollEdgeAppearance)
 		    end if

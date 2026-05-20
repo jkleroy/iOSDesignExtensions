@@ -158,8 +158,8 @@ Protected Module ExtensionsXC
 		  
 		  
 		  //Improve size of picture
-		  Declare Function mainScreen Lib UIKitLib selector "mainScreen" (clsRef As ptr) As ptr
-		  Declare Function nativebounds Lib UIKitLib selector "nativeBounds" (obj_id As Ptr) As xcCGRect
+		  Declare Function mainScreen Lib "UIKit" selector "mainScreen" (clsRef As ptr) As ptr
+		  Declare Function nativebounds Lib "UIKit" selector "nativeBounds" (obj_id As Ptr) As xcCGRect
 		  Dim sz As xcCGSize = nativeBounds(mainScreen(NSClassFromString("UIScreen"))).rsize
 		  
 		  
@@ -167,6 +167,19 @@ Protected Module ExtensionsXC
 		  
 		  
 		  Return s
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
+		Protected Function NSDirectionalEdgeInsetsMake(top As CGFloat, leading As CGFloat, bottom As CGFloat, trailing As CGFloat) As xcNSDirectionalEdgeInsets
+		  
+		  Dim insets As xcNSDirectionalEdgeInsets
+		  insets.Top = top
+		  insets.Leading = leading
+		  insets.Bottom = bottom
+		  insets.Trailing = trailing
+		  
+		  Return insets
 		End Function
 	#tag EndMethod
 
@@ -182,9 +195,15 @@ Protected Module ExtensionsXC
 
 	#tag Method, Flags = &h1
 		Protected Function UIColorFromColor(value as color) As ptr
-		  Soft Declare Function colorWithRGBA Lib "UIKit" Selector "colorWithRed:green:blue:alpha:" (UIColorClassRef As Ptr, red As CGFloat, green As CGFloat, blue As CGFloat, alpha As CGFloat) As Ptr
+		  Declare Function colorWithRGBA Lib "UIKit" Selector "colorWithRed:green:blue:alpha:"_
+		  (UIColorClassRef As Ptr, red As CGFloat, green As CGFloat, blue As CGFloat, alpha As CGFloat) As Ptr
 		  
-		  Soft Declare Function NSClassFromString Lib "Foundation" (classname As CFStringRef) As Ptr
+		  
+		  'Declare Function colorWithDisplayP3 Lib "UIKit" Selector "colorWithDisplayP3Red:green:blue:alpha:" _
+		  '(UIColorClassRef As Ptr, red As CGFloat, green As CGFloat, blue As CGFloat, alpha As CGFloat) As Ptr
+		  
+		  
+		  Declare Function NSClassFromString Lib "Foundation" (classname As CFStringRef) As Ptr
 		  
 		  
 		  static UIColorClassPtr As Ptr =  NSClassFromString("UIColor")
@@ -194,11 +213,66 @@ Protected Module ExtensionsXC
 		  Dim red As CGFloat = c.red / 255
 		  Dim green As CGFloat = c.Green / 255
 		  Dim blue As CGFloat = c.Blue / 255
-		  Dim alpha As CGFloat = 1.0 - c.Alpha / 255
+		  Dim alpha As CGFloat = (255 - c.Alpha) / 255
 		  
 		  Dim colorPtr As ptr = colorWithRGBA(UIColorClassPtr, red, green, blue, alpha)
+		  'Dim colorPtr As ptr = colorWithDisplayP3((UIColorClassPtr), red, green, blue, alpha)
 		  
 		  Return colorPtr
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
+		Protected Function UIColorFromColorWithExposure(value as color, exposure as Double) As ptr
+		  //new iOS26
+		  // https://developer.apple.com/documentation/uikit/uicolor?language=objc#Working-with-high-dynamic-range-HDR-colors
+		  
+		  if ExtensionsXC.GetiOSVersionXC < 26 then
+		    Return UIColorFromColor(value)
+		    
+		  else
+		    Declare Function colorWithRGBAE Lib "UIKit" Selector "colorWithRed:green:blue:alpha:exposure:"_
+		    (UIColorClassRef As Ptr, red As CGFloat, green As CGFloat, blue As CGFloat, alpha As CGFloat, exp as CGFloat) As Ptr
+		    
+		    
+		    'Declare Function colorWithDisplayP3 Lib "UIKit" Selector "colorWithDisplayP3Red:green:blue:alpha:" _
+		    '(UIColorClassRef As Ptr, red As CGFloat, green As CGFloat, blue As CGFloat, alpha As CGFloat) As Ptr
+		    
+		    
+		    Declare Function NSClassFromString Lib "Foundation" (classname As CFStringRef) As Ptr
+		    
+		    
+		    static UIColorClassPtr As Ptr =  NSClassFromString("UIColor")
+		    
+		    Dim c as color  = value
+		    
+		    Dim red As CGFloat = c.red / 255
+		    Dim green As CGFloat = c.Green / 255
+		    Dim blue As CGFloat = c.Blue / 255
+		    Dim alpha As CGFloat = (255 - c.Alpha) / 255
+		    dim exp As CGFloat = exposure
+		    
+		    Dim colorPtr As ptr = colorWithRGBAE(UIColorClassPtr, red, green, blue, alpha, exp)
+		    'Dim colorPtr As ptr = colorWithDisplayP3((UIColorClassPtr), red, green, blue, alpha)
+		    
+		    Return colorPtr
+		  end if
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h1
+		Protected Function UIColor_Clear() As ptr
+		  
+		  
+		  Soft Declare Function NSClassFromString Lib "Foundation" (classname As CFStringRef) As Ptr
+		  declare function clearColor lib "UIKit" selector "clearColor" (id as Ptr) as Ptr
+		  
+		  
+		  static UIColorClassPtr As Ptr =  NSClassFromString("UIColor")
+		  
+		  
+		  
+		  return clearColor(UIColorClassPtr)
 		End Function
 	#tag EndMethod
 
@@ -231,6 +305,8 @@ Protected Module ExtensionsXC
 
 	#tag Note, Name = History
 		## History
+		
+		* New UIColorFromColorWithExposure
 		
 		### Version 2.6.2 - Released 2025-05-20
 		* Fixed TabbarExtensionsXC.SetTabBarColorXC to change the background color of the TabBar
@@ -446,6 +522,13 @@ Protected Module ExtensionsXC
 	#tag Structure, Name = xcCGSize, Flags = &h1
 		width As CGFloat
 		height As CGFloat
+	#tag EndStructure
+
+	#tag Structure, Name = xcNSDirectionalEdgeInsets, Flags = &h1
+		Top as CGFloat
+		  Leading As CGFloat
+		  Bottom As CGFloat
+		Trailing As CGFloat
 	#tag EndStructure
 
 	#tag Structure, Name = xcUIEdgeInsets, Flags = &h1

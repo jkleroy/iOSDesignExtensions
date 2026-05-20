@@ -254,21 +254,55 @@ Protected Module ControlExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 536574732074686520636F6C6F72206F6620612056696577
-		Sub SetBackgroundColorXC(extends ctrl As MobileUIControl, value As Color)
+		Sub SetBackgroundColorWithExposureXC(extends ctrl as MobileUIControl, value as Color, exposure as double)
 		  
 		  
-		  Dim uic As UIKit.UIColor
 		  
-		  If value.Alpha = 255 Then
-		    uic = UIKit.UIColor.ClearColor
+		  
+		  Dim uic as ptr
+		  if value.Alpha = 255 then
+		    uic = ExtensionsXC.UIColor_Clear()
 		  else
-		    uic = New UIKit.UIColor(value)
+		    uic = ExtensionsXC.UIColorFromColorWithExposure(value, exposure)
+		    
 		  end if
 		  
 		  
+		  'Declare function description_ lib "UIKit" Selector "description" (obj as ptr) as CFStringRef
+		  'System.DebugLog description_(uic)
+		  
 		  
 		  Declare Sub decl_SetBackgroundColor lib "UIKit.framework" selector "setBackgroundColor:" (aUIView As Ptr, aUIColor As Ptr)
-		  ' Here is the corresponding Xojo call
+		  
+		  decl_SetBackgroundColor(ctrl.handle, uic)
+		  
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 536574732074686520636F6C6F72206F66206120636F6E74726F6C2E204578706F7375726520616C6C6F777320
+		Sub SetBackgroundColorXC(extends ctrl As MobileUIControl, value As Color, exposure As Double = 0.0)
+		  // Updated for iOS26 with exposure component to make colors brighter
+		  
+		  
+		  
+		  Dim uic as ptr
+		  if value.Alpha = 255 then
+		    uic = ExtensionsXC.UIColor_Clear()
+		  elseif exposure > 0.0 then
+		    uic = ExtensionsXC.UIColorFromColorWithExposure(value, exposure)
+		  else
+		    uic = ExtensionsXC.UIColorFromColor(value)
+		    
+		  end if
+		  
+		  
+		  'Declare function description_ lib "UIKit" Selector "description" (obj as ptr) as CFStringRef
+		  'System.DebugLog description_(uic)
+		  
+		  
+		  Declare Sub decl_SetBackgroundColor lib "UIKit.framework" selector "setBackgroundColor:" (aUIView As Ptr, aUIColor As Ptr)
+		  
 		  decl_SetBackgroundColor(ctrl.handle, uic)
 		  
 		  
@@ -355,6 +389,17 @@ Protected Module ControlExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Sub SetDirectionalLayoutMarginsXC(extends ctrl as MobileUIControl, margins as ExtensionsXC.xcNSDirectionalEdgeInsets)
+		  
+		  // @property (nonatomic) NSDirectionalEdgeInsets directionalLayoutMargins;
+		  
+		  Declare Sub setDirectionalLayoutMargins Lib "Foundation" selector "setDirectionalLayoutMargins:" (obj as ptr, value as ExtensionsXC.xcNSDirectionalEdgeInsets)
+		  
+		  setDirectionalLayoutMargins(ctrl.Handle, margins)
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 536574732074686520636F6C6F72206F662074686520737769746368206261636B67726F756E64207768656E2076616C75652069732054727565
 		Sub SetOnTintColorXC(extends switch As MobileSwitch, value As Color)
 		  
@@ -362,12 +407,13 @@ Protected Module ControlExtensionsXC
 		  'declare sub setTintColor lib "UIKit.framework" selector "setTintColor:" (id as ptr, UIColor as Ptr)
 		  'setTintColor s.Handle, new UIColor(c)
 		  
-		  Dim uic As UIKit.UIColor
-		  If value.Alpha = 255 Then
-		    uic = UIKit.UIColor.ClearColor
-		  Else
-		    uic = New UIColor(value)
-		  End If
+		  Dim uic as ptr
+		  if value.Alpha = 255 then
+		    uic = ExtensionsXC.UIColor_Clear()
+		  else
+		    uic = ExtensionsXC.UIColorFromColor(value)
+		    
+		  end if
 		  
 		  declare sub setOnTintColor lib "UIKit.framework" selector "setOnTintColor:" (id as ptr, UIColor as Ptr)
 		  setOnTintColor(switch.Handle, uic)
@@ -390,12 +436,14 @@ Protected Module ControlExtensionsXC
 		Sub SetTextColorXC(extends picker as MobileDateTimePicker, value as Color)
 		  
 		  
-		  Dim uic As UIKit.UIColor
 		  
-		  If value.Alpha = 255 Then
-		    uic = UIKit.UIColor.ClearColor
+		  
+		  Dim uic as ptr
+		  if value.Alpha = 255 then
+		    uic = ExtensionsXC.UIColor_Clear()
 		  else
-		    uic = New UIKit.UIColor(value)
+		    uic = ExtensionsXC.UIColorFromColor(value)
+		    
 		  end if
 		  
 		  
@@ -568,7 +616,9 @@ Protected Module ControlExtensionsXC
 	#tag Enum, Name = UIActivityIndicatorViewStyle, Type = Integer, Flags = &h1
 		whiteLarge
 		  white
-		gray
+		  gray
+		  medium = 100
+		large = 101
 	#tag EndEnum
 
 	#tag Enum, Name = UIControlContentHorizontalAlignment, Flags = &h1

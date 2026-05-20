@@ -3,7 +3,7 @@ Class UIColor
 	#tag Method, Flags = &h0
 		Function CGColor() As Ptr
 		  
-		  Declare Function CGColor Lib UIKitLib selector "cgColor" (obj_id As ptr) as ptr
+		  Declare Function CGColor Lib "UIKit" selector "cgColor" (obj_id As ptr) as ptr
 		  Return CGColor(self)
 		End Function
 	#tag EndMethod
@@ -92,7 +92,7 @@ Class UIColor
 
 	#tag Method, Flags = &h0
 		Sub Destructor()
-		  declare sub release lib UIKitLib selector "release" (obj_id as ptr)
+		  declare sub release lib "UIKit" selector "release" (obj_id as ptr)
 		  release(m_id)
 		  
 		  if needsExtraRelease then release(m_id)
@@ -151,7 +151,7 @@ Class UIColor
 	#tag Method, Flags = &h21
 		Private Shared Function m_blackColor(class_id as Ptr) As Ptr
 		  
-		  declare function blackColor lib UIKitLib selector "blackColor" (id as Ptr) as Ptr
+		  declare function blackColor lib "UIKit" selector "blackColor" (id as Ptr) as Ptr
 		  
 		  return blackColor(class_id)
 		  
@@ -164,7 +164,7 @@ Class UIColor
 	#tag Method, Flags = &h21
 		Private Shared Function m_blueColor(class_id as Ptr) As Ptr
 		  
-		  declare function blueColor lib UIKitLib selector "blueColor" (id as Ptr) as Ptr
+		  declare function blueColor lib "UIKit" selector "blueColor" (id as Ptr) as Ptr
 		  
 		  return blueColor(class_id)
 		  
@@ -177,7 +177,7 @@ Class UIColor
 	#tag Method, Flags = &h21
 		Private Shared Function m_brownColor(class_id as Ptr) As Ptr
 		  
-		  declare function brownColor lib UIKitLib selector "brownColor" (id as Ptr) as Ptr
+		  declare function brownColor lib "UIKit" selector "brownColor" (id as Ptr) as Ptr
 		  
 		  return brownColor(class_id)
 		  
@@ -190,7 +190,7 @@ Class UIColor
 	#tag Method, Flags = &h21
 		Private Shared Function m_clearColor(class_id as Ptr) As Ptr
 		  
-		  declare function clearColor lib UIKitLib selector "clearColor" (id as Ptr) as Ptr
+		  declare function clearColor lib "UIKit" selector "clearColor" (id as Ptr) as Ptr
 		  
 		  return clearColor(class_id)
 		  
@@ -203,7 +203,7 @@ Class UIColor
 	#tag Method, Flags = &h21
 		Private Shared Function m_cyanColor(class_id as Ptr) As Ptr
 		  
-		  declare function cyanColor lib UIKitLib selector "cyanColor" (id as Ptr) as Ptr
+		  declare function cyanColor lib "UIKit" selector "cyanColor" (id as Ptr) as Ptr
 		  
 		  return cyanColor(class_id)
 		  
@@ -216,7 +216,7 @@ Class UIColor
 	#tag Method, Flags = &h21
 		Private Shared Function m_darkGrayColor(class_id as Ptr) As Ptr
 		  
-		  declare function darkGrayColor lib UIKitLib selector "darkGrayColor" (id as Ptr) as Ptr
+		  declare function darkGrayColor lib "UIKit" selector "darkGrayColor" (id as Ptr) as Ptr
 		  
 		  return darkGrayColor(class_id)
 		  
@@ -229,7 +229,7 @@ Class UIColor
 	#tag Method, Flags = &h21
 		Private Shared Function m_grayColor(class_id as Ptr) As Ptr
 		  
-		  declare function grayColor lib UIKitLib selector "grayColor" (id as Ptr) as Ptr
+		  declare function grayColor lib "UIKit" selector "grayColor" (id as Ptr) as Ptr
 		  
 		  return grayColor(class_id)
 		  
@@ -242,7 +242,7 @@ Class UIColor
 	#tag Method, Flags = &h21
 		Private Shared Function m_greenColor(class_id as Ptr) As Ptr
 		  
-		  declare function greenColor lib UIKitLib selector "greenColor" (id as Ptr) as Ptr
+		  declare function greenColor lib "UIKit" selector "greenColor" (id as Ptr) as Ptr
 		  
 		  return greenColor(class_id)
 		  
@@ -255,7 +255,7 @@ Class UIColor
 	#tag Method, Flags = &h21
 		Private Shared Function m_lightGrayColor(class_id as Ptr) As Ptr
 		  
-		  declare function lightGrayColor lib UIKitLib selector "lightGrayColor" (id as Ptr) as Ptr
+		  declare function lightGrayColor lib "UIKit" selector "lightGrayColor" (id as Ptr) as Ptr
 		  
 		  return lightGrayColor(class_id)
 		  
@@ -268,7 +268,7 @@ Class UIColor
 	#tag Method, Flags = &h21
 		Private Shared Function m_magentaColor(class_id as Ptr) As Ptr
 		  
-		  declare function magentaColor lib UIKitLib selector "magentaColor" (id as Ptr) as Ptr
+		  declare function magentaColor lib "UIKit" selector "magentaColor" (id as Ptr) as Ptr
 		  
 		  return magentaColor(class_id)
 		  
@@ -281,7 +281,7 @@ Class UIColor
 	#tag Method, Flags = &h21
 		Private Shared Function m_orangeColor(class_id as Ptr) As Ptr
 		  
-		  declare function orangeColor lib UIKitLib selector "orangeColor" (id as Ptr) as Ptr
+		  declare function orangeColor lib "UIKit" selector "orangeColor" (id as Ptr) as Ptr
 		  
 		  return orangeColor(class_id)
 		  
@@ -294,7 +294,7 @@ Class UIColor
 	#tag Method, Flags = &h21
 		Private Shared Function m_purpleColor(class_id as Ptr) As Ptr
 		  
-		  declare function purpleColor lib UIKitLib selector "purpleColor" (id as Ptr) as Ptr
+		  declare function purpleColor lib "UIKit" selector "purpleColor" (id as Ptr) as Ptr
 		  
 		  return purpleColor(class_id)
 		  
@@ -307,7 +307,7 @@ Class UIColor
 	#tag Method, Flags = &h21
 		Private Shared Function m_redColor(class_id as Ptr) As Ptr
 		  
-		  declare function redColor lib UIKitLib selector "redColor" (id as Ptr) as Ptr
+		  declare function redColor lib "UIKit" selector "redColor" (id as Ptr) as Ptr
 		  
 		  return redColor(class_id)
 		  
@@ -320,7 +320,7 @@ Class UIColor
 	#tag Method, Flags = &h21
 		Private Shared Function m_whiteColor(class_id as Ptr) As Ptr
 		  
-		  declare function whiteColor lib UIKitLib selector "whiteColor" (id as Ptr) as Ptr
+		  declare function whiteColor lib "UIKit" selector "whiteColor" (id as Ptr) as Ptr
 		  
 		  return whiteColor(class_id)
 		  
@@ -333,7 +333,7 @@ Class UIColor
 	#tag Method, Flags = &h21
 		Private Shared Function m_yellowColor(class_id as Ptr) As Ptr
 		  
-		  declare function yellowColor lib UIKitLib selector "yellowColor" (id as Ptr) as Ptr
+		  declare function yellowColor lib "UIKit" selector "yellowColor" (id as Ptr) as Ptr
 		  
 		  return yellowColor(class_id)
 		  

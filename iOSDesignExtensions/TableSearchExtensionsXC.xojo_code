@@ -15,6 +15,34 @@ Protected Module TableSearchExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub SetPreferredSearchBarPlacementXC(extends screen as MobileScreen, placement as TableSearchExtensionsXC.SearchBarPlacement)
+		  
+		  Declare Function navigationItem Lib "UIKit" _
+		  Selector "navigationItem" (vc As Ptr) As Ptr
+		  Declare Sub setPreferredSearchBarPlacement Lib "UIKit" _
+		  Selector "setPreferredSearchBarPlacement:" (navItem As Ptr, placement As SearchBarPlacement)
+		  
+		  Declare Function respondsToSelector Lib "Foundation" Selector "respondsToSelector:" (obj As ptr, aSelector As Ptr) As Boolean
+		  Declare Function NSSelectorFromString Lib "Foundation" ( aSelectorName As CFStringRef ) As Ptr
+		  
+		  
+		  Dim navItem As Ptr = navigationItem(screen.ViewControllerHandle)
+		  If navItem = Nil Then Return
+		  
+		  Dim sel As Ptr = NSSelectorFromString("setPreferredSearchBarPlacement:")
+		  
+		  If respondsToSelector(navItem, sel) Then
+		    
+		    if ExtensionsXC.GetiOSVersionXC < 26.0 and CType(placement, integer) > 1 then
+		      placement = SearchBarPlacement.Automatic //Revert to automatic
+		    End If
+		    
+		    setPreferredSearchBarPlacement(navItem, placement)
+		  End If
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub SetSearchActiveXC(extends table As iOSMobileTable, value As Boolean)
 		  
 		  
@@ -42,14 +70,13 @@ Protected Module TableSearchExtensionsXC
 		    Var textFieldObj As ptr = searchTextField(searchBarObj)
 		    
 		    
-		    //Now do something
-		    Dim uic As UIKit.UIColor
-		    
-		    If value.Alpha = 255 Then
-		      uic = UIKit.UIColor.ClearColor
-		    Else
-		      uic = New UIColor(value)
-		    End If
+		    Dim uic as ptr
+		    if value.Alpha = 255 then
+		      uic = ExtensionsXC.UIColor_Clear()
+		    else
+		      uic = ExtensionsXC.UIColorFromColor(value)
+		      
+		    end if
 		    
 		    
 		    Declare Sub setTextColor_ Lib "UIKit.framework" selector "setTextColor:" (obj_id As ptr, col As ptr)
@@ -108,6 +135,15 @@ Protected Module TableSearchExtensionsXC
 		  End If
 		End Sub
 	#tag EndMethod
+
+
+	#tag Enum, Name = SearchBarPlacement, Flags = &h0
+		Automatic = 0
+		  Integrated = 1
+		  Stacked = 2
+		  IntegratedCentered
+		IntegratedButton
+	#tag EndEnum
 
 
 	#tag ViewBehavior

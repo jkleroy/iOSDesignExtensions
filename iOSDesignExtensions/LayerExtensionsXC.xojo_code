@@ -46,7 +46,7 @@ Protected Module LayerExtensionsXC
 		    linearBrush.GradientStops.Add(New Pair(1.0, &cFD575C))
 		  #endif
 		  
-		  Declare Sub setFrame Lib UIKitLib selector "setFrame:" (obj_id As ptr, frame As ExtensionsXC.xcCGRect)
+		  Declare Sub setFrame Lib "UIKit" selector "setFrame:" (obj_id As ptr, frame As ExtensionsXC.xcCGRect)
 		  setFrame(gradient, frame)
 		  
 		  
@@ -72,6 +72,9 @@ Protected Module LayerExtensionsXC
 		  
 		  c1 = New UIKit.UIColor(col1)
 		  c2 = New UIKit.UIColor(col2)
+		  
+		  
+		  #Pragma warning "Need to convert UIColor to CGColor"
 		  
 		  
 		  addObject colorArray, c1.CGColor
@@ -132,15 +135,19 @@ Protected Module LayerExtensionsXC
 		  
 		  Dim layer as ptr = c.GetLayerXC
 		  
-		  Dim uic As uikit.uicolor 
-		  If value.Alpha = 255 Then
-		    uic = UIKit.UIColor.ClearColor
-		  Else
-		    uic = New UIColor(value)
-		  End If 
+		  
+		  Dim uic as ptr
+		  if value.Alpha = 255 then
+		    uic = ExtensionsXC.UIColor_Clear()
+		  else
+		    uic = ExtensionsXC.UIColorFromColor(value)
+		    
+		  end if
 		  
 		  declare sub setBorderColor lib "UIKit.framework" selector "setBorderColor:" (obj_id as ptr, col as ptr)
-		  setBorderColor(layer, uic.CGColor)
+		  Declare Function CGColor Lib "UIKit" selector "cgColor" (obj_id As ptr) as ptr
+		  
+		  setBorderColor(layer, CGColor(uic))
 		End Sub
 	#tag EndMethod
 
@@ -152,6 +159,36 @@ Protected Module LayerExtensionsXC
 		  
 		  declare sub setBorderWidth lib "UIKit.framework" selector "setBorderWidth:" (obj_id as ptr, value as CGFloat)
 		  setBorderWidth(layer, width)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 5365747320726F756E6420636F726E65727320746F20616E20694F53436F6E74726F6C
+		Sub SetCornerCurveXC(extends ctrl As MobileUIControl, curve As LayerExtensionsXC.CornerCurves)
+		  
+		  
+		  if ExtensionsXC.GetiOSVersionXC >= 13.0 then
+		    
+		    Declare Function layer_ Lib "UIKit.framework" selector "layer" (id As ptr) As Ptr
+		    Dim layer As ptr = layer_(ctrl.Handle)
+		    
+		    
+		    // @property (copy) CALayerCornerCurve cornerCurve;
+		    'Declare Function getCornerCurve Lib "Foundation" selector "cornerCurve" (obj as ptr) As Ptr
+		    Declare Sub setCornerCurve Lib "Foundation" selector "setCornerCurve:" (obj as ptr, value as CFStringRef)
+		    
+		    
+		    select case curve
+		    Case CornerCurves.continuous
+		      setCornerCurve(layer, "continuous")
+		      
+		    Case CornerCurves.circular
+		      
+		      setCornerCurve(layer, "circular")
+		      
+		    end select
+		    
+		    
+		  end if
 		End Sub
 	#tag EndMethod
 
@@ -200,8 +237,20 @@ Protected Module LayerExtensionsXC
 		  masksToBounds_(layer, False)
 		  
 		  Declare Sub shadowColor_ Lib QuartzCoreLib selector "setShadowColor:" (id As ptr, col As ptr)
-		  Dim c As new UIColor(ShadowColor)
-		  shadowColor_(layer, c.CGColor)
+		  
+		  
+		  Dim uic as ptr
+		  if ShadowColor.Alpha = 255 then
+		    uic = ExtensionsXC.UIColor_Clear()
+		  else
+		    uic = ExtensionsXC.UIColorFromColor(ShadowColor)
+		    
+		  end if
+		  
+		  Declare Function cgcolor Lib "UIKit" selector "cgColor" (obj_id As ptr) as ptr
+		  
+		  
+		  shadowColor_(layer, CGColor(uic))
 		  
 		  
 		  
@@ -231,6 +280,12 @@ Protected Module LayerExtensionsXC
 
 	#tag Constant, Name = QuartzCoreLib, Type = Text, Dynamic = False, Default = \"Quartzcore.framework", Scope = Protected
 	#tag EndConstant
+
+
+	#tag Enum, Name = CornerCurves, Flags = &h0
+		circular
+		continuous
+	#tag EndEnum
 
 
 	#tag ViewBehavior
