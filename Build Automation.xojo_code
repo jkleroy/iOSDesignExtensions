@@ -17,7 +17,7 @@
 				Begin BuildProjectStep Build
 				End
 				Begin CopyFilesBuildStep CopyFileLibReveal
-					AppliesTo = 1
+					AppliesTo = 3
 					Architecture = 2
 					Target = 0
 					Destination = 0

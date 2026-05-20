@@ -168,6 +168,12 @@ A set of 100+ UI extensions for Xojo iOS framework.
 
 ## History
 
+### Version 2.7 - Released 2026-05-20
+* New iOS26 features
+* Now supports Glass button configurations
+* Now supports Button badges
+* New UIColorFromColorWithExposure
+
 ### Version 2.6.3 - Released 2025-05-20
 * Fixed TabbarExtensionsXC.SetTabBarColorXC to change the background color of the TabBar
 * New TabbarExtensionsXC.TabSetTabBarShadowColorXC
