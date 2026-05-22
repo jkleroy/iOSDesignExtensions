@@ -36,6 +36,35 @@ Protected Module TableExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 50726F6772616D6D61746963616C6C79207472696767657273207468652070756C6C2D746F2D72656672657368207370696E6E6572
+		Sub BeginRefreshXC(extends table As iOSMobileTable)
+		  // Programmatically trigger the pull-to-refresh spinner
+		  // This accesses the UIRefreshControl (which UITableView inherits from UIScrollView) and calls beginRefreshing
+		  
+		  // Get the refresh control property from UIScrollView (UITableView inherits from it)
+		  Declare Function refreshControl Lib "UIKit.framework" selector "refreshControl" (obj_id As Ptr) As Ptr
+		  
+		  Dim refreshCtrl As Ptr = refreshControl(table.Handle)
+		  
+		  If refreshCtrl <> Nil Then
+		    // Call beginRefreshing on the refresh control to show the spinner
+		    Declare Sub beginRefreshing Lib "UIKit.framework" selector "beginRefreshing" (obj_id As Ptr)
+		    beginRefreshing(refreshCtrl)
+		    
+		    // Scroll the table view down slightly to make the refresh control visible
+		    Declare Function ContentOffset_ Lib "UIKit.framework" selector "contentOffset" (obj_id As ptr) As ExtensionsXC.xcCGPoint
+		    Declare Sub setContentOffset Lib "UIKit.framework" selector "setContentOffset:animated:" (obj_id As Ptr, offset As ExtensionsXC.xcCGPoint, animated As Boolean)
+		    
+		    Dim currentOffset As ExtensionsXC.xcCGPoint = ContentOffset_(table.Handle)
+		    Dim offset As ExtensionsXC.xcCGPoint
+		    offset.x = currentOffset.x
+		    offset.y = currentOffset.y - 60 // Pull down to show refresh control
+		    
+		    setContentOffset(table.Handle, offset, True)
+		  End If
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 416C7465726E617469766520746F2053657444657461696C54657874436F6C6F725843
 		Sub DetailTextColorXC(extends cell As MobileTableCellData, assigns value As Color)
 		  
