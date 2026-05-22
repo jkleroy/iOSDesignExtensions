@@ -176,7 +176,7 @@ A set of 200+ UI extensions for Xojo iOS framework.
 * ScrollableArea.SetTopEdgeEffectXC
 * ScrollableArea.SetBottomEdgeEffectXC
 
-**iOS17**
+*iOS17*
 * MobileScreen.ShowEmptyContentUnavailableXC
 * MobileScreen.ShowLoadingContentUnavailableXC
 * MobileScreen.ShowSearchContentUnavailableXC
