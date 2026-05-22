@@ -169,9 +169,14 @@ A set of 200+ UI extensions for Xojo iOS framework.
 ## History
 
 ### Version 2.7.1 - Released 2026-05-22
-* New Table.SetTopEdgeEffectXC, Table.SetBottomEdgeEffectXC, ScrollableArea.SetTopEdgeEffectXC, ScrollableArea.SetBottomEdgeEffectXC
 
-#### iOS17
+**ios26**
+* Table.SetTopEdgeEffectXC
+* Table.SetBottomEdgeEffectXC
+* ScrollableArea.SetTopEdgeEffectXC
+* ScrollableArea.SetBottomEdgeEffectXC
+
+**iOS17**
 * MobileScreen.ShowEmptyContentUnavailableXC
 * MobileScreen.ShowLoadingContentUnavailableXC
 * MobileScreen.ShowSearchContentUnavailableXC
