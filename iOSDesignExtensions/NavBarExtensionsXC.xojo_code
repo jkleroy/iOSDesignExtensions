@@ -131,7 +131,7 @@ Protected Module NavBarExtensionsXC
 		  Dim sel As Ptr = NSSelectorFromString("setLargeTitle:")
 		  
 		  
-		  
+		  //safeguard iOS26
 		  If respondsToSelector(navItem, sel) Then
 		    setLargeTitle(navItem, title)
 		  End If
@@ -168,6 +168,27 @@ Protected Module NavBarExtensionsXC
 		    End If
 		  End If
 		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0, Description = 4120426F6F6C65616E2076616C7565207468617420696E646963617465732077686574686572207468652073797374656D2063616E20706C61636520746865207365617263682062617220616D6F6E67206F7468657220746F6F6C626172206974656D73206F6E206950686F6E652E2044656661756C747320746F2054727565
+		Sub SetSearchBarPlacementAllowsToolbarIntegrationXC(extends v As MobileScreen, value As Boolean)
+		  //New iOS26
+		  
+		  Declare Function navigationItem Lib "UIKit" _
+		  Selector "navigationItem" (vc As Ptr) As Ptr
+		  Dim navItem As Ptr = navigationItem(v.ViewControllerHandle)
+		  
+		  if navItem = nil then Return
+		  
+		  
+		  if ExtensionsXC.GetiOSVersionXC >= 26.0 then
+		    // Setter
+		    Declare Sub setSearchBarPlacementAllowsToolbarIntegration Lib "UIKit" Selector _
+		    "setSearchBarPlacementAllowsToolbarIntegration:" (obj As Ptr, value As Boolean)
+		    setSearchBarPlacementAllowsToolbarIntegration(navItem, value)
+		    
+		  end if
 		End Sub
 	#tag EndMethod
 

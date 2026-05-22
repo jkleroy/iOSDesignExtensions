@@ -55,6 +55,12 @@ Protected Class NSObjectXC
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Function Ref() As ptr
+		  Return self.m_id
+		End Function
+	#tag EndMethod
+
 
 	#tag Property, Flags = &h21
 		Private m_id As ptr

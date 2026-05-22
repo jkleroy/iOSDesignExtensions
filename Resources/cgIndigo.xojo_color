@@ -1,0 +1,8 @@
+#tag ColorGroup
+	CodeName=cgIndigo
+	#tag Color
+		Type=2
+		Platform=2
+		Name=systemIndigoColor
+	#tag EndColor
+#tag EndColorGroup

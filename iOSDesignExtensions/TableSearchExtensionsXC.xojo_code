@@ -1,6 +1,20 @@
 #tag Module
 Protected Module TableSearchExtensionsXC
 	#tag Method, Flags = &h0
+		Function GetSearchActiveXC(extends table As iOSMobileTable) As Boolean
+		  
+		  
+		  
+		  // Put them on the searchbar
+		  Declare Function searchBar Lib "UIKit" selector "searchBar" (obj As ptr) As ptr
+		  Var searchPtr As ptr = table.SearchControllerHandle
+		  
+		  Declare function getActive lib "UIKit" selector "isActive" (obj as ptr) as Boolean
+		  return getActive(searchPtr)
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function GetSearchFilterIndexXC(extends table as iOSMobileTable) As Integer
 		  // Get the searchbar from the search controller
 		  Declare Function searchBar Lib "UIKit" selector "searchBar" (obj As ptr) As ptr
@@ -53,6 +67,33 @@ Protected Module TableSearchExtensionsXC
 		  
 		  Declare sub setActive lib "UIKit" selector "setActive:" (obj as ptr, value as Boolean)
 		  setActive(searchPtr, value)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub SetSearchFieldOverrideUserInterfaceStyleXC(extends table As iOSMobileTable, style As ControlExtensionsXC.UIUserInterfaceStyle)
+		  
+		  if ExtensionsXC.GetiOSVersionXC >= 13.0 then
+		    
+		    // Get the searchBar object
+		    Declare Function searchBar Lib "UIKit" selector "searchBar" (obj As ptr) As ptr
+		    Declare Function searchTextField Lib "UIKit" selector "searchTextField" (obj As ptr) As ptr
+		    
+		    Var searchPtr As ptr = table.SearchControllerHandle
+		    Var searchBarObj As ptr = searchBar(searchPtr)
+		    Var textFieldObj As ptr = searchTextField(searchBarObj)
+		    
+		    
+		    
+		    declare sub overrideUserInterfaceStyle lib "UIKit.framework" selector "setOverrideUserInterfaceStyle:" (obj as ptr, style As ControlExtensionsXC.UIUserInterfaceStyle)
+		    
+		    overrideUserInterfaceStyle(searchBarObj, style)
+		    
+		    
+		    
+		    
+		    
+		  end if
 		End Sub
 	#tag EndMethod
 
@@ -133,6 +174,27 @@ Protected Module TableSearchExtensionsXC
 		    setPlaceholder(searchBarObj, value)
 		    
 		  End If
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub SetSearchValueXC(extends table As iOSMobileTable, value As String)
+		  // Convert the string array into an NSMutableArray
+		  Declare Function NSClassFromString Lib "Foundation" (aString As CFStringRef) As Ptr
+		  Declare Function arrayWithCapacity Lib "Foundation" selector "arrayWithCapacity:" (cls As ptr, count as UInteger) As ptr
+		  Declare Sub addObject Lib "Foundation" selector "addObject:" (arr As ptr, obj As CFStringRef)
+		  
+		  
+		  
+		  // Put them on the searchbar
+		  Declare Function searchBar Lib "UIKit" selector "searchBar" (obj As ptr) As ptr
+		  Var searchPtr As ptr = table.SearchControllerHandle
+		  
+		  Var searchBarObj As ptr = searchBar(searchPtr)
+		  
+		  
+		  Declare Sub setText Lib "UIKit" selector "setText:" (obj As ptr, txt As CFStringRef)
+		  setText(searchBarObj, value)
 		End Sub
 	#tag EndMethod
 

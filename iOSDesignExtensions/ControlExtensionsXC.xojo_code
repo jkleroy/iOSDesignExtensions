@@ -253,7 +253,7 @@ Protected Module ControlExtensionsXC
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0, Description = 536574732074686520636F6C6F72206F6620612056696577
+	#tag Method, Flags = &h0, Description = 536574732074686520636F6C6F72206F66206120636F6E74726F6C2077697468206578706F73757265202848445229
 		Sub SetBackgroundColorWithExposureXC(extends ctrl as MobileUIControl, value as Color, exposure as double)
 		  
 		  

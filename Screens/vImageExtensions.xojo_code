@@ -342,6 +342,36 @@ Begin MobileScreen vImageExtensions
       Width           =   50
       _ClosingFired   =   False
    End
+   Begin iOSMobileTable Table1
+      AccessibilityHint=   ""
+      AccessibilityLabel=   ""
+      AllowRefresh    =   False
+      AllowSearch     =   False
+      AutoLayout      =   Table1, 1, <Parent>, 1, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   Table1, 2, <Parent>, 2, False, +1.00, 4, 1, -0, , True
+      AutoLayout      =   Table1, 3, Button4, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
+      AutoLayout      =   Table1, 4, BottomLayoutGuide, 4, False, +1.00, 4, 1, 0, , True
+      BackgroundColor =   
+      ControlCount    =   0
+      EditingEnabled  =   False
+      Enabled         =   True
+      EstimatedRowHeight=   30
+      Format          =   0
+      Height          =   183
+      Left            =   0
+      LockedInPosition=   False
+      Scope           =   2
+      SectionBackgroundColor=   
+      SectionCount    =   0
+      SectionTextColor=   
+      SelectedRowColor=   
+      TintColor       =   
+      Top             =   385
+      Visible         =   True
+      Width           =   320
+      _ClosingFired   =   False
+      _OpeningCompleted=   False
+   End
 End
 #tag EndMobileScreen
 
@@ -440,6 +470,32 @@ End
 		  me.TintColor = &cFF0000 //although the button's tint color is red
 		  me.SetImageXC(img)
 		  me.Caption = ""
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events Table1
+	#tag Event
+		Sub Opening()
+		  me.AddSection("")
+		  
+		  Dim cell As MobileTableCellData
+		  
+		  cell = me.CreateCell("Monochrome", "", Picture.SystemImage("lungs", 0, Picture.SystemImageWeights.Regular, cgIndigo))
+		  me.AddRow(0, cell)
+		  
+		  
+		  cell = me.CreateCell("Hierarchical", "", ImageExtensionsXC.SystemImageHierarchicalXC("lungs", cgIndigo))
+		  me.AddRow(0, cell)
+		  
+		  
+		  cell = me.CreateCell("Palette", "", ImageExtensionsXC.SystemImageWithPaletteXC("lungs", Array(color.Black, color.Green, color.Red, color.White), False))
+		  me.AddRow(0, cell)
+		  
+		  cell = me.CreateCell("Multicolor", "", ImageExtensionsXC.SystemImageMultiColorXC("lungs"))
+		  me.AddRow(0, cell)
+		  
+		  cell = me.CreateCell("Multicolor Gradient", "", ImageExtensionsXC.SystemImageMultiColorXC("lungs", true))
+		  me.AddRow(0, cell)
 		End Sub
 	#tag EndEvent
 #tag EndEvents

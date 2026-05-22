@@ -116,7 +116,7 @@ Protected Module ButtonExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 4120426F6F6C65616E2076616C7565207468617420696E6469636174657320776865746865722074686520627574746F6E20747261636B7320612073656C656374696F6E2C20656974686572207468726F7567682061206D656E75206F72206120746F67676C652E
-		Sub SetChangesSelectionAsPrimaryAction(extends bt As MobileButton, value As Boolean)
+		Sub SetChangesSelectionAsPrimaryActionXC(extends bt As MobileButton, value As Boolean)
 		  //New in version 2.0
 		  
 		  // https://developer.apple.com/documentation/uikit/uibutton/changesselectionasprimaryaction?language=objc

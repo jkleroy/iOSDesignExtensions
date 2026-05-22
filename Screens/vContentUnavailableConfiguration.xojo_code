@@ -1,12 +1,12 @@
 #tag MobileScreen
-Begin MobileScreen vSearchBarExample
+Begin MobileScreen vContentUnavailableConfiguration
    BackButtonCaption=   ""
    BackgroundColor =   
    Compatibility   =   ""
    ControlCount    =   0
    Device = 1
    HasNavigationBar=   True
-   LargeTitleDisplayMode=   2
+   LargeTitleDisplayMode=   1
    Left            =   0
    NavigationBarColor=   
    NavigationBarTextColor=   
@@ -15,76 +15,70 @@ Begin MobileScreen vSearchBarExample
    TabBarVisible   =   True
    TabIcon         =   0
    TintColor       =   
-   Title           =   "Search bar placement"
+   Title           =   "Content Unavailable"
    Top             =   0
    _mTabBarVisible =   False
-   Begin iOSMobileTable Table1
+   Begin MobileSegmentedButton SegmentedButton1
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
-      AllowRefresh    =   False
-      AllowSearch     =   True
-      AutoLayout      =   Table1, 1, <Parent>, 1, False, +1.00, 4, 1, 0, , True
-      AutoLayout      =   Table1, 2, <Parent>, 2, False, +1.00, 4, 1, -0, , True
-      AutoLayout      =   Table1, 3, TopLayoutGuide, 3, False, +1.00, 4, 1, 0, , True
-      AutoLayout      =   Table1, 4, BottomLayoutGuide, 4, False, +1.00, 4, 1, 0, , True
-      BackgroundColor =   
+      AutoLayout      =   SegmentedButton1, 4, BottomLayoutGuide, 3, False, +1.00, 4, 1, -*kStdControlGapV, , True
+      AutoLayout      =   SegmentedButton1, 9, <Parent>, 9, False, +1.00, 4, 1, 0, , True
+      AutoLayout      =   SegmentedButton1, 8, , 0, True, +1.00, 4, 1, 29, , True
+      AutoLayout      =   SegmentedButton1, 7, , 0, False, +1.00, 4, 1, 280, , True
       ControlCount    =   0
-      EditingEnabled  =   False
-      EditingEnabled  =   False
       Enabled         =   True
-      EstimatedRowHeight=   -1
-      Format          =   0
-      Height          =   503
-      Left            =   0
+      Height          =   29
+      LastSegmentIndex=   0
+      Left            =   20
       LockedInPosition=   False
       Scope           =   0
-      SectionBackgroundColor=   
-      SectionCount    =   0
-      SectionTextColor=   
-      SelectedRowColor=   
+      SegmentCount    =   0
+      Segments        =   "Empty\n\nTrue\rLoading\n\nFalse\rSearch\n\nFalse\rNone\n\nFalse"
+      SelectedSegmentIndex=   0
       TintColor       =   
-      Top             =   65
+      Top             =   531
       Visible         =   True
-      Width           =   320
+      Width           =   280
       _ClosingFired   =   False
-      _OpeningCompleted=   False
    End
 End
 #tag EndMobileScreen
 
 #tag WindowCode
 	#tag Event
-		Sub Activated()
-		  self.SetPreferredSearchBarPlacementXC(placement)
-		End Sub
-	#tag EndEvent
-
-	#tag Event
 		Sub Opening()
+		  app.TintColor = Color.Orange
 		  
-		  self.ShowSearchContentUnavailableXC
+		  self.ShowEmptyContentUnavailableXC("No Content", "A content-unavailable configuration is a composable description of a view that indicates that your app can’t display content. Using a content-unavailable configuration, you can obtain system default styling for a variety of different empty states.")
+		  
+		  if ExtensionsXC.GetiOSVersionXC < 17.0 then
+		    
+		    MessageBox("Not available below iOS17")
+		    
+		  end if
 		End Sub
 	#tag EndEvent
-
-
-	#tag Method, Flags = &h0
-		Sub Constructor(placement as TableSearchExtensionsXC.SearchBarPlacement)
-		  self.placement = placement
-		  
-		  // Calling the overridden superclass constructor.
-		  Super.Constructor
-		  
-		End Sub
-	#tag EndMethod
-
-
-	#tag Property, Flags = &h0
-		placement As TableSearchExtensionsXC.SearchBarPlacement
-	#tag EndProperty
 
 
 #tag EndWindowCode
 
+#tag Events SegmentedButton1
+	#tag Event
+		Sub Pressed(segmentedIndex As Integer)
+		  
+		  select case segmentedIndex
+		  case 0
+		    self.ShowEmptyContentUnavailableXC("Nobody here", "These are not the droids you are looking for.", Picture.SystemImage("robotic.vacuum.fill", 50))
+		  Case 1
+		    self.ShowLoadingContentUnavailableXC
+		  Case 2
+		    self.ShowSearchContentUnavailableXC("", "", nil, &cFF0000)
+		  Case 3
+		    self.HideContentUnavailableXC
+		  end select
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag ViewBehavior
 	#tag ViewProperty
 		Name="Index"
@@ -234,20 +228,5 @@ End
 		InitialValue=""
 		Type="ColorGroup"
 		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="placement"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="TableSearchExtensionsXC.SearchBarPlacement"
-		EditorType="Enum"
-		#tag EnumValues
-			"0 - Automatic"
-			"1 - Integrated"
-			"2 - Stacked"
-			"3 - IntegratedCentered"
-			"4 - IntegratedButton"
-		#tag EndEnumValues
 	#tag EndViewProperty
 #tag EndViewBehavior

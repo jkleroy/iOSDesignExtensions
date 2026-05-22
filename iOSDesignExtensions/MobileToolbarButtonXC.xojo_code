@@ -2,26 +2,33 @@
 Protected Module MobileToolbarButtonXC
 	#tag Method, Flags = &h0, Description = 416E206974656D20796F752075736520746F20636F6E74726F6C2074686520706C6163656D656E74206F6620746865207365617263682062617220696E206120746F6F6C626172206F6E206950686F6E652E2043616E2072657475726E204E696C
 		Function GetSearchBarPlacementBarButtonItemXC(extends s as MobileScreen) As MobileToolbarButton
+		  // https://developer.apple.com/documentation/uikit/uinavigationitem/searchbarplacementbarbuttonitem?language=objc
+		  'When searchBarPlacement is .integrated or .integratedButton and a search controller is present,
+		  'use this bar button item in the view controller’s toolbarItems to control the placement of 
+		  'the search bar among them when the search bar is appearing in the UIToolbar on iPhone.
+		  'Without this bar button item, the positioning for the search bar defaults to trailingmost for the UIToolbar case.
 		  
-		  if ExtensionsXC.GetiOSVersionXC >= 26.0 then
-		    
-		    Declare Function navigationItem Lib "UIKit" _
-		    Selector "navigationItem" (vc As Ptr) As Ptr
-		    Declare Function searchBarPlacementBarButtonItem Lib "UIKit" _
-		    Selector "searchBarPlacementBarButtonItem" (navItem As Ptr) As Ptr
-		    
-		    Dim navItem    As Ptr = navigationItem(s.ViewControllerHandle)
-		    
-		    if navItem = nil then Return nil
-		    
-		    Dim btnSearch  As Ptr = searchBarPlacementBarButtonItem(navItem)
-		    if btnSearch = nil then Return nil
-		    
-		    Dim searchButton As MobileToolbarButton = MobileToolbarButton.FromHandle(btnSearch)
-		    
-		    Return searchButton
-		    
-		  end if
+		  // ⚠️ searchBarPlacementBarButtonItem is only supported in UIToolbar
+		  
+		  if ExtensionsXC.GetiOSVersionXC < 26.0 then Return nil
+		  
+		  Declare Function navigationItem Lib "UIKit" _
+		  Selector "navigationItem" (vc As Ptr) As Ptr
+		  Declare Function searchBarPlacementBarButtonItem Lib "UIKit" _
+		  Selector "searchBarPlacementBarButtonItem" (navItem As Ptr) As Ptr
+		  
+		  Dim navItem    As Ptr = navigationItem(s.ViewControllerHandle)
+		  
+		  if navItem = nil then Return nil
+		  
+		  Dim btnSearch  As Ptr = searchBarPlacementBarButtonItem(navItem)
+		  if btnSearch = nil then Return nil
+		  
+		  Dim searchButton As MobileToolbarButton = MobileToolbarButton.FromHandle(btnSearch)
+		  
+		  Return searchButton
+		  
+		  
 		End Function
 	#tag EndMethod
 
@@ -34,17 +41,18 @@ Protected Module MobileToolbarButtonXC
 
 	#tag Method, Flags = &h0, Description = 4372656174657320612062616467652077697468207468652073706563696669656420636F756E742E
 		Sub RemoveBadgeXC(extends tb as MobileToolbarButton)
-		  if ExtensionsXC.GetiOSVersionXC >= 26 then
-		    
-		    Declare Function NSClassFromString Lib "Foundation" (name As CFStringRef) As Ptr
-		    
-		    // Set/remove badge on the bar button item
-		    Declare Sub setBadge Lib "UIKit" Selector "setBadge:" (obj As Ptr, badge As Ptr)
-		    
-		    // Remove badge
-		    setBadge(tb.Handle, Nil)
-		    
-		  end if
+		  //safeguard iOS26
+		  if ExtensionsXC.GetiOSVersionXC < 26 then Return
+		  
+		  Declare Function NSClassFromString Lib "Foundation" (name As CFStringRef) As Ptr
+		  
+		  // Set/remove badge on the bar button item
+		  Declare Sub setBadge Lib "UIKit" Selector "setBadge:" (obj As Ptr, badge As Ptr)
+		  
+		  // Remove badge
+		  setBadge(tb.Handle, Nil)
+		  
+		  
 		End Sub
 	#tag EndMethod
 
@@ -66,147 +74,153 @@ Protected Module MobileToolbarButtonXC
 
 	#tag Method, Flags = &h0, Description = 4372656174657320612062616467652077697468207468652073706563696669656420636F756E742E
 		Sub SetIndicatorBadgeXC(extends tb as MobileToolbarButton)
-		  if ExtensionsXC.GetiOSVersionXC >= 26 then
-		    Declare Function NSClassFromString Lib "Foundation" (name As CFStringRef) As Ptr
-		    // Three ways to create a badge
-		    Declare Function badgeWithCount  Lib "UIKit" Selector "badgeWithCount:"  (cls As Ptr, count As UInteger) As Ptr
-		    Declare Function badgeWithString Lib "UIKit" Selector "badgeWithString:" (cls As Ptr, value As CFStringRef) As Ptr
-		    Declare Function indicatorBadge  Lib "UIKit" Selector "indicatorBadge"   (cls As Ptr) As Ptr
-		    // Set/remove badge on the bar button item
-		    Declare Sub setBadge Lib "UIKit" Selector "setBadge:" (obj As Ptr, badge As Ptr)
-		    // Optional color customization on the badge object
-		    Declare Sub setBackgroundColor Lib "UIKit" Selector "setBackgroundColor:" (obj As Ptr, col As Ptr)
-		    Declare Sub setForegroundColor Lib "UIKit" Selector "setForegroundColor:" (obj As Ptr, col As Ptr)
-		    
-		    
-		    Dim badgeClass As Ptr = NSClassFromString("UIBarButtonItemBadge")
-		    
-		    // Dot indicator (no content)
-		    Dim badge As Ptr = indicatorBadge(badgeClass)
-		    
-		    
-		    
-		    setBadge(tb.Handle, badge)
-		    
-		    
-		  end if
+		  //safeguard iOS26
+		  if ExtensionsXC.GetiOSVersionXC < 26 then Return
+		  
+		  Declare Function NSClassFromString Lib "Foundation" (name As CFStringRef) As Ptr
+		  // Three ways to create a badge
+		  Declare Function badgeWithCount  Lib "UIKit" Selector "badgeWithCount:"  (cls As Ptr, count As UInteger) As Ptr
+		  Declare Function badgeWithString Lib "UIKit" Selector "badgeWithString:" (cls As Ptr, value As CFStringRef) As Ptr
+		  Declare Function indicatorBadge  Lib "UIKit" Selector "indicatorBadge"   (cls As Ptr) As Ptr
+		  // Set/remove badge on the bar button item
+		  Declare Sub setBadge Lib "UIKit" Selector "setBadge:" (obj As Ptr, badge As Ptr)
+		  // Optional color customization on the badge object
+		  Declare Sub setBackgroundColor Lib "UIKit" Selector "setBackgroundColor:" (obj As Ptr, col As Ptr)
+		  Declare Sub setForegroundColor Lib "UIKit" Selector "setForegroundColor:" (obj As Ptr, col As Ptr)
+		  
+		  
+		  Dim badgeClass As Ptr = NSClassFromString("UIBarButtonItemBadge")
+		  
+		  // Dot indicator (no content)
+		  Dim badge As Ptr = indicatorBadge(badgeClass)
+		  
+		  
+		  
+		  setBadge(tb.Handle, badge)
+		  
+		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 4372656174657320612062616467652077697468207468652073706563696669656420636F756E742E
 		Sub SetIndicatorBadgeXC(extends tb as MobileToolbarButton, backgroundColor as Color)
-		  if ExtensionsXC.GetiOSVersionXC >= 26 then
-		    Declare Function NSClassFromString Lib "Foundation" (name As CFStringRef) As Ptr
-		    // Three ways to create a badge
-		    Declare Function badgeWithCount  Lib "UIKit" Selector "badgeWithCount:"  (cls As Ptr, count As UInteger) As Ptr
-		    Declare Function badgeWithString Lib "UIKit" Selector "badgeWithString:" (cls As Ptr, value As CFStringRef) As Ptr
-		    Declare Function indicatorBadge  Lib "UIKit" Selector "indicatorBadge"   (cls As Ptr) As Ptr
-		    // Set/remove badge on the bar button item
-		    Declare Sub setBadge Lib "UIKit" Selector "setBadge:" (obj As Ptr, badge As Ptr)
-		    // Optional color customization on the badge object
-		    Declare Sub setBackgroundColor Lib "UIKit" Selector "setBackgroundColor:" (obj As Ptr, col As Ptr)
-		    Declare Sub setForegroundColor Lib "UIKit" Selector "setForegroundColor:" (obj As Ptr, col As Ptr)
+		  //safeguard iOS26
+		  if ExtensionsXC.GetiOSVersionXC < 26 then Return
+		  
+		  Declare Function NSClassFromString Lib "Foundation" (name As CFStringRef) As Ptr
+		  // Three ways to create a badge
+		  Declare Function badgeWithCount  Lib "UIKit" Selector "badgeWithCount:"  (cls As Ptr, count As UInteger) As Ptr
+		  Declare Function badgeWithString Lib "UIKit" Selector "badgeWithString:" (cls As Ptr, value As CFStringRef) As Ptr
+		  Declare Function indicatorBadge  Lib "UIKit" Selector "indicatorBadge"   (cls As Ptr) As Ptr
+		  // Set/remove badge on the bar button item
+		  Declare Sub setBadge Lib "UIKit" Selector "setBadge:" (obj As Ptr, badge As Ptr)
+		  // Optional color customization on the badge object
+		  Declare Sub setBackgroundColor Lib "UIKit" Selector "setBackgroundColor:" (obj As Ptr, col As Ptr)
+		  Declare Sub setForegroundColor Lib "UIKit" Selector "setForegroundColor:" (obj As Ptr, col As Ptr)
+		  
+		  
+		  Dim badgeClass As Ptr = NSClassFromString("UIBarButtonItemBadge")
+		  
+		  // Dot indicator (no content)
+		  Dim badge As Ptr = indicatorBadge(badgeClass)
+		  
+		  // Colors
+		  if backgroundColor.Alpha <> 255  then
+		    Dim uic as ptr
 		    
-		    
-		    Dim badgeClass As Ptr = NSClassFromString("UIBarButtonItemBadge")
-		    
-		    // Dot indicator (no content)
-		    Dim badge As Ptr = indicatorBadge(badgeClass)
-		    
-		    // Colors
-		    if backgroundColor.Alpha <> 255  then
-		      Dim uic as ptr
-		      
-		      uic = ExtensionsXC.UIColorFromColor(backgroundColor)
-		      setBackgroundColor(badge, uic)
-		    end if
-		    
-		    'if foregroundColor.Alpha <> 255  then
-		    'Dim uic as ptr
-		    '
-		    'uic = ExtensionsXC.UIColorFromColor(foregroundColor)
-		    'setForegroundColor(badge, uic)
-		    'end if
-		    
-		    setBadge(tb.Handle, badge)
-		    
-		    
+		    uic = ExtensionsXC.UIColorFromColor(backgroundColor)
+		    setBackgroundColor(badge, uic)
 		  end if
+		  
+		  'if foregroundColor.Alpha <> 255  then
+		  'Dim uic as ptr
+		  '
+		  'uic = ExtensionsXC.UIColorFromColor(foregroundColor)
+		  'setForegroundColor(badge, uic)
+		  'end if
+		  
+		  setBadge(tb.Handle, badge)
+		  
+		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 4372656174657320612062616467652077697468207468652073706563696669656420636F756E742E
 		Sub SetNumberedBadgeXC(extends tb as MobileToolbarButton, value as integer)
-		  if ExtensionsXC.GetiOSVersionXC >= 26 then
-		    Declare Function NSClassFromString Lib "Foundation" (name As CFStringRef) As Ptr
-		    // Three ways to create a badge
-		    Declare Function badgeWithCount  Lib "UIKit" Selector "badgeWithCount:"  (cls As Ptr, count As UInteger) As Ptr
-		    Declare Function badgeWithString Lib "UIKit" Selector "badgeWithString:" (cls As Ptr, value As CFStringRef) As Ptr
-		    Declare Function indicatorBadge  Lib "UIKit" Selector "indicatorBadge"   (cls As Ptr) As Ptr
-		    // Set/remove badge on the bar button item
-		    Declare Sub setBadge Lib "UIKit" Selector "setBadge:" (obj As Ptr, badge As Ptr)
-		    // Optional color customization on the badge object
-		    Declare Sub setBackgroundColor Lib "UIKit" Selector "setBackgroundColor:" (obj As Ptr, col As Ptr)
-		    Declare Sub setForegroundColor Lib "UIKit" Selector "setForegroundColor:" (obj As Ptr, col As Ptr)
-		    
-		    
-		    Dim badgeClass As Ptr = NSClassFromString("UIBarButtonItemBadge")
-		    // Numbered badge
-		    Dim badge As Ptr = badgeWithCount(badgeClass, value)
-		    
-		    
-		    
-		    setBadge(tb.Handle, badge)
-		    
-		    
+		  //safeguard iOS26
+		  if ExtensionsXC.GetiOSVersionXC < 26 then Return
+		  
+		  Declare Function NSClassFromString Lib "Foundation" (name As CFStringRef) As Ptr
+		  // Three ways to create a badge
+		  Declare Function badgeWithCount  Lib "UIKit" Selector "badgeWithCount:"  (cls As Ptr, count As UInteger) As Ptr
+		  Declare Function badgeWithString Lib "UIKit" Selector "badgeWithString:" (cls As Ptr, value As CFStringRef) As Ptr
+		  Declare Function indicatorBadge  Lib "UIKit" Selector "indicatorBadge"   (cls As Ptr) As Ptr
+		  // Set/remove badge on the bar button item
+		  Declare Sub setBadge Lib "UIKit" Selector "setBadge:" (obj As Ptr, badge As Ptr)
+		  // Optional color customization on the badge object
+		  Declare Sub setBackgroundColor Lib "UIKit" Selector "setBackgroundColor:" (obj As Ptr, col As Ptr)
+		  Declare Sub setForegroundColor Lib "UIKit" Selector "setForegroundColor:" (obj As Ptr, col As Ptr)
+		  
+		  
+		  Dim badgeClass As Ptr = NSClassFromString("UIBarButtonItemBadge")
+		  // Numbered badge
+		  Dim badge As Ptr = badgeWithCount(badgeClass, value)
+		  
+		  
+		  
+		  setBadge(tb.Handle, badge)
+		  
+		  
 		  end if
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 4372656174657320612062616467652077697468207468652073706563696669656420636F756E742E
 		Sub SetNumberedBadgeXC(extends tb as MobileToolbarButton, value as integer, backgroundColor as Color, foregroundColor as Color)
-		  if ExtensionsXC.GetiOSVersionXC >= 26 then
-		    Declare Function NSClassFromString Lib "Foundation" (name As CFStringRef) As Ptr
-		    // Three ways to create a badge
-		    Declare Function badgeWithCount  Lib "UIKit" Selector "badgeWithCount:"  (cls As Ptr, count As UInteger) As Ptr
-		    Declare Function badgeWithString Lib "UIKit" Selector "badgeWithString:" (cls As Ptr, value As CFStringRef) As Ptr
-		    Declare Function indicatorBadge  Lib "UIKit" Selector "indicatorBadge"   (cls As Ptr) As Ptr
-		    // Set/remove badge on the bar button item
-		    Declare Sub setBadge Lib "UIKit" Selector "setBadge:" (obj As Ptr, badge As Ptr)
-		    // Optional color customization on the badge object
-		    Declare Sub setBackgroundColor Lib "UIKit" Selector "setBackgroundColor:" (obj As Ptr, col As Ptr)
-		    Declare Sub setForegroundColor Lib "UIKit" Selector "setForegroundColor:" (obj As Ptr, col As Ptr)
+		  //safeguard iOS26
+		  if ExtensionsXC.GetiOSVersionXC < 26 then Return
+		  
+		  Declare Function NSClassFromString Lib "Foundation" (name As CFStringRef) As Ptr
+		  // Three ways to create a badge
+		  Declare Function badgeWithCount  Lib "UIKit" Selector "badgeWithCount:"  (cls As Ptr, count As UInteger) As Ptr
+		  Declare Function badgeWithString Lib "UIKit" Selector "badgeWithString:" (cls As Ptr, value As CFStringRef) As Ptr
+		  Declare Function indicatorBadge  Lib "UIKit" Selector "indicatorBadge"   (cls As Ptr) As Ptr
+		  // Set/remove badge on the bar button item
+		  Declare Sub setBadge Lib "UIKit" Selector "setBadge:" (obj As Ptr, badge As Ptr)
+		  // Optional color customization on the badge object
+		  Declare Sub setBackgroundColor Lib "UIKit" Selector "setBackgroundColor:" (obj As Ptr, col As Ptr)
+		  Declare Sub setForegroundColor Lib "UIKit" Selector "setForegroundColor:" (obj As Ptr, col As Ptr)
+		  
+		  
+		  Dim badgeClass As Ptr = NSClassFromString("UIBarButtonItemBadge")
+		  // Numbered badge
+		  Dim badge As Ptr = badgeWithCount(badgeClass, value)
+		  
+		  // Colors
+		  if backgroundColor.Alpha <> 255  then
+		    Dim uic as ptr
 		    
+		    uic = ExtensionsXC.UIColorFromColor(backgroundColor)
+		    setBackgroundColor(badge, uic)
+		  end if
+		  
+		  if foregroundColor.Alpha <> 255  then
+		    Dim uic as ptr
 		    
-		    Dim badgeClass As Ptr = NSClassFromString("UIBarButtonItemBadge")
-		    // Numbered badge
-		    Dim badge As Ptr = badgeWithCount(badgeClass, value)
-		    
-		    // Colors
-		    if backgroundColor.Alpha <> 255  then
-		      Dim uic as ptr
-		      
-		      uic = ExtensionsXC.UIColorFromColor(backgroundColor)
-		      setBackgroundColor(badge, uic)
-		    end if
-		    
-		    if foregroundColor.Alpha <> 255  then
-		      Dim uic as ptr
-		      
-		      uic = ExtensionsXC.UIColorFromColor(foregroundColor)
-		      setForegroundColor(badge, uic)
-		    end if
-		    
-		    setBadge(tb.Handle, badge)
-		    
-		    
+		    uic = ExtensionsXC.UIColorFromColor(foregroundColor)
+		    setForegroundColor(badge, uic)
+		  end if
+		  
+		  setBadge(tb.Handle, badge)
+		  
+		  
 		  end if
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub SetProminentStyleXC(extends tb As MobileToolbarButton)
-		  
+		  //TODO
 		End Sub
 	#tag EndMethod
 
@@ -228,77 +242,77 @@ Protected Module MobileToolbarButtonXC
 	#tag Method, Flags = &h0, Description = 4372656174657320612062616467652077697468207468652073706563696669656420636F756E742E
 		Sub SetTextBadgeXC(extends tb as MobileToolbarButton, value as String)
 		  
-		  if ExtensionsXC.GetiOSVersionXC >= 26 then
-		    
-		    Declare Function NSClassFromString Lib "Foundation" (name As CFStringRef) As Ptr
-		    // Three ways to create a badge
-		    
-		    Declare Function badgeWithString Lib "UIKit" Selector "badgeWithString:" (cls As Ptr, value As CFStringRef) As Ptr
-		    
-		    // Set/remove badge on the bar button item
-		    Declare Sub setBadge Lib "UIKit" Selector "setBadge:" (obj As Ptr, badge As Ptr)
-		    // Optional color customization on the badge object
-		    Declare Sub setBackgroundColor Lib "UIKit" Selector "setBackgroundColor:" (obj As Ptr, col As Ptr)
-		    Declare Sub setForegroundColor Lib "UIKit" Selector "setForegroundColor:" (obj As Ptr, col As Ptr)
-		    
-		    
-		    Dim badgeClass As Ptr = NSClassFromString("UIBarButtonItemBadge")
-		    
-		    // Text badge
-		    Dim badge As Ptr = badgeWithString(badgeClass, "New")
-		    
-		    
-		    
-		    setBadge(tb.Handle, badge)
-		    
-		    
-		  end if
+		  //safeguard iOS26
+		  if ExtensionsXC.GetiOSVersionXC < 26 then Return
+		  
+		  Declare Function NSClassFromString Lib "Foundation" (name As CFStringRef) As Ptr
+		  // Three ways to create a badge
+		  
+		  Declare Function badgeWithString Lib "UIKit" Selector "badgeWithString:" (cls As Ptr, value As CFStringRef) As Ptr
+		  
+		  // Set/remove badge on the bar button item
+		  Declare Sub setBadge Lib "UIKit" Selector "setBadge:" (obj As Ptr, badge As Ptr)
+		  // Optional color customization on the badge object
+		  Declare Sub setBackgroundColor Lib "UIKit" Selector "setBackgroundColor:" (obj As Ptr, col As Ptr)
+		  Declare Sub setForegroundColor Lib "UIKit" Selector "setForegroundColor:" (obj As Ptr, col As Ptr)
+		  
+		  
+		  Dim badgeClass As Ptr = NSClassFromString("UIBarButtonItemBadge")
+		  
+		  // Text badge
+		  Dim badge As Ptr = badgeWithString(badgeClass, "New")
+		  
+		  
+		  
+		  setBadge(tb.Handle, badge)
+		  
+		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0, Description = 4372656174657320612062616467652077697468207468652073706563696669656420636F756E742E
 		Sub SetTextBadgeXC(extends tb as MobileToolbarButton, value as String, backgroundColor as Color, foregroundColor as Color)
 		  
-		  if ExtensionsXC.GetiOSVersionXC >= 26 then
+		  //safeguard iOS26
+		  if ExtensionsXC.GetiOSVersionXC < 26 then Return
+		  
+		  Declare Function NSClassFromString Lib "Foundation" (name As CFStringRef) As Ptr
+		  // Three ways to create a badge
+		  
+		  Declare Function badgeWithString Lib "UIKit" Selector "badgeWithString:" (cls As Ptr, value As CFStringRef) As Ptr
+		  
+		  // Set/remove badge on the bar button item
+		  Declare Sub setBadge Lib "UIKit" Selector "setBadge:" (obj As Ptr, badge As Ptr)
+		  // Optional color customization on the badge object
+		  Declare Sub setBackgroundColor Lib "UIKit" Selector "setBackgroundColor:" (obj As Ptr, col As Ptr)
+		  Declare Sub setForegroundColor Lib "UIKit" Selector "setForegroundColor:" (obj As Ptr, col As Ptr)
+		  
+		  
+		  Dim badgeClass As Ptr = NSClassFromString("UIBarButtonItemBadge")
+		  
+		  // Text badge
+		  Dim badge As Ptr = badgeWithString(badgeClass, "New")
+		  
+		  // Colors
+		  if backgroundColor.Alpha <> 255  then
+		    Dim uic as ptr
 		    
-		    Declare Function NSClassFromString Lib "Foundation" (name As CFStringRef) As Ptr
-		    // Three ways to create a badge
-		    
-		    Declare Function badgeWithString Lib "UIKit" Selector "badgeWithString:" (cls As Ptr, value As CFStringRef) As Ptr
-		    
-		    // Set/remove badge on the bar button item
-		    Declare Sub setBadge Lib "UIKit" Selector "setBadge:" (obj As Ptr, badge As Ptr)
-		    // Optional color customization on the badge object
-		    Declare Sub setBackgroundColor Lib "UIKit" Selector "setBackgroundColor:" (obj As Ptr, col As Ptr)
-		    Declare Sub setForegroundColor Lib "UIKit" Selector "setForegroundColor:" (obj As Ptr, col As Ptr)
-		    
-		    
-		    Dim badgeClass As Ptr = NSClassFromString("UIBarButtonItemBadge")
-		    
-		    // Text badge
-		    Dim badge As Ptr = badgeWithString(badgeClass, "New")
-		    
-		    // Colors
-		    if backgroundColor.Alpha <> 255  then
-		      Dim uic as ptr
-		      
-		      uic = ExtensionsXC.UIColorFromColor(backgroundColor)
-		      setBackgroundColor(badge, uic)
-		    end if
-		    
-		    if foregroundColor.Alpha <> 255  then
-		      Dim uic as ptr
-		      
-		      uic = ExtensionsXC.UIColorFromColor(foregroundColor)
-		      setForegroundColor(badge, uic)
-		    end if
-		    
-		    
-		    
-		    setBadge(tb.Handle, badge)
-		    
-		    
+		    uic = ExtensionsXC.UIColorFromColor(backgroundColor)
+		    setBackgroundColor(badge, uic)
 		  end if
+		  
+		  if foregroundColor.Alpha <> 255  then
+		    Dim uic as ptr
+		    
+		    uic = ExtensionsXC.UIColorFromColor(foregroundColor)
+		    setForegroundColor(badge, uic)
+		  end if
+		  
+		  
+		  
+		  setBadge(tb.Handle, badge)
+		  
+		  
 		End Sub
 	#tag EndMethod
 

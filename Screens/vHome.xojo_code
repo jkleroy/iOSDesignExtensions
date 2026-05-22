@@ -247,11 +247,11 @@ End
 		  img = Picture.SystemImage("button.horizontal", 0)
 		  AddRow(section, "Buttons", "", accessory, GetTypeInfo(vButtons), ImageExtensionsXC.ImageWithColorXC(img, &c0F7FFE00))
 		  
-		  img = Picture.SystemImage("button.horizontal", 0)
-		  AddRow(section, "Button State (iOS15)", "", accessory, GetTypeInfo(vButtonState), ImageExtensionsXC.ImageWithColorXC(img, &c0F7FFE00))
+		  img = ImageExtensionsXC.SystemImageHierarchicalXC("button.horizontal.top.press", color.Orange, True)
+		  AddRow(section, "Button State (iOS15)", "", accessory, GetTypeInfo(vButtonState), img)
 		  
-		  img = Picture.SystemImage("button.horizontal", 0)
-		  AddRow(section, "Button Configuration (iOS15)", "", accessory, GetTypeInfo(vButtonConfiguration), ImageExtensionsXC.ImageWithColorXC(img, &c0F7FFE00))
+		  img = ImageExtensionsXC.SystemImageMultiColorXC("button.programmable", True)
+		  AddRow(section, "Button Configuration (iOS15)", "", accessory, GetTypeInfo(vButtonConfiguration), img)
 		  
 		  section = AddSection("Label Extensions")
 		  img = Picture.SystemImage("textformat", 0)
@@ -269,18 +269,24 @@ End
 		  
 		  
 		  section = AddSection("Image Extensions")
-		  img = Picture.SystemImage("photo", 0)
-		  AddRow(section, "Image Examples", "", accessory, GetTypeInfo(vImageExtensions), ImageExtensionsXC.ImageWithColorXC(img, Color.Blue))
+		  img = ImageExtensionsXC.SystemImageMultiColorXC("photo.badge.plus", False)
+		  AddRow(section, "Image Examples", "Recently Updated", accessory, GetTypeInfo(vImageExtensions), img)
 		  
 		  
 		  section = AddSection("Scroll Extensions")
 		  'img = Picture.SystemImage("arrow.up.arrow.down", 0)
+		  
 		  
 		  dim config as ptr = ImageExtensionsXC.GetUIImageSymbolConfigurationXC(color.Blue)
 		  
 		  img = ImageExtensionsXC.SystemImageWithConfigurationXC("arrow.up.arrow.down", config)
 		  
 		  AddRow(section, "Scroll Examples", "", accessory, GetTypeInfo(vScrollView), img) 'ImageExtensionsXC.ImageWithColorXC(img, &cFC800800))
+		  
+		  config = ImageExtensionsXC.GetUIImageSymbolConfigurationXC(color.Red)
+		  img = ImageExtensionsXC.SystemImageWithConfigurationXC("arrow.up.and.line.horizontal.and.arrow.down", config)
+		  
+		  AddRow(section, "Scroll Edge Effect", "New iOS26", accessory, GetTypeInfo(vEdgeEffect), img)
 		  
 		  
 		  section = AddSection("Table Extensions")
@@ -301,11 +307,14 @@ End
 		  AddRow(section, "Navigation Bar prompt and subtitle", "", accessory, GetTypeInfo(vNavigation), Picture.SystemImage("textformat.size.larger", 0, Picture.SystemImageWeights.Bold))
 		  AddRow(section, "Navigation Bar Color / Image", "", accessory, GetTypeInfo(vNavbar), Picture.SystemImage("line.3.horizontal", 0, Picture.SystemImageWeights.Regular, &c073F8000))
 		  AddRow(section, "ToolButtons", "Updated for iOS26", accessory, GetTypeInfo(vToolButton), ImageExtensionsXC.ImageWithColorXC(ic8_button, &c7F0FFE))
-		  AddRow(section, "Button Badges", "New iOS26", accessory, GetTypeInfo(vButtonBadge), Picture.SystemImage("bell.badge", 0, Picture.SystemImageWeights.Bold))
-		  AddRow(section, "Search bar", "New iOS26", accessory, GetTypeInfo(vSearchBar), Picture.SystemImage("magnifyingglass.circle", 0, Picture.SystemImageWeights.Bold))
+		  
+		  AddRow(section, "Button Badges", "New iOS26", accessory, GetTypeInfo(vButtonBadge), ImageExtensionsXC.SystemImageHierarchicalXC("bell.badge", cgIndigo))
+		  AddRow(section, "Search bar", "New iOS26", accessory, GetTypeInfo(vSearchBar), ImageExtensionsXC.SystemImageHierarchicalXC("magnifyingglass.circle.fill", cgIndigo))
 		  
 		  AddRow(section, "View Color", "", accessory, GetTypeInfo(vBackground), ImageExtensionsXC.ImageOriginalXC(ic8_color))
 		  AddRow(section, "Screen Options", "", accessory, GetTypeInfo(vScreenOptions), Picture.SystemImage("gearshape.circle", 0))
+		  
+		  AddRow(section, "Content Unavailable Configuration", "New iOS 17+", accessory, GetTypeInfo(vContentUnavailableConfiguration), Picture.SystemImage("arrow.2.circlepath", 0))
 		  
 		  
 		  section = AddSection("Modal")
@@ -318,8 +327,11 @@ End
 		  section = AddSection("Animations")
 		  AddRow(section, "Animate", "", accessory, GetTypeInfo(vAnimate), Picture.SystemImage("livephoto", 0))
 		  
-		  section = AddSection("Application extensions")
-		  AddRow(section, "Open Settings", "", accessory, "opensettings", Picture.SystemImage("gear.circle", 0))
+		  section = AddSection("Application extensions / Other")
+		  AddRow(section, "Open Settings", "", accessory, "opensettings", ImageExtensionsXC.SystemImageMultiColorXC("gear.badge"))
+		  
+		  AddRow(section, "HDR Colors", "New iOS26", accessory, GetTypeInfo(vHDRColors), ImageExtensionsXC.SystemImageMultiColorXC("paintpalette.fill"))
+		  
 		  
 		  //Deprecatedd
 		  'AddRow(section, "Modal View Flip", "", accessory, "modalflip", ic8_flip_vertical)
@@ -382,15 +394,19 @@ End
 		    Case "sheet"
 		      Dim v As new vModal
 		      v.showsheetXC(self, ViewExtensionsXC.UISheetPresentationControllerDetent.medium_large, True)
+		      v.SetBackgroundColorXC(color.Clear)
 		      
-		      v.SetSecondLabel("Notice the grabber at the top?" + EndOfLine + "The sheet can be resized when scrolling up.")
+		      v.SetSecondLabel("")
+		      v.ShowEmptyContentUnavailableXC("Notice the grabber at the top?" + EndOfLine + "The sheet can be resized when scrolling up.")
 		      
 		    Case "smallsheet"
 		      Dim v As new vModal
 		      v.ShowSheetWithHeightXC(self, 250)
 		      
 		      
-		      v.SetSecondLabel("This sheet's height is set to 250.")
+		      'v.SetSecondLabel("This sheet's height is set to 250.")
+		      v.SetSecondLabel("")
+		      v.ShowEmptyContentUnavailableXC("This sheet's height is set to 250.")
 		      
 		    Case "modal"
 		      
