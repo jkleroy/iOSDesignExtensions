@@ -60,9 +60,14 @@ Inherits MobileApplication
 		## History
 		
 		### Version 2.7.1 - Released 2026-05-22
-		* New Table.SetTopEdgeEffectXC, Table.SetBottomEdgeEffectXC, ScrollableArea.SetTopEdgeEffectXC, ScrollableArea.SetBottomEdgeEffectXC
 		
-		#### iOS17
+		**iOS26**
+		* Table.SetTopEdgeEffectXC
+		* Table.SetBottomEdgeEffectXC
+		* ScrollableArea.SetTopEdgeEffectXC
+		* ScrollableArea.SetBottomEdgeEffectXC
+		
+		**iOS17**
 		* MobileScreen.ShowEmptyContentUnavailableXC
 		* MobileScreen.ShowLoadingContentUnavailableXC
 		* MobileScreen.ShowSearchContentUnavailableXC
@@ -80,16 +85,15 @@ Inherits MobileApplication
 		* MobileToolbarButton.SetTextBadgeXC
 		* MobileToolbarButton.RemoveBadgeXC
 		
-		#### iOS16
+		**iOS16**
 		* MobileScreen.ShowSheetWithHeightXC
 		
-		#### iOS26
+		**iOS26**
 		* MobileScreen.SetLargeTitleXC
 		* MobileScreen.SetLargeSubtitleXC
 		* MobileScreen.SetSubtitleXC
 		* MobileScreen.GetSearchBarPlacementBarButtonItemXC
 		* Updated MobileScreen.SetPreferredSearchBarPlacementXC with IntegratedCentered and IntegratedButton
-		
 		
 		### Version 2.6.2 - Released 2025-05-20
 		* Fixed TabbarExtensionsXC.SetTabBarColorXC to change the background color of the TabBar

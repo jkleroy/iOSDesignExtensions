@@ -307,9 +307,14 @@ Protected Module ExtensionsXC
 		## History
 		
 		### Version 2.7.1 - Released 2026-05-22
-		* New Table.SetTopEdgeEffectXC, Table.SetBottomEdgeEffectXC, ScrollableArea.SetTopEdgeEffectXC, ScrollableArea.SetBottomEdgeEffectXC
 		
-		#### iOS17
+		**iOS26**
+		* Table.SetTopEdgeEffectXC
+		* Table.SetBottomEdgeEffectXC
+		* ScrollableArea.SetTopEdgeEffectXC
+		* ScrollableArea.SetBottomEdgeEffectXC
+		
+		**iOS17**
 		* MobileScreen.ShowEmptyContentUnavailableXC
 		* MobileScreen.ShowLoadingContentUnavailableXC
 		* MobileScreen.ShowSearchContentUnavailableXC
@@ -327,10 +332,10 @@ Protected Module ExtensionsXC
 		* MobileToolbarButton.SetTextBadgeXC
 		* MobileToolbarButton.RemoveBadgeXC
 		
-		#### iOS16
+		**iOS16**
 		* MobileScreen.ShowSheetWithHeightXC
 		
-		#### iOS26
+		**iOS26**
 		* MobileScreen.SetLargeTitleXC
 		* MobileScreen.SetLargeSubtitleXC
 		* MobileScreen.SetSubtitleXC

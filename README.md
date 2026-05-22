@@ -170,13 +170,13 @@ A set of 200+ UI extensions for Xojo iOS framework.
 
 ### Version 2.7.1 - Released 2026-05-22
 
-**ios26**
+**iOS26**
 * Table.SetTopEdgeEffectXC
 * Table.SetBottomEdgeEffectXC
 * ScrollableArea.SetTopEdgeEffectXC
 * ScrollableArea.SetBottomEdgeEffectXC
 
-*iOS17*
+**iOS17**
 * MobileScreen.ShowEmptyContentUnavailableXC
 * MobileScreen.ShowLoadingContentUnavailableXC
 * MobileScreen.ShowSearchContentUnavailableXC
@@ -194,10 +194,10 @@ A set of 200+ UI extensions for Xojo iOS framework.
 * MobileToolbarButton.SetTextBadgeXC
 * MobileToolbarButton.RemoveBadgeXC
 
-#### iOS16
+**iOS16**
 * MobileScreen.ShowSheetWithHeightXC
 
-#### iOS26
+**iOS26**
 * MobileScreen.SetLargeTitleXC
 * MobileScreen.SetLargeSubtitleXC
 * MobileScreen.SetSubtitleXC
