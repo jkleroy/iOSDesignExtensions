@@ -3,7 +3,7 @@
 [![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 # iOSDesignExtensions
-A set of 100+ UI extensions for Xojo iOS framework.
+A set of 200+ UI extensions for Xojo iOS framework.
 
 ## Currently implemented extensions
 
@@ -168,11 +168,37 @@ A set of 100+ UI extensions for Xojo iOS framework.
 
 ## History
 
+### Version 2.7.1 - Released 2026-05-22
+* New Table.SetTopEdgeEffectXC, Table.SetBottomEdgeEffectXC, ScrollableArea.SetTopEdgeEffectXC, ScrollableArea.SetBottomEdgeEffectXC
+
+#### iOS17
+* MobileScreen.ShowEmptyContentUnavailableXC
+* MobileScreen.ShowLoadingContentUnavailableXC
+* MobileScreen.ShowSearchContentUnavailableXC
+
+
 ### Version 2.7 - Released 2026-05-20
 * New iOS26 features
 * Now supports Glass button configurations
 * Now supports Button badges
 * New UIColorFromColorWithExposure
+* Updated SetBackgroundColorXC to support HDR colors
+* MobileToolbarButton.SetHidesSharedBackgroundXC
+* MobileToolbarButton.SetIndicatorBadgeXC
+* MobileToolbarButton.SetNumberedBadgeXC
+* MobileToolbarButton.SetTextBadgeXC
+* MobileToolbarButton.RemoveBadgeXC
+
+#### iOS16
+* MobileScreen.ShowSheetWithHeightXC
+
+#### iOS26
+* MobileScreen.SetLargeTitleXC
+* MobileScreen.SetLargeSubtitleXC
+* MobileScreen.SetSubtitleXC
+* MobileScreen.GetSearchBarPlacementBarButtonItemXC
+* Updated MobileScreen.SetPreferredSearchBarPlacementXC with IntegratedCentered and IntegratedButton
+
 
 ### Version 2.6.3 - Released 2025-05-20
 * Fixed TabbarExtensionsXC.SetTabBarColorXC to change the background color of the TabBar
