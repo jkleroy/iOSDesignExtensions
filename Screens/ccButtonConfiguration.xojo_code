@@ -155,6 +155,7 @@ Begin MobileContainer ccButtonConfiguration
       Scope           =   1
       selectedXC      =   False
       showsMenuAsPrimaryAction=   False
+      symbolAnimationEnabledXC=   False
       TextFont        =   ""
       TextSize        =   0
       TintColor       =   &c000000
@@ -223,6 +224,7 @@ Begin MobileContainer ccButtonConfiguration
       Scope           =   1
       selectedXC      =   False
       showsMenuAsPrimaryAction=   False
+      symbolAnimationEnabledXC=   False
       TextFont        =   ""
       TextSize        =   0
       TintColor       =   &c000000
@@ -261,6 +263,7 @@ Begin MobileContainer ccButtonConfiguration
       Scope           =   1
       selectedXC      =   False
       showsMenuAsPrimaryAction=   False
+      symbolAnimationEnabledXC=   False
       TextFont        =   ""
       TextSize        =   0
       TintColor       =   &c000000
@@ -299,6 +302,7 @@ Begin MobileContainer ccButtonConfiguration
       Scope           =   1
       selectedXC      =   False
       showsMenuAsPrimaryAction=   False
+      symbolAnimationEnabledXC=   False
       TextFont        =   ""
       TextSize        =   0
       TintColor       =   &c000000
@@ -337,6 +341,7 @@ Begin MobileContainer ccButtonConfiguration
       Scope           =   1
       selectedXC      =   False
       showsMenuAsPrimaryAction=   False
+      symbolAnimationEnabledXC=   False
       TextFont        =   ""
       TextSize        =   0
       TintColor       =   &c000000
@@ -405,6 +410,7 @@ Begin MobileContainer ccButtonConfiguration
       Scope           =   1
       selectedXC      =   False
       showsMenuAsPrimaryAction=   False
+      symbolAnimationEnabledXC=   False
       TextFont        =   ""
       TextSize        =   0
       TintColor       =   &c000000
@@ -443,6 +449,7 @@ Begin MobileContainer ccButtonConfiguration
       Scope           =   1
       selectedXC      =   False
       showsMenuAsPrimaryAction=   False
+      symbolAnimationEnabledXC=   False
       TextFont        =   ""
       TextSize        =   0
       TintColor       =   &c000000
@@ -481,6 +488,7 @@ Begin MobileContainer ccButtonConfiguration
       Scope           =   1
       selectedXC      =   False
       showsMenuAsPrimaryAction=   False
+      symbolAnimationEnabledXC=   False
       TextFont        =   ""
       TextSize        =   0
       TintColor       =   &c000000
@@ -519,6 +527,7 @@ Begin MobileContainer ccButtonConfiguration
       Scope           =   1
       selectedXC      =   False
       showsMenuAsPrimaryAction=   False
+      symbolAnimationEnabledXC=   False
       TextFont        =   ""
       TextSize        =   0
       TintColor       =   &c000000
@@ -587,6 +596,7 @@ Begin MobileContainer ccButtonConfiguration
       Scope           =   1
       selectedXC      =   False
       showsMenuAsPrimaryAction=   False
+      symbolAnimationEnabledXC=   False
       TextFont        =   ""
       TextSize        =   0
       TintColor       =   &c000000
@@ -625,6 +635,7 @@ Begin MobileContainer ccButtonConfiguration
       Scope           =   1
       selectedXC      =   False
       showsMenuAsPrimaryAction=   False
+      symbolAnimationEnabledXC=   False
       TextFont        =   ""
       TextSize        =   0
       TintColor       =   &c000000
@@ -664,6 +675,7 @@ Begin MobileContainer ccButtonConfiguration
       Scope           =   1
       selectedXC      =   False
       showsMenuAsPrimaryAction=   False
+      symbolAnimationEnabledXC=   False
       TextFont        =   ""
       TextSize        =   0
       TintColor       =   &c000000
@@ -1277,7 +1289,6 @@ End
 		  Dim config As ControlsXC.UIButtonConfiguration
 		  
 		  config = UIButtonConfiguration.GetConfiguration(UIButtonConfiguration.Types.filled)
-		  
 		  
 		  
 		  

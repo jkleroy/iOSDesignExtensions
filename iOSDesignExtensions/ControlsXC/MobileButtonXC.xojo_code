@@ -294,6 +294,38 @@ Inherits MobileButton
 		showsMenuAsPrimaryAction As Boolean
 	#tag EndComputedProperty
 
+	#tag ComputedProperty, Flags = &h0, Description = 28694F53313429204120426F6F6C65616E2076616C756520746861742064657465726D696E657320776865746865722074686520636F6E74657874206D656E7520696E746572616374696F6E2069732074686520636F6E74726F6CE2809973207072696D61727920616374696F6E2E
+		#tag Getter
+			Get
+			  // @property (nonatomic, getter=isSymbolAnimationEnabled) BOOL symbolAnimationEnabled;
+			  Declare Function isSymbolAnimationEnabled Lib "Foundation" selector "isSymbolAnimationEnabled" (obj as ptr) as Boolean
+			  
+			  
+			  if ExtensionsXC.GetiOSVersionXC >= 14.0 then
+			    
+			    Declare Function isSymbolAnimationEnabled Lib "Foundation" selector "isSymbolAnimationEnabled" (obj as ptr) as Boolean
+			    
+			    Return isSymbolAnimationEnabled(self.Handle)
+			    
+			    
+			  end if
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  if ExtensionsXC.GetiOSVersionXC >= 14.0 then
+			    
+			    Declare Sub setSymbolAnimationEnabled Lib "Foundation" Selector "setSymbolAnimationEnabled:" (obj as ptr, value as Boolean)
+			    
+			    setSymbolAnimationEnabled(self.Handle, value)
+			    
+			    
+			  end if
+			End Set
+		#tag EndSetter
+		symbolAnimationEnabledXC As Boolean
+	#tag EndComputedProperty
+
 	#tag ComputedProperty, Flags = &h0, Description = 28694F53313529205468652064656661756C74207465787420746F20646973706C617920696E2074686520636F6E74726F6CE280997320746F6F6C74697020696E204D61634F5320436174616C79737420617070732E
 		#tag Getter
 			Get
@@ -331,6 +363,54 @@ Inherits MobileButton
 
 
 	#tag ViewBehavior
+		#tag ViewProperty
+			Name="BackgroundColor"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="ColorGroup"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="BorderWidth"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="BorderColor"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="ColorGroup"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Icon"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Picture"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="CornerSize"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="AdjustTextSizeToFit"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
 		#tag ViewProperty
 			Name="_ClosingFired"
 			Visible=false

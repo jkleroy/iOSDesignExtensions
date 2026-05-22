@@ -163,6 +163,9 @@ Inherits NSObjectXC
 		
 		
 		Inspired by https://sarunw.com/posts/new-way-to-style-uibutton-in-ios15/
+		
+		
+		
 	#tag EndNote
 
 	#tag Note, Name = TODO
@@ -178,6 +181,10 @@ Inherits NSObjectXC
 		
 		indicator
 		https://developer.apple.com/documentation/uikit/uibuttonconfiguration/indicator?language=objc
+		
+		
+		symbolContentTransition
+		https://developer.apple.com/documentation/uikit/uibuttonconfiguration/symbolcontenttransition?language=objc
 	#tag EndNote
 
 
@@ -656,7 +663,13 @@ Inherits NSObjectXC
 			Group="Behavior"
 			InitialValue=""
 			Type="Sizes"
-			EditorType=""
+			EditorType="Enum"
+			#tag EnumValues
+				"0 - Medium"
+				"1 - Small"
+				"2 - Mini"
+				"3 - Large"
+			#tag EndEnumValues
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="cornerRadius"
@@ -672,7 +685,15 @@ Inherits NSObjectXC
 			Group="Behavior"
 			InitialValue=""
 			Type="CornerStyles"
-			EditorType=""
+			EditorType="Enum"
+			#tag EnumValues
+				"-1 - Fixed"
+				"0 - Dynamic"
+				"1 - Small"
+				"2 - Medium"
+				"3 - Large"
+				"4 - Capsule"
+			#tag EndEnumValues
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="image"
@@ -696,7 +717,15 @@ Inherits NSObjectXC
 			Group="Behavior"
 			InitialValue=""
 			Type="NSDirectionalRectEdge"
-			EditorType=""
+			EditorType="Enum"
+			#tag EnumValues
+				"0 - None"
+				"1 - Top"
+				"2 - Leading"
+				"4 - Bottom"
+				"8 - Trailing"
+				"15 - All"
+			#tag EndEnumValues
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="showsActivityIndicator"
@@ -712,7 +741,7 @@ Inherits NSObjectXC
 			Group="Behavior"
 			InitialValue=""
 			Type="String"
-			EditorType=""
+			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="subtitleLineBreakMode"
@@ -720,7 +749,15 @@ Inherits NSObjectXC
 			Group="Behavior"
 			InitialValue=""
 			Type="NSLineBreakMode"
-			EditorType=""
+			EditorType="Enum"
+			#tag EnumValues
+				"0 - WordWrap"
+				"1 - CharacterWrap"
+				"2 - Clip"
+				"3 - TruncateHead"
+				"4 - TruncateTail"
+				"5 - TruncateMiddle"
+			#tag EndEnumValues
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="titleAlignment"
@@ -728,7 +765,13 @@ Inherits NSObjectXC
 			Group="Behavior"
 			InitialValue=""
 			Type="TitleAlignments"
-			EditorType=""
+			EditorType="Enum"
+			#tag EnumValues
+				"0 - Automatic"
+				"1 - Leading"
+				"2 - Center"
+				"3 - Trailing"
+			#tag EndEnumValues
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="titleLineBreakMode"
@@ -736,7 +779,15 @@ Inherits NSObjectXC
 			Group="Behavior"
 			InitialValue=""
 			Type="NSLineBreakMode"
-			EditorType=""
+			EditorType="Enum"
+			#tag EnumValues
+				"0 - WordWrap"
+				"1 - CharacterWrap"
+				"2 - Clip"
+				"3 - TruncateHead"
+				"4 - TruncateTail"
+				"5 - TruncateMiddle"
+			#tag EndEnumValues
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="titlePadding"

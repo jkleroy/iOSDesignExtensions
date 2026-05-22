@@ -34,6 +34,8 @@ Protected Module ImageExtensionsXC
 		    Return config
 		    
 		  end if
+		  
+		  
 		End Function
 	#tag EndMethod
 
@@ -231,6 +233,119 @@ Protected Module ImageExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h1, Description = 52657475726E7320616E20696D6167652066726F6D207468652053462053796D626F6C206C696272617279207573696E67206D756C7469636F6C6F757220616E64206F7074696F6E616C206772616469656E742028694F53323629
+		Protected Function SystemImageHierarchicalXC(name As String, value As Color, gradient As Boolean = False) As Picture
+		  //New v2.7.1
+		  
+		  if ExtensionsXC.GetiOSVersionXC < 15.0 then
+		    Return Picture.SystemImage(name, 0)
+		  end if
+		  
+		  
+		  Declare Function systemImageNamed lib "UIKit.framework" selector "systemImageNamed:withConfiguration:" (cls as ptr, name as CFStringRef, config as ptr) as ptr
+		  declare function NSClassFromString lib "Foundation.framework" (clsName as CFStringRef) as ptr
+		  
+		  
+		  Dim UIImageSymbolConfiguration_class as ptr = NSClassFromString("UIImageSymbolConfiguration")
+		  
+		  var config as ptr
+		  
+		  // + (instancetype) configurationWithHierarchicalColor:(UIColor *) hierarchicalColor;
+		  Declare Function configurationWithHierarchicalColor Lib "Foundation" Selector "configurationWithHierarchicalColor:" ( cls as ptr, color_value as ptr) As Ptr
+		  
+		  config = configurationWithHierarchicalColor(UIImageSymbolConfiguration_class,  ExtensionsXC.UIColorFromColor(value) )
+		  
+		  
+		  
+		  if gradient and ExtensionsXC.GetiOSVersionXC >= 26.0 then
+		    
+		    //Get a combined configuration using gradient
+		    
+		    Const UIImageSymbolColorRenderingModeGradient = 2
+		    
+		    // + (instancetype) configurationWithColorRenderingMode:(UIImageSymbolColorRenderingMode) mode;
+		    Declare Function configurationWithColorRenderingMode Lib "Foundation" Selector "configurationWithColorRenderingMode:" ( cls as ptr, mode as Integer ) As Ptr
+		    
+		    
+		    Var configGradient as ptr
+		    configGradient = configurationWithColorRenderingMode(UIImageSymbolConfiguration_class, UIImageSymbolColorRenderingModeGradient)
+		    
+		    // - (instancetype) configurationByApplyingConfiguration:(UIImageConfiguration *) otherConfiguration;
+		    Declare Function configurationByApplyingConfiguration Lib "Foundation" Selector "configurationByApplyingConfiguration:" ( obj as ptr, otherConfiguration as Ptr ) As Ptr
+		    
+		    config = configurationByApplyingConfiguration(config, configGradient)
+		    
+		    
+		  end if
+		  
+		  Dim imgRef As ptr = systemImageNamed(NSClassFromString("UIImage"), name, config)
+		  
+		  if imgRef <> nil then
+		    
+		    Return Picture.FromHandle(imgRef)
+		    
+		  end if
+		  
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h1, Description = 52657475726E7320616E20696D6167652066726F6D207468652053462053796D626F6C206C696272617279207573696E67206D756C7469636F6C6F757220616E64206F7074696F6E616C206772616469656E742028694F53323629
+		Protected Function SystemImageMultiColorXC(name As String, gradient As Boolean = False) As Picture
+		  //New v2.7.1
+		  
+		  if ExtensionsXC.GetiOSVersionXC < 15.0 then
+		    Return Picture.SystemImage(name, 0)
+		  end if
+		  
+		  
+		  Declare Function systemImageNamed lib "UIKit.framework" selector "systemImageNamed:withConfiguration:" (cls as ptr, name as CFStringRef, config as ptr) as ptr
+		  declare function NSClassFromString lib "Foundation.framework" (clsName as CFStringRef) as ptr
+		  
+		  
+		  Dim UIImageSymbolConfiguration_class as ptr = NSClassFromString("UIImageSymbolConfiguration")
+		  
+		  var config as ptr
+		  
+		  // + (instancetype) configurationWithHierarchicalColor:(UIColor *) hierarchicalColor;
+		  Declare Function configurationPreferringMulticolor Lib "Foundation" Selector "configurationPreferringMulticolor" ( cls as ptr) As Ptr
+		  
+		  config = configurationPreferringMulticolor(UIImageSymbolConfiguration_class)
+		  
+		  
+		  if gradient and ExtensionsXC.GetiOSVersionXC >= 26.0 then
+		    
+		    //Get a combined configuration using gradient
+		    
+		    Const UIImageSymbolColorRenderingModeGradient = 2
+		    
+		    // + (instancetype) configurationWithColorRenderingMode:(UIImageSymbolColorRenderingMode) mode;
+		    Declare Function configurationWithColorRenderingMode Lib "Foundation" Selector "configurationWithColorRenderingMode:" ( cls as ptr, mode as Integer ) As Ptr
+		    
+		    
+		    Var configGradient as ptr
+		    configGradient = configurationWithColorRenderingMode(UIImageSymbolConfiguration_class, UIImageSymbolColorRenderingModeGradient)
+		    
+		    // - (instancetype) configurationByApplyingConfiguration:(UIImageConfiguration *) otherConfiguration;
+		    Declare Function configurationByApplyingConfiguration Lib "Foundation" Selector "configurationByApplyingConfiguration:" ( obj as ptr, otherConfiguration as Ptr ) As Ptr
+		    
+		    config = configurationByApplyingConfiguration(config, configGradient)
+		    
+		    
+		  end if
+		  
+		  Dim imgRef As ptr = systemImageNamed(NSClassFromString("UIImage"), name, config)
+		  
+		  if imgRef <> nil then
+		    
+		    Return Picture.FromHandle(imgRef)
+		    
+		  end if
+		  
+		  
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h1, Description = 52657475726E7320616E20696D6167652066726F6D2074686520694F5331332053462053796D626F6C206C696272617279
 		Protected Function SystemImageWithConfigurationXC(name as String, configuration as ptr) As Picture
 		  
@@ -251,6 +366,63 @@ Protected Module ImageExtensionsXC
 		    
 		  end if
 		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h1, Description = 52657475726E7320616E20696D6167652066726F6D207468652053462053796D626F6C206C696272617279207573696E6720757020746F20332070616C6574746520636F6C6F727320616E64206F7074696F6E616C206772616469656E742028694F53323629
+		Protected Function SystemImageWithPaletteXC(name As String, colors() As Color, gradient As Boolean = False) As Picture
+		  //New v2.x.x
+		  
+		  if ExtensionsXC.GetiOSVersionXC < 15.0 then
+		    Return Picture.SystemImage(name, 0)
+		  end if
+		  
+		  Declare Function systemImageNamed lib "UIKit" selector "systemImageNamed:withConfiguration:" (cls as ptr, name as CFStringRef, config as ptr) as ptr
+		  declare function NSClassFromString lib "Foundation" (clsName as CFStringRef) as ptr
+		  
+		  Dim UIImageSymbolConfiguration_class as ptr = NSClassFromString("UIImageSymbolConfiguration")
+		  
+		  var config as ptr
+		  
+		  // Build NSMutableArray of UIColors
+		  Declare Function NSMutableArrayNew Lib "Foundation" Selector "array" (cls As Ptr) As Ptr
+		  Declare Sub NSMutableArrayAddObject Lib "Foundation" Selector "addObject:" (obj As Ptr, item As Ptr)
+		  
+		  Dim arr As Ptr = NSMutableArrayNew(NSClassFromString("NSMutableArray"))
+		  For Each c As Color In colors
+		    NSMutableArrayAddObject(arr, ExtensionsXC.UIColorFromColor(c))
+		  Next
+		  
+		  // + (instancetype) configurationWithPaletteColors:(NSArray<UIColor *> *) paletteColors;
+		  Declare Function configurationWithPaletteColors Lib "Foundation" Selector "configurationWithPaletteColors:" (cls as ptr, colors as ptr) As Ptr
+		  
+		  config = configurationWithPaletteColors(UIImageSymbolConfiguration_class, arr)
+		  
+		  
+		  if gradient and ExtensionsXC.GetiOSVersionXC >= 26.0 then
+		    
+		    //Get a combined configuration using gradient
+		    
+		    Const UIImageSymbolColorRenderingModeGradient = 2
+		    
+		    // + (instancetype) configurationWithColorRenderingMode:(UIImageSymbolColorRenderingMode) mode;
+		    Declare Function configurationWithColorRenderingMode Lib "Foundation" Selector "configurationWithColorRenderingMode:" ( cls as ptr, mode as Integer ) As Ptr
+		    
+		    Var configGradient as ptr
+		    configGradient = configurationWithColorRenderingMode(UIImageSymbolConfiguration_class, UIImageSymbolColorRenderingModeGradient)
+		    
+		    // - (instancetype) configurationByApplyingConfiguration:(UIImageConfiguration *) otherConfiguration;
+		    Declare Function configurationByApplyingConfiguration Lib "Foundation" Selector "configurationByApplyingConfiguration:" ( obj as ptr, otherConfiguration as Ptr ) As Ptr
+		    
+		    config = configurationByApplyingConfiguration(config, configGradient)
+		    
+		  end if
+		  
+		  Dim imgRef As ptr = systemImageNamed(NSClassFromString("UIImage"), name, config)
+		  
+		  if imgRef <> nil then
+		    Return Picture.FromHandle(imgRef)
+		  end if
 		End Function
 	#tag EndMethod
 

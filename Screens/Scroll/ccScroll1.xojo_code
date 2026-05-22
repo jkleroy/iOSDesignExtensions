@@ -13,6 +13,7 @@ Begin MobileContainer ccScroll1
    Begin MobileLabel Label1
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       Alignment       =   0
       AutoLayout      =   Label1, 8, , 0, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   Label1, 1, <Parent>, 1, False, +1.00, 4, 1, *kStdGapCtlToViewH, , True
@@ -42,6 +43,7 @@ Begin MobileContainer ccScroll1
    Begin MobileLabel Label2
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       Alignment       =   0
       AutoLayout      =   Label2, 1, Label1, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Label2, 7, , 0, False, +1.00, 4, 1, 280, , True
@@ -71,6 +73,7 @@ Begin MobileContainer ccScroll1
    Begin MobileLabel Label3
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       Alignment       =   0
       AutoLayout      =   Label3, 1, <Parent>, 1, False, +1.00, 4, 1, 20, , True
       AutoLayout      =   Label3, 7, , 0, False, +1.00, 4, 1, 280, , True
@@ -100,6 +103,7 @@ Begin MobileContainer ccScroll1
    Begin MobileLabel Label4
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       Alignment       =   0
       AutoLayout      =   Label4, 1, Label3, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Label4, 7, , 0, False, +1.00, 4, 1, 280, , True
@@ -129,6 +133,7 @@ Begin MobileContainer ccScroll1
    Begin MobileLabel Label5
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       Alignment       =   0
       AutoLayout      =   Label5, 1, <Parent>, 1, False, +1.00, 4, 1, 20, , True
       AutoLayout      =   Label5, 7, , 0, False, +1.00, 4, 1, 280, , True

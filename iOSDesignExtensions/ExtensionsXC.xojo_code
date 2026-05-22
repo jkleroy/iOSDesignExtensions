@@ -306,11 +306,42 @@ Protected Module ExtensionsXC
 	#tag Note, Name = History
 		## History
 		
+		### Version 2.7.1 - Released 2026-05-22
+		
+		**iOS26**
+		* Table.SetTopEdgeEffectXC
+		* Table.SetBottomEdgeEffectXC
+		* ScrollableArea.SetTopEdgeEffectXC
+		* ScrollableArea.SetBottomEdgeEffectXC
+		
+		**iOS17**
+		* MobileScreen.ShowEmptyContentUnavailableXC
+		* MobileScreen.ShowLoadingContentUnavailableXC
+		* MobileScreen.ShowSearchContentUnavailableXC
+		
+		
 		### Version 2.7 - Released 2026-05-20
 		* New iOS26 features
 		* Now supports Glass button configurations
 		* Now supports Button badges
 		* New UIColorFromColorWithExposure
+		* Updated SetBackgroundColorXC to support HDR colors
+		* MobileToolbarButton.SetHidesSharedBackgroundXC
+		* MobileToolbarButton.SetIndicatorBadgeXC
+		* MobileToolbarButton.SetNumberedBadgeXC
+		* MobileToolbarButton.SetTextBadgeXC
+		* MobileToolbarButton.RemoveBadgeXC
+		
+		**iOS16**
+		* MobileScreen.ShowSheetWithHeightXC
+		
+		**iOS26**
+		* MobileScreen.SetLargeTitleXC
+		* MobileScreen.SetLargeSubtitleXC
+		* MobileScreen.SetSubtitleXC
+		* MobileScreen.GetSearchBarPlacementBarButtonItemXC
+		* Updated MobileScreen.SetPreferredSearchBarPlacementXC with IntegratedCentered and IntegratedButton
+		
 		
 		### Version 2.6.2 - Released 2025-05-20
 		* Fixed TabbarExtensionsXC.SetTabBarColorXC to change the background color of the TabBar
@@ -483,7 +514,7 @@ Protected Module ExtensionsXC
 		
 		Most controls will then have additional methods, all ending with "XC"
 		
-		Contact: https://www.jeremieleroy.com/contact.php
+		Contact: https://forum.xojo.com/u/jeremie_l/summary
 		
 		Feel free to ask for feature requests!
 		

@@ -1273,7 +1273,7 @@ Protected Module ViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub ShowSheetXC(extends v As MobileScreen, parentScreen As MobileScreen, height As UISheetPresentationControllerDetent = UISheetPresentationControllerDetent.large, showGrabber As Boolean = False, Animate As Boolean = True, cornerRadius As Single = -1)
+		Sub ShowSheetXC(extends v as MobileScreen, parentScreen as MobileScreen, height as UISheetPresentationControllerDetent = UISheetPresentationControllerDetent.large, showGrabber as Boolean = False, Animate as Boolean = True, cornerRadius as Single = -1)
 		  //Source https://sarunw.com/posts/bottom-sheet-in-ios-15-with-uisheetpresentationcontroller/
 		  
 		  
@@ -1331,6 +1331,8 @@ Protected Module ViewExtensionsXC
 		      Declare sub preferredCornerRadius_ lib "UIKit" selector "setPreferredCornerRadius:" (obj as ptr, value as CGFloat)
 		      preferredCornerRadius_(sheet, cornerRadius)
 		    end if
+		    
+		    
 		    
 		  End If
 		  

@@ -37,6 +37,79 @@ Protected Module ScrollViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub SetBottomEdgeEffectXC(extends scroll as MobileScrollableArea, effect as ScrollViewExtensionsXC.UIScrollEdgeEffectStyle)
+		  
+		  if ExtensionsXC.GetiOSVersionXC < 26.0 then Return
+		  
+		  
+		  
+		  // Get the bottom edge effect
+		  Declare Function bottomEdgeEffect Lib "UIKit" selector "bottomEdgeEffect" (obj As Ptr) As Ptr
+		  
+		  
+		  // UIScrollEdgeEffect.Style constants (get from the class)
+		  Declare Function automaticStyle Lib "UIKit" selector "automaticStyle" (cls As Ptr) As Ptr
+		  
+		  declare sub setHidden Lib "UIKit" selector "setHidden:" (obj as ptr, value as Boolean)
+		  Declare Function softStyle Lib "UIKit" selector "softStyle" (cls As Ptr) As Ptr
+		  Declare Function hardStyle Lib "UIKit" selector "hardStyle" (cls As Ptr) As Ptr
+		  
+		  Declare Function NSClassFromString Lib "Foundation" (name As CFStringRef) As Ptr
+		  
+		  
+		  
+		  // Apply to scroll view
+		  Declare sub setStyle lib "UIKit" selector "setStyle:" (obj as ptr, style as ptr)
+		  
+		  Dim edgeEffect As Ptr = bottomEdgeEffect(scroll.Handle)
+		  If edgeEffect <> Nil Then
+		    
+		    select case effect
+		      
+		    case UIScrollEdgeEffectStyle.automatic
+		      
+		      
+		      Dim styleClass As Ptr = NSClassFromString("UIScrollEdgeEffectStyle")
+		      Dim style As Ptr = automaticStyle(styleClass)
+		      
+		      setStyle(edgeEffect, style)
+		      setHidden(edgeEffect, False)
+		      
+		    case UIScrollEdgeEffectStyle.softEffect
+		      
+		      
+		      Dim styleClass As Ptr = NSClassFromString("UIScrollEdgeEffectStyle")
+		      Dim style As Ptr = softStyle(styleClass)
+		      
+		      setStyle(edgeEffect, style)
+		      setHidden(edgeEffect, False)
+		      
+		      
+		    case UIScrollEdgeEffectStyle.hardEffect
+		      
+		      
+		      Dim styleClass As Ptr = NSClassFromString("UIScrollEdgeEffectStyle")
+		      Dim style As Ptr = hardStyle(styleClass)
+		      
+		      setStyle(edgeEffect, style)
+		      setHidden(edgeEffect, False)
+		      
+		      
+		      
+		    case UIScrollEdgeEffectStyle.hidden
+		      
+		      setHidden(edgeEffect, True)
+		      
+		      
+		    end select
+		    
+		    
+		    
+		  End If
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub SetBouncesXC(extends scroll As MobileScrollableArea, value As Boolean)
 		  
 		  declare sub bounces_ lib "UIKit.framework" selector "setBounces:" (obj_id as ptr, value as Boolean)
@@ -89,6 +162,85 @@ Protected Module ScrollViewExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub SetTopEdgeEffectXC(extends scroll as MobileScrollableArea, effect as ScrollViewExtensionsXC.UIScrollEdgeEffectStyle)
+		  //new ios26
+		  
+		  if ExtensionsXC.GetiOSVersionXC < 26.0 then Return
+		  
+		  // Get the top edge effect from a scroll view
+		  Declare Function topEdgeEffect Lib "UIKit" selector "topEdgeEffect" (obj As Ptr) As Ptr
+		  
+		  
+		  
+		  
+		  // UIScrollEdgeEffect.Style constants (get from the class)
+		  Declare Function automaticStyle Lib "UIKit" selector "automaticStyle" (cls As Ptr) As Ptr
+		  
+		  declare sub setHidden Lib "UIKit" selector "setHidden:" (obj as ptr, value as Boolean)
+		  Declare Function softStyle Lib "UIKit" selector "softStyle" (cls As Ptr) As Ptr
+		  Declare Function hardStyle Lib "UIKit" selector "hardStyle" (cls As Ptr) As Ptr
+		  
+		  Declare Function NSClassFromString Lib "Foundation" (name As CFStringRef) As Ptr
+		  
+		  
+		  
+		  // Apply to scroll view
+		  Declare sub setStyle lib "UIKit" selector "setStyle:" (obj as ptr, style as ptr)
+		  
+		  Dim edgeEffect As Ptr = topEdgeEffect(scroll.Handle)
+		  If edgeEffect <> Nil Then
+		    
+		    select case effect
+		      
+		    case UIScrollEdgeEffectStyle.automatic
+		      
+		      
+		      
+		      Dim styleClass As Ptr = NSClassFromString("UIScrollEdgeEffectStyle")
+		      Dim style As Ptr = automaticStyle(styleClass)
+		      
+		      setStyle(edgeEffect, style)
+		      setHidden(edgeEffect, False)
+		      
+		    case UIScrollEdgeEffectStyle.softEffect
+		      
+		      
+		      
+		      Dim styleClass As Ptr = NSClassFromString("UIScrollEdgeEffectStyle")
+		      Dim style As Ptr = softStyle(styleClass)
+		      
+		      setStyle(edgeEffect, style)
+		      setHidden(edgeEffect, False)
+		      
+		      
+		    case UIScrollEdgeEffectStyle.hardEffect
+		      
+		      
+		      
+		      Dim styleClass As Ptr = NSClassFromString("UIScrollEdgeEffectStyle")
+		      Dim style As Ptr = hardStyle(styleClass)
+		      
+		      setStyle(edgeEffect, style)
+		      setHidden(edgeEffect, False)
+		      
+		      
+		      
+		      
+		    case UIScrollEdgeEffectStyle.hidden
+		      
+		      
+		      setHidden(edgeEffect, True)
+		      
+		      
+		    end select
+		    
+		    
+		    
+		  End If
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub SetVerticalScrollbarVisibleXC(extends scroll as MobileScrollableArea, value as Boolean)
 		  
 		  //Hide scrollbar
@@ -97,6 +249,13 @@ Protected Module ScrollViewExtensionsXC
 		End Sub
 	#tag EndMethod
 
+
+	#tag Enum, Name = UIScrollEdgeEffectStyle, Type = Integer, Flags = &h1
+		automatic
+		  softEffect
+		  hardEffect
+		hidden
+	#tag EndEnum
 
 	#tag Enum, Name = UIScrollViewIndicatorStyle, Type = Integer, Flags = &h1
 		default = 0
