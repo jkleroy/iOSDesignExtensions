@@ -42,9 +42,12 @@ Inherits MobileButton
 		  
 		  self.menu = menu
 		  
-		  Declare sub decl_setMenu lib "UIKit" selector "setMenu:" (obj as ptr, menu as ptr)
-		  
-		  decl_setMenu(self.Handle, menu)
+		  if ExtensionsXC.GetiOSVersionXC >= 14 then
+		    Declare sub decl_setMenu lib "UIKit" selector "setMenu:" (obj as ptr, menu as ptr)
+		    
+		    decl_setMenu(self.Handle, menu)
+		    
+		  end if
 		End Sub
 	#tag EndMethod
 
@@ -609,6 +612,14 @@ Inherits MobileButton
 			Group="Behavior"
 			InitialValue=""
 			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="symbolAnimationEnabledXC"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Boolean"
 			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
