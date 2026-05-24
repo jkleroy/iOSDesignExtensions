@@ -171,7 +171,7 @@ Protected Module MobileToolbarButtonXC
 		  setBadge(tb.Handle, badge)
 		  
 		  
-		  end if
+		  
 		End Sub
 	#tag EndMethod
 
@@ -214,7 +214,7 @@ Protected Module MobileToolbarButtonXC
 		  setBadge(tb.Handle, badge)
 		  
 		  
-		  end if
+		  
 		End Sub
 	#tag EndMethod
 
