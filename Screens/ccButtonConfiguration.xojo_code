@@ -1056,24 +1056,48 @@ End
 		  
 		  me.configurationXC = config
 		  
+		  
 		  me.showsMenuAsPrimaryAction = True
 		  me.changesSelectionAsPrimaryAction = True //This allows to show a chevron on the trailing edge
 		  
 		  
 		  //Creating the menu
 		  
-		  Dim actions() as UIActionXC
-		  
-		  actions.add me.CreateAction("Option1", Picture.SystemImage("slider.horizontal.3", 0), "edit")
-		  
-		  actions.add me.CreateAction("Option2", Picture.SystemImage("plus.square.on.square", 0), "duplicate")
-		  
-		  actions.add me.CreateAction("Option3", Picture.SystemImage("house", 0), "home")
-		  
-		  
-		  
-		  me.SetMenu("Options", actions)
-		  
+		  #if XojoVersion < 2026.02
+		    Dim actions() as UIActionXC
+		    
+		    actions.add me.CreateAction("Edit", Picture.SystemImage("slider.horizontal.3", 0), "edit")
+		    
+		    actions.add me.CreateAction("Duplicate", Picture.SystemImage("plus.square.on.square", 0), "duplicate")
+		    
+		    actions.add me.CreateAction("Home", Picture.SystemImage("house", 0), "home")
+		    
+		    
+		    
+		    me.SetMenu("Options", actions)
+		    
+		  #else
+		    
+		    Dim menu As new MobileMenuItem("Options")
+		    
+		    Dim item As new MobileMenuItem("Option1", "edit")
+		    item.Icon = Picture.SystemImage("slider.horizontal.3", 0)
+		    menu.AddMenu item
+		    
+		    item = new MobileMenuItem("Option2", "duplicate")
+		    item.Icon = Picture.SystemImage("plus.square.on.square", 0)
+		    item.DisplayMode = 
+		    menu.AddMenu item
+		    
+		    item = new MobileMenuItem("Option3", "home")
+		    item.Icon = Picture.SystemImage("house", 0)
+		    menu.AddMenu item
+		    
+		    me.Menu = menu
+		    
+		    
+		    me.DisplayMenuAsAction = True
+		  #endif
 		End Sub
 	#tag EndEvent
 	#tag Event

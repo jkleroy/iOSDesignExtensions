@@ -40,12 +40,18 @@ Inherits MobileButton
 	#tag Method, Flags = &h0
 		Sub SetMenu(menu as UIMenuXC)
 		  
-		  self.menu = menu
+		  self.menuXC = menu
 		  
 		  if ExtensionsXC.GetiOSVersionXC >= 14 then
-		    Declare sub decl_setMenu lib "UIKit" selector "setMenu:" (obj as ptr, menu as ptr)
 		    
-		    decl_setMenu(self.Handle, menu)
+		    #if XojoVersion < 2026.02 then
+		      Declare sub decl_setMenu lib "UIKit" selector "setMenu:" (obj as ptr, menu as ptr)
+		      
+		      decl_setMenu(self.Handle, menu)
+		      
+		    #else
+		      Break //You should use MobileButton.menu instead
+		    #endif
 		    
 		  end if
 		End Sub
@@ -214,7 +220,7 @@ Inherits MobileButton
 	#tag EndComputedProperty
 
 	#tag Property, Flags = &h1
-		Protected menu As UIMenuXC
+		Protected menuXC As UIMenuXC
 	#tag EndProperty
 
 	#tag ComputedProperty, Flags = &h0, Description = 546865206D6178696D756D206E756D626572206F66206C696E657320666F722072656E646572696E6720746578742E0A
@@ -271,25 +277,40 @@ Inherits MobileButton
 			Get
 			  // @property (nonatomic, assign, readwrite) BOOL showsMenuAsPrimaryAction;
 			  
-			  if ExtensionsXC.GetiOSVersionXC >= 14.0 then
+			  #if XojoVersion >= 2026.02 then
 			    
-			    Declare Function getShowsMenuAsPrimaryAction Lib "Foundation" selector "showsMenuAsPrimaryAction" (obj as ptr) As Boolean
+			    Return me.DisplayMenuAsAction
 			    
+			  #else
 			    
-			    Return getShowsMenuAsPrimaryAction(self.Handle)
+			    if ExtensionsXC.GetiOSVersionXC >= 14.0 then
+			      
+			      Declare Function getShowsMenuAsPrimaryAction Lib "Foundation" selector "showsMenuAsPrimaryAction" (obj as ptr) As Boolean
+			      
+			      
+			      Return getShowsMenuAsPrimaryAction(self.Handle)
+			      
+			      
+			    end if
 			    
-			    
-			  end if
+			  #endif
 			End Get
 		#tag EndGetter
 		#tag Setter
 			Set
 			  if ExtensionsXC.GetiOSVersionXC >= 14.0 then
 			    
-			    Declare Sub setShowsMenuAsPrimaryAction Lib "Foundation" selector "setShowsMenuAsPrimaryAction:" (obj as ptr, value as Boolean)
-			    
-			    setShowsMenuAsPrimaryAction(self.Handle, value)
-			    
+			    #if XojoVersion >= 2026.02 then
+			      
+			      me.DisplayMenuAsAction = True
+			      
+			    #Else
+			      
+			      Declare Sub setShowsMenuAsPrimaryAction Lib "Foundation" selector "setShowsMenuAsPrimaryAction:" (obj as ptr, value as Boolean)
+			      
+			      setShowsMenuAsPrimaryAction(self.Handle, value)
+			      
+			    #endif
 			    
 			  end if
 			End Set
