@@ -14,9 +14,6 @@
 				End
 			End
 			Begin BuildStepList iOS
-				Begin IDEScriptBuildStep SaveProject , AppliesTo = 0, Architecture = 0, Target = 0
-					DoCommand("SaveFile")
-				End
 				Begin BuildProjectStep Build
 				End
 				Begin CopyFilesBuildStep CopyFileLibReveal
@@ -28,6 +25,9 @@
 					FolderItem = Li4vLi4vLi4vLi4vTGlicmFyeS9BcHBsaWNhdGlvbiUyMFN1cHBvcnQvUmV2ZWFsL1JldmVhbFNlcnZlci9SZXZlYWxTZXJ2ZXIueGNmcmFtZXdvcmsvaW9zLWFybTY0X3g4Nl82NC1zaW11bGF0b3IvUmV2ZWFsU2VydmVyLmZyYW1ld29yay8=
 				End
 				Begin SignProjectStep Sign
+				End
+				Begin IDEScriptBuildStep SaveProject , AppliesTo = 3, Architecture = 0, Target = 0
+					DoCommand("SaveFile")
 				End
 			End
 #tag EndBuildAutomation
