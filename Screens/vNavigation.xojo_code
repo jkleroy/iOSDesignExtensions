@@ -34,7 +34,7 @@ Begin MobileScreen vNavigation
       Enabled         =   True
       EstimatedRowHeight=   -1
       Format          =   0
-      Height          =   747
+      Height          =   503
       Left            =   0
       LockedInPosition=   False
       Scope           =   0
