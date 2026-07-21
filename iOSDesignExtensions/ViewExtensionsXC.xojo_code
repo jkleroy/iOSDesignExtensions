@@ -556,6 +556,17 @@ Protected Module ViewExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 5365747320746865206261636B67726F756E6420636F6C6F7220746F204E696C20746F20616C6C6F77206C697175696420676C617373206261636B67726F756E6420746F206163746976617465
+		Sub SetBackgroundColorToNilXC(extends v As MobileScreen)
+		  
+		  Declare Sub decl_SetBackgroundColor lib "UIKit.framework" selector "setBackgroundColor:" (aUIView As Ptr, aUIColor As Ptr)
+		  
+		  decl_SetBackgroundColor(v.Handle, nil)
+		  
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 536574732074686520636F6C6F72206F6620612056696577
 		Sub SetBackgroundColorXC(extends v As MobileScreen, value As Color)
 		  
@@ -1546,7 +1557,7 @@ Protected Module ViewExtensionsXC
 
 	#tag Enum, Name = UISplitViewControllerDisplayMode, Flags = &h1, Attributes = \"Deprecated \x3D "SplitViewExtensionsXC.UISplitViewControllerDisplayMode""
 		Automatic = 0
-		  secondaryOnly
+		  secondaryOnly = 1
 		  oneBesideSecondary
 		oneOverSecondary
 	#tag EndEnum

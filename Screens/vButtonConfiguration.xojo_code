@@ -58,8 +58,6 @@ Begin MobileScreen vButtonConfiguration
       Icon            =   0
       Left            =   325
       LockedInPosition=   False
-      PanelIndex      =   -1
-      Parent          =   ""
       Scope           =   2
       TextFont        =   ""
       TextSize        =   0

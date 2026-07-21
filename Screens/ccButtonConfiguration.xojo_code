@@ -1086,7 +1086,7 @@ End
 		    
 		    item = new MobileMenuItem("Option2", "duplicate")
 		    item.Icon = Picture.SystemImage("plus.square.on.square", 0)
-		    item.DisplayMode = 
+		    item.DisplayMode = MobileMenuItem.DisplayModes.Regular
 		    menu.AddMenu item
 		    
 		    item = new MobileMenuItem("Option3", "home")

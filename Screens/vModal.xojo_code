@@ -83,6 +83,12 @@ End
 
 #tag WindowCode
 	#tag Event
+		Sub AppearanceChanged(dark As Boolean)
+		  self.SetBackgroundColorToNilXC
+		End Sub
+	#tag EndEvent
+
+	#tag Event
 		Sub Opening()
 		  
 		  Dim tb As new MobileToolbarButton(MobileToolbarButton.Types.Done)
@@ -91,6 +97,8 @@ End
 		  
 		  
 		  Label2.AdjustsFontForContentSizeCategoryXC(ControlExtensionsXC.UIFontTextStyle.headline)
+		  
+		  
 		End Sub
 	#tag EndEvent
 

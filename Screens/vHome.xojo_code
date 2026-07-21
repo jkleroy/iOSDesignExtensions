@@ -80,6 +80,9 @@ End
 		  
 		  
 		  'app.TintColor = &cFF0000
+		  
+		  dim b As Boolean
+		  b = False
 		End Sub
 	#tag EndEvent
 
@@ -291,6 +294,7 @@ End
 		  
 		  section = AddSection("Table Extensions")
 		  AddRow(section, "Table Examples", "", accessory, GetTypeInfo(vTable), Picture.SystemImage("list.dash", 0, Picture.SystemImageWeights.Regular, &c66CCFE))
+		  AddRow(section, "Table Examples", "", accessory, GetTypeInfo(vTableCellConfiguration), Picture.SystemImage("rectangle.grid.1x3", 0, Picture.SystemImageWeights.Regular, &c66CCFE))
 		  
 		  
 		  
@@ -394,7 +398,7 @@ End
 		    Case "sheet"
 		      Dim v As new vModal
 		      v.showsheetXC(self, ViewExtensionsXC.UISheetPresentationControllerDetent.medium_large, True)
-		      v.SetBackgroundColorXC(color.Clear)
+		      
 		      
 		      v.SetSecondLabel("")
 		      v.ShowEmptyContentUnavailableXC("Notice the grabber at the top?" + EndOfLine + "The sheet can be resized when scrolling up.")
