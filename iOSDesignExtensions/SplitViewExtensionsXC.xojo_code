@@ -2,10 +2,10 @@
 Protected Module SplitViewExtensionsXC
 	#tag Method, Flags = &h0, Description = 52657475726E73206120426F6F6C65616E2076616C7565207468617420696E646963617465732077686574686572206F6E6C79206F6E65206F6620746865206368696C64207669657720636F6E74726F6C6C65727320646973706C6179732E
 		Function IsCollapsedXC(Extends scr As iOSSplitView) As Boolean
-		  //Changes the SplitView in portrait mode
+		  //Checks if only one screen is showing at a time
 		  
 		  Declare function isCollapsed Lib "UIKit" _
-		  selector "setPreferredDisplayMode:" (obj As Ptr) as Boolean
+		  selector "isCollapsed" (obj As Ptr) as Boolean
 		  
 		  Return isCollapsed(scr.ViewControllerHandle)
 		End Function
@@ -50,6 +50,22 @@ Protected Module SplitViewExtensionsXC
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0, Description = 53657473207468652072656C6174697665207769647468206F6620746865207072696D617279207669657720636F6E74726F6C6C6572E280997320636F6E74656E742E
+		Sub SetPreferredSplitBehaviorXC(Extends scr as iOSSplitView, behavior as UISplitViewControllerSplitBehavior)
+		  
+		  // @property (nonatomic) UISplitViewControllerSplitBehavior preferredSplitBehavior;
+		  // Only valid on column-style split views (iOS 14+); classic style (0) throws NSException on this setter.
+		  Declare Function getStyle Lib "UIKit" Selector "style" (obj As Ptr) As Integer
+		  If getStyle(scr.ViewControllerHandle) = 0 Then Return
+		  
+		  Declare Sub setPreferredSplitBehavior Lib "UIKit" Selector "setPreferredSplitBehavior:" _
+		  (obj as ptr, value as Integer)
+		  
+		  setPreferredSplitBehavior(scr.ViewControllerHandle, CType(behavior, Integer))
+		  
+		End Sub
+	#tag EndMethod
+
 	#tag Method, Flags = &h0, Description = 546865206261636B67726F756E64207374796C65206F6620746865207072696D617279207669657720636F6E74726F6C6C65722E
 		Sub SetPrimaryBackgroundStyleXC(Extends scr as iOSSplitView, style as SplitViewExtensionsXC.UISplitViewControllerBackgroundStyle)
 		  //More info: https://developer.apple.com/documentation/uikit/uisplitviewcontroller/3238075-primarybackgroundstyle?language=objc
@@ -78,6 +94,13 @@ Protected Module SplitViewExtensionsXC
 		  secondaryOnly
 		  oneBesideSecondary
 		oneOverSecondary
+	#tag EndEnum
+
+	#tag Enum, Name = UISplitViewControllerSplitBehavior, Type = Integer, Flags = &h1
+		Automatic = 0
+		  Tile = 1
+		  Overlay
+		Displace
 	#tag EndEnum
 
 

@@ -38,6 +38,35 @@ Begin MobileScreen vButtonConfiguration
       Width           =   375
       _ClosingFired   =   False
    End
+   Begin MobileButton btnScrollDown
+      AccessibilityHint=   ""
+      AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
+      AutoLayout      =   btnScrollDown, 4, <Parent>, 4, False, +1.00, 4, 1, -*kStdGapCtlToViewV, , True
+      AutoLayout      =   btnScrollDown, 8, , 0, False, +1.00, 4, 1, 30, , True
+      AutoLayout      =   btnScrollDown, 2, <Parent>, 2, False, +1.00, 4, 1, -*kStdGapCtlToViewH, , True
+      AutoLayout      =   btnScrollDown, 7, , 0, False, +1.00, 4, 1, 30, , True
+      BackgroundColor =   
+      BorderColor     =   
+      BorderWidth     =   0
+      Caption         =   "⌄"
+      CaptionColor    =   &c007AFF00
+      ControlCount    =   0
+      CornerSize      =   0
+      Enabled         =   True
+      Height          =   30
+      Icon            =   0
+      Left            =   325
+      LockedInPosition=   False
+      Scope           =   2
+      TextFont        =   ""
+      TextSize        =   0
+      TintColor       =   
+      Top             =   762
+      Visible         =   True
+      Width           =   30
+      _ClosingFired   =   False
+   End
 End
 #tag EndMobileScreen
 
@@ -60,6 +89,29 @@ End
 		  1.0, 0)
 		  cons.Active = True
 		  me.AddConstraint(cons)
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Scrolled(x As Integer, y As Integer)
+		  
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events btnScrollDown
+	#tag Event
+		Sub Opening()
+		  me.Caption = ""
+		  me.SetImageXC(Picture.SystemImage("chevron.down", 0))
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Pressed()
+		  
+		  Dim pt As Point = ScrollableArea1.ScrollPositionXC
+		  
+		  pt = new Point(pt.X, pt.Y+100)
+		  
+		  ScrollableArea1.ScrollToXC(pt)
 		End Sub
 	#tag EndEvent
 #tag EndEvents

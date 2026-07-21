@@ -5,17 +5,7 @@
 	OrientationPortraitUpsideDown = True
 	Begin ScreenContent
 		ItemName = 
-		Target = -1
+		Target = 1529663487
 		Icon = 0
-			Begin ScreenContent
-				ItemName = Tab 0
-				Target = 384548863
-				Icon = 0
-			End ScreenContent
-			Begin ScreenContent
-				ItemName = Tab 1
-				Target = 1552658431
-				Icon = 0
-			End ScreenContent
 	End ScreenContent
 #tag EndIOSLayout

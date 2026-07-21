@@ -1,12 +1,15 @@
 #tag MobileScreen
 Begin MobileScreen vButtons
    BackButtonCaption=   ""
+   BackgroundColor =   
    Compatibility   =   ""
    ControlCount    =   0
    Device = 1
    HasNavigationBar=   True
    LargeTitleDisplayMode=   0
    Left            =   0
+   NavigationBarColor=   
+   NavigationBarTextColor=   
    Orientation = 0
    ScaleFactor     =   0.0
    TabBarVisible   =   True
@@ -14,18 +17,25 @@ Begin MobileScreen vButtons
    TintColor       =   &c00000000
    Title           =   "Buttons"
    Top             =   0
+   _mTabBarVisible =   False
    Begin MobileButton btBackgroundColor
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       AutoLayout      =   btBackgroundColor, 9, <Parent>, 9, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   btBackgroundColor, 8, , 0, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   btBackgroundColor, 3, TopLayoutGuide, 4, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   btBackgroundColor, 7, , 0, False, +1.00, 4, 2, 100, , True
+      BackgroundColor =   
+      BorderColor     =   
+      BorderWidth     =   0
       Caption         =   "Background Color"
       CaptionColor    =   &c000000
       ControlCount    =   0
+      CornerSize      =   0
       Enabled         =   True
       Height          =   30
+      Icon            =   0
       Left            =   110
       LockedInPosition=   False
       Scope           =   0
@@ -40,15 +50,21 @@ Begin MobileScreen vButtons
    Begin MobileButton btCornerRadius
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       AutoLayout      =   btCornerRadius, 9, <Parent>, 9, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   btCornerRadius, 8, , 0, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   btCornerRadius, 3, btBackgroundColor, 4, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   btCornerRadius, 7, , 0, False, +1.00, 4, 2, 100, , True
+      BackgroundColor =   
+      BorderColor     =   
+      BorderWidth     =   0
       Caption         =   "Corner radius"
       CaptionColor    =   &c000000
       ControlCount    =   0
+      CornerSize      =   0
       Enabled         =   True
       Height          =   30
+      Icon            =   0
       Left            =   110
       LockedInPosition=   False
       Scope           =   0
@@ -63,15 +79,21 @@ Begin MobileScreen vButtons
    Begin MobileButton btCaptionAndImage
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       AutoLayout      =   btCaptionAndImage, 9, <Parent>, 9, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   btCaptionAndImage, 8, , 0, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   btCaptionAndImage, 3, btCornerRadius, 4, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   btCaptionAndImage, 7, , 0, False, +1.00, 4, 2, 100, , True
+      BackgroundColor =   
+      BorderColor     =   
+      BorderWidth     =   0
       Caption         =   "Image & Caption"
       CaptionColor    =   &c000000
       ControlCount    =   0
+      CornerSize      =   0
       Enabled         =   True
       Height          =   30
+      Icon            =   0
       Left            =   110
       LockedInPosition=   False
       Scope           =   0
@@ -86,15 +108,21 @@ Begin MobileScreen vButtons
    Begin MobileButton Button4
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       AutoLayout      =   Button4, 9, <Parent>, 9, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Button4, 8, , 0, False, +1.00, 4, 1, 50, , True
       AutoLayout      =   Button4, 3, btCaptionAndImage, 4, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   Button4, 7, , 0, False, +1.00, 4, 1, 100, , True
+      BackgroundColor =   
+      BorderColor     =   
+      BorderWidth     =   0
       Caption         =   "First line\nSecond line"
       CaptionColor    =   &c000000
       ControlCount    =   0
+      CornerSize      =   0
       Enabled         =   True
       Height          =   50
+      Icon            =   0
       Left            =   110
       LockedInPosition=   False
       Scope           =   0
@@ -109,15 +137,21 @@ Begin MobileScreen vButtons
    Begin MobileButton Button5
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       AutoLayout      =   Button5, 8, , 0, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   Button5, 2, <Parent>, 9, False, +1.00, 4, 1, -20, , True
       AutoLayout      =   Button5, 3, Button4, 4, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   Button5, 7, , 0, False, +1.00, 4, 1, 100, , True
+      BackgroundColor =   
+      BorderColor     =   
+      BorderWidth     =   0
       Caption         =   "Clipped Caption"
       CaptionColor    =   &c000000
       ControlCount    =   0
+      CornerSize      =   0
       Enabled         =   True
       Height          =   30
+      Icon            =   0
       Left            =   40
       LockedInPosition=   False
       Scope           =   0
@@ -132,15 +166,21 @@ Begin MobileScreen vButtons
    Begin MobileButton Button6
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       AutoLayout      =   Button6, 8, , 0, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   Button6, 1, <Parent>, 9, False, +1.00, 4, 1, 20, , True
       AutoLayout      =   Button6, 3, Button5, 3, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Button6, 7, , 0, False, +1.00, 4, 1, 100, , True
+      BackgroundColor =   
+      BorderColor     =   
+      BorderWidth     =   0
       Caption         =   "Adjusted Caption"
       CaptionColor    =   &c000000
       ControlCount    =   0
+      CornerSize      =   0
       Enabled         =   True
       Height          =   30
+      Icon            =   0
       Left            =   180
       LockedInPosition=   False
       Scope           =   0
@@ -155,15 +195,21 @@ Begin MobileScreen vButtons
    Begin MobileButton Button7
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       AutoLayout      =   Button7, 1, Button5, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Button7, 7, , 0, False, +1.00, 4, 1, 100, , True
       AutoLayout      =   Button7, 3, Button6, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
       AutoLayout      =   Button7, 8, , 0, False, +1.00, 4, 1, 30, , True
+      BackgroundColor =   
+      BorderColor     =   
+      BorderWidth     =   0
       Caption         =   "Border 1px"
       CaptionColor    =   &c000000
       ControlCount    =   0
+      CornerSize      =   0
       Enabled         =   True
       Height          =   30
+      Icon            =   0
       Left            =   40
       LockedInPosition=   False
       Scope           =   0
@@ -178,15 +224,21 @@ Begin MobileScreen vButtons
    Begin MobileButton Button8
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       AutoLayout      =   Button8, 1, Button6, 1, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   Button8, 7, , 0, False, +1.00, 4, 1, 100, , True
       AutoLayout      =   Button8, 8, , 0, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   Button8, 11, Button7, 11, False, +1.00, 4, 1, 0, , True
+      BackgroundColor =   
+      BorderColor     =   
+      BorderWidth     =   0
       Caption         =   "Border 0.5px"
       CaptionColor    =   &c000000
       ControlCount    =   0
+      CornerSize      =   0
       Enabled         =   True
       Height          =   30
+      Icon            =   0
       Left            =   180
       LockedInPosition=   False
       Scope           =   0
@@ -201,15 +253,21 @@ Begin MobileScreen vButtons
    Begin MobileButton btLeft
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       AutoLayout      =   btLeft, 9, <Parent>, 9, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   btLeft, 8, , 0, False, +1.00, 4, 1, 30, , True
       AutoLayout      =   btLeft, 3, Button8, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
       AutoLayout      =   btLeft, 7, , 0, False, +1.00, 4, 1, 100, , True
+      BackgroundColor =   
+      BorderColor     =   
+      BorderWidth     =   0
       Caption         =   "Left align"
       CaptionColor    =   &c000000
       ControlCount    =   0
+      CornerSize      =   0
       Enabled         =   True
       Height          =   30
+      Icon            =   0
       Left            =   110
       LockedInPosition=   False
       Scope           =   0
@@ -224,15 +282,21 @@ Begin MobileScreen vButtons
    Begin MobileButton btPrimary
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       AutoLayout      =   btPrimary, 1, <Parent>, 1, False, +1.00, 4, 1, *kStdGapCtlToViewH, , True
       AutoLayout      =   btPrimary, 2, btLeft, 1, False, +1.00, 4, 1, -*kStdControlGapH, , True
       AutoLayout      =   btPrimary, 3, btLeft, 4, False, +1.00, 4, 1, *kStdControlGapV, , True
       AutoLayout      =   btPrimary, 8, , 0, False, +1.00, 4, 1, 30, , True
+      BackgroundColor =   
+      BorderColor     =   
+      BorderWidth     =   0
       Caption         =   "Primary"
       CaptionColor    =   &c000000
       ControlCount    =   0
+      CornerSize      =   0
       Enabled         =   True
       Height          =   30
+      Icon            =   0
       Left            =   20
       LockedInPosition=   False
       Scope           =   2
@@ -247,15 +311,21 @@ Begin MobileScreen vButtons
    Begin MobileButton btDestructive
       AccessibilityHint=   ""
       AccessibilityLabel=   ""
+      AdjustTextSizeToFit=   False
       AutoLayout      =   btDestructive, 1, btPrimary, 2, False, +1.00, 4, 1, *kStdControlGapH, , True
       AutoLayout      =   btDestructive, 7, , 0, False, +1.00, 4, 1, 82, , True
       AutoLayout      =   btDestructive, 11, btPrimary, 11, False, +1.00, 4, 1, 0, , True
       AutoLayout      =   btDestructive, 8, , 0, False, +1.00, 4, 1, 30, , True
+      BackgroundColor =   
+      BorderColor     =   
+      BorderWidth     =   0
       Caption         =   "Destructive"
       CaptionColor    =   &c000000
       ControlCount    =   0
+      CornerSize      =   0
       Enabled         =   True
       Height          =   30
+      Icon            =   0
       Left            =   110
       LockedInPosition=   False
       Scope           =   2
@@ -397,6 +467,38 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="_mTabBarVisible"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="BackgroundColor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="NavigationBarColor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="NavigationBarTextColor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="ColorGroup"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="ScaleFactor"
 		Visible=false

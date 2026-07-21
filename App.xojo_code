@@ -23,6 +23,7 @@ Inherits MobileApplication
 		  'Dim img2 As iOSImage = p2
 		  
 		  Dim b As Boolean
+		  Dim bb As Boolean
 		  
 		  /////////////////
 		  // Reveal
@@ -34,6 +35,7 @@ Inherits MobileApplication
 		    res = res
 		    
 		  #EndIf
+		  
 		  
 		  
 		  #if False

@@ -132,29 +132,26 @@ Protected Module SegmentedControlExtensionsXC
 
 	#tag Method, Flags = &h0
 		Sub SetTextColorXC(extends seg As MobileSegmentedButton, c As color, state As SegmentedControlExtensionsXC.UIControlState)
-		  #If ExtensionsXC.kUseUIKit
-		    
-		    Dim constStr As Text = Foundation.StringConstant("UIKit", "NSForegroundColorAttributeName")
-		    
-		    Dim constPtr As new NSString(constStr)
-		    
-		    Dim nsDic As Foundation.NSDictionary
-		    
-		    nsDic = Foundation.NSDictionary.CreateFromObject(constPtr, New UIColor(c))
-		    
-		    
-		    Declare Sub setTitleTextAttributes Lib "UIKit" selector "setTitleTextAttributes:forState:" _
-		    (obj_id As ptr, att As ptr, state As UIControlState)
-		    
-		    setTitleTextAttributes(seg.Handle, nsDic, state)
-		    
-		  #else
-		    
-		    #Pragma Unused seg
-		    #Pragma Unused c
-		    #Pragma Unused state
-		    
-		  #EndIf
+		  
+		  Declare Function dlopen Lib "/usr/lib/libSystem.dylib" (path As CString, mode As Integer) As Ptr
+		  Declare Function dlsym Lib "/usr/lib/libSystem.dylib" ( handle As Ptr, name As CString ) As ptr
+		  
+		  Dim uikitHandle As Ptr = dlopen("/System/Library/Frameworks/UIKit.framework/UIKit", 2)
+		  Dim symAddr As Ptr = dlsym(uikitHandle, "NSForegroundColorAttributeName")
+		  Dim keyStr As ptr = symAddr.Ptr(0)
+		  
+		  Declare Function NSClassFromString Lib "Foundation" (aClassName As CFStringRef) As Ptr
+		  
+		  Declare Function dictionaryWithObjectForKey Lib "Foundation" selector "dictionaryWithObject:forKey:" _
+		  (clsRef As ptr, obj As ptr, key As ptr) As ptr
+		  
+		  Dim nsDic As ptr = dictionaryWithObjectForKey(NSClassFromString("NSDictionary"), New UIColor(c), keyStr)
+		  
+		  Declare Sub setTitleTextAttributes Lib "UIKit" selector "setTitleTextAttributes:forState:" _
+		  (obj_id As ptr, att As ptr, state As UIControlState)
+		  
+		  setTitleTextAttributes(seg.Handle, nsDic, state)
+		  
 		End Sub
 	#tag EndMethod
 

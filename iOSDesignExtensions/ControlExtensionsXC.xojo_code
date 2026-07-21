@@ -148,6 +148,18 @@ Protected Module ControlExtensionsXC
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function GetAlphaValueXC(extends ctrl As MobileUIControl) As Double
+		  
+		  Declare Function alphaValue Lib "UIKit.framework" selector "alpha" (id As ptr) As CGFloat
+		  
+		  Return alphaValue(ctrl.Handle)
+		  
+		  
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function GetBoundsXC(extends c as MobileUIControl) As Rect
 		  
 		  
@@ -429,6 +441,96 @@ Protected Module ControlExtensionsXC
 		    overrideUserInterfaceStyle(control.Handle, style)
 		    
 		  end if
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub SetSFSymbolXC(extends lbl As MobileLabel, symbolName As String, labelText As String)
+		  
+		  //New 2026-30-29
+		  
+		  Declare Function NSClassFromString Lib "Foundation.framework" (clsName As CFStringRef) As ptr
+		  
+		  Declare Function stringWithUTF8String Lib "Foundation" selector "stringWithUTF8String:" _
+		  (clsRef As ptr, str As CString) As ptr
+		  
+		  Declare Function alloc Lib "Foundation" selector "alloc" (clsRef As ptr) As ptr
+		  Declare Function init Lib "Foundation" selector "init" (obj_id As ptr) As ptr
+		  
+		  // --- symbol image ---
+		  
+		  Dim nameStr As ptr = stringWithUTF8String(NSClassFromString("NSString"), symbolName)
+		  
+		  Declare Function systemImageNamed Lib "UIKit" selector "systemImageNamed:" _
+		  (clsRef As ptr, name As ptr) As ptr
+		  
+		  Dim img As ptr = systemImageNamed(NSClassFromString("UIImage"), nameStr)
+		  
+		  If img = Nil Then Return // symbol name not found
+		  
+		  
+		  
+		  Declare Sub setImage Lib "UIKit" selector "setImage:" (obj_id As ptr, image As ptr)
+		  
+		  Dim attachment As ptr = init(alloc(NSClassFromString("NSTextAttachment")))
+		  setImage(attachment, img)
+		  
+		  Declare Function attributedStringWithAttachment Lib "UIKit" selector "attributedStringWithAttachment:" _
+		  (clsRef As ptr, attachment As ptr) As ptr
+		  
+		  Dim symbolAttrStr As ptr = attributedStringWithAttachment(NSClassFromString("NSAttributedString"), attachment)
+		  
+		  // --- plain text run (leading space so it doesn't touch the glyph) ---
+		  
+		  Declare Function initWithString Lib "Foundation" selector "initWithString:" _
+		  (obj_id As ptr, str As ptr) As ptr
+		  
+		  Dim textStr As ptr = stringWithUTF8String(NSClassFromString("NSString"), " " + labelText)
+		  
+		  Dim textAttrStr As ptr = initWithString(alloc(NSClassFromString("NSAttributedString")), textStr)
+		  
+		  // --- combine into one mutable attributed string ---
+		  
+		  Declare Sub appendAttributedString Lib "UIKit" selector "appendAttributedString:" _
+		  (obj_id As ptr, attrStr As ptr)
+		  
+		  Dim mutableStr As ptr = init(alloc(NSClassFromString("NSMutableAttributedString")))
+		  appendAttributedString(mutableStr, symbolAttrStr)
+		  appendAttributedString(mutableStr, textAttrStr)
+		  
+		  // --- color the whole thing ---
+		  #if False
+		    Declare Function dlopen Lib "libSystem.dylib" (path As CString, mode As Integer) As Ptr
+		    Declare Function dlsym Lib "libSystem.dylib" (handle As Ptr, symbol As CString) As Ptr
+		    
+		    Dim uikitHandle As Ptr = dlopen("/System/Library/Frameworks/UIKit.framework/UIKit", 2)
+		    Dim symAddr As Ptr = dlsym(uikitHandle, "NSForegroundColorAttributeName")
+		    Dim colorKey As ptr = symAddr.Ptr(0)
+		    
+		    Declare Function length Lib "Foundation" selector "length" (obj_id As ptr) As UInteger
+		    
+		    Declare Sub addAttribute Lib "Foundation" selector "addAttribute:value:range:" _
+		    (obj_id As ptr, attrName As ptr, value As ptr, rng As TextFieldExtensionsXC.NSRangeXC)
+		    
+		    Dim rng As TextFieldExtensionsXC.NSRangeXC
+		    rng.loc = 0
+		    rng.len = length(mutableStr)
+		    
+		    addAttribute(mutableStr, colorKey, New UIColor(c), rng)
+		  #endif
+		  
+		  // --- set on the label ---
+		  
+		  Declare Sub setAttributedText Lib "UIKit" selector "setAttributedText:" (obj_id As ptr, attrStr As ptr)
+		  
+		  setAttributedText(lbl.Handle, mutableStr)
+		  
+		  
+		  Declare Sub release Lib "Foundation" selector "release" (obj_id As ptr)
+		  release(attachment)
+		  release(textAttrStr)
+		  release(mutableStr)
+		  
 		End Sub
 	#tag EndMethod
 

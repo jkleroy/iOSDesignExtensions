@@ -1,5 +1,5 @@
 #tag MobileScreen
-Begin MobileScreen vTable Implements iOSMobileTableDataSource,iOSMobileTableDataSourceEditing
+Begin MobileScreen vTableCellConfiguration Implements iOSMobileTableDataSource,iOSMobileTableDataSourceEditing
    BackButtonCaption=   ""
    BackgroundColor =   
    Compatibility   =   ""
@@ -58,45 +58,37 @@ End
 		  
 		  'section As Integer, Text As Text, detail As Text, Accessory As MobileTableCellData.AccessoryTypes = MobileTableCellData.AccessoryTypes.Disclosure, tag As Auto, image As iOSImage = Nil
 		  
-		  dim nd As new Dictionary
-		  nd.Value("text") = title
-		  nd.Value("detail") = detail
-		  nd.Value("accessory") = Accessory
-		  nd.Value("image") = image
-		  nd.Value("tag") = tag
+		  dim r As new TableRow
+		  r.title = title
+		  r.detailText = detail
+		  r.accessory = Accessory
+		  r.image = image
+		  r.tag = tag
 		  
 		  
-		  Dim rows() As Dictionary
+		  Dim rows() As TableRow = sections(section).rows
+		  rows.Add r
 		  
-		  if sections(section).HasKey("rows") then
-		    rows = sections(section).Value("rows")
-		    rows.Append nd
-		    
-		  else
-		    rows.Append nd
-		    sections(section).Value("rows") = rows
-		    
-		  end if
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub AddSection(title As String, tag As Variant = nil)
-		  
-		  Dim d As new Dictionary
-		  d.Value("title") = title
-		  d.Value("tag") = tag
-		  d.Value("collapsed") = False
+		Sub AddSection(title As String, tag As Auto = nil)
 		  
 		  
-		  sections.Append d
+		  Dim s As new TableSection
+		  s.title = title
+		  s.tag = tag
+		  s.collapsed = False
+		  
+		  sections.Add s
 		  
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function AddSection(title As text, tag As Variant = nil) As Integer
+		Function AddSection(title As text, tag As Auto = nil) As Integer
 		  
 		  AddSection(title, tag)
 		  
@@ -128,21 +120,8 @@ End
 		    Return 0
 		  End If
 		  
-		  Dim sectionDic As Dictionary = sections(section)
 		  
-		  
-		  If sectionDic.HasKey("rows") Then
-		    
-		    
-		    Dim rows() As Dictionary = sections(section).Value("rows")
-		    
-		    
-		    Return rows.LastIndex + 1
-		    
-		    
-		  End If
-		  
-		  
+		  Return sections(section).rows.Count
 		End Function
 	#tag EndMethod
 
@@ -151,27 +130,21 @@ End
 		  // Part of the iOSMobileTableDataSource interface.
 		  
 		  Dim cell As MobileTableCellData
-		  Dim rows() As Dictionary = sections(section).Value("rows")
+		  Dim rows() As TableRow = sections(section).rows
 		  
 		  
-		  Dim nd As Dictionary = rows(row)
+		  Dim arow As TableRow = rows(row)
 		  
-		  #if XojoVersion >= 2021.02
-		    cell = table.CreateCell("")
-		    
-		  #else
-		    // See feedback://showreport?report_id=64547
-		    cell = table.CreateCustomCell(GetTypeInfo(cellGeneric))
-		    
-		  #endif
+		  
+		  cell = table.CreateCell("")
 		  
 		  
 		  
-		  cell.Text = nd.Value("text")
-		  cell.DetailText = nd.Value("detail")
-		  cell.Image = nd.Lookup("image", Nil)
-		  cell.AccessoryType = nd.Value("accessory")
-		  cell.Tag = nd.Value("tag")
+		  cell.Text = arow.title
+		  cell.DetailText = arow.detailText
+		  cell.Image = arow.image
+		  cell.AccessoryType = arow.accessory
+		  cell.Tag = arow.tag
 		  
 		  Select Case cell.Tag
 		    
@@ -229,7 +202,7 @@ End
 		Function RowIsEditable(table As iOSMobileTable, section As Integer, row As Integer) As Boolean
 		  // Part of the iOSMobileTableDataSourceEditing interface.
 		  
-		  Select Case Me.RowData(table, section, row).Tag
+		  Select Case Me.Sections(section).rows(row).tag
 		    
 		  Case "slide"
 		    
@@ -243,7 +216,7 @@ End
 		  // Part of the iOSMobileTableDataSource interface.
 		  #Pragma Unused table
 		  
-		  Return sections.LastIndex+1
+		  Return sections.Count
 		  
 		  
 		End Function
@@ -255,7 +228,7 @@ End
 		  
 		  #Pragma Unused table
 		  
-		  Return sections(section).Value("title")
+		  Return sections(section).title
 		  
 		  
 		End Function
@@ -263,7 +236,7 @@ End
 
 
 	#tag Property, Flags = &h1
-		Protected sections() As Dictionary
+		Protected sections() As TableSection
 	#tag EndProperty
 
 
@@ -420,9 +393,11 @@ End
 		    
 		  Case "scrollposition"
 		    Dim pos() as Integer = me.GetScrollPositionXC
-		    Dim rows() As Dictionary = sections(section).Value("rows")
-		    Dim nd As Dictionary = rows(row)
-		    nd.Value("detail") = pos(0).ToString + ":" + pos(1).ToString
+		    Dim rows() As TableRow = sections(section).rows
+		    
+		    Dim arow As TableRow = rows(row)
+		    arow.detailText = pos(0).ToString + ":" + pos(1).ToString
+		    
 		    
 		    
 		  Else
@@ -432,10 +407,10 @@ End
 		  End Select
 		  
 		  
-		  Dim rows() As Dictionary = sections(section).Value("rows")
-		  Dim nd As Dictionary = rows(row)
+		  Dim arow As TableRow = sections(section).rows(row)
 		  
-		  nd.Value("accessory") = If(value, MobileTableCellData.AccessoryTypes.Checkmark, MobileTableCellData.AccessoryTypes.None)
+		  arow.accessory = If(value, MobileTableCellData.AccessoryTypes.Checkmark, MobileTableCellData.AccessoryTypes.None)
+		  
 		  Me.ReloadRow(section, row)
 		End Sub
 	#tag EndEvent
